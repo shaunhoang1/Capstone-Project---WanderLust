@@ -1,0 +1,134 @@
+<!doctype html>
+<html>
+    <head>
+        <title>INSTALLATION</title>
+        <script src="https://aframe.io/releases/1.3.0/aframe.min.js"></script>
+        <script>
+            AFRAME.registerComponent('button-interaction-handler', {
+                init: function () {
+                    var skyEl = this.el.sceneEl.querySelector('#background');
+                    var cubeEl = this.el.sceneEl.querySelector('#left-cube');
+
+                    this.el.addEventListener('mouseenter', function () {
+                        skyEl.setAttribute('src', '#pano-town');  
+                        cubeEl.setAttribute('scale', '3 3 3');  
+                    });
+
+                    this.el.addEventListener('mouseleave', function () {
+                        skyEl.setAttribute('src', '#pano-brush');
+                        cubeEl.setAttribute('scale', '1 1 1'); 
+                    });
+                }  
+            });
+        </script> 
+        <script>
+            AFRAME.registerComponent('button-rightclick-handler', {
+                init: function () {
+                    var skyEl = this.el.sceneEl.querySelector('#thing');
+
+                    this.el.addEventListener('rclick', function () {
+                        skyEl.setAttribute('scale', '20 20 20');  
+                    });
+                }  
+            });
+        </script> 
+    </head>
+    <body>
+        <a-scene>
+            <a-assets>
+                <img id="sky" src="stock-photo-sky005-9227.jpg">
+                <img id="pano-town" src="screenshots/texturify_pano-1-9.jpg">
+                <img id="pano-brush" src="screenshots/woods-by-the-river.jpg">
+                <img id="pano-space" src="screenshots/wog0d8q6-a-pair-of-sunglasses-on-a-table.jpeg">
+            </a-assets>
+            
+            <!-- PRIMITIVE OBJECTS -->
+            <a-entity>
+                <!-- TRANSLATING BOX -->
+                <a-box id="thing"position="-1 1.6 -5" 
+                       animation__POSITIONX="property: position; from:-4 8 -10;to: 4 8 -10; dur: 2000; easing: linear; loop: true; dir:alternate;"  
+                       animation__ROTATION="property: rotation; to: 360 -360 360; dur: 2000; easing: linear; loop: true; dir:alternate;"
+                       animation__OPACITY="property: opacity; from:0;to: 1; dur: 1000; easing: linear; loop: true; dir:alternate;"
+                       color="tomato">
+                </a-box>
+                <a-entity rotation="0 0 0" animation="property: rotation; to: 0 360 0; loop: true; dur: 10000">
+                        <a-sphere button-rightclick-handler id="thing" position="5 0 0" color="mediumseagreen"></a-sphere>
+                </a-entity>
+                <!-- red box -->
+                <a-box button-interaction-handler id="left-cube" material="color:#ff0000;
+                                 roughness:0;
+                                 opacity:0.2;"
+                       position="2 1 0"
+                       rotation="60 -45 0"
+                       side="double">
+                </a-box>
+                <!-- Green box-->
+                <a-box button-interaction-handler id="left-cube" color="#00ff00"
+                       position="-3 1 -2">
+                </a-box>
+
+                
+                <a-circle button-interaction-handler color="#ffffff"
+                                  radius=".2"
+                                  position="0 3 -2"
+                                  side="double">
+                </a-circle>
+                <!--cylinder
+                    <a-cylinder color="#e6e6fa"
+                                height="3"
+                                radius="6"
+                                segments-radial="6"
+                                open-ended="true"
+                                side="double"
+                                position="0 0 -10"
+                                rotation="0 90 90"
+                                scale="1 5 1">
+                        <a-circle color="#ffffff"
+                                  radius="1"
+                                  position="0 0 0"
+                                  side="double"
+
+                    <a-circle material="color:#808098;
+                                       shader:flat"
+                             rotation="-90 0 0"
+                             radius="5"
+                             side="double">
+                    </a-circle> --> 
+            </a-entity>
+            
+            <a-sky id="background"
+                   src="#pano-brush"
+                   side="double">
+            </a-sky>
+            
+            <a-image src="#sky"
+                     position="0 1.5 -3"
+                     width="1"
+                     height="0.75"
+                     scale="1.024 1.024 1">
+            </a-image>
+            
+            <a-curvedimage src="#sky"
+                           theta-length="90"
+                           theta-start="135"
+                           position="0 1.5 -2"
+                           radius="0.707"
+                           height="0.833"
+                           scale="3 3 3">
+            </a-curvedimage>
+            
+            <a-text id="textPara"value="The city of Porto is full of sky-high lookouts and rooftop bars that afford expansive views. Yet the most memorable and unique experiences are often at ground level.!"
+                    position="-8 1 -3"
+                    scale="5 5 5"
+                    rotation="0 30 0"></a-text>
+            
+            <!-- Camera and Cursor. -->    
+            <a-camera> 
+                <a-cursor color="#11D8C4" timeout="1000"></a-cursor> 
+            </a-camera> 
+            <!-- Controllers. -->
+            <a-entity laser-controls="hand: right"></a-entity>
+            
+        </a-scene>
+    </body>
+</html>
