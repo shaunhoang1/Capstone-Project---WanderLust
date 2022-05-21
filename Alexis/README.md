@@ -5,7 +5,7 @@
 *VR Scene Creation Test*
 - Creating an A-Frame scene using JS Functions
 
-*VR Story Prototype *
+*VR Story Prototype*<br>
 Demo to showcase a VR Story
 - Changing Paragraph animations
 - Switching Backgrounds
