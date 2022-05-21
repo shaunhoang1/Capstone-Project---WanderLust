@@ -9,4 +9,4 @@
 Demo to showcase a VR Story
 - Changing Paragraph animations
 - Switching Backgrounds
-- 
+- Text Follows Reader
