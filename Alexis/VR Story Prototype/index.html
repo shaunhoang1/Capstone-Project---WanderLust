@@ -147,7 +147,7 @@
         <p>Clicks: <a id="clicks">0</a></p>
         <a-scene id="VRScene" z-index=-1>
             <a-assets>
-                <a-asset-item id="portal" src="Resources/Objects/Portal-highPoly.obj"></a-asset-item>
+                <!--<a-asset-item id="portal" src="Resources/Objects/Portal-highPoly.obj"></a-asset-item>-->
                 <img id="skyLawn" src="Resources/Backgrounds/lawn-Mansion.jpeg">
                 <img id="skyScenes" src="Resources/Backgrounds/scenes.jpeg">
                 <img id="skySnow" src="Resources/Backgrounds/snowy-mountain.jpeg">
@@ -163,8 +163,8 @@
                 <a-entity cursor="fuse:true;fuseTimeout:500;" position="0 0 -1" geometry="primitive:ring;radiusInner:0.001;radiusOuter:0.003;" material="color:white;shader:flat;"></a-entity>
             </a-camera>
             
-            <a-entity id="portalEntity" obj-model="obj: #portal;"  scale="0.1 0.1 0.1" position="-4 -1 -4"
-                      event-set__scale="_target:#portalEntity; _event:click; animation.to: 0.3 0.3 0.3; animation.easing: easeOutExpo;"></a-entity>
+            <!--<a-entity id="portalEntity" obj-model="obj: #portal;"  scale="0.1 0.1 0.1" position="-4 -1 -4"
+                      event-set__scale="_target:#portalEntity; _event:click; animation.to: 0.3 0.3 0.3; animation.easing: easeOutExpo;"></a-entity>-->
             <a-text id="textPara" scale="5 5 5" value="HELLO WORLD" opacity=0 align="center" width=8 look-at="#cameraObj"></a-text>
         </a-scene>
         
