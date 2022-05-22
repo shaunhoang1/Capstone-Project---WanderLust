@@ -84,8 +84,12 @@
             //Define theBackgrounds
             var currentSky = 0;
             const skies=[];
-            skies[1]="Resources/Backgrounds/texturify_pano-1-9.jpg";
-            skies[2]="Resources/Backgrounds/woods-by-the-river.jpg";
+            skies[1]="#skyLawn";
+            skies[2]="#skyScenes";
+            skies[3]="#skySnow";
+            skies[4]="#skyVillage";
+            skies[5]="#skyWhite";
+            skies[6]="#skyWoods";
             function changeSky(skyChange) {
                 currentSky+=skyChange;
                 if (currentSky>skies.length-1){
@@ -144,10 +148,17 @@
         <a-scene id="VRScene" z-index=-1>
             <a-assets>
                 <a-asset-item id="portal" src="Resources/Objects/Portal-highPoly.obj"></a-asset-item>
+                <img id="skyLawn" src="Resources/Backgrounds/lawn-Mansion.jpeg">
+                <img id="skyScenes" src="Resources/Backgrounds/scenes.jpeg">
+                <img id="skySnow" src="Resources/Backgrounds/snowy-mountain.jpeg">
+                <img id="skyVillage" src="Resources/Backgrounds/texturify_pano-1-9.jpg">
+                <img id="skyWhite" src="Resources/Backgrounds/white-building.jpeg">
+                <img id="skyWoods" src="Resources/Backgrounds/woods-by-the-river.jpg">
+                
             </a-assets>
             <!--ground for player-->
             <a-circle position="-0.5 0 2" rotation="-90 0 0" radius="3" color="grey">hello</a-circle> 
-            <a-sky id="sky" src="Resources/Backgrounds/woods-by-the-river.jpg"></a-sky>
+            <a-sky id="sky" src="#skyWoods"></a-sky>
             <a-camera id="cameraObj" position="-0.5 1.6 2">
                 <a-entity cursor="fuse:true;fuseTimeout:500;" position="0 0 -1" geometry="primitive:ring;radiusInner:0.001;radiusOuter:0.003;" material="color:white;shader:flat;"></a-entity>
             </a-camera>
