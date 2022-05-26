@@ -1,42 +1,41 @@
-<!doctype html>
+<!DOCTYPE html>
 <html>
-    <head>
-        <title>WanderLust VR Story</title>
-        <!-- Load styles -->
-        <link href="main.css" rel="stylesheet">
-        
-        <!-- Load A-Frame -->
-        <script src="https://aframe.io/releases/1.3.0/aframe.min.js"></script>
-        <script src="https://unpkg.com/aframe-look-at-component@0.8.0/dist/aframe-look-at-component.min.js"></script> 
-        <script src="https://unpkg.com/aframe-event-set-component@^4.0.0/dist/aframe-event-set-component.min.js"></script>
-        <script src="https://unpkg.com/aframe-animation-component@^4.1.2/dist/aframe-animation-component.min.js"></script>
-        
-        
-        <!-- Load JS Events -->
-        <script>
-            //Navigate between paragraphs
-            document.addEventListener('keydown', function (event) {
-                //Go to previous paragraph
-                if (event.key === "q") {
-                    changePage(-1);
-                    
-                //Go to next paragraph
-                }else if (event.key === "e") {
-                    changePage(1);
-                }
-            });
-            
-            //Toggle Background
-            var currentSky=0
-            document.addEventListener('keydown', function (event) {
-                //Go to previous paragraph
-                if (event.shiftKey) {
-                    changeSky(1);
-                }
-            });
-            
-            //interactions
-            /*
+  <head>
+    <title>WanderLust VR Story</title>
+    <!-- Load styles -->
+    <link href="main.css" rel="stylesheet" />
+
+    <!-- Load A-Frame -->
+    <script src="https://aframe.io/releases/1.3.0/aframe.min.js"></script>
+    <script src="https://unpkg.com/aframe-look-at-component@0.8.0/dist/aframe-look-at-component.min.js"></script>
+    <script src="https://unpkg.com/aframe-event-set-component@^4.0.0/dist/aframe-event-set-component.min.js"></script>
+    <script src="https://unpkg.com/aframe-animation-component@^4.1.2/dist/aframe-animation-component.min.js"></script>
+
+    <!-- Load JS Events -->
+    <script>
+      //Navigate between paragraphs
+      document.addEventListener("keydown", function (event) {
+        //Go to previous paragraph
+        if (event.key === "q") {
+          changePage(-1);
+
+          //Go to next paragraph
+        } else if (event.key === "e") {
+          changePage(1);
+        }
+      });
+
+      //Toggle Background
+      var currentSky = 0;
+      document.addEventListener("keydown", function (event) {
+        //Go to previous paragraph
+        if (event.shiftKey) {
+          changeSky(1);
+        }
+      });
+
+      //interactions
+      /*
             AFRAME.registerComponent('button-interaction-handler', {
                 init: function () {
                     var skyEl = this.el.sceneEl.querySelector('#background');
@@ -70,104 +69,125 @@
                     
                 }   
             });*/
-            
-            AFRAME.registerComponent('button-click-handler', {
-                init: function () {
-                    var skyEl = this.el.sceneEl.querySelector('#thing');
 
-                    this.el.addEventListener('click', function () {
-                        skyEl.setAttribute('scale', '5 5 5');  
-                    });
-                }   
-            });
-            
-            //Define theBackgrounds
-            var currentSky = 0;
-            const skies=[];
-            skies[1]="#skyLawn";
-            skies[2]="#skyScenes";
-            skies[3]="#skySnow";
-            skies[4]="#skyVillage";
-            skies[5]="#skyWhite";
-            skies[6]="#skyWoods";
-            function changeSky(skyChange) {
-                currentSky+=skyChange;
-                if (currentSky>skies.length-1){
-                    currentSky=1;
-                }
-                if (currentSky<1){
-                    currentSky=skies.length-1;
-                }
-                var sky = document.getElementById("sky")
-                sky.setAttribute('src',skies[currentSky])
-            }
-            
-            
-            
-            //Define the page number and change
-            var currentPage = 0;
-            function changePage(pageChange) {
-                currentPage += pageChange;
-                if (currentPage>storyParagraphs.length-1){
-                    currentPage=1;
-                }
-                if (currentPage<1){
-                    currentPage=storyParagraphs.length-1;
-                }
-                
-                //Select the text object
-                var textObj = document.getElementById("textPara");
-                textObj.setAttribute('opacity',0)
-                textObj.setAttribute('value',storyParagraphs[currentPage]);
-                
-                //Reset and activate the Position animation
-                textObj.removeAttribute('animation__pos');
-                textObj.setAttribute('animation__pos','property: position; from:-4 -10 -20;to: -4 10 -20; dur: 10000; easing: linear; loop: false;');
-                
-                //Reset and activate the opacity animation
-                textObj.removeAttribute('animation__opa');
-                textObj.setAttribute('animation__opa','property: opacity; from:0;to: 1; dur: 5000; easing: linear; Elasticity:400; loop: 1; dir:alternate;');
-            };
-            
-            //Define Story paragraphs
-            const storyParagraphs = [];
-            storyParagraphs[0] = "THIS IS THE ZEROTH PARAGRAPH, NO ONE WILL SEE THIS";
-            storyParagraphs[1] = "1 Ph'nglui mglw'nafh Cthulhu R'lyeh wgah'nagl fhtagn. Throd sll'ha, Nyarlathotep nw Nyarlathotep sll'ha n'gha sgn'wahl, ya ngTsathoggua ftaghu chtenff ehye uaaah.";
-            storyParagraphs[2] = "2 Ehye uaaah nnngotha naflathg orr'e Azathoth ph'ebunma cs'uhn Dagon ngshtunggli, y'hah lw'nafh y-kn'a Nyarlathotep Chaugnar Faugn uh'enyth uh'e n'gha, mnahn' ph'grah'n ron uh'e li'hee mnahn' ftaghu f'vulgtm. Orr'e nafhtagn wgah'n s'uhn ee kadishtu orr'e fm'latgh hai, phlegeth naflChaugnar Faugn uaaah kn'a sll'ha y-r'luh ng'bthnk, hai r'luh y'hah vulgtlagln throd Tsathoggua nallll. Ep gnaiih kn'a h'vulgtm vulgtm 'bthnk hafh'drn nw, mgoth ngshagg phlegeth hai bug Chaugnar Faugn, nog csll'ha r'luh kadishtu cep sll'ha. Ooboshu r'luh gotha nilgh'ri ron throd fm'latgh 'ai mg f'bug, r'luh uh'e y'hah ehye ooboshunyth geb k'yarnak h'nilgh'ri, ya cftaghu hafh'drn li'hee shagg ep h'uln ilyaa.";
-            storyParagraphs[3] = "3 Llll li'hee nnnch' y-gnaiih bug ya ebunma ngnog ch'og, ep ph'lloig nog lloig Yoggoth Chaugnar Faugn y-ooboshu y'hah R'lyehog, llll zhro uh'e natharanak nilgh'ri nnnTsathoggua 'ai. Ph'r'luh goka nglui orr'e n'ghft goka athg ee tharanak s'uhn athg, y-s'uhn ehye 'ai Chaugnar Faugn orr'e gnaiih y'hah 'bthnk eeagl, ehye nw kn'a tharanak hafh'drn s'uhn 'ai ph'uh'e f'ehye. N'ghft mg llll ftaghu n'ghayar geb nnns'uhn ooboshu n'gha gotha, ph'stell'bsna hlirgh Nyarlathotep Dagon Cthulhu athg sll'ha ngathg, nilgh'ri y'hah naorr'e ooboshu h'y'hah sgn'wahl grah'n s'uhn. Chaugnar Faugn mg bug shugg fm'latgh Dagon y-ron R'lyeh, nashugg wgah'n naflsyha'h grah'n ngR'lyeh gotha, uaaah gnaiih mnahn' sgn'wahl ngk'yarnak hlirgh.";
-            storyParagraphs[4] = "4 Chtenff stell'bsna nnnkadishtu goka li'hee R'lyeh uln, Yoggoth ron naflkn'a y'hahor wgah'n gnaiih, Nyarlathotep wgah'n lloig stell'bsnayar goka. Sgn'wahl wgah'n R'lyehagl llll Shub-Niggurath y-'ai nwoth ebunmayar h'hlirgh ngnilgh'ri, ngnw f'goka y-ya 'bthnk 'fhalma ep grah'nor sll'ha, nglw'nafh phlegeth shaggagl R'lyeh kadishtu Cthulhu llll naehye. Y-ehye ebunma tharanak vulgtlagln ngnglui Dagon 'ai y'hah n'ghft, gnaiih sgn'wahl f'R'lyeh nilgh'ri hlirgh naflstell'bsna y-r'luh y'hah nglui, hai zhro shogg sgn'wahl ron sll'ha uln. Mg Azathothyar stell'bsna nilgh'ri Nyarlathotep nnnnilgh'ri R'lyeh hafh'drn lloig y-kadishtu, f'li'hee wgah'n hrii shogg vulgtlaglnog throd li'heeor f'uln, nnnchtenff lloig n'ghft R'lyeh sll'ha Nyarlathotep Azathoth ah.";
-            storyParagraphs[5] = "5 Stell'bsna nnnuaaah n'ghaoth hai nglui nnnHastur llll orr'e ah, Chaugnar Faugn cnw y'hah mnahn' Azathoth cgoka sgn'wahl, uln Cthulhu chtenff y-ftaghu f'orr'e ee mg. Athg gotha Chaugnar Faugn ee ooboshu h'nilgh'ri uaaah cch', shtunggli uaaah hrii ahog h'y'hah shtunggli uln ya, ehye ph'ch' R'lyeh shtunggli athgagl r'luh. Uaaah cn'gha vulgtlagln y-goka phlegeth f'goka bug ron mnahn' shugg, f'y'hah syha'h hafh'drn llll ee nnngrah'n ep wgah'n syha'h ch', Shub-Niggurathyar tharanak Chaugnar Faugn fhtagn ron y'hah grah'n cathg. R'luh kn'a ep sgn'wahl ebunma chtenff kn'a Azathoth gof'nn vulgtm, ron li'heeog y-hlirgh naflR'lyeh ftaghu hupadgh h'sgn'wahl lloig gnaiih, tharanak k'yarnak geb ya fm'latgh sgn'wahl y'hah hriiagl. ";
-            
-        </script>
-        
-    </head>
-    <body>
-        
-        <button type="button" onClick="onClick()">Click me</button>
-        <p>Clicks: <a id="clicks">0</a></p>
-        <a-scene id="VRScene" z-index=-1>
-            <a-assets>
-                <!--<a-asset-item id="portal" src="Resources/Objects/Portal-highPoly.obj"></a-asset-item>-->
-                <img id="skyLawn" src="Resources/Backgrounds/lawn-Mansion.jpeg">
-                <img id="skyScenes" src="Resources/Backgrounds/scenes.jpeg">
-                <img id="skySnow" src="Resources/Backgrounds/snowy-mountain.jpeg">
-                <img id="skyVillage" src="Resources/Backgrounds/texturify_pano-1-9.jpg">
-                <img id="skyWhite" src="Resources/Backgrounds/white-building.jpeg">
-                <img id="skyWoods" src="Resources/Backgrounds/woods-by-the-river.jpg">
-                
-            </a-assets>
-            <!--ground for player-->
-            <a-circle position="-0.5 0 2" rotation="-90 0 0" radius="3" color="grey">hello</a-circle> 
-            <a-sky id="sky" src="#skyWoods"></a-sky>
-            <a-camera id="cameraObj" position="-0.5 1.6 2">
-                <a-entity cursor="fuse:true;fuseTimeout:500;" position="0 0 -1" geometry="primitive:ring;radiusInner:0.001;radiusOuter:0.003;" material="color:white;shader:flat;"></a-entity>
-            </a-camera>
-            
-            <!--<a-entity id="portalEntity" obj-model="obj: #portal;"  scale="0.1 0.1 0.1" position="-4 -1 -4"
+      AFRAME.registerComponent("button-click-handler", {
+        init: function () {
+          var skyEl = this.el.sceneEl.querySelector("#thing");
+
+          this.el.addEventListener("click", function () {
+            skyEl.setAttribute("scale", "5 5 5");
+          });
+        },
+      });
+
+      //Define theBackgrounds
+      var currentSky = 0;
+      const skies = [];
+      skies[1] = "#skyLawn";
+      skies[2] = "#skyScenes";
+      skies[3] = "#skySnow";
+      skies[4] = "#skyVillage";
+      skies[5] = "#skyWhite";
+      skies[6] = "#skyWoods";
+      function changeSky(skyChange) {
+        currentSky += skyChange;
+        if (currentSky > skies.length - 1) {
+          currentSky = 1;
+        }
+        if (currentSky < 1) {
+          currentSky = skies.length - 1;
+        }
+        var sky = document.getElementById("sky");
+        sky.setAttribute("src", skies[currentSky]);
+      }
+
+      //Define the page number and change
+      var currentPage = 0;
+      function changePage(pageChange) {
+        currentPage += pageChange;
+        if (currentPage > storyParagraphs.length - 1) {
+          currentPage = 1;
+        }
+        if (currentPage < 1) {
+          currentPage = storyParagraphs.length - 1;
+        }
+
+        //Select the text object
+        var textObj = document.getElementById("textPara");
+        textObj.setAttribute("opacity", 0);
+        textObj.setAttribute("value", storyParagraphs[currentPage]);
+
+        //Reset and activate the Position animation
+        textObj.removeAttribute("animation__pos");
+        textObj.setAttribute(
+          "animation__pos",
+          "property: position; from:-4 -10 -20;to: -4 10 -20; dur: 10000; easing: linear; loop: false;"
+        );
+
+        //Reset and activate the opacity animation
+        textObj.removeAttribute("animation__opa");
+        textObj.setAttribute(
+          "animation__opa",
+          "property: opacity; from:0;to: 1; dur: 5000; easing: linear; Elasticity:400; loop: 1; dir:alternate;"
+        );
+      }
+
+      //Define Story paragraphs
+      const storyParagraphs = [];
+      storyParagraphs[0] = "THIS IS THE ZEROTH PARAGRAPH, NO ONE WILL SEE THIS";
+      storyParagraphs[1] =
+        "1 Fable: Long ago in the Blue Mountains, three Aboriginal sisters; Meenhi, Wimlah and Gunnedoo lived with their father, a Witch doctor named Tyawan. In the same forest lived a gigantic creature that was feared by all – he was the Bunyip. Tyawan who knew where he lived would leave his daughters on the cliff behind a rocky wall where they would be safe while he would collect food.";
+      storyParagraphs[2] =
+        "2 One day, waving goodbye to his daughters he descended the cliff steps. On the top of the cliff, a big lizard suddenly appeared and frightened Meenhi. She picked up a stone and threw it at the lizard. The stone rolled away over the cliff and crashed into the valley below. Suddenly, the rocks behind the three sisters split open, leaving the sisters on a thin ledge. There was a deep rumble from below and the angry Bunyip emerged from his sleep. He looked up to see who had rudely awakened him and there perched on the thin ledge he saw the sisters cowering in fear. Furiously he lurched towards them.";
+      storyParagraphs[3] =
+        "3 In the valley, Tyawan heard the cry and looked up to see that the Bunyip had almost reached his daughters. Frantically the Witch Doctor pointed his magic bone at the girls and turned them into stone. They would be safe there until the Bunyip was gone and then Tyawan would return them to their former selves.";
+      storyParagraphs[4] =
+        "4 The Bunyip was even more angry when he saw what had happened and he turned on Tyawan and began to chase him. Running away, Tyawan found himself trapped against a rock which he could neither climb nor go around. He quickly changed into a Lyrebird and disappeared into a small cave. Everyone was safe but Tyawan had dropped his magic bone. The Bunyip returned angrily to his hole. Tyawan crept out of the cave and searched for the bone, and is still seeking it while the Three Sisters stand silently waiting, hoping he will find the bone and turn them back to their former selves. \n \n You can see the Three Sisters today from Echo Point and in the valley you can hear Tyawan, the Lyrebird, calling them as he searches for his lost magic bone.";
+      storyParagraphs[5] =
+        "5 Moral: The forests are beautiful, but you must always be careful to know what creatures live there.";
+    </script>
+  </head>
+  <body>
+    <button type="button" onClick="onClick()">Click me</button>
+    <p>Clicks: <a id="clicks">0</a></p>
+    <a-scene id="VRScene" z-index="-1">
+      <a-assets>
+        <!--<a-asset-item id="portal" src="Resources/Objects/Portal-highPoly.obj"></a-asset-item>-->
+        <img id="skyLawn" src="Resources/Backgrounds/lawn-Mansion.jpeg" />
+        <img id="skyScenes" src="Resources/Backgrounds/scenes.jpeg" />
+        <img id="skySnow" src="Resources/Backgrounds/snowy-mountain.jpeg" />
+        <img
+          id="skyVillage"
+          src="Resources/Backgrounds/texturify_pano-1-9.jpg"
+        />
+        <img id="skyWhite" src="Resources/Backgrounds/white-building.jpeg" />
+        <img id="skyWoods" src="Resources/Backgrounds/woods-by-the-river.jpg" />
+      </a-assets>
+      <!--ground for player-->
+      <a-circle position="-0.5 0 2" rotation="-90 0 0" radius="3" color="grey"
+        >hello</a-circle
+      >
+      <a-sky id="sky" src="#skyWoods"></a-sky>
+      <a-camera id="cameraObj" position="-0.5 1.6 2">
+        <a-entity
+          cursor="fuse:true;fuseTimeout:500;"
+          position="0 0 -1"
+          geometry="primitive:ring;radiusInner:0.001;radiusOuter:0.003;"
+          material="color:white;shader:flat;"
+        ></a-entity>
+      </a-camera>
+
+      <!--<a-entity id="portalEntity" obj-model="obj: #portal;"  scale="0.1 0.1 0.1" position="-4 -1 -4"
                       event-set__scale="_target:#portalEntity; _event:click; animation.to: 0.3 0.3 0.3; animation.easing: easeOutExpo;"></a-entity>-->
-            <a-text id="textPara" scale="5 5 5" value="HELLO WORLD" opacity=0 align="center" width=8 look-at="#cameraObj"></a-text>
-        </a-scene>
-        
-        
-    </body>
+      <a-text
+        id="textPara"
+        scale="5 5 5"
+        value="HELLO WORLD"
+        opacity="0"
+        align="center"
+        width="8"
+        look-at="#cameraObj"
+      ></a-text>
+    </a-scene>
+  </body>
 </html>
