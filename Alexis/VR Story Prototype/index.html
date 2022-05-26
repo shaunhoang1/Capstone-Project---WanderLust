@@ -84,11 +84,11 @@
       var currentSky = 0;
       const skies = [];
       skies[1] = "#skyLawn";
-      skies[2] = "#skyScenes";
-      skies[3] = "#skySnow";
-      skies[4] = "#skyVillage";
-      skies[5] = "#skyWhite";
-      skies[6] = "#skyWoods";
+      //skies[2] = "#skyScenes";
+      //skies[3] = "#skySnow";
+      skies[2] = "#skyVillage";
+      //skies[5] = "#skyWhite";
+      skies[3] = "#skyWoods";
       function changeSky(skyChange) {
         currentSky += skyChange;
         if (currentSky > skies.length - 1) {
@@ -121,14 +121,14 @@
         textObj.removeAttribute("animation__pos");
         textObj.setAttribute(
           "animation__pos",
-          "property: position; from:-4 -10 -20;to: -4 10 -20; dur: 10000; easing: linear; loop: false;"
+          "property: position; from:0 -10 -20;to: 0 10 -20; dur: 15000; easing: linear; loop: false;"
         );
 
         //Reset and activate the opacity animation
         textObj.removeAttribute("animation__opa");
         textObj.setAttribute(
           "animation__opa",
-          "property: opacity; from:0;to: 1; dur: 5000; easing: linear; Elasticity:400; loop: 1; dir:alternate;"
+          "property: opacity; from:0;to: 1; dur: 7500; easing: linear; Elasticity:400; loop: 1; dir:alternate;"
         );
       }
 
@@ -147,28 +147,34 @@
         "5 Moral: The forests are beautiful, but you must always be careful to know what creatures live there.";
     </script>
   </head>
+    
   <body>
+      <!-- HTML Elements to create a page before scene
+      <!--
     <button type="button" onClick="onClick()">Click me</button>
-    <p>Clicks: <a id="clicks">0</a></p>
-    <a-scene id="VRScene" z-index="-1">
+    <p>Clicks: <a id="clicks">0</a></p>-->
+    <a-scene stats id="VRScene">
       <a-assets>
-        <!--<a-asset-item id="portal" src="Resources/Objects/Portal-highPoly.obj"></a-asset-item>-->
+          <!-- CANNOT UPLOAD OBJECTS TO GITHUB -->
+        <a-asset-item id="firstModel" src="Resources/Objects/testObj.obj"></a-asset-item>
+        <a-asset-item id="venator" src="Resources/Objects/venator/Venator.obj"></a-asset-item>
+        <a-asset-item id="plant1" src="Resources/Objects/folder/Vase%20Pack%202.FBX"></a-asset-item>
+        <img id="imgBunyip" src="Resources/Images/Bunyip_5.jpg"/>
+        <img id="imgBunyip2" src="Resources/Images/bunyip-emerging.jpg"/>
+          
+        <!-- Skybox Images-->
         <img id="skyLawn" src="Resources/Backgrounds/lawn-Mansion.jpeg" />
         <img id="skyScenes" src="Resources/Backgrounds/scenes.jpeg" />
         <img id="skySnow" src="Resources/Backgrounds/snowy-mountain.jpeg" />
-        <img
-          id="skyVillage"
-          src="Resources/Backgrounds/texturify_pano-1-9.jpg"
-        />
+        <img id="skyVillage" src="Resources/Backgrounds/texturify_pano-1-9.jpg"/>
         <img id="skyWhite" src="Resources/Backgrounds/white-building.jpeg" />
         <img id="skyWoods" src="Resources/Backgrounds/woods-by-the-river.jpg" />
       </a-assets>
       <!--ground for player-->
-      <a-circle position="-0.5 0 2" rotation="-90 0 0" radius="3" color="grey"
-        >hello</a-circle
-      >
+      <a-circle position="0 0 2" rotation="-90 0 0" radius="2" color="grey">
+        </a-circle>
       <a-sky id="sky" src="#skyWoods"></a-sky>
-      <a-camera id="cameraObj" position="-0.5 1.6 2">
+      <a-camera id="cameraObj" position="0 1.6 2">
         <a-entity
           cursor="fuse:true;fuseTimeout:500;"
           position="0 0 -1"
@@ -176,18 +182,27 @@
           material="color:white;shader:flat;"
         ></a-entity>
       </a-camera>
-
-      <!--<a-entity id="portalEntity" obj-model="obj: #portal;"  scale="0.1 0.1 0.1" position="-4 -1 -4"
-                      event-set__scale="_target:#portalEntity; _event:click; animation.to: 0.3 0.3 0.3; animation.easing: easeOutExpo;"></a-entity>-->
-      <a-text
-        id="textPara"
-        scale="5 5 5"
-        value="HELLO WORLD"
-        opacity="0"
-        align="center"
-        width="8"
-        look-at="#cameraObj"
-      ></a-text>
+    
+      <a-entity id="portalEntity" obj-model="obj: #firstModel;" color="#00FF00"  scale="0.08 0.08 0.08" position="-1.6 0 0.2"
+                event-set__scale="_target:#portalEntity; _event:click; animation.to: 0.3 0.3 0.3; animation.easing: easeOutExpo;">
+        <a-circle radius="3" rotation="-90 0 0" color="grey"></a-circle>
+        </a-entity>
+      <a-image id="imageEntity" src="#imgBunyip" position="1.8 1.4 0.5" look-at="#cameraObj"
+               event-set__click="_event:click; animation.property:scale;animation.to:3 3 3;animation.easing:linear;"
+               event-set__leave="_event:mouseleave;animation.property:scale;animation.to:1 1 1;animation.easing:linear;">
+        </a-image>
+    <a-image id="imageEntity" src="#imgBunyip2" position="-2.8 1.4 0.5" look-at="#cameraObj"
+               event-set__click="_event:click; animation.property:scale;animation.to:3 3 3;animation.easing:linear;"
+               event-set__leave="_event:mouseleave;animation.property:scale;animation.to:1 1 1;animation.easing:linear;">
+        </a-image>
+        <a-text
+            id="textPara"
+            scale="5 5 5"
+            value="HELLO WORLD"
+            opacity="0"
+            align="center"
+            width="6">
+            </a-text><!--look-at="#cameraObj"-->
     </a-scene>
   </body>
 </html>
