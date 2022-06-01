@@ -128,14 +128,14 @@
         textObj.removeAttribute("animation__pos");
         textObj.setAttribute(
           "animation__pos",
-          "property: position; from:0 -10 -20;to: 0 10 -20; dur: 10000; easing: linear; loop: false;"
+          "property: position; from:0 -10 -20;to: 0 10 -20; dur: 20000; easing: linear; loop: false;"
         );
 
         //Reset and activate the opacity animation
         textObj.removeAttribute("animation__opa");
         textObj.setAttribute(
           "animation__opa",
-          "property: opacity; from:0;to: 1; dur: 5000; easing: linear; Elasticity:400; loop: 1; dir:alternate;"
+          "property: opacity; from:0;to: 1; dur: 10000; easing: linear; Elasticity:400; loop: 1; dir:alternate;"
         );
           tempPage = currentPage+1;
         if (tempPage > storyParagraphs.length - 1) {
@@ -148,7 +148,7 @@
             
       }
         
-        //Define the page number and change
+        //Define the page number and change for all text objects
       var currentPageAll = 0;
         var tempPage = currentPageAll;
       function changePageAll(pageChange) {
@@ -280,14 +280,18 @@
   </head>
     
   <body>
-      <!-- HTML Elements to create a page before scene
-      <!--
+    <!-- HTML Elements to create a page before scene
     <button type="button" onClick="onClick()">Click me</button>
-    <p>Clicks: <a id="clicks">0</a></p>-->
+    <p>Clicks: <a id="clicks">0</a></p>
+    -->
     <a-scene id="VRScene">
+        
+    <!-- ###################  LOAD ASSETS INTO STORY  #################### -->
       <a-assets>
-          <!-- CANNOT UPLOAD OBJECTS TO GITHUB -->
+          
         <a-asset-item id="firstModel" src="Resources/Objects/testObj.obj"></a-asset-item>
+          
+        <!-- CANNOT UPLOAD LARGE OBJECTS TO GITHUB -->
         <!--<a-asset-item id="venator" src="Resources/Objects/venator/Venator.obj"></a-asset-item>
         <a-asset-item id="plant1" src="Resources/Objects/folder/Vase%20Pack%202.FBX"></a-asset-item>-->
         <img id="imgBunyip" src="Resources/Images/Bunyip_5.jpg"/>
@@ -301,48 +305,56 @@
         <img id="skyWhite" src="Resources/Backgrounds/white-building.jpeg" />
         <img id="skyWoods" src="Resources/Backgrounds/woods-by-the-river.jpg" />
       </a-assets>
+        
       <!--ground for player-->
-      <a-circle position="0 0 2" rotation="-90 0 0" radius="2" color="grey">
-        </a-circle>
-      <a-sky id="sky" src="#skyWhite"></a-sky>
-      <a-camera id="cameraObj" position="0 1.6 2">
+      <a-circle position="0 0 2" rotation="-90 0 0" radius="2" color="grey"></a-circle>
+        
+      <a-sky id="sky" src="#skyWoods"></a-sky>
+        
+        <!-- ###################  CAMERA/PLAYER ENTITIES  #################### -->
+      <a-entity camera look-controls id="cameraObj" position="0 1.6 2" wasd-controls="enabled:true;acceleration:10;">
         <a-entity
           cursor="fuse:true;fuseTimeout:500;"
           position="0 0 -1"
           geometry="primitive:ring;radiusInner:0.001;radiusOuter:0.003;"
-          material="color:white;shader:flat;"
-        ></a-entity>
-      </a-camera>
+          material="color:white;shader:flat;"></a-entity>
+      </a-entity>
     
-      <a-entity id="portalEntity" obj-model="obj: #firstModel;" color="#00FF00"  scale="0.08 0.08 0.08" position="-1.6 0 0.2"
+        <!-- ###################  STORY ENTITIES  #################### -->
+      <a-entity id="portalEntity" obj-model="obj: #firstModel;" color="#00FF00" scale="0.06 0.06 0.06" position="-1.6 0 0.2"
                 event-set__click="_event:click; animation.property:scale;animation.to:0.2 0.2 0.2;animation.easing:linear;"
-               event-set__leave="_event:mouseleave;animation.property:scale;animation.to:0.08 0.08 0.08;animation.easing:linear;">>
+               event-set__leave="_event:mouseleave;animation.property:scale;animation.to:0.06 0.06 0.06;animation.easing:linear;">>
         <a-circle radius="3" rotation="-90 0 0" color="grey"></a-circle>
         </a-entity>
-      <a-image id="imageEntity" src="#imgBunyip" position="1.8 1.4 0.5" look-at="#cameraObj"
+      <a-image id="imageEntity" src="#imgBunyip" position="2.6 1.4 -0.8" opacity="0" look-at="#cameraObj"
+               animation__fadeIn="property:opacity;to:1 1 1;easing:linear; duration:5000;"
                event-set__click="_event:click; animation.property:scale;animation.to:3 3 3;animation.easing:linear;"
                event-set__leave="_event:mouseleave;animation.property:scale;animation.to:1 1 1;animation.easing:linear;">
         </a-image>
-    <a-image id="imageEntity" src="#imgBunyip2" position="-2.8 1.4 0.5" look-at="#cameraObj"
+    <a-image id="imageEntity" src="#imgBunyip2" position="-2.6 1.4 -0.8" opacity="0" look-at="#cameraObj"
+                animation__fadeIn="property:opacity;to:1 1 1;easing:linear; duration:5000;"
                event-set__click="_event:click; animation.property:scale;animation.to:3 3 3;animation.easing:linear;"
                event-set__leave="_event:mouseleave;animation.property:scale;animation.to:1 1 1;animation.easing:linear;">
         </a-image>
+        
+        
+        <!-- ###################  TEXT ENTITIES  #################### -->
         <a-text
             id="textPara"
             scale="5 5 5"
             value="HELLO WORLD"
             opacity="0"
             align="center"
-                color="#000000"
-                width="6"look-at="#cameraObj">
-            </a-text><!--look-at="#cameraObj"-->
+            color="#FFFFFF"
+            width="6"look-at="#cameraObj">
+            </a-text>
         <a-text
             id="textPara2"
             scale="5 5 5"
             value="HELLO WORLD"
             opacity="0"
             align="center"
-                color="#000000"
+            color="#000000"
             width="6"look-at="#cameraObj">
             </a-text>
         <a-text
@@ -351,7 +363,7 @@
             value="HELLO WORLD"
             opacity="0"
             align="center"
-                color="#000000"
+            color="#000000"
             width="6"look-at="#cameraObj">
             </a-text>
         <a-text
@@ -360,7 +372,7 @@
             value="HELLO WORLD"
             opacity="0"
             align="center"
-                color="#000000"
+            color="#000000"
             width="6"look-at="#cameraObj">
             </a-text>
     </a-scene>
