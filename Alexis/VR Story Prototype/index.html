@@ -13,7 +13,6 @@
       
     <!-- Load JS Events -->
     <script>
-        
         //WrapAround function to loop array variables, and can also change the variable which it is based on. Returns "True" or "False" in case additional functions depend on the wrap status
         function wrapAround(current,min,max){
             var wrapped = false;
@@ -27,17 +26,18 @@
             return [wrapped,current];
             
         }
+        
         //Navigate between paragraphs
         document.addEventListener("keydown", function (event) {
             //Go to previous paragraph
             if (event.key === "q") {
                 scrollingHeight = 0;
-                changePage(-1,0);
+                changePage(-1);
 
             //Go to next paragraph
             } else if (event.key === "e") {
                 scrollingHeight = 0;
-                changePage(1,0);
+                changePage(1);
             }
 
             if (event.key ==="p"){
@@ -54,47 +54,38 @@
             textObj = document.getElementById("textPara");
             //Scroll up        
             if (event.key === "i"){
-                //Remove existing animations
-                textObj.removeAttribute("animation__pos");
-                textObj.removeAttribute("animation__opa");
+                changePage(0);
 
                 //add to scroll
-                scrollingHeight= scrollingHeight+0.2;
+                scrollingHeight= textObj.object3D.position.y+10+0.2;
 
                 //If greater than or equal to maximum height, reset for next section
                 var wrapCheck = wrapAround(scrollingHeight,0,20);
                 if (wrapCheck[0]) {
                     scrollingHeight = wrapCheck[1];
                     changePage(1);
+                    
                     textObj = document.getElementById("textPara");
-
-
                     textObj.setAttribute("opacity", 0);
-
                     //Reset the Position 
                     textObj.setAttribute("position","0 -10 -20"); 
                 }
                 
-                //Control opacity while scrolling
-            if (scrollingHeight>=15){
-                textObj.setAttribute("opacity",(20-scrollingHeight)/5);
-            }else if (scrollingHeight<=5){
-                textObj.setAttribute("opacity",scrollingHeight/5);
-            } 
-            textObj.object3D.position.y = -10+scrollingHeight;
+                //Remove existing animations
+                textObj.removeAttribute("animation__pos");
+                
+                textObj.object3D.position.y = -10+scrollingHeight;
+                setOpacity();
                 
                 //Scroll Down
             } else if (event.key === "k") {
-
-                textObj.removeAttribute("animation__pos");
-                textObj.removeAttribute("animation__opa");
+                scrollingHeight = textObj.object3D.position.y+10;
                 
                 //subtract from scroll
                 scrollingHeight= scrollingHeight-0.2;
                 //If less than or equal to min height, reset for previous section      
                 var wrapCheck = wrapAround(scrollingHeight,0,20);
-                
-                if (wrapCheck[0]==true  ) {
+                if (wrapCheck[0]) {
                     scrollingHeight = wrapCheck[1];
                     console.log("Loading Previous manual section");
                     changePage(-1);
@@ -103,21 +94,38 @@
                     textObj.setAttribute("opacity", 0);
 
                     //Reset  the Position
-                    textObj.setAttribute("position","0 10 -20");   
+                    textObj.setAttribute("position","0 10 -20");  
                 }           
                 
-                //Control opacity while scrolling
-            if (scrollingHeight>=15){
-                textObj.setAttribute("opacity",(20-scrollingHeight)/5);
-            }else if (scrollingHeight<=5){
-                textObj.setAttribute("opacity",scrollingHeight/5);
-            } 
-            textObj.object3D.position.y = -10+scrollingHeight;
+                //Remove existing animations
+                textObj.removeAttribute("animation__pos");
+                
+                textObj.object3D.position.y = -10+scrollingHeight;
+                setOpacity();
             }
             
 
         });
-
+        
+        
+        //Control the scrolling opacity
+        function setOpacity(){
+            
+            var textObj = document.getElementById("textPara");
+            scrollingHeight = textObj.object3D.position.y+10;
+            if (scrollingHeight !== 0 && scrollingHeight !== 20){
+                //Control opacity while scrolling
+                if (scrollingHeight>=15){
+                    textObj.setAttribute("opacity",(20-scrollingHeight)/5);
+                }else if (scrollingHeight<=5){
+                    textObj.setAttribute("opacity",scrollingHeight/5);
+                }else{
+                    textObj.setAttribute("opacity",1);
+                }
+                
+            }
+        }
+        
         //Toggle Background
         var currentSky = 0;
         document.addEventListener("keydown", function (event) {
@@ -153,33 +161,24 @@
             sky.setAttribute("src", skies[currentSky]);
         }
 
-      //Define the page number and change
-      var currentPage = 0;
+        //Define the page number and change
+        var currentPage = 0;
         var tempPage = currentPage;
-      function changePage(pageChange, surrounding) {
-        currentPage = wrapAround(currentPage+pageChange,1, storyParagraphs.length - 1)[1];
-        //Select the text object
-        var textObj = document.getElementById("textPara");
-          
-        textObj.setAttribute("opacity", 0);
-        textObj.setAttribute("value", storyParagraphs[currentPage]);
+        function changePage(pageChange) {
+            currentPage = wrapAround(currentPage+pageChange,1, storyParagraphs.length - 1)[1];
+            //Select the text object
+            var textObj = document.getElementById("textPara");
 
-        //Reset and activate the Position animation
-        textObj.removeAttribute("animation__pos");
-        textObj.setAttribute(
-          "animation__pos",
-          "property: position; from:0 -10 -20;to: 0 10 -20; dur: 20000; easing: linear; loop: false;"
-        );
+            textObj.setAttribute("opacity", 0);
+            textObj.setAttribute("value", storyParagraphs[currentPage]);
 
-        //Reset and activate the opacity animation
-        textObj.removeAttribute("animation__opa");
-        textObj.setAttribute(
-          "animation__opa",
-          "property: opacity; from:0;to: 1; dur: 10000; easing: linear; loop: 1; dir:alternate;"
-        );
-        
-            
-      }
+            //Reset and activate the Position animation
+            textObj.removeAttribute("animation__pos");
+            textObj.setAttribute(
+            "animation__pos",
+            "property: position; from:0 -10 -20;to: 0 10 -20; dur: 20000; easing: linear; loop: false;"
+            );
+        }
         
         //Define the page number and change for all text objects
         var currentPageAll = 0;
@@ -264,13 +263,6 @@
           "animation__pos",
           "property: position; from:-20 -10 -0;to: -20 10 -0; dur: 10000; easing: linear; loop: false;"
         );
-
-        //Reset and activate the opacity animation
-        textObj.removeAttribute("animation__opa");
-        textObj.setAttribute(
-          "animation__opa",
-          "property: opacity; from:0;to: 1; dur: 5000; easing: linear; loop: 1; dir:alternate;"
-        );
       }
 
       //Define Story paragraphs
@@ -288,6 +280,12 @@
       storyParagraphs[5] =
         "5 Moral: The forests are beautiful, but you must always be careful to know what creatures live there.";
         }
+        
+        //regularly update the opacity of the text
+        setInterval(setOpacity,100);
+        
+        //set initial paragraph value
+        textObj.setAttribute("value", storyParagraphs[0]);
     </script>
   </head>
     
@@ -357,6 +355,7 @@
             opacity="0"
             align="center"
             color="#FFFFFF"
+            position="0 10 -20"
             width="6"look-at="#cameraObj">
             </a-text>
         <a-text
