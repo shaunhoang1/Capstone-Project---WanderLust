@@ -10,282 +10,265 @@
     <script src="https://unpkg.com/aframe-look-at-component@0.8.0/dist/aframe-look-at-component.min.js"></script>
     <script src="https://unpkg.com/aframe-event-set-component@^4.0.0/dist/aframe-event-set-component.min.js"></script>
     <script src="https://unpkg.com/aframe-animation-component@^4.1.2/dist/aframe-animation-component.min.js"></script>
-      
+
     <!-- Load JS Events -->
     <script>
-        //WrapAround function to loop array variables, and can also change the variable which it is based on. Returns "True" or "False" in case additional functions depend on the wrap status
-        function wrapAround(current,min,max){
-            var wrapped = false;
-            if (current > max) {
-                current = min;
-                wrapped = true;
-            }else if (current < min) {
-                current = max;
-                wrapped = true;
-            }
-            return [wrapped,current];
+      //WrapAround function to loop array variables, and can also change the variable which it is based on. Returns "True" or "False" in case additional functions depend on the wrap status
+      function wrapAround(current,min,max){
+        var wrapped = false;
+        if (current > max) {
+          current = min;
+          wrapped = true;
+        }else if (current < min) {
+          current = max;
+          wrapped = true;
+        }
+        return [wrapped,current];
+      }
+
+      //Navigate between paragraphs
+      document.addEventListener("keydown", function (event) {
+        //Go to previous paragraph
+        if (event.key === "q") {
+        scrollingHeight = 0;
+        changePage(-1);
+        //Go to next paragraph
+        } else if (event.key === "e") {
+        scrollingHeight = 0;
+        changePage(1);
+        }
+
+        if (event.key ==="p"){
+        scrollingHeight = 0;
+        changePageAll(1);
+        console.log("4-page scrolling");
+        }
+      });
+
+      var scrollingHeight = 0;
+      //Manual scrolling functions
+      document.addEventListener("keydown", function (event) {
+        //Scroll through paragraphs  
+        //Scroll up        
+        if (event.key === "i"){
+          changePage(0);
+          //add to scroll
+          scrollingHeight= objParas[0].object3D.position.y+10+0.2;
+
+          //If greater than or equal to maximum height, reset for next section
+          var wrapCheck = wrapAround(scrollingHeight,0,20);
+          if (wrapCheck[0]) {
+            scrollingHeight = wrapCheck[1];
+            console.log("Loading Next section");
+            changePage(1);
             
+            //Reset the Position 
+            objParas[0].setAttribute("opacity", 0);
+            objParas[0].setAttribute("position","0 -10 -20"); 
+          }
+
+          //Remove existing animations
+          objParas[0].removeAttribute("animation__pos");
+
+          objParas[0].object3D.position.y = -10+scrollingHeight;
+          setOpacity();
+
+          //Scroll Down
+        } else if (event.key === "k") {
+          scrollingHeight = objParas[0].object3D.position.y+10;
+
+          //subtract from scroll
+          scrollingHeight= scrollingHeight-0.2;
+          //If less than or equal to min height, reset for previous section      
+          var wrapCheck = wrapAround(scrollingHeight,0,20);
+          if (wrapCheck[0]) {
+            scrollingHeight = wrapCheck[1];
+            console.log("Loading Previous section");
+            changePage(-1);
+
+            //Reset  the Position
+            objParas[0].setAttribute("opacity", 0);
+            objParas[0].setAttribute("position","0 10 -20");  
+          }           
+
+          //Remove existing animations
+          objParas[0].removeAttribute("animation__pos");
+
+          objParas[0].object3D.position.y = -10+scrollingHeight;
+          setOpacity();
         }
-        
-        //Navigate between paragraphs
-        document.addEventListener("keydown", function (event) {
-            //Go to previous paragraph
-            if (event.key === "q") {
-                scrollingHeight = 0;
-                changePage(-1);
-            //Go to next paragraph
-            } else if (event.key === "e") {
-                scrollingHeight = 0;
-                changePage(1);
+      });
+
+      //Control the scrolling opacity
+      function setOpacity(){
+        for(let i=0;i<4;i++){
+          textTarget = objParas[i];
+          scrollingHeight = textTarget.object3D.position.y+10;
+          if (scrollingHeight !== 0 && scrollingHeight !== 20){
+            //Control opacity while scrolling
+            if (scrollingHeight>=15){
+              textTarget.setAttribute("opacity",(20-scrollingHeight)/5);
+            }else if (scrollingHeight<=5){
+                textTarget.setAttribute("opacity",scrollingHeight/5);
+            }else{
+                textTarget.setAttribute("opacity",1);
             }
-
-            if (event.key ==="p"){
-                scrollingHeight = 0;
-                changePageAll(1);
-                console.log("4-page scrolling");
-            }
-
-        });
-
-        var scrollingHeight = 0;
-        //Manual scrolling functions
-        document.addEventListener("keydown", function (event) {
-            //Scroll through paragraphs  
-            //Scroll up        
-            if (event.key === "i"){
-                changePage(0);
-                //add to scroll
-                scrollingHeight= objParas[0].object3D.position.y+10+0.2;
-
-                //If greater than or equal to maximum height, reset for next section
-                var wrapCheck = wrapAround(scrollingHeight,0,20);
-                if (wrapCheck[0]) {
-                    scrollingHeight = wrapCheck[1];
-                    console.log("Loading Next section");
-                    changePage(1);
-                    
-                    //Reset the Position 
-                    objParas[0].setAttribute("opacity", 0);
-                    objParas[0].setAttribute("position","0 -10 -20"); 
-                }
-                
-                //Remove existing animations
-                objParas[0].removeAttribute("animation__pos");
-                
-                objParas[0].object3D.position.y = -10+scrollingHeight;
-                setOpacity();
-                
-                //Scroll Down
-            } else if (event.key === "k") {
-                scrollingHeight = objParas[0].object3D.position.y+10;
-                
-                //subtract from scroll
-                scrollingHeight= scrollingHeight-0.2;
-                //If less than or equal to min height, reset for previous section      
-                var wrapCheck = wrapAround(scrollingHeight,0,20);
-                if (wrapCheck[0]) {
-                    scrollingHeight = wrapCheck[1];
-                    console.log("Loading Previous section");
-                    changePage(-1);
-
-                    //Reset  the Position
-                    objParas[0].setAttribute("opacity", 0);
-                    objParas[0].setAttribute("position","0 10 -20");  
-                }           
-                
-                //Remove existing animations
-                objParas[0].removeAttribute("animation__pos");
-                
-                objParas[0].object3D.position.y = -10+scrollingHeight;
-                setOpacity();
-            }
-        });
-        
-        //Control the scrolling opacity
-        function setOpacity(){
-            for(let i=0;i<4;i++){
-                textTarget = objParas[i];
-                scrollingHeight = textTarget.object3D.position.y+10;
-                if (scrollingHeight !== 0 && scrollingHeight !== 20){
-                    //Control opacity while scrolling
-                    if (scrollingHeight>=15){
-                        textTarget.setAttribute("opacity",(20-scrollingHeight)/5);
-                    }else if (scrollingHeight<=5){
-                        textTarget.setAttribute("opacity",scrollingHeight/5);
-                    }else{
-                        textTarget.setAttribute("opacity",1);
-                    }
-                }
-            }
+          }
         }
-        
-        //Toggle Background
-        var currentSky = 0;
-        document.addEventListener("keydown", function (event) {
-            //Go to previous paragraph
-            if (event.shiftKey) {
-                changeSky(1);
-            }
-        });
+      }
 
-        //Handle Click function
-        AFRAME.registerComponent("button-click-handler", {
-            init: function () {
-                var skyEl = this.el.sceneEl.querySelector("#thing");
-
-                this.el.addEventListener("click", function () {
-                    skyEl.setAttribute("scale", "5 5 5");
-                });
-            },
-        });
-
-        //Define theBackgrounds
-        var currentSky = 0;
-        const skies = [];
-        skies[1] = "#skyLawn";
-        //skies[2] = "#skyScenes";
-        //skies[3] = "#skySnow";
-        skies[2] = "#skyVillage";
-        //skies[5] = "#skyWhite";
-        skies[3] = "#skyWoods";
-        function changeSky(skyChange) {
-            currentSky = wrapAround(currentSky + skyChange,1,skies.length-1)[1];
-            var sky = document.getElementById("sky");
-            sky.setAttribute("src", skies[currentSky]);
+      //Toggle Background
+      var currentSky = 0;
+      document.addEventListener("keydown", function (event) {
+        //Go to previous paragraph
+        if (event.shiftKey) {
+          changeSky(1);
         }
+      });
 
-        //Define the page number and change
-        var currentPage = 0;
-        var tempPage = currentPage;
-        function changePage(pageChange) {
-            clearPageAll();
-            currentPage = wrapAround(currentPage+pageChange,1, storyParagraphs.length - 1)[1];
-            
-            //Update paragraph text value
-            objParas[0].setAttribute("value", storyParagraphs[currentPage]);
+      //Handle Click function
+      AFRAME.registerComponent("button-click-handler", {
+        init: function () {
+          var skyEl = this.el.sceneEl.querySelector("#thing");
 
-            //Reset and activate the Position animation
-            objParas[0].removeAttribute("animation__pos");
-            objParas[0].setAttribute(
-            "animation__pos",
-            "property: position; from:0 -10 -20;to: 0 10 -20; dur: 10000; easing: linear; loop: false;"
-            );
-        }
-        
-        //Define the page number and change for all text objects
-        var currentPageAll = 0;
-        var tempPage = currentPageAll;
-        //Repetitive code for all four text objects, Could be optimized with function but requires too many variables unique to each object - name, location, text value etc
+          this.el.addEventListener("click", function () {
+            skyEl.setAttribute("scale", "5 5 5");
+          });
+        },
+      });
+
+      //Define theBackgrounds
+      var currentSky = 0;
+      const skies = [];
+      skies[1] = "#skyLawn";
+      //skies[2] = "#skyScenes";
+      //skies[3] = "#skySnow";
+      skies[2] = "#skyVillage";
+      //skies[5] = "#skyWhite";
+      skies[3] = "#skyWoods";
+      function changeSky(skyChange) {
+        currentSky = wrapAround(currentSky + skyChange,1,skies.length-1)[1];
+        var sky = document.getElementById("sky");
+        sky.setAttribute("src", skies[currentSky]);
+      }
+
+      //Define the page number and change
+      var currentPage = 0;
+      var tempPage = currentPage;
+      function changePage(pageChange) {
+        clearPageAll();
+        currentPage = wrapAround(currentPage+pageChange,1, storyParagraphs.length - 1)[1];
+
+        //Update paragraph text value
+        objParas[0].setAttribute("value", storyParagraphs[currentPage]);
+
+        //Reset and activate the Position animation
+        objParas[0].removeAttribute("animation__pos");
+        objParas[0].setAttribute("animation__pos","property: position; from:0 -10 -20;to: 0 10 -20; dur: 10000; easing: linear; loop: false;");
+      }
+
+      //Define the page number and change for all text objects
+      var currentPageAll = 0;
+      var tempPage = currentPageAll;
+      //Repetitive code for all four text objects, Could be optimized with function but requires too many variables unique to each object - name, location, text value etc
       function changePageAll(pageChange) {
-          //reset all paragraphs
-          clearPageAll();
-          
+        //reset all paragraphs
+        clearPageAll();
+
         currentPage=wrapAround(currentPage+1,1, storyParagraphs.length - 1)[1];
         tempPage=currentPage;
 
-        //Select the primary text object
+        //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ UPDATE FIRST PARAGRAH ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+        //set next page variable text object
         objParas[0].setAttribute("value", storyParagraphs[tempPage]);
-
         //Reset and activate the Position animation
-        objParas[0].setAttribute(
-          "animation__pos",
-          "property: position; from:0 -10 -20;to: 0 10 -20; dur: 10000; easing: linear; loop: false;"
-        );
-          
-          //Set next temporary page variable for PARAGRAPH 2 
-          tempPage = wrapAround(tempPage+1,1, storyParagraphs.length - 1)[1];
-                  
+        objParas[0].setAttribute("animation__pos","property: position; from:0 -10 -20;to: 0 10 -20; dur: 10000; easing: linear; loop: false;");
+
+        //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ UPDATE SECOND PARAGRAH ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+        //Set next temporary page variable for PARAGRAPH 2 
+        tempPage = wrapAround(tempPage+1,1, storyParagraphs.length - 1)[1];
         objParas[1].setAttribute("value", storyParagraphs[tempPage]);
         //Reset and activate the Position animation
-        objParas[1].setAttribute(
-          "animation__pos",
-          "property: position; from:20 -10 0;to: 20 10 -0; dur: 10000; easing: linear; loop: false;"
-        );
-          
-          //Set next temporary page variable for PARAGRAPH 3
-          tempPage = wrapAround(tempPage+1,1, storyParagraphs.length - 1)[1];          
+        objParas[1].setAttribute("animation__pos","property: position; from:20 -10 0;to: 20 10 -0; dur: 10000; easing: linear; loop: false;");
+
+        //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ UPDATE THIRD PARAGRAH ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+        //Set next temporary page variable for PARAGRAPH 3
+        tempPage = wrapAround(tempPage+1,1, storyParagraphs.length - 1)[1];          
         objParas[2].setAttribute("value", storyParagraphs[tempPage]);
-
         //Reset and activate the Position animation
-        objParas[2].setAttribute(
-          "animation__pos",
-          "property: position; from:-0 -10 20;to: -0 10 20; dur: 10000; easing: linear; loop: false;"
-        );
-          
-          //Set next temporary page variable for PARAGRAPH 4
-          tempPage = wrapAround(tempPage+1,1, storyParagraphs.length - 1)[1];
+        objParas[2].setAttribute("animation__pos","property: position; from:-0 -10 20;to: -0 10 20; dur: 10000; easing: linear; loop: false;");
 
+        //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ UPDATE FOURTH PARAGRAH ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+        //Set next temporary page variable for PARAGRAPH 4
+        tempPage = wrapAround(tempPage+1,1, storyParagraphs.length - 1)[1];
         objParas[3].setAttribute("value", storyParagraphs[tempPage]);
-
         //Reset and activate the Position animation
-        objParas[3].setAttribute(
-          "animation__pos",
-          "property: position; from:-20 -10 -0;to: -20 10 -0; dur: 10000; easing: linear; loop: false;"
-        );
+        objParas[3].setAttribute("animation__pos","property: position; from:-20 -10 -0;to: -20 10 -0; dur: 10000; easing: linear; loop: false;");
       }
 
-        //clearing all pages for the changing section
-        function clearPageAll(){
-            for (let i = 0; i < 4; i++) {
-              objParas[i].removeAttribute("animation__pos");
-                objParas[i].setAttribute("opacity",0);
-                objParas[i].setAttribute("value", "");
-            }
+      //clearing all pages for the changing section
+      function clearPageAll(){
+        for (let i = 0; i < 4; i++) {
+          objParas[i].removeAttribute("animation__pos");
+          objParas[i].setAttribute("opacity",0);
+          objParas[i].setAttribute("value", "");
         }
-        
-        //define all paragraph objects
-        var objParas = [];
-        function iniParagraphObjects(){
-            console.log("GETTING ELEMENTS")
-            objParas[0]=document.getElementById("textPara");
-            objParas[1]=document.getElementById("textPara2");
-            objParas[2]=document.getElementById("textPara3");
-            objParas[3]=document.getElementById("textPara4");
-        }
-        //define objects after page loads
-        setTimeout(iniParagraphObjects,10);
-        
+      }
+
+      //define all paragraph objects
+      var objParas = [];
+      function iniParagraphObjects(){
+        console.log("GETTING ELEMENTS")
+        objParas[0]=document.getElementById("textPara");
+        objParas[1]=document.getElementById("textPara2");
+        objParas[2]=document.getElementById("textPara3");
+        objParas[3]=document.getElementById("textPara4");
+      }
+      //define objects after page loads
+      setTimeout(iniParagraphObjects,10);
+
       //Define Story paragraphs
       const storyParagraphs = [];
-        {
-      storyParagraphs[0] = "THIS IS THE ZEROTH PARAGRAPH, NO ONE WILL SEE THIS";
-      storyParagraphs[1] =
-        "1 Fable: Long ago in the Blue Mountains, three Aboriginal sisters; Meenhi, Wimlah and Gunnedoo lived with their father, a Witch doctor named Tyawan. In the same forest lived a gigantic creature that was feared by all – he was the Bunyip. Tyawan who knew where he lived would leave his daughters on the cliff behind a rocky wall where they would be safe while he would collect food.";
-      storyParagraphs[2] =
-        "2 One day, waving goodbye to his daughters he descended the cliff steps. On the top of the cliff, a big lizard suddenly appeared and frightened Meenhi. She picked up a stone and threw it at the lizard. The stone rolled away over the cliff and crashed into the valley below. Suddenly, the rocks behind the three sisters split open, leaving the sisters on a thin ledge. There was a deep rumble from below and the angry Bunyip emerged from his sleep. He looked up to see who had rudely awakened him and there perched on the thin ledge he saw the sisters cowering in fear. Furiously he lurched towards them.";
-      storyParagraphs[3] =
-        "3 In the valley, Tyawan heard the cry and looked up to see that the Bunyip had almost reached his daughters. Frantically the Witch Doctor pointed his magic bone at the girls and turned them into stone. They would be safe there until the Bunyip was gone and then Tyawan would return them to their former selves.";
-      storyParagraphs[4] =
-        "4 The Bunyip was even more angry when he saw what had happened and he turned on Tyawan and began to chase him. Running away, Tyawan found himself trapped against a rock which he could neither climb nor go around. He quickly changed into a Lyrebird and disappeared into a small cave. Everyone was safe but Tyawan had dropped his magic bone. The Bunyip returned angrily to his hole. Tyawan crept out of the cave and searched for the bone, and is still seeking it while the Three Sisters stand silently waiting, hoping he will find the bone and turn them back to their former selves. \n \n You can see the Three Sisters today from Echo Point and in the valley you can hear Tyawan, the Lyrebird, calling them as he searches for his lost magic bone.";
-      storyParagraphs[5] =
-        "5 Moral: The forests are beautiful, but you must always be careful to know what creatures live there.";
-        }
-        
-        //regularly update the opacity of the text
-        setInterval(setOpacity,100);
-        
-        //set initial paragraph value
-        textObj.setAttribute("value", storyParagraphs[0]);
+      {
+        storyParagraphs[0] = 
+          "THIS IS THE FIRST PARAGRAPH, NO ONE WILL SEE THIS";
+        storyParagraphs[1] =
+          "1 Fable: Long ago in the Blue Mountains, three Aboriginal sisters; Meenhi, Wimlah and Gunnedoo lived with their father, a Witch doctor named Tyawan. In the same forest lived a gigantic creature that was feared by all – he was the Bunyip. Tyawan who knew where he lived would leave his daughters on the cliff behind a rocky wall where they would be safe while he would collect food.";
+        storyParagraphs[2] =
+          "2 One day, waving goodbye to his daughters he descended the cliff steps. On the top of the cliff, a big lizard suddenly appeared and frightened Meenhi. She picked up a stone and threw it at the lizard. The stone rolled away over the cliff and crashed into the valley below. Suddenly, the rocks behind the three sisters split open, leaving the sisters on a thin ledge. There was a deep rumble from below and the angry Bunyip emerged from his sleep. He looked up to see who had rudely awakened him and there perched on the thin ledge he saw the sisters cowering in fear. Furiously he lurched towards them.";
+        storyParagraphs[3] =
+          "3 In the valley, Tyawan heard the cry and looked up to see that the Bunyip had almost reached his daughters. Frantically the Witch Doctor pointed his magic bone at the girls and turned them into stone. They would be safe there until the Bunyip was gone and then Tyawan would return them to their former selves.";
+        storyParagraphs[4] =
+          "4 The Bunyip was even more angry when he saw what had happened and he turned on Tyawan and began to chase him. Running away, Tyawan found himself trapped against a rock which he could neither climb nor go around. He quickly changed into a Lyrebird and disappeared into a small cave. Everyone was safe but Tyawan had dropped his magic bone. The Bunyip returned angrily to his hole. Tyawan crept out of the cave and searched for the bone, and is still seeking it while the Three Sisters stand silently waiting, hoping he will find the bone and turn them back to their former selves. \n \n You can see the Three Sisters today from Echo Point and in the valley you can hear Tyawan, the Lyrebird, calling them as he searches for his lost magic bone.";
+        storyParagraphs[5] =
+          "5 Moral: The forests are beautiful, but you must always be careful to know what creatures live there.";
+      }
+
+      //regularly update the opacity of the text
+      setInterval(setOpacity,100);
+
+      //set initial paragraph value
+      textObj.setAttribute("value", storyParagraphs[0]);
     </script>
   </head>
-    
+
   <body>
     <!-- HTML Elements to create a page before scene
     <button type="button" onClick="onClick()">Click me</button>
     <p>Clicks: <a id="clicks">0</a></p>
     -->
     <a-scene id="VRScene">
-        
-    <!-- ###################  LOAD ASSETS INTO STORY  #################### -->
+
+      <!-- ###################  LOAD ASSETS INTO STORY  #################### -->
       <a-assets>
-        
+
         <a-asset-item id="firstModel" src="Resources/Objects/testObj.obj"></a-asset-item>
         <!-- CANNOT UPLOAD LARGE OBJECTS TO GITHUB -->
         <!--<a-asset-item id="venator" src="Resources/Objects/venator/Venator.obj"></a-asset-item>
         <a-asset-item id="plant1" src="Resources/Objects/folder/Vase%20Pack%202.FBX"></a-asset-item>-->
         <img id="imgBunyip" src="Resources/Images/Bunyip_5.jpg"/>
         <img id="imgBunyip2" src="Resources/Images/bunyip-emerging.jpg"/>
-          
+
         <!-- Skybox Images-->
         <img id="skyLawn" src="Resources/Backgrounds/lawn-Mansion.jpeg" />
         <img id="skyScenes" src="Resources/Backgrounds/scenes.jpeg" />
@@ -294,77 +277,84 @@
         <img id="skyWhite" src="Resources/Backgrounds/white-building.jpeg" />
         <img id="skyWoods" src="Resources/Backgrounds/woods-by-the-river.jpg" />
       </a-assets>
-        
+
       <!--ground for player-->
       <a-circle position="0 0 2" rotation="-90 0 0" radius="2" color="grey"></a-circle>
-        
+
       <a-sky id="sky" src="#skyWoods"></a-sky>
-        
-        <!-- ###################  CAMERA/PLAYER ENTITIES  #################### -->
+
+      <!-- ###################  CAMERA/PLAYER ENTITIES  #################### -->
       <a-entity camera look-controls id="cameraObj" position="0 1.6 2" wasd-controls="enabled:true;acceleration:10;">
-        <a-entity
-          cursor="fuse:true;fuseTimeout:500;"
-          position="0 0 -1"
-          geometry="primitive:ring;radiusInner:0.001;radiusOuter:0.003;"
-          material="color:white;shader:flat;"></a-entity>
-      </a-entity>
-    
-        <!-- ###################  STORY ENTITIES  #################### -->
-        <a-entity id="modelEntity" obj-model="obj: #firstModel;" color="#00FF00" scale="0.06 0.06 0.06" position="-1.6 0 0.2"
-            event-set__click="_event:click; animation.property:scale;animation.to:0.2 0.2 0.2;animation.easing:linear;"
-            event-set__leave="_event:mouseleave;animation.property:scale;animation.to:0.06 0.06 0.06;animation.easing:linear;">>
-            <a-circle radius="3" rotation="-90 0 0" color="grey"></a-circle>
+      <a-entity
+        cursor="fuse:true;fuseTimeout:500;"
+        position="0 0 -1"
+        geometry="primitive:ring;radiusInner:0.001;radiusOuter:0.003;"
+        material="color:white;shader:flat;"></a-entity>
         </a-entity>
-        <a-image id="imageEntity" src="#imgBunyip" position="2.6 1.4 -0.8" opacity="0" look-at="#cameraObj"
-            animation__fadeIn="property:opacity;to:1 1 1;easing:linear; duration:5000;"
-            event-set__click="_event:click; animation.property:scale;animation.to:3 3 3;animation.easing:linear;"
-            event-set__leave="_event:mouseleave;animation.property:scale;animation.to:1 1 1;animation.easing:linear;">
-            </a-image>
-        <a-image id="imageEntity" src="#imgBunyip2" position="-2.6 1.4 -0.8" opacity="0" look-at="#cameraObj"
-            animation__fadeIn="property:opacity;to:1 1 1;easing:linear; duration:5000;"
-            event-set__click="_event:click; animation.property:scale;animation.to:3 3 3;animation.easing:linear;"
-            event-set__leave="_event:mouseleave;animation.property:scale;animation.to:1 1 1;animation.easing:linear;">
-            </a-image>
-        
-        
-        <!-- ###################  TEXT ENTITIES  #################### -->
-        <a-text
-            id="textPara"
-            scale="5 5 5"
-            value="HELLO WORLD"
-            opacity="0"
-            align="center"
-            color="#FFFFFF"
-            position="0 10 -20"
-            width="6"look-at="#cameraObj">
-            </a-text>
-        <a-text
-            id="textPara2"
-            scale="5 5 5"
-            value=""
-            opacity="0"
-            align="center"
-            color="#FFFFFF"
-            width="6"look-at="#cameraObj">
-            </a-text>
-        <a-text
-            id="textPara3"
-            scale="5 5 5"
-            value=""
-            opacity="0"
-            align="center"
-            color="#FFFFFF"
-            width="6"look-at="#cameraObj">
-            </a-text>
-        <a-text
-            id="textPara4"
-            scale="5 5 5"
-            value=""
-            opacity="0"
-            align="center"
-            color="#FFFFFF"
-            width="6"look-at="#cameraObj">
-            </a-text>
+
+      <!-- ###################  STORY ENTITIES  #################### -->
+      <a-entity id="modelEntity" obj-model="obj: #firstModel;" color="#00FF00" scale="0.06 0.06 0.06" position="-1.6 0 0.2"
+        event-set__click="_event:click; animation.property:scale;animation.to:0.2 0.2 0.2;animation.easing:linear;"
+        event-set__leave="_event:mouseleave;animation.property:scale;animation.to:0.06 0.06 0.06;animation.easing:linear;">
+        <a-circle radius="3" rotation="-90 0 0" color="grey"></a-circle>
+        </a-entity>
+      <a-image id="imageEntity" src="#imgBunyip" position="2.6 1.4 -0.8" opacity="0" look-at="#cameraObj"
+        animation__fadeIn="property:opacity;to:1 1 1;easing:linear; duration:5000;"
+        event-set__click="_event:click; animation.property:scale;animation.to:3 3 3;animation.easing:linear;"
+        event-set__leave="_event:mouseleave;animation.property:scale;animation.to:1 1 1;animation.easing:linear;">
+        </a-image>
+      <a-image id="imageEntity" src="#imgBunyip2" position="-2.6 1.4 -0.8" opacity="0" look-at="#cameraObj"
+        animation__fadeIn="property:opacity;to:1 1 1;easing:linear; duration:5000;"
+        event-set__click="_event:click; animation.property:scale;animation.to:3 3 3;animation.easing:linear;"
+        event-set__leave="_event:mouseleave;animation.property:scale;animation.to:1 1 1;animation.easing:linear;">
+        </a-image>
+
+
+      <!-- ###################  TEXT ENTITIES  #################### -->
+      <!-- First Paragraph -->
+      <a-text
+        id="textPara"
+        scale="5 5 5"
+        value="HELLO WORLD"
+        opacity="0"
+        align="center"
+        color="#FFFFFF"
+        position="0 10 -20"
+        width="6"look-at="#cameraObj">
+        </a-text>
+      
+      <!-- Second Paragraph -->
+      <a-text
+        id="textPara2"
+        scale="5 5 5"
+        value=""
+        opacity="0"
+        align="center"
+        color="#FFFFFF"
+        width="6"look-at="#cameraObj">
+        </a-text>
+      
+      <!-- Third Paragraph -->
+      <a-text
+        id="textPara3"
+        scale="5 5 5"
+        value=""
+        opacity="0"
+        align="center"
+        color="#FFFFFF"
+        width="6"look-at="#cameraObj">
+        </a-text>
+
+      <!-- Fourth Paragraph -->
+      <a-text
+        id="textPara4"
+        scale="5 5 5"
+        value=""
+        opacity="0"
+        align="center"
+        color="#FFFFFF"
+        width="6"look-at="#cameraObj">
+        </a-text>
     </a-scene>
   </body>
 </html>
