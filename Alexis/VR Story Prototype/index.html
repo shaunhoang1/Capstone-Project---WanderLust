@@ -18,7 +18,7 @@
     <!-- Load JS other Events -->
     <script>
       //define objects after page loads
-        setTimeout(iniParagraphObjects,10);
+      setTimeout(iniParagraphObjects,10);
         
       //regularly update the opacity of the text
       setInterval(setOpacity,100);
@@ -27,7 +27,8 @@
   </head>
 
   <body>
-    <!-- HTML Elements to create a page before scene
+    <!-- HTML Elements to c
+reate a page before scene
     <button type="button" onClick="onClick()">Click me</button>
     <p>Clicks: <a id="clicks">0</a></p>
     -->
@@ -73,14 +74,14 @@
         
       <!-- First Image Entity -->
       <a-image id="imageEntity" src="#imgBunyip" position="2.6 1.4 -0.8" opacity="0" look-at="#cameraObj"
-        animation__fadeIn="property:opacity;to:1 1 1;easing:linear; duration:5000;"
+        animation__fadeIn="property:opacity;to:1;easing:linear; "
         event-set__click="_event:click; animation.property:scale;animation.to:3 3 3;animation.easing:linear;"
         event-set__leave="_event:mouseleave;animation.property:scale;animation.to:1 1 1;animation.easing:linear;">
         </a-image>
         
       <!-- Second Image Entity -->
       <a-image id="imageEntity" src="#imgBunyip2" position="-2.6 1.4 -0.8" opacity="0" look-at="#cameraObj"
-        animation__fadeIn="property:opacity;to:1 1 1;easing:linear; duration:5000;"
+        animation__fadeIn="property:opacity;to:1;easing:linear; "
         event-set__click="_event:click; animation.property:scale;animation.to:3 3 3;animation.easing:linear;"
         event-set__leave="_event:mouseleave;animation.property:scale;animation.to:1 1 1;animation.easing:linear;">
         </a-image>
