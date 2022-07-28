@@ -1,0 +1,280 @@
+{
+    "id": "7YtO4S",
+    "kind": "text-body",
+    "text1": {
+        "type": "doc",
+        "content": [
+        {
+            "type": "h3",
+            "attrs": {
+            "align": "",
+            "className": "",
+            "fontFamily": ""
+            },
+            "content": [
+            {
+                "text": "The city of Porto is full of sky-high lookouts and rooftop bars that afford expansive views. Yet the most memorable and unique experiences are often at ground level.",
+                "type": "text"
+            }
+            ]
+        },
+        {
+            "type": "divider",
+            "attrs": {
+            "size": "small",
+            "align": "left",
+            "color": "Theme-BackgroundColor-1"
+            }
+        },
+        {
+            "type": "paragraph",
+            "attrs": {
+            "align": "",
+            "className": "",
+            "fontFamily": ""
+            },
+            "content": [
+            {
+                "text": "Put on your walking shoes, and hit the streets of Porto and you'll soon find yourself entranced.  … and maybe lost. It's one of the pitfalls of historic cities with labyrinthine narrow streets. Fortunately for you, we can't think of a better city to be lost in. For a start, there's always delicious food and drink on hand, and any of those impossibly narrow alleys will soon open up to stunning vistas over courtyards and gardens, the river, and valley beyond. ",
+                "type": "text"
+            }
+            ]
+        },
+        {
+            "type": "divider",
+            "attrs": {
+            "size": "",
+            "align": "",
+            "color": ""
+            }
+        },
+        {
+            "type": "paragraph",
+            "attrs": {
+            "align": "",
+            "className": "",
+            "fontFamily": ""
+            },
+            "content": [
+            {
+                "text": "The UNESCO-listed city centre is a layer-cake of Roman rule, Moorish invasions, and French destruction, with artefacts from multiple eras shining brightly or merely peering out through the cracks. ",
+                "type": "text"
+            }
+            ]
+        },
+        {
+            "type": "paragraph",
+            "attrs": {
+            "align": "",
+            "className": "",
+            "fontFamily": ""
+            },
+            "content": [
+            {
+                "text": "One thing you won't miss is the art style for which Porto is most well known: blue azulejo tiles. As with the rest of Porto, the story of how this style came to the city is one with a fascinating international history.",
+                "type": "text"
+            }
+            ]
+        },
+        {
+            "type": "media",
+            "attrs": {
+            "item": {
+                "id": "poBhrz",
+                "kind": "image",
+                "link": {
+                "href": "",
+                "blank": false,
+                "nofollow": false,
+                "noreferrer": true
+                },
+                "portrait": {
+                "image": {
+                    "id": "QeAdGy3QGw",
+                    "meta": {
+                    "heading": "Image (will scale to column width)",
+                    "subHeading": "Recommended: JPEG @ 900px wide"
+                    },
+                    "isGenerated": false,
+                    "isUserDefined": false
+                },
+                "altText": "",
+                "caption": {
+                    "type": "doc",
+                    "content": [
+                    {
+                        "type": "paragraph",
+                        "content": []
+                    }
+                    ]
+                },
+                "transition": {
+                    "name": "none",
+                    "delay": 0.1,
+                    "start": 0
+                }
+                },
+                "landscape": {
+                "image": {
+                    "id": "QeAdGy3QGw",
+                    "meta": {
+                    "heading": "Image (will scale to column width)",
+                    "subHeading": "Recommended: JPEG @ 900px wide"
+                    },
+                    "isGenerated": false,
+                    "isUserDefined": false
+                },
+                "altText": "",
+                "caption": {
+                    "type": "doc",
+                    "content": [
+                    {
+                        "type": "paragraph",
+                        "content": []
+                    }
+                    ]
+                },
+                "transition": {
+                    "name": "none",
+                    "delay": 0.1,
+                    "start": 0
+                }
+                }
+            },
+            "align": "",
+            "className": ""
+            }
+        },
+        {
+            "type": "paragraph",
+            "attrs": {
+            "align": "",
+            "className": "",
+            "fontFamily": ""
+            },
+            "content": [
+            {
+                "text": "In the 15th century, King Manuel I of Portugal imported the style from Spain, where it had been developed during the Islamic expansion of the area in the middle ages. Originally featuring geometric patterns and symbols of flowers, animals and birds, European adaptation added elements of architecture and elaborate storytelling, mostly of a a religious nature. ",
+                "type": "text"
+            }
+            ]
+        },
+        {
+            "type": "media",
+            "attrs": {
+            "item": {
+                "id": "ZTLe9B",
+                "kind": "image",
+                "link": {
+                "href": "",
+                "blank": false,
+                "nofollow": false,
+                "noreferrer": true
+                },
+                "portrait": {
+                "image": {
+                    "id": "MtI182HxLv",
+                    "meta": {
+                    "heading": "Image (will scale to column width)",
+                    "subHeading": "Recommended: JPEG @ 900px wide"
+                    },
+                    "isGenerated": false,
+                    "isUserDefined": false
+                },
+                "altText": "",
+                "caption": {
+                    "type": "doc",
+                    "content": [
+                    {
+                        "type": "paragraph",
+                        "content": []
+                    }
+                    ]
+                },
+                "transition": {
+                    "name": "none",
+                    "delay": 0.1,
+                    "start": 0
+                }
+                },
+                "landscape": {
+                "image": {
+                    "id": "MtI182HxLv",
+                    "meta": {
+                    "heading": "Image (will scale to column width)",
+                    "subHeading": "Recommended: JPEG @ 900px wide"
+                    },
+                    "isGenerated": false,
+                    "isUserDefined": false
+                },
+                "altText": "",
+                "caption": {
+                    "type": "doc",
+                    "content": [
+                    {
+                        "type": "paragraph",
+                        "content": []
+                    }
+                    ]
+                },
+                "transition": {
+                    "name": "none",
+                    "delay": 0.1,
+                    "start": 0
+                }
+                }
+            },
+            "align": "",
+            "className": ""
+            }
+        },
+        {
+            "type": "paragraph",
+            "attrs": {
+            "align": "",
+            "className": "",
+            "fontFamily": ""
+            },
+            "content": [
+            {
+                "text": "Adopted by large-scale public works, private enterprises, and individual residents, the ironically blue tiles make up huge whole-building facades with elaborate scenes, and also appear as small geometric repeating patterns on private doors and low garden walls. ",
+                "type": "text"
+            }
+            ]
+        },
+        {
+            "type": "paragraph",
+            "attrs": {
+            "align": "",
+            "className": "",
+            "fontFamily": ""
+            }
+        }
+        ]
+    },
+    "text2": {
+        "type": "doc",
+        "content": [
+          {
+            "type": "paragraph",
+            "content": [
+              {
+                "text": "A point with no defined highlight will show the entire uncropped image, like this.",
+                "type": "text"
+              }
+            ]
+          },
+          {
+            "type": "paragraph",
+            "content": [
+              {
+                "text": "To edit the section, simply upload an image and add, remove, or modify the existing highlights and text.",
+                "type": "text"
+              }
+            ]
+          }
+        ]
+      }
+    
+}
+  
