@@ -11,7 +11,6 @@ function wrapAround(current,min,max){
         wrapped = true;
     }
     return [wrapped,current];
-    
 }
 
 //Control the opacity of paragraphs as they change height
@@ -209,9 +208,6 @@ function iniParagraphObjects(){
 //Currently just defines story paragraphs from input 
 const storyParagraphs = [];
 {
-    
-    storyParagraphs.push(allParas)
-    /*
     storyParagraphs[0] = 
         "THIS IS THE FIRST PARAGRAPH, NO ONE WILL SEE THIS";
     storyParagraphs[1] =
@@ -223,8 +219,7 @@ const storyParagraphs = [];
     storyParagraphs[4] =
         "4 The Bunyip was even more angry when he saw what had happened and he turned on Tyawan and began to chase him. Running away, Tyawan found himself trapped against a rock which he could neither climb nor go around. He quickly changed into a Lyrebird and disappeared into a small cave. Everyone was safe but Tyawan had dropped his magic bone. The Bunyip returned angrily to his hole. Tyawan crept out of the cave and searched for the bone, and is still seeking it while the Three Sisters stand silently waiting, hoping he will find the bone and turn them back to their former selves. \n \n You can see the Three Sisters today from Echo Point and in the valley you can hear Tyawan, the Lyrebird, calling them as he searches for his lost magic bone.";
     storyParagraphs[5] =
-        "5 Moral: The forests are beautiful, but you must always be careful to know what creatures live there.";*/
-
+        "5 Moral: The forests are beautiful, but you must always be careful to know what creatures live there.";
 }
 
 //Unused Click function
