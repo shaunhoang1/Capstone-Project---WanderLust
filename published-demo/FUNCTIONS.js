@@ -1,29 +1,5 @@
 const { response } = require('express');
 
-data={
-    "status": "SUCCESS",
-    "status_message": "blah blah blah",
-    "pri_tag": [
-    {
-        "tag_id": 1,
-        "name": "Tag1"
-    },
-    {
-        "tag_id": 2,
-        "name": "Tag2"
-    },
-    {
-        "tag_id": 3,
-        "name": "Tag3"
-    },
-    {
-        "tag_id": 4,
-        "name": "Tag4"
-    }
-    ]
-};
-
-
 storyData = require('./testData.json');
 
 console.log("parsing now");
@@ -33,6 +9,7 @@ for(var i in sections)
 {
     let layers = sections[i].layers; 
     if (i==0){
+        console.log("Section: " + i);
         let items = layers[i].items; //Items[0] = title, Items[1] = Byline
         //retrieve story title
         storyTitle = items[0]["storyTitle"]["content"][0]["content"][0]["text"];
@@ -42,8 +19,25 @@ for(var i in sections)
         byLine = items[1]["byline"]["content"][0]["content"][0]["text"];
         console.log("ByLine: "+ byLine);
     }else{
-        currentText= layers[0].items[0]["title"]["content"][0]["content"][0]["text"];
-        console.log("Text: "+ currentText);
+        for(var j in layers)
+        {
+            console.log("Section: " + i);
+            console.log("Layer: "+j+", ID: "+layers[j].id);
+            console.log(typeof(layers[j].items))
+            if(typeof(layers[j].items)!='undefined'){
+                layerItems = layers[j].items;
+                if(layerItems[0]["title"]!=undefined)
+                {
+                    currentText= layerItems[0]["title"]["content"][0]["content"][0]["text"];
+                    console.log("Text: "+ currentText);
+                }
+                
+            }else if(typeof(layers[j].layers)!='undefined'){
+
+            }
+            
+        }
+        
     }
     
     
