@@ -9,6 +9,10 @@ for(var i in sections)
 {
     let layers = sections[i].layers; 
     if (i==0){
+        if (layers?.content!=="")
+        {
+
+        }
         console.log("Section: " + i);
         let items = layers[i].items; //Items[0] = title, Items[1] = Byline
         //retrieve story title
@@ -19,6 +23,7 @@ for(var i in sections)
         byLine = items[1]["byline"]["content"][0]["content"][0]["text"];
         console.log("ByLine: "+ byLine);
     }else{
+        //Filter through standard paragraphs
         for(var j in layers)
         {
             console.log("Section: " + i);
@@ -37,7 +42,11 @@ for(var i in sections)
             }
             
         }
+
+        //Filter through Scrollytelling paragraphs
         
+
+        //Filter through 
     }
     
     
