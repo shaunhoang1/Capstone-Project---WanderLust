@@ -3,7 +3,7 @@ const { array, string } = require('joi');
 
 
 //const storyData = require('./testData.json');
-const storyData = require('./shorthand-wanderlust-project-220817111600/story.json');
+const storyData = require('./shorthand-wanderlust-project-Innsmouth/story.json');
 const combinedText =[];
 
 function extractText(json)
