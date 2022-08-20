@@ -87,9 +87,8 @@ function retrieveStoryText(jsonDirectory){
   return combinedText;
 }
 
-
-myText = retrieveStoryText('./shorthand-wanderlust-project-Innsmouth/story.json');
-
+//myText = retrieveStoryText('./shorthand-wanderlust-project-Innsmouth/story.json');
+myText = retrieveStoryText('');
 for(i in myText)
 {
     console.log("item "+i+": "+myText[i]);
