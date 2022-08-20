@@ -1,0 +1,2511 @@
+"type": "story",
+  "cover": "RvwA7gIWWd",
+  "coverBackgroundClass": "Theme-BackgroundColor-10",
+  "title": null,
+  "description": null,
+  "slug": "untitled",
+  "sections": [
+    {
+      "id": "vn1JaMSuzM",
+      "organisation": "429MisUGlc",
+      "page": "po9k9ofYug",
+      "template": "jyR1iQaL2T",
+      "title": null,
+      "isNavigable": false,
+      "layers": [
+        {
+          "id": "0xKBBL",
+          "kind": "text-blocks",
+          "items": [
+            {
+              "id": "xBl1F7",
+              "kind": "header",
+              "leadIn": {
+                "type": "doc",
+                "content": [
+                  {
+                    "type": "leadin",
+                    "attrs": {
+                      "fontSize": "xxxlarge"
+                    },
+                    "content": [
+                      {
+                        "text": "PORTO",
+                        "type": "text",
+                        "marks": [
+                          {
+                            "type": "strong"
+                          }
+                        ]
+                      }
+                    ]
+                  }
+                ]
+              },
+              "position": {
+                "x": "left",
+                "y": "top"
+              },
+              "storyTitle": {
+                "type": "doc",
+                "content": [
+                  {
+                    "type": "storytitle",
+                    "attrs": {
+                      "align": "left",
+                      "fontSize": "xxsmall"
+                    },
+                    "content": [
+                      {
+                        "text": "Portugal's 'second city' should be your first destination. ",
+                        "type": "text"
+                      }
+                    ]
+                  }
+                ]
+              }
+            },
+            {
+              "id": "pCAw4H",
+              "kind": "byline",
+              "byline": {
+                "type": "doc",
+                "content": [
+                  {
+                    "type": "byline",
+                    "content": [
+                      {
+                        "text": "By Alexis Csanyi-Vo",
+                        "type": "text"
+                      }
+                    ]
+                  }
+                ]
+              },
+              "position": {
+                "x": "center",
+                "y": "bottom"
+              }
+            }
+          ]
+        },
+        {
+          "id": "g5TvHY",
+          "kind": "background-viewport",
+          "items": [
+            {
+              "id": "cwwURg",
+              "kind": "cyclops",
+              "landscape": {
+                "image": {
+                  "id": "RvwA7gIWWd",
+                  "meta": {
+                    "heading": "Automatically generate a 3D animation from any static image",
+                    "subHeading": "Recommended image size: JPEG @ 2560x1440px"
+                  },
+                  "isUserDefined": true
+                },
+                "model": {
+                  "id": "2ML7YKyQQ7",
+                  "isUserDefined": true
+                },
+                "altText": "image",
+                "caption": {
+                  "type": "doc",
+                  "content": [
+                    {
+                      "type": "paragraph",
+                      "attrs": {
+                        "align": "",
+                        "className": "",
+                        "fontFamily": ""
+                      },
+                      "content": [
+                        {
+                          "text": "Photo by ",
+                          "type": "text"
+                        },
+                        {
+                          "text": "Dušan veverkolog",
+                          "type": "text",
+                          "marks": [
+                            {
+                              "type": "link",
+                              "attrs": {
+                                "href": "https://unsplash.com/@veverkolog?utm_source=shorthand_production&utm_medium=referral",
+                                "blank": true,
+                                "nofollow": false,
+                                "noreferrer": false
+                              }
+                            }
+                          ]
+                        },
+                        {
+                          "text": " on ",
+                          "type": "text"
+                        },
+                        {
+                          "text": "Unsplash",
+                          "type": "text",
+                          "marks": [
+                            {
+                              "type": "link",
+                              "attrs": {
+                                "href": "https://unsplash.com/photos/nvpxQQsQoaM",
+                                "blank": true,
+                                "nofollow": false,
+                                "noreferrer": false
+                              }
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                  ]
+                },
+                "transition": {
+                  "name": "none",
+                  "delay": 0.1,
+                  "start": 0
+                },
+                "stockMediaDetails": {
+                  "url": "https://images.unsplash.com/photo-1648390332174-33e5480911f6?crop=entropy&cs=srgb&fm=jpg&ixid=MnwyNzIzMzZ8MHwxfHRvcGljfHxKcGc2S2lkbC1Ia3x8fHx8Mnx8MTY0ODc2NDQ5Nw&ixlib=rb-1.2.1&q=85",
+                  "width": 3600,
+                  "height": 5400,
+                  "provider": "Unsplash",
+                  "url_thumb": "https://images.unsplash.com/photo-1648390332174-33e5480911f6?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=MnwyNzIzMzZ8MHwxfHRvcGljfHxKcGc2S2lkbC1Ia3x8fHx8Mnx8MTY0ODc2NDQ5Nw&ixlib=rb-1.2.1&q=80&w=200",
+                  "provider_link": "https://unsplash.com/photos/nvpxQQsQoaM",
+                  "attribution_link": "https://unsplash.com/@veverkolog",
+                  "download_location": "https://api.unsplash.com/photos/nvpxQQsQoaM/download?ixid=MnwyNzIzMzZ8MHwxfHRvcGljfHxKcGc2S2lkbC1Ia3x8fHx8Mnx8MTY0ODc2NDQ5Nw",
+                  "provider_media_id": "nvpxQQsQoaM",
+                  "attribution_full_name": "Dušan veverkolog",
+                  "provider_media_alt_text": ""
+                }
+              }
+            }
+          ],
+          "overlay": 30
+        }
+      ],
+      "className": "Title",
+      "settings": {
+        "theme": "Custom",
+        "height": 100,
+        "layout": "Full",
+        "isFixed": false,
+        "overlay": 60,
+        "textFade": "none",
+        "className": null,
+        "textDepth": 1,
+        "textShift": "none",
+        "scrollFade": "none",
+        "overlayStyle": "Top",
+        "visibilities": [
+          "All devices",
+          "Mobile only",
+          "Desktop only"
+        ],
+        "colorClassName": "Theme-ForegroundColor-9",
+        "mediaTransition": "none",
+        "backgroundColorClassName": "Theme-BackgroundColor-10"
+      },
+      "createdBy": "Ru4S9oEnSI",
+      "updatedBy": "Ru4S9oEnSI",
+      "deletedBy": null,
+      "createdAt": "2022-03-31T23:48:14.509Z",
+      "updatedAt": "2022-03-31T23:57:31.651Z",
+      "currentVersion": 4
+    },
+    {
+      "id": "kf1nDWv20S",
+      "organisation": "429MisUGlc",
+      "page": "po9k9ofYug",
+      "template": "N7Rl2RNrSI",
+      "title": null,
+      "isNavigable": false,
+      "layers": [
+        {
+          "id": "vCQkUFaOIR",
+          "kind": "media-gallery",
+          "items": [
+            {
+              "id": "a695zWf4ZK",
+              "kind": "background-viewport",
+              "items": [
+                {
+                  "id": "LueoCAaFjt",
+                  "kind": "image",
+                  "link": {
+                    "href": "",
+                    "blank": false,
+                    "nofollow": false,
+                    "noreferrer": true
+                  },
+                  "size": 2,
+                  "portrait": {
+                    "image": {
+                      "id": "b7I9tGxtAv",
+                      "isUserDefined": false
+                    },
+                    "altText": "",
+                    "caption": {
+                      "type": "doc",
+                      "content": [
+                        {
+                          "type": "paragraph",
+                          "content": []
+                        }
+                      ]
+                    }
+                  },
+                  "position": {
+                    "x": "center",
+                    "y": "center"
+                  },
+                  "landscape": {
+                    "image": {
+                      "id": "b7I9tGxtAv",
+                      "isUserDefined": false
+                    },
+                    "altText": "",
+                    "caption": {
+                      "type": "doc",
+                      "content": [
+                        {
+                          "type": "paragraph",
+                          "content": []
+                        }
+                      ]
+                    }
+                  }
+                },
+                {
+                  "id": "XH7RKX7xSV",
+                  "kind": "image",
+                  "link": {
+                    "href": "",
+                    "blank": false,
+                    "nofollow": false,
+                    "noreferrer": true
+                  },
+                  "size": 1,
+                  "portrait": {
+                    "image": {
+                      "id": "7A08E2GWXh",
+                      "isUserDefined": false
+                    },
+                    "altText": "",
+                    "caption": {
+                      "type": "doc",
+                      "content": [
+                        {
+                          "type": "paragraph",
+                          "content": []
+                        }
+                      ]
+                    }
+                  },
+                  "position": {
+                    "x": "center",
+                    "y": "center"
+                  },
+                  "landscape": {
+                    "image": {
+                      "id": "7A08E2GWXh",
+                      "isUserDefined": false
+                    },
+                    "altText": "",
+                    "caption": {
+                      "type": "doc",
+                      "content": [
+                        {
+                          "type": "paragraph",
+                          "content": []
+                        }
+                      ]
+                    }
+                  }
+                }
+              ]
+            },
+            {
+              "id": "3IPD8tL344",
+              "kind": "background-viewport",
+              "items": [
+                {
+                  "id": "Y8y3mbuLGZ",
+                  "kind": "image",
+                  "link": {
+                    "href": "",
+                    "blank": false,
+                    "nofollow": false,
+                    "noreferrer": true
+                  },
+                  "size": 3,
+                  "portrait": {
+                    "image": {
+                      "id": "UwPqqQK6tF",
+                      "isUserDefined": false
+                    },
+                    "altText": "",
+                    "caption": {
+                      "type": "doc",
+                      "content": [
+                        {
+                          "type": "paragraph",
+                          "content": []
+                        }
+                      ]
+                    }
+                  },
+                  "position": {
+                    "x": "center",
+                    "y": "center"
+                  },
+                  "landscape": {
+                    "image": {
+                      "id": "UwPqqQK6tF",
+                      "isUserDefined": false
+                    },
+                    "altText": "",
+                    "caption": {
+                      "type": "doc",
+                      "content": [
+                        {
+                          "type": "paragraph",
+                          "content": []
+                        }
+                      ]
+                    }
+                  }
+                }
+              ]
+            }
+          ]
+        }
+      ],
+      "className": "MediaGallery",
+      "settings": {
+        "theme": "Light",
+        "gallery": "Full",
+        "className": null,
+        "visibilities": [
+          "All devices",
+          "Mobile only",
+          "Desktop only"
+        ]
+      },
+      "createdBy": "Ru4S9oEnSI",
+      "updatedBy": null,
+      "deletedBy": null,
+      "createdAt": "2022-04-14T04:06:02.447Z",
+      "updatedAt": "2022-04-14T04:06:02.447Z",
+      "currentVersion": 0
+    },
+    {
+      "id": "HjpELC73b2",
+      "organisation": "429MisUGlc",
+      "page": "po9k9ofYug",
+      "template": "N7Rl2RNrSI",
+      "title": null,
+      "isNavigable": false,
+      "layers": [
+        {
+          "id": "r0tSJx",
+          "kind": "media-gallery",
+          "items": [
+            {
+              "id": "1hDVh6",
+              "kind": "background-viewport",
+              "items": [
+                {
+                  "id": "LueoCAaFjt",
+                  "kind": "image",
+                  "link": {
+                    "href": "",
+                    "blank": false,
+                    "nofollow": false,
+                    "noreferrer": true
+                  },
+                  "size": 2,
+                  "portrait": {
+                    "image": {
+                      "id": "b7I9tGxtAv",
+                      "isUserDefined": false
+                    },
+                    "altText": "",
+                    "caption": {
+                      "type": "doc",
+                      "content": [
+                        {
+                          "type": "paragraph",
+                          "content": []
+                        }
+                      ]
+                    }
+                  },
+                  "position": {
+                    "x": "center",
+                    "y": "center"
+                  },
+                  "landscape": {
+                    "image": {
+                      "id": "b7I9tGxtAv",
+                      "isUserDefined": false
+                    },
+                    "altText": "",
+                    "caption": {
+                      "type": "doc",
+                      "content": [
+                        {
+                          "type": "paragraph",
+                          "content": []
+                        }
+                      ]
+                    }
+                  }
+                },
+                {
+                  "id": "XH7RKX7xSV",
+                  "kind": "image",
+                  "link": {
+                    "href": "",
+                    "blank": false,
+                    "nofollow": false,
+                    "noreferrer": true
+                  },
+                  "size": 1,
+                  "portrait": {
+                    "image": {
+                      "id": "7A08E2GWXh",
+                      "isUserDefined": false
+                    },
+                    "altText": "",
+                    "caption": {
+                      "type": "doc",
+                      "content": [
+                        {
+                          "type": "paragraph",
+                          "content": []
+                        }
+                      ]
+                    }
+                  },
+                  "position": {
+                    "x": "center",
+                    "y": "center"
+                  },
+                  "landscape": {
+                    "image": {
+                      "id": "7A08E2GWXh",
+                      "isUserDefined": false
+                    },
+                    "altText": "",
+                    "caption": {
+                      "type": "doc",
+                      "content": [
+                        {
+                          "type": "paragraph",
+                          "content": []
+                        }
+                      ]
+                    }
+                  }
+                }
+              ]
+            },
+            {
+              "id": "5qKoGd",
+              "kind": "background-viewport",
+              "items": [
+                {
+                  "id": "Y8y3mbuLGZ",
+                  "kind": "image",
+                  "link": {
+                    "href": "",
+                    "blank": false,
+                    "nofollow": false,
+                    "noreferrer": true
+                  },
+                  "size": 3,
+                  "portrait": {
+                    "image": {
+                      "id": "UwPqqQK6tF",
+                      "isUserDefined": false
+                    },
+                    "altText": "",
+                    "caption": {
+                      "type": "doc",
+                      "content": [
+                        {
+                          "type": "paragraph",
+                          "content": []
+                        }
+                      ]
+                    }
+                  },
+                  "position": {
+                    "x": "center",
+                    "y": "center"
+                  },
+                  "landscape": {
+                    "image": {
+                      "id": "UwPqqQK6tF",
+                      "isUserDefined": false
+                    },
+                    "altText": "",
+                    "caption": {
+                      "type": "doc",
+                      "content": [
+                        {
+                          "type": "paragraph",
+                          "content": []
+                        }
+                      ]
+                    }
+                  }
+                }
+              ]
+            }
+          ]
+        }
+      ],
+      "className": "MediaGallery",
+      "settings": {
+        "theme": "Light",
+        "gallery": "Full",
+        "className": null,
+        "visibilities": [
+          "All devices",
+          "Mobile only",
+          "Desktop only"
+        ]
+      },
+      "createdBy": "Ru4S9oEnSI",
+      "updatedBy": null,
+      "deletedBy": null,
+      "createdAt": "2022-04-14T04:06:17.916Z",
+      "updatedAt": "2022-04-14T04:06:17.916Z",
+      "currentVersion": 0
+    },
+    {
+      "id": "8PZm6bOnZD",
+      "organisation": "429MisUGlc",
+      "page": "po9k9ofYug",
+      "template": "jbgODOP9LW",
+      "title": null,
+      "isNavigable": false,
+      "layers": [
+        {
+          "id": "CDCvgI",
+          "kind": "background-canvas",
+          "items": [
+            {
+              "id": "semCys",
+              "kind": "image",
+              "link": {
+                "href": "",
+                "blank": false,
+                "nofollow": false,
+                "noreferrer": true
+              },
+              "portrait": {
+                "image": {
+                  "id": "xXTEYKSVWm",
+                  "isUserDefined": false
+                },
+                "altText": "",
+                "caption": {
+                  "type": "doc",
+                  "content": [
+                    {
+                      "type": "paragraph",
+                      "content": []
+                    }
+                  ]
+                },
+                "transition": {
+                  "name": "none",
+                  "delay": 0.1,
+                  "start": 0
+                }
+              },
+              "position": {
+                "x": "center",
+                "y": "center"
+              },
+              "landscape": {
+                "image": {
+                  "id": "qasohiBqhO",
+                  "isUserDefined": false
+                },
+                "altText": "",
+                "caption": {
+                  "type": "doc",
+                  "content": [
+                    {
+                      "type": "paragraph",
+                      "content": []
+                    }
+                  ]
+                },
+                "transition": {
+                  "name": "none",
+                  "delay": 0.1,
+                  "start": 0
+                }
+              }
+            },
+            {
+              "id": "cRJ2RI",
+              "kind": "image",
+              "link": {
+                "href": "",
+                "blank": false,
+                "nofollow": false,
+                "noreferrer": true
+              },
+              "portrait": {
+                "image": {
+                  "id": "Fk8Hau9EWs",
+                  "isUserDefined": false
+                },
+                "altText": "",
+                "caption": {
+                  "type": "doc",
+                  "content": [
+                    {
+                      "type": "paragraph",
+                      "content": []
+                    }
+                  ]
+                },
+                "transition": {
+                  "name": "fade",
+                  "delay": 0.1,
+                  "start": 0.05
+                }
+              },
+              "position": {
+                "x": "center",
+                "y": "center"
+              },
+              "landscape": {
+                "image": {
+                  "id": "2jPgHDKZ2O",
+                  "isUserDefined": false
+                },
+                "altText": "",
+                "caption": {
+                  "type": "doc",
+                  "content": [
+                    {
+                      "type": "paragraph",
+                      "content": []
+                    }
+                  ]
+                },
+                "transition": {
+                  "name": "fade",
+                  "delay": 0.1,
+                  "start": 0.05
+                }
+              }
+            },
+            {
+              "id": "0kssIc",
+              "kind": "image",
+              "link": {
+                "href": "",
+                "blank": false,
+                "nofollow": false,
+                "noreferrer": true
+              },
+              "portrait": {
+                "image": {
+                  "id": "WB8EyO4zdF",
+                  "isUserDefined": false
+                },
+                "altText": "",
+                "caption": {
+                  "type": "doc",
+                  "content": [
+                    {
+                      "type": "paragraph",
+                      "content": []
+                    }
+                  ]
+                },
+                "transition": {
+                  "name": "up",
+                  "delay": 400,
+                  "start": 0.66
+                }
+              },
+              "position": {
+                "x": "center",
+                "y": "center"
+              },
+              "landscape": {
+                "image": {
+                  "id": "Vlq2xk9igg",
+                  "isUserDefined": false
+                },
+                "altText": "",
+                "caption": {
+                  "type": "doc",
+                  "content": [
+                    {
+                      "type": "paragraph",
+                      "content": []
+                    }
+                  ]
+                },
+                "transition": {
+                  "name": "up",
+                  "delay": 400,
+                  "start": 0.66
+                }
+              }
+            }
+          ],
+          "overlay": 50
+        }
+      ],
+      "className": "Reveal",
+      "settings": {
+        "theme": "Dark",
+        "overlay": 90,
+        "className": null,
+        "visibilities": [
+          "All devices",
+          "Mobile only",
+          "Desktop only"
+        ]
+      },
+      "createdBy": "Ru4S9oEnSI",
+      "updatedBy": "Ru4S9oEnSI",
+      "deletedBy": null,
+      "createdAt": "2022-04-14T04:03:51.100Z",
+      "updatedAt": "2022-04-14T04:05:18.242Z",
+      "currentVersion": 2
+    },
+    {
+      "id": "EXP0WkeLXW",
+      "organisation": "429MisUGlc",
+      "page": "po9k9ofYug",
+      "template": "74v5b8TFme",
+      "title": null,
+      "isNavigable": false,
+      "layers": [
+        {
+          "id": "YTaiah",
+          "kind": "text-blocks",
+          "items": [
+            {
+              "kind": "card-body",
+              "text": {
+                "type": "doc",
+                "content": [
+                  {
+                    "type": "subsubtitle",
+                    "attrs": {
+                      "fontSize": "xxsmall"
+                    },
+                    "content": []
+                  }
+                ]
+              },
+              "title": {
+                "type": "doc",
+                "content": [
+                  {
+                    "type": "title",
+                    "attrs": {
+                      "fontSize": "small"
+                    },
+                    "content": [
+                      {
+                        "text": "Text over media",
+                        "type": "text",
+                        "marks": [
+                          {
+                            "type": "strong"
+                          }
+                        ]
+                      }
+                    ]
+                  }
+                ]
+              },
+              "position": {
+                "x": "center",
+                "y": "bottom"
+              },
+              "subTitle": {
+                "type": "doc",
+                "content": [
+                  {
+                    "type": "subtitle",
+                    "attrs": {
+                      "fontSize": "xxsmall"
+                    },
+                    "content": []
+                  }
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "id": "tF0nco",
+          "kind": "background-viewport",
+          "items": [
+            {
+              "id": "BRxYxu",
+              "kind": "cyclops",
+              "landscape": {
+                "image": {
+                  "id": "RlnwaW0yXM",
+                  "meta": {
+                    "heading": "Automatically generate a 3D animation from any static image",
+                    "subHeading": "Recommended image size: JPEG @ 2560x1440px"
+                  },
+                  "isUserDefined": false
+                },
+                "model": {
+                  "id": "sLrYxGKpRU",
+                  "meta": {
+                    "heading": "Background 3D Model",
+                    "subHeading": "Recommended: 10mb MAX"
+                  },
+                  "isUserDefined": false
+                },
+                "caption": {
+                  "type": "doc",
+                  "content": [
+                    {
+                      "type": "paragraph",
+                      "content": []
+                    }
+                  ]
+                },
+                "transition": {
+                  "name": "none",
+                  "delay": 0.1,
+                  "start": 0
+                }
+              }
+            }
+          ],
+          "overlay": 30
+        }
+      ],
+      "className": "TextOverMedia",
+      "settings": {
+        "theme": "Dark",
+        "height": 100,
+        "layout": "Full",
+        "isFixed": true,
+        "overlay": 30,
+        "textBlur": "in",
+        "textFade": "none",
+        "textZoom": "in",
+        "className": null,
+        "textDepth": 0.678,
+        "textShift": "none",
+        "scrollFade": "none",
+        "visibilities": [
+          "All devices",
+          "Mobile only",
+          "Desktop only"
+        ]
+      },
+      "createdBy": "Ru4S9oEnSI",
+      "updatedBy": "Ru4S9oEnSI",
+      "deletedBy": null,
+      "createdAt": "2022-03-31T23:56:48.938Z",
+      "updatedAt": "2022-04-14T04:08:48.961Z",
+      "currentVersion": 9
+    },
+    {
+      "id": "tpv9gj6otG",
+      "organisation": "429MisUGlc",
+      "page": "po9k9ofYug",
+      "template": "Ilg8E8vx5C",
+      "title": null,
+      "isNavigable": false,
+      "layers": [
+        {
+          "id": "G1Gqzd",
+          "kind": "columns",
+          "layers": [
+            {
+              "id": "pLvzg0",
+              "kind": "text",
+              "items": [
+                {
+                  "id": "7YtO4S",
+                  "kind": "text-body",
+                  "text": {
+                    "type": "doc",
+                    "content": [
+                      {
+                        "type": "h3",
+                        "attrs": {
+                          "align": "",
+                          "className": "",
+                          "fontFamily": ""
+                        },
+                        "content": [
+                          {
+                            "text": "The city of Porto is full of sky-high lookouts and rooftop bars that afford expansive views. Yet the most memorable and unique experiences are often at ground level.",
+                            "type": "text"
+                          }
+                        ]
+                      },
+                      {
+                        "type": "divider",
+                        "attrs": {
+                          "size": "small",
+                          "align": "left",
+                          "color": "Theme-BackgroundColor-1"
+                        }
+                      },
+                      {
+                        "type": "paragraph",
+                        "attrs": {
+                          "align": "",
+                          "className": "",
+                          "fontFamily": ""
+                        },
+                        "content": [
+                          {
+                            "text": "Put on your walking shoes, and hit the streets of Porto and you'll soon find yourself entranced.  … and maybe lost. It's one of the pitfalls of historic cities with labyrinthine narrow streets. Fortunately for you, we can't think of a better city to be lost in. For a start, there's always delicious food and drink on hand, and any of those impossibly narrow alleys will soon open up to stunning vistas over courtyards and gardens, the river, and valley beyond. ",
+                            "type": "text"
+                          }
+                        ]
+                      },
+                      {
+                        "type": "divider",
+                        "attrs": {
+                          "size": "",
+                          "align": "",
+                          "color": ""
+                        }
+                      },
+                      {
+                        "type": "paragraph",
+                        "attrs": {
+                          "align": "",
+                          "className": "",
+                          "fontFamily": ""
+                        },
+                        "content": [
+                          {
+                            "text": "The UNESCO-listed city centre is a layer-cake of Roman rule, Moorish invasions, and French destruction, with artefacts from multiple eras shining brightly or merely peering out through the cracks. ",
+                            "type": "text"
+                          }
+                        ]
+                      },
+                      {
+                        "type": "paragraph",
+                        "attrs": {
+                          "align": "",
+                          "className": "",
+                          "fontFamily": ""
+                        },
+                        "content": [
+                          {
+                            "text": "One thing you won't miss is the art style for which Porto is most well known: blue azulejo tiles. As with the rest of Porto, the story of how this style came to the city is one with a fascinating international history.",
+                            "type": "text"
+                          }
+                        ]
+                      },
+                      {
+                        "type": "media",
+                        "attrs": {
+                          "item": {
+                            "id": "poBhrz",
+                            "kind": "image",
+                            "link": {
+                              "href": "",
+                              "blank": false,
+                              "nofollow": false,
+                              "noreferrer": true
+                            },
+                            "portrait": {
+                              "image": {
+                                "id": "QeAdGy3QGw",
+                                "meta": {
+                                  "heading": "Image (will scale to column width)",
+                                  "subHeading": "Recommended: JPEG @ 900px wide"
+                                },
+                                "isGenerated": false,
+                                "isUserDefined": false
+                              },
+                              "altText": "",
+                              "caption": {
+                                "type": "doc",
+                                "content": [
+                                  {
+                                    "type": "paragraph",
+                                    "content": []
+                                  }
+                                ]
+                              },
+                              "transition": {
+                                "name": "none",
+                                "delay": 0.1,
+                                "start": 0
+                              }
+                            },
+                            "landscape": {
+                              "image": {
+                                "id": "QeAdGy3QGw",
+                                "meta": {
+                                  "heading": "Image (will scale to column width)",
+                                  "subHeading": "Recommended: JPEG @ 900px wide"
+                                },
+                                "isGenerated": false,
+                                "isUserDefined": false
+                              },
+                              "altText": "",
+                              "caption": {
+                                "type": "doc",
+                                "content": [
+                                  {
+                                    "type": "paragraph",
+                                    "content": []
+                                  }
+                                ]
+                              },
+                              "transition": {
+                                "name": "none",
+                                "delay": 0.1,
+                                "start": 0
+                              }
+                            }
+                          },
+                          "align": "",
+                          "className": ""
+                        }
+                      },
+                      {
+                        "type": "paragraph",
+                        "attrs": {
+                          "align": "",
+                          "className": "",
+                          "fontFamily": ""
+                        },
+                        "content": [
+                          {
+                            "text": "In the 15th century, King Manuel I of Portugal imported the style from Spain, where it had been developed during the Islamic expansion of the area in the middle ages. Originally featuring geometric patterns and symbols of flowers, animals and birds, European adaptation added elements of architecture and elaborate storytelling, mostly of a a religious nature. ",
+                            "type": "text"
+                          }
+                        ]
+                      },
+                      {
+                        "type": "media",
+                        "attrs": {
+                          "item": {
+                            "id": "ZTLe9B",
+                            "kind": "image",
+                            "link": {
+                              "href": "",
+                              "blank": false,
+                              "nofollow": false,
+                              "noreferrer": true
+                            },
+                            "portrait": {
+                              "image": {
+                                "id": "MtI182HxLv",
+                                "meta": {
+                                  "heading": "Image (will scale to column width)",
+                                  "subHeading": "Recommended: JPEG @ 900px wide"
+                                },
+                                "isGenerated": false,
+                                "isUserDefined": false
+                              },
+                              "altText": "",
+                              "caption": {
+                                "type": "doc",
+                                "content": [
+                                  {
+                                    "type": "paragraph",
+                                    "content": []
+                                  }
+                                ]
+                              },
+                              "transition": {
+                                "name": "none",
+                                "delay": 0.1,
+                                "start": 0
+                              }
+                            },
+                            "landscape": {
+                              "image": {
+                                "id": "MtI182HxLv",
+                                "meta": {
+                                  "heading": "Image (will scale to column width)",
+                                  "subHeading": "Recommended: JPEG @ 900px wide"
+                                },
+                                "isGenerated": false,
+                                "isUserDefined": false
+                              },
+                              "altText": "",
+                              "caption": {
+                                "type": "doc",
+                                "content": [
+                                  {
+                                    "type": "paragraph",
+                                    "content": []
+                                  }
+                                ]
+                              },
+                              "transition": {
+                                "name": "none",
+                                "delay": 0.1,
+                                "start": 0
+                              }
+                            }
+                          },
+                          "align": "",
+                          "className": ""
+                        }
+                      },
+                      {
+                        "type": "paragraph",
+                        "attrs": {
+                          "align": "",
+                          "className": "",
+                          "fontFamily": ""
+                        },
+                        "content": [
+                          {
+                            "text": "Adopted by large-scale public works, private enterprises, and individual residents, the ironically blue tiles make up huge whole-building facades with elaborate scenes, and also appear as small geometric repeating patterns on private doors and low garden walls. ",
+                            "type": "text"
+                          }
+                        ]
+                      },
+                      {
+                        "type": "paragraph",
+                        "attrs": {
+                          "align": "",
+                          "className": "",
+                          "fontFamily": ""
+                        }
+                      }
+                    ]
+                  }
+                }
+              ],
+              "layout": {
+                "lg": {
+                  "col": 6,
+                  "push": 6
+                },
+                "md": {
+                  "col": 6,
+                  "push": 6
+                },
+                "sm": {
+                  "col": 10,
+                  "push": 1
+                },
+                "xs": {
+                  "col": 12,
+                  "push": 0
+                }
+              }
+            }
+          ]
+        },
+        {
+          "id": "s2Yhew",
+          "kind": "background-canvas",
+          "items": [
+            {
+              "id": "aKJ5dZ",
+              "kind": "image",
+              "link": {
+                "href": "",
+                "blank": false,
+                "nofollow": false,
+                "noreferrer": true
+              },
+              "portrait": {
+                "image": {
+                  "id": "waegdw5k7X",
+                  "isUserDefined": false
+                },
+                "transition": {
+                  "name": "fade",
+                  "start": 0.6666666666666666
+                }
+              },
+              "position": {
+                "x": "center",
+                "y": "center"
+              },
+              "landscape": {
+                "image": {
+                  "id": "waegdw5k7X",
+                  "isUserDefined": false
+                },
+                "transition": {
+                  "name": "fade",
+                  "start": 0.6666666666666666
+                }
+              }
+            },
+            {
+              "id": "9Q4BCQ",
+              "kind": "image",
+              "link": {
+                "href": "",
+                "blank": false,
+                "nofollow": false,
+                "noreferrer": true
+              },
+              "portrait": {
+                "image": {
+                  "id": "KbrAb6giIA",
+                  "isUserDefined": false
+                },
+                "transition": {
+                  "name": "none",
+                  "start": 0.3333333333333333
+                }
+              },
+              "position": {
+                "x": "center",
+                "y": "center"
+              },
+              "landscape": {
+                "image": {
+                  "id": "KbrAb6giIA",
+                  "isUserDefined": false
+                },
+                "transition": {
+                  "name": "none",
+                  "start": 0.3333333333333333
+                }
+              }
+            }
+          ],
+          "overlay": 50
+        }
+      ],
+      "className": "BackgroundScrollmation",
+      "settings": {
+        "theme": "Light",
+        "overlay": 90,
+        "className": null,
+        "visibility": "All devices",
+        "visibilities": [
+          "All devices",
+          "Mobile only",
+          "Desktop only"
+        ],
+        "mediaTransition": "slow"
+      },
+      "createdBy": "Ru4S9oEnSI",
+      "updatedBy": "Ru4S9oEnSI",
+      "deletedBy": null,
+      "createdAt": "2022-03-31T23:48:14.625Z",
+      "updatedAt": "2022-04-01T00:04:17.979Z",
+      "currentVersion": 16
+    },
+    {
+      "id": "F3xIUerY1h",
+      "organisation": "429MisUGlc",
+      "page": "po9k9ofYug",
+      "template": "Sa33zbyRTr",
+      "title": null,
+      "isNavigable": false,
+      "layers": [
+        {
+          "id": "QDLcmhWjSJ",
+          "kind": "scrollpoints-text",
+          "layers": [
+            {
+              "id": "qSHphYA8ua",
+              "kind": "text",
+              "items": [
+                {
+                  "kind": "text-body",
+                  "text": {
+                    "type": "doc",
+                    "content": [
+                      {
+                        "type": "paragraph",
+                        "content": [
+                          {
+                            "text": "This is a Scrollpoints section.",
+                            "type": "text"
+                          }
+                        ]
+                      },
+                      {
+                        "type": "paragraph",
+                        "content": [
+                          {
+                            "text": "It contains a single image that can have multiple 'points', highlighted via box or marker, with accompanying text.",
+                            "type": "text"
+                          }
+                        ]
+                      },
+                      {
+                        "type": "paragraph",
+                        "content": [
+                          {
+                            "text": "The section moves to each point as you scroll, allowing you to bring attention to various details in the image.",
+                            "type": "text"
+                          }
+                        ]
+                      }
+                    ]
+                  }
+                }
+              ],
+              "column": 0,
+              "layout": {
+                "lg": {
+                  "col": 6,
+                  "push": 0
+                },
+                "md": {
+                  "col": 6,
+                  "push": 0
+                },
+                "sm": {
+                  "col": 10,
+                  "push": 1
+                },
+                "xs": {
+                  "col": 12,
+                  "push": 0
+                }
+              },
+              "isEmpty": false,
+              "highlights": [
+                {
+                  "x": 60,
+                  "y": 50,
+                  "dotX": 68,
+                  "dotY": 63,
+                  "color": "Theme-ForegroundColor-0",
+                  "width": 18,
+                  "hasDot": false,
+                  "height": 26,
+                  "dotColor": "Theme-ForegroundColor-0",
+                  "isHidden": false
+                }
+              ]
+            },
+            {
+              "id": "X5cbNhOtNL",
+              "kind": "text",
+              "items": [
+                {
+                  "id": "UlLn5vwaUK",
+                  "kind": "text-body",
+                  "text": {
+                    "type": "doc",
+                    "content": [
+                      {
+                        "type": "paragraph",
+                        "attrs": {
+                          "align": "",
+                          "className": "",
+                          "fontFamily": ""
+                        },
+                        "content": [
+                          {
+                            "text": "Elephant",
+                            "type": "text"
+                          }
+                        ]
+                      }
+                    ]
+                  }
+                }
+              ],
+              "column": 1,
+              "layout": {
+                "lg": {
+                  "col": 6,
+                  "push": 3
+                },
+                "md": {
+                  "col": 8,
+                  "push": 2
+                },
+                "sm": {
+                  "col": 10,
+                  "push": 1
+                },
+                "xs": {
+                  "col": 12,
+                  "push": 0
+                }
+              },
+              "isEmpty": false,
+              "highlights": [
+                {
+                  "x": 9.8,
+                  "y": 35.2,
+                  "dotX": 22.049999999999997,
+                  "dotY": 47.150000000000006,
+                  "color": "Theme-ForegroundColor-0",
+                  "width": 24.499999999999996,
+                  "hasDot": false,
+                  "height": 23.9,
+                  "dotColor": "Theme-ForegroundColor-0",
+                  "isHidden": false
+                }
+              ]
+            },
+            {
+              "id": "5ZEQLQEZmY",
+              "kind": "text",
+              "items": [
+                {
+                  "kind": "text-body",
+                  "text": {
+                    "type": "doc",
+                    "content": [
+                      {
+                        "type": "paragraph",
+                        "content": [
+                          {
+                            "text": "A point with no defined highlight will show the entire uncropped image, like this.",
+                            "type": "text"
+                          }
+                        ]
+                      },
+                      {
+                        "type": "paragraph",
+                        "content": [
+                          {
+                            "text": "To edit the section, simply upload an image and add, remove, or modify the existing highlights and text.",
+                            "type": "text"
+                          }
+                        ]
+                      }
+                    ]
+                  }
+                }
+              ],
+              "column": 1,
+              "layout": {
+                "lg": {
+                  "col": 6,
+                  "push": 3
+                },
+                "md": {
+                  "col": 8,
+                  "push": 2
+                },
+                "sm": {
+                  "col": 10,
+                  "push": 1
+                },
+                "xs": {
+                  "col": 12,
+                  "push": 0
+                }
+              },
+              "isEmpty": false,
+              "highlights": []
+            }
+          ]
+        },
+        {
+          "id": "hAoZo9F1Jf",
+          "kind": "background-viewport",
+          "items": [
+            {
+              "id": "3Yn9V1KyoL",
+              "kind": "image",
+              "link": {},
+              "portrait": {
+                "image": {
+                  "id": "lGV1OG18Fc",
+                  "isUserDefined": false
+                },
+                "altText": ""
+              },
+              "position": {
+                "x": "center",
+                "y": "center"
+              },
+              "landscape": {
+                "image": {
+                  "id": "lGV1OG18Fc",
+                  "isUserDefined": false
+                },
+                "altText": ""
+              }
+            }
+          ],
+          "overlay": 0
+        }
+      ],
+      "className": "Scrollpoints",
+      "settings": {
+        "theme": "Dark",
+        "overlay": 85,
+        "className": null,
+        "background": "",
+        "visibilities": [
+          "All devices",
+          "Mobile only",
+          "Desktop only"
+        ],
+        "backgroundOpacity": 10
+      },
+      "createdBy": "Ru4S9oEnSI",
+      "updatedBy": "Ru4S9oEnSI",
+      "deletedBy": null,
+      "createdAt": "2022-03-31T23:52:39.127Z",
+      "updatedAt": "2022-03-31T23:53:17.153Z",
+      "currentVersion": 7
+    },
+    {
+      "id": "rF1oF57J6g",
+      "organisation": "429MisUGlc",
+      "page": "po9k9ofYug",
+      "template": "74v5b8TFme",
+      "title": null,
+      "isNavigable": false,
+      "layers": [
+        {
+          "id": "YTaiah",
+          "kind": "text-blocks",
+          "items": [
+            {
+              "id": "2DE0Z7",
+              "kind": "card-body",
+              "text": {
+                "type": "doc",
+                "content": [
+                  {
+                    "type": "subsubtitle",
+                    "attrs": {
+                      "fontSize": "xxsmall"
+                    },
+                    "content": []
+                  }
+                ]
+              },
+              "title": {
+                "type": "doc",
+                "content": [
+                  {
+                    "type": "title",
+                    "attrs": {
+                      "fontSize": "xxsmall",
+                      "fontFamily": "PT Serif,serif"
+                    },
+                    "content": [
+                      {
+                        "text": " ",
+                        "type": "text",
+                        "marks": [
+                          {
+                            "type": "foregroundColor",
+                            "attrs": {
+                              "className": "Theme-ForegroundColor-10"
+                            }
+                          }
+                        ]
+                      },
+                      {
+                        "text": "The city of Porto is full of sky-high lookouts and rooftop bars that afford expansive views, yet the most memorable and unique vistas are those at street level. ",
+                        "type": "text",
+                        "marks": [
+                          {
+                            "type": "foregroundColor",
+                            "attrs": {
+                              "className": "Theme-ForegroundColor-1"
+                            }
+                          }
+                        ]
+                      }
+                    ]
+                  }
+                ]
+              },
+              "position": {
+                "x": "center",
+                "y": "bottom"
+              },
+              "subTitle": {
+                "type": "doc",
+                "content": [
+                  {
+                    "type": "subtitle",
+                    "attrs": {
+                      "fontSize": "xxsmall"
+                    },
+                    "content": []
+                  }
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "id": "tF0nco",
+          "kind": "background-viewport",
+          "items": [
+            {
+              "id": "BRxYxu",
+              "kind": "image",
+              "link": {
+                "href": "",
+                "blank": false,
+                "nofollow": false,
+                "noreferrer": true
+              },
+              "portrait": {
+                "image": {
+                  "id": "cynmIKAY73",
+                  "isUserDefined": false
+                },
+                "altText": "",
+                "caption": {
+                  "type": "doc",
+                  "content": [
+                    {
+                      "type": "paragraph",
+                      "content": []
+                    }
+                  ]
+                }
+              },
+              "position": {
+                "x": "center",
+                "y": "center"
+              },
+              "landscape": {
+                "image": {
+                  "id": "cynmIKAY73",
+                  "isUserDefined": false
+                },
+                "altText": "",
+                "caption": {
+                  "type": "doc",
+                  "content": [
+                    {
+                      "type": "paragraph",
+                      "content": []
+                    }
+                  ]
+                }
+              }
+            }
+          ],
+          "overlay": 30
+        }
+      ],
+      "className": "TextOverMedia",
+      "settings": {
+        "theme": "Custom",
+        "height": 34,
+        "layout": "Full",
+        "isFixed": true,
+        "overlay": 100,
+        "textFade": "none",
+        "className": null,
+        "textShift": "none",
+        "scrollFade": "none",
+        "visibilities": [
+          "All devices",
+          "Mobile only",
+          "Desktop only"
+        ],
+        "backgroundColorClassName": "Theme-BackgroundColor-9"
+      },
+      "createdBy": "Ru4S9oEnSI",
+      "updatedBy": "Ru4S9oEnSI",
+      "deletedBy": null,
+      "createdAt": "2022-03-31T23:48:14.672Z",
+      "updatedAt": "2022-03-31T23:48:17.358Z",
+      "currentVersion": 2
+    },
+    {
+      "id": "jESi4hL8aK",
+      "organisation": "429MisUGlc",
+      "page": "po9k9ofYug",
+      "template": "x3t6PvdwHF",
+      "title": null,
+      "isNavigable": false,
+      "layers": [
+        {
+          "id": "G1Gqzd",
+          "kind": "columns",
+          "layers": [
+            {
+              "id": "JYB8rA",
+              "kind": "text",
+              "items": [
+                {
+                  "id": "qtsyJo",
+                  "kind": "text-body",
+                  "text": {
+                    "type": "doc",
+                    "content": [
+                      {
+                        "type": "paragraph",
+                        "content": [
+                          {
+                            z
+                            "type": "text"
+                          }
+                        ]
+                      },
+                      {
+                        "type": "paragraph",
+                        "content": [
+                          {
+                            "text": "Tickling the sky, you'll see the Torre dos Clérigos (Clérigos Tower), a 17th century Baroque landmark whose 240 steps will reward you with a bird's eye view if you feel the need to head upwards.",
+                            "type": "text"
+                          }
+                        ]
+                      },
+                      {
+                        "type": "paragraph",
+                        "content": [
+                          {
+                            "text": "The Ponte Luiz I bridge, however, gives you two choices for a stroll: the upper deck is a great spot from which to take pictures looking back across the water at the city, while the lower deck is often filled with adventurous young locals diving into the Douro. We suggest you take one path across and the other back. If the bridge's style looks familiar, it may be because it was designed by a protégé of Gustave Eiffel.",
+                            "type": "text"
+                          }
+                        ]
+                      },
+                      {
+                        "type": "paragraph",
+                        "content": [
+                          {
+                            "text": "Standing out here like an air-conditioner on an ancient pyramid, the Casa da Música (House of Music) stands in stark contrast to its surroundings, but is now considered one of the world's best concert halls, hosting daily performances of everything from classical choral to experimental electronica. If you aren't stopping in for a show, then it might just be time to head out to lunch. ",
+                            "type": "text"
+                          }
+                        ]
+                      }
+                    ]
+                  }
+                }
+              ],
+              "layout": {
+                "lg": {
+                  "col": 6,
+                  "push": 3
+                },
+                "md": {
+                  "col": 8,
+                  "push": 2
+                },
+                "sm": {
+                  "col": 10,
+                  "push": 1
+                },
+                "xs": {
+                  "col": 12,
+                  "push": 0
+                }
+              }
+            }
+          ]
+        },
+        {
+          "id": "s2Yhew",
+          "kind": "background-canvas",
+          "items": [],
+          "overlay": 50
+        }
+      ],
+      "className": "Text",
+      "settings": {
+        "theme": "Light",
+        "overlay": 90,
+        "className": null,
+        "visibilities": [
+          "All devices",
+          "Mobile only",
+          "Desktop only"
+        ]
+      },
+      "createdBy": "Ru4S9oEnSI",
+      "updatedBy": null,
+      "deletedBy": null,
+      "createdAt": "2022-03-31T23:48:14.713Z",
+      "updatedAt": "2022-03-31T23:48:14.732Z",
+      "currentVersion": 1
+    },
+    {
+      "id": "MD2H4lAYZT",
+      "organisation": "429MisUGlc",
+      "page": "po9k9ofYug",
+      "template": "N7Rl2RNrSI",
+      "title": null,
+      "isNavigable": false,
+      "layers": [
+        {
+          "id": "vCQkUFaOIR",
+          "kind": "media-gallery",
+          "items": [
+            {
+              "id": "a695zWf4ZK",
+              "kind": "background-viewport",
+              "items": [
+                {
+                  "id": "XH7RKX7xSV",
+                  "kind": "image",
+                  "link": {
+                    "href": "",
+                    "blank": false,
+                    "nofollow": false,
+                    "noreferrer": true
+                  },
+                  "size": 1,
+                  "portrait": {
+                    "focal": {
+                      "x": 50,
+                      "y": 37
+                    },
+                    "image": {
+                      "id": "boTe1Bb44U",
+                      "isGenerated": false,
+                      "isUserDefined": false
+                    },
+                    "altText": "",
+                    "caption": {
+                      "type": "doc",
+                      "content": [
+                        {
+                          "type": "paragraph",
+                          "content": []
+                        }
+                      ]
+                    }
+                  },
+                  "position": {
+                    "x": "center",
+                    "y": "center"
+                  },
+                  "landscape": {
+                    "focal": {
+                      "x": 50,
+                      "y": 25
+                    },
+                    "image": {
+                      "id": "boTe1Bb44U",
+                      "isGenerated": false,
+                      "isUserDefined": false
+                    },
+                    "altText": "",
+                    "caption": {
+                      "type": "doc",
+                      "content": [
+                        {
+                          "type": "paragraph",
+                          "content": [
+                            {
+                              "text": "Torre dos Clérigos. The most iconic and visible of Porto's many Baroque buildings.",
+                              "type": "text"
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                  }
+                },
+                {
+                  "id": "LueoCAaFjt",
+                  "kind": "image",
+                  "link": {
+                    "href": "",
+                    "blank": false,
+                    "nofollow": false,
+                    "noreferrer": true
+                  },
+                  "size": 1,
+                  "portrait": {
+                    "image": {
+                      "id": "wNmxtrJAp4",
+                      "isGenerated": false,
+                      "isUserDefined": false
+                    },
+                    "altText": "",
+                    "caption": {
+                      "type": "doc",
+                      "content": [
+                        {
+                          "type": "paragraph",
+                          "content": []
+                        }
+                      ]
+                    }
+                  },
+                  "position": {
+                    "x": "center",
+                    "y": "center"
+                  },
+                  "landscape": {
+                    "image": {
+                      "id": "wNmxtrJAp4",
+                      "isGenerated": false,
+                      "isUserDefined": false
+                    },
+                    "altText": "",
+                    "caption": {
+                      "type": "doc",
+                      "content": [
+                        {
+                          "type": "paragraph",
+                          "content": [
+                            {
+                              "text": "Ponte Luiz I. A cast iron bridge in the middle of Porto's old town. Look familiar? It was designed by a disciple of Gustave Eiffel.",
+                              "type": "text"
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                  }
+                }
+              ]
+            },
+            {
+              "id": "3IPD8tL344",
+              "kind": "background-viewport",
+              "items": [
+                {
+                  "id": "Y8y3mbuLGZ",
+                  "kind": "image",
+                  "link": {
+                    "href": "",
+                    "blank": false,
+                    "nofollow": false,
+                    "noreferrer": true
+                  },
+                  "size": 3,
+                  "portrait": {
+                    "focal": {
+                      "x": 50,
+                      "y": 25
+                    },
+                    "image": {
+                      "id": "bS3CTLFQd4",
+                      "isGenerated": false,
+                      "isUserDefined": false
+                    },
+                    "altText": "",
+                    "caption": {
+                      "type": "doc",
+                      "content": [
+                        {
+                          "type": "paragraph",
+                          "content": []
+                        }
+                      ]
+                    }
+                  },
+                  "position": {
+                    "x": "center",
+                    "y": "center"
+                  },
+                  "landscape": {
+                    "focal": {
+                      "x": 50,
+                      "y": 25
+                    },
+                    "image": {
+                      "id": "bS3CTLFQd4",
+                      "isGenerated": false,
+                      "isUserDefined": false
+                    },
+                    "altText": "",
+                    "caption": {
+                      "type": "doc",
+                      "content": [
+                        {
+                          "type": "paragraph",
+                          "content": [
+                            {
+                              "text": "A modern tilt to the Baroque landscape: the Casa da Música",
+                              "type": "text"
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                  }
+                },
+                {
+                  "id": "I8iBniwERy",
+                  "kind": "image",
+                  "link": {
+                    "href": "",
+                    "blank": false,
+                    "nofollow": false,
+                    "noreferrer": true
+                  },
+                  "size": 2,
+                  "portrait": {
+                    "image": {
+                      "id": "Zv34m8YXp4",
+                      "isGenerated": false,
+                      "isUserDefined": false
+                    },
+                    "caption": {
+                      "type": "doc",
+                      "content": [
+                        {
+                          "type": "paragraph",
+                          "content": []
+                        }
+                      ]
+                    }
+                  },
+                  "position": {
+                    "x": "center",
+                    "y": "center"
+                  },
+                  "landscape": {
+                    "image": {
+                      "id": "Zv34m8YXp4",
+                      "isGenerated": false,
+                      "isUserDefined": false
+                    },
+                    "altText": "",
+                    "caption": {
+                      "type": "doc",
+                      "content": [
+                        {
+                          "type": "paragraph",
+                          "content": [
+                            {
+                              "text": "If you aren't stopping for custard tarts, you aren't doing Porto right.",
+                              "type": "text"
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                  }
+                }
+              ]
+            },
+            {
+              "id": "OcPhXdcIfR",
+              "kind": "background-viewport",
+              "items": [
+                {
+                  "id": "FDpWdMNJmP",
+                  "kind": "image",
+                  "link": {
+                    "href": "",
+                    "blank": false,
+                    "nofollow": false,
+                    "noreferrer": true
+                  },
+                  "size": 2,
+                  "portrait": {
+                    "image": {
+                      "id": "YiWRQsFnLL",
+                      "isUserDefined": false
+                    },
+                    "caption": {
+                      "type": "doc",
+                      "content": [
+                        {
+                          "type": "paragraph",
+                          "content": []
+                        }
+                      ]
+                    }
+                  },
+                  "position": {
+                    "x": "center",
+                    "y": "center"
+                  },
+                  "landscape": {
+                    "image": {
+                      "id": "YiWRQsFnLL",
+                      "isUserDefined": false
+                    },
+                    "altText": "",
+                    "caption": {
+                      "type": "doc",
+                      "content": [
+                        {
+                          "type": "paragraph",
+                          "content": [
+                            {
+                              "text": "View of the Ribeira district from the upper level of the Ponte Luiz I",
+                              "type": "text"
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                  }
+                }
+              ]
+            }
+          ]
+        }
+      ],
+      "className": "MediaGallery",
+      "settings": {
+        "theme": "Light",
+        "gallery": "Full",
+        "className": null,
+        "visibilities": [
+          "All devices",
+          "Mobile only",
+          "Desktop only"
+        ]
+      },
+      "createdBy": "Ru4S9oEnSI",
+      "updatedBy": null,
+      "deletedBy": null,
+      "createdAt": "2022-03-31T23:48:14.754Z",
+      "updatedAt": "2022-03-31T23:48:14.776Z",
+      "currentVersion": 1
+    },
+    {
+      "id": "HHgCzSmn0H",
+      "organisation": "429MisUGlc",
+      "page": "po9k9ofYug",
+      "template": "Ilg8E8vx5C",
+      "title": null,
+      "isNavigable": false,
+      "layers": [
+        {
+          "id": "G1Gqzd",
+          "kind": "columns",
+          "layers": [
+            {
+              "id": "JYB8rA",
+              "kind": "text",
+              "items": [
+                {
+                  "id": "1YLw7n",
+                  "kind": "text-body",
+                  "text": {
+                    "type": "doc",
+                    "content": [
+                      {
+                        "type": "paragraph",
+                        "content": [
+                          {
+                            "text": "We can highly recommend ",
+                            "type": "text"
+                          },
+                          {
+                            "text": "A Cozinha do Manel",
+                            "type": "text",
+                            "marks": [
+                              {
+                                "type": "em"
+                              }
+                            ]
+                          },
+                          {
+                            "text": " for an outstanding cozy and intimate meal while retreating from the sun, or  Casa de Chá da Boa Nova if the opposite is true and you care to dine looking out over the ocean with a Michelin-starred meal of traditional seafood.",
+                            "type": "text"
+                          }
+                        ]
+                      },
+                      {
+                        "type": "paragraph",
+                        "content": [
+                          {
+                            "text": "While you are at the beach, a stroll or short tram ride will reveal several unexpected delights as lighthouses and chapels dot the rocky outcrops: a truly remarkable way to break free of the city for a fresh-air experience that still retains a magically unique flavour of its own.",
+                            "type": "text"
+                          }
+                        ]
+                      },
+                      {
+                        "type": "paragraph",
+                        "content": [
+                          {
+                            "text": "Wherever you go in Porto, you are bound to be delighted, and no matter how long you visit for, you'll wish you could stay just a little bit longer.",
+                            "type": "text"
+                          }
+                        ]
+                      }
+                    ]
+                  }
+                }
+              ],
+              "layout": {
+                "lg": {
+                  "col": 6,
+                  "push": 6
+                },
+                "md": {
+                  "col": 6,
+                  "push": 6
+                },
+                "sm": {
+                  "col": 10,
+                  "push": 1
+                },
+                "xs": {
+                  "col": 12,
+                  "push": 0
+                }
+              }
+            }
+          ]
+        },
+        {
+          "id": "s2Yhew",
+          "kind": "background-canvas",
+          "items": [
+            {
+              "id": "5EqTcy",
+              "kind": "image",
+              "link": {
+                "href": "",
+                "blank": false,
+                "nofollow": false,
+                "noreferrer": true
+              },
+              "portrait": {
+                "focal": {
+                  "x": 30,
+                  "y": 12
+                },
+                "image": {
+                  "id": "zNQUpqUUoN",
+                  "isGenerated": false,
+                  "isUserDefined": false
+                },
+                "caption": {
+                  "type": "doc",
+                  "content": [
+                    {
+                      "type": "paragraph",
+                      "content": []
+                    }
+                  ]
+                },
+                "transition": {
+                  "name": "none",
+                  "start": 0.05
+                }
+              },
+              "position": {
+                "x": "center",
+                "y": "center"
+              },
+              "landscape": {
+                "focal": {
+                  "x": 50,
+                  "y": 25
+                },
+                "image": {
+                  "id": "zNQUpqUUoN",
+                  "isGenerated": false,
+                  "isUserDefined": false
+                },
+                "transition": {
+                  "name": "none",
+                  "start": 0.05
+                }
+              }
+            }
+          ],
+          "overlay": 50
+        }
+      ],
+      "className": "BackgroundScrollmation",
+      "settings": {
+        "theme": "Light",
+        "overlay": 90,
+        "className": null,
+        "visibilities": [
+          "All devices",
+          "Mobile only",
+          "Desktop only"
+        ]
+      },
+      "createdBy": "Ru4S9oEnSI",
+      "updatedBy": null,
+      "deletedBy": null,
+      "createdAt": "2022-03-31T23:48:14.796Z",
+      "updatedAt": "2022-03-31T23:48:14.815Z",
+      "currentVersion": 1
+    },
+    {
+      "id": "O7fMzCimXk",
+      "organisation": "429MisUGlc",
+      "page": "po9k9ofYug",
+      "template": "mXhhJXlEKQ",
+      "title": null,
+      "isNavigable": false,
+      "layers": [
+        {
+          "id": "PIojJY",
+          "kind": "responsive-media",
+          "items": [
+            {
+              "id": "N4eQNg",
+              "kind": "image",
+              "link": {
+                "href": "",
+                "blank": false,
+                "nofollow": false,
+                "noreferrer": true
+              },
+              "portrait": {
+                "image": {
+                  "id": "AbQtWsCb5W",
+                  "isUserDefined": false
+                }
+              },
+              "position": {
+                "x": "center",
+                "y": "center"
+              },
+              "landscape": {
+                "image": {
+                  "id": "VHvyWiUnW2",
+                  "isUserDefined": false
+                },
+                "altText": "",
+                "caption": {
+                  "type": "doc",
+                  "content": [
+                    {
+                      "type": "paragraph",
+                      "content": []
+                    }
+                  ]
+                }
+              }
+            }
+          ],
+          "overlay": 50
+        }
+      ],
+      "className": "Media",
+      "settings": {
+        "theme": "Light",
+        "className": null,
+        "visibilities": [
+          "All devices",
+          "Mobile only",
+          "Desktop only"
+        ]
+      },
+      "createdBy": "Ru4S9oEnSI",
+      "updatedBy": null,
+      "deletedBy": null,
+      "createdAt": "2022-04-14T04:09:46.028Z",
+      "updatedAt": "2022-04-14T04:09:46.028Z",
+      "currentVersion": 0
+    },
+    {
+      "id": "rEoKOXt7xP",
+      "organisation": "429MisUGlc",
+      "page": "po9k9ofYug",
+      "template": "mXhhJXlEKQ",
+      "title": null,
+      "isNavigable": false,
+      "layers": [
+        {
+          "id": "PIojJY",
+          "kind": "responsive-media",
+          "items": [
+            {
+              "id": "N4eQNg",
+              "kind": "image",
+              "link": {
+                "href": "",
+                "blank": false,
+                "nofollow": false,
+                "noreferrer": true
+              },
+              "portrait": {
+                "image": {
+                  "id": "TtBNEszyaG",
+                  "isUserDefined": false
+                },
+                "caption": {
+                  "type": "doc",
+                  "content": [
+                    {
+                      "type": "paragraph",
+                      "content": []
+                    }
+                  ]
+                }
+              },
+              "position": {
+                "x": "center",
+                "y": "center"
+              },
+              "landscape": {
+                "image": {
+                  "id": "TtBNEszyaG",
+                  "isUserDefined": false
+                },
+                "altText": "",
+                "caption": {
+                  "type": "doc",
+                  "content": [
+                    {
+                      "type": "paragraph",
+                      "content": [
+                        {
+                          "text": " ",
+                          "type": "text"
+                        },
+                        {
+                          "text": "Capela do Senhora Pedro",
+                          "type": "text",
+                          "marks": [
+                            {
+                              "type": "em"
+                            }
+                          ]
+                        },
+                        {
+                          "text": ", at Miramar.",
+                          "type": "text"
+                        }
+                      ]
+                    }
+                  ]
+                }
+              }
+            }
+          ],
+          "overlay": 50
+        }
+      ],
+      "className": "Media",
+      "settings": {
+        "theme": "Light",
+        "className": null,
+        "visibilities": [
+          "All devices",
+          "Mobile only",
+          "Desktop only"
+        ]
+      },
+      "createdBy": "Ru4S9oEnSI",
+      "updatedBy": null,
+      "deletedBy": null,
+      "createdAt": "2022-03-31T23:48:14.834Z",
+      "updatedAt": "2022-03-31T23:48:14.852Z",
+      "currentVersion": 1
+    }
+  ]

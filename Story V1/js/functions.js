@@ -85,7 +85,7 @@ function changePage(pageChange) {
 
     //Reset and activate the Position animation
     objParas[0].removeAttribute("animation__pos");
-    objParas[0].setAttribute("animation__pos","property: position; from:0 -10 -20;to: 0 10 -20;                             dur:10000; easing: linear; loop: false;");
+    objParas[0].setAttribute("animation__pos","property: position; from:0 -10 -20;to: 0 10 -20; dur:30000; easing: linear; loop: false;");
 }
 
 //Manually scroll through paragraphs with "i" or "k"
@@ -211,15 +211,19 @@ const storyParagraphs = [];
     storyParagraphs[0] = 
         "THIS IS THE FIRST PARAGRAPH, NO ONE WILL SEE THIS";
     storyParagraphs[1] =
-        "1 Fable: Long ago in the Blue Mountains, three Aboriginal sisters; Meenhi, Wimlah and Gunnedoo lived with their father, a Witch doctor named Tyawan. In the same forest lived a gigantic creature that was feared by all – he was the Bunyip. Tyawan who knew where he lived would leave his daughters on the cliff behind a rocky wall where they would be safe while he would collect food.";
+        "Lost in Innsmouth";
     storyParagraphs[2] =
-        "2 One day, waving goodbye to his daughters he descended the cliff steps. On the top of the cliff, a big lizard suddenly appeared and frightened Meenhi. She picked up a stone and threw it at the lizard. The stone rolled away over the cliff and crashed into the valley below. Suddenly, the rocks behind the three sisters split open, leaving the sisters on a thin ledge. There was a deep rumble from below and the angry Bunyip emerged from his sleep. He looked up to see who had rudely awakened him and there perched on the thin ledge he saw the sisters cowering in fear. Furiously he lurched towards them.";
+        "In the winter of 1846, it seemed to be colder than usual. Ronald Lambert, a young man who had just graduated from college, was preparing to buy a train ticket to return to his grandmother's hometown. However, there were no direct tickets available. He could only follow the conductor's advice and take the bus to a small town called Innsmouth, and then from there to his destination";
     storyParagraphs[3] =
-        "3 In the valley, Tyawan heard the cry and looked up to see that the Bunyip had almost reached his daughters. Frantically the Witch Doctor pointed his magic bone at the girls and turned them into stone. They would be safe there until the Bunyip was gone and then Tyawan would return them to their former selves.";
+        "Except that the bus driver looked very strange, there was nothing special. Ronald soon arrived at Innsmouth, a small town covered by thick fog, and the stench in the air was hard to ignore. The most iconic building in the town, an ancient house quickly attracted Ronald's attention. However, the strange atmosphere also made Ronald dare not stop his steps.";
     storyParagraphs[4] =
-        "4 The Bunyip was even more angry when he saw what had happened and he turned on Tyawan and began to chase him. Running away, Tyawan found himself trapped against a rock which he could neither climb nor go around. He quickly changed into a Lyrebird and disappeared into a small cave. Everyone was safe but Tyawan had dropped his magic bone. The Bunyip returned angrily to his hole. Tyawan crept out of the cave and searched for the bone, and is still seeking it while the Three Sisters stand silently waiting, hoping he will find the bone and turn them back to their former selves. \n \n You can see the Three Sisters today from Echo Point and in the valley you can hear Tyawan, the Lyrebird, calling them as he searches for his lost magic bone.";
+        "'The car is broken, I think you'll have to spend the night here,' the driver said after trying to start the bus's engine several times. It seemed Ronald had no choice.";
     storyParagraphs[5] =
-        "5 Moral: The forests are beautiful, but you must always be careful to know what creatures live there.";
+        "Ronald fell into a deep sleep with the sea breeze and the stench, lying on the bed in the hotel room. He had a very strange dream, a dream about the deep sea.";
+    storyParagraphs[6] =
+        "In the dream, he swims freely in the deep sea. At the bottom of the sea, he saw a stone statue that seemed to be a Murloc. Although it exuded a strange light, it was very fascinating to Ronald.";
+    storyParagraphs[7] =
+        "Suddenly, a flash of lightning flashed through the air, and the deafening sound accompanied by the heavy rain woke Ronald from his dream instantly. He looked out the window curiously. A strange and shocking scene happened. Countless half-human, half-fish creatures crawled out of the sea to head to the town.";
 }
 
 //Unused Click function
