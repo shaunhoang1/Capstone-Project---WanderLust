@@ -41,6 +41,8 @@ reate a page before scene
         <a-asset-item id="plant1" src="Resources/Objects/folder/Vase%20Pack%202.FBX"></a-asset-item>-->
         <img id="imgBunyip" src="Resources/Images/Bunyip_5.jpg"/>
         <img id="imgBunyip2" src="Resources/Images/bunyip-emerging.jpg"/>
+        <img id="imgPortrait1" src="Resources/Images/portrait1jpg.jpg"/>
+        <img id="imgPortrait2" src="Resources/Images/portrait2.jpg"/>
 
         <!-- Skybox Images-->
         <img id="sky3" src="Resources/Backgrounds/lawn-Mansion.jpeg" />
@@ -49,12 +51,14 @@ reate a page before scene
         <img id="sky2" src="Resources/Backgrounds/texturify_pano-1-9.jpg"/>
         <img id="skyWhite" src="Resources/Backgrounds/white-building.jpeg" />
         <img id="sky1" src="Resources/Backgrounds/woods-by-the-river.jpg" />
+        <img id="pier" src="Resources/Backgrounds/pier.jpg" />
+        <img id="sunset" src="Resources/Backgrounds/sunset.jpeg"/>
       </a-assets>
 
       <!--ground for player-->
       <a-circle position="0 0 2" rotation="-90 0 0" radius="2" color="grey"></a-circle>
 
-      <a-sky id="sky" src="#sky1"></a-sky>
+      <a-sky id="sky" src="#pier"></a-sky>
 
       <!-- ###################  CAMERA/PLAYER ENTITIES  #################### -->
       <a-entity camera look-controls id="cameraObj" position="0 1.6 2" wasd-controls="enabled:true;acceleration:10;">
@@ -73,14 +77,14 @@ reate a page before scene
         </a-entity>
         
       <!-- First Image Entity -->
-      <a-image id="imageEntity" src="#imgBunyip" position="2.6 1.4 -0.8" opacity="0" look-at="#cameraObj"
-        animation__fadeIn="property:opacity;to:1;easing:linear; "
-        event-set__click="_event:click; animation.property:scale;animation.to:3 3 3;animation.easing:linear;"
-        event-set__leave="_event:mouseleave;animation.property:scale;animation.to:1 1 1;animation.easing:linear;">
-        </a-image>
+            <a-circle id="imageEntity" src="#imgPortrait1" position="2.6 1.4 -0.8" opacity="0" look-at="#cameraObj"
+            animation__fadeIn="property:opacity;to:1;easing:linear; "
+            event-set__click="_event:click; animation.property:scale;animation.to:3 3 3;animation.easing:linear;"
+            event-set__leave="_event:mouseleave;animation.property:scale;animation.to:1 1 1;animation.easing:linear;">
+            </a-circle>
         
       <!-- Second Image Entity -->
-      <a-image id="imageEntity" src="#imgBunyip2" position="-2.6 1.4 -0.8" opacity="0" look-at="#cameraObj"
+      <a-image id="imageEntity" src="#imgPortrait2" position="-2.6 1.4 -0.8" opacity="0" look-at="#cameraObj"
         animation__fadeIn="property:opacity;to:1;easing:linear; "
         event-set__click="_event:click; animation.property:scale;animation.to:3 3 3;animation.easing:linear;"
         event-set__leave="_event:mouseleave;animation.property:scale;animation.to:1 1 1;animation.easing:linear;">
