@@ -1,5 +1,9 @@
 (function(){function r(e,n,t){function o(i,f){if(!n[i]){if(!e[i]){var c="function"==typeof require&&require;if(!f&&c)return c(i,!0);if(u)return u(i,!0);var a=new Error("Cannot find module '"+i+"'");throw a.code="MODULE_NOT_FOUND",a}var p=n[i]={exports:{}};e[i][0].call(p.exports,function(r){var n=e[i][1][r];return o(n||r)},p,p.exports,r,e,n,t)}return n[i].exports}for(var u="function"==typeof require&&require,i=0;i<t.length;i++)o(t[i]);return o}return r})()({1:[function(require,module,exports){
 
+    
+let objParas = [];
+    
+let storyParagraphs=[];
 //All JS Functions which are required to navigate through the story are created here
 
 //WrapAround function to loop array variables,
@@ -59,6 +63,13 @@ document.addEventListener("keydown", function (event) {
     //Go to next background
     if (event.shiftKey) {
         changeSky(1);
+        iniParagraphObjects();
+        console.log("extracting text");
+        fullText = retrieveStoryText();
+        for(i in fullText){
+          storyParagraphs[i] = fullText[i];
+        }
+        console.log(storyParagraphs.length);
     }
 });
 
@@ -84,12 +95,13 @@ document.addEventListener("keydown", function (event) {
 //Define the page number and change
 var currentPage = 0;
 function changePage(pageChange) {
+    
     clearPageAll();
     currentPage = wrapAround(currentPage+pageChange,1, storyParagraphs.length - 1)[1];
 
     //Update paragraph text value
     objParas[0].setAttribute("value", storyParagraphs[currentPage]);
-
+    console.log("Page Change"+storyParagraphs[currentPage]);
     //Reset and activate the Position animation
     objParas[0].removeAttribute("animation__pos");
     objParas[0].setAttribute("animation__pos","property: position; from:0 -10 -20;to: 0 10 -20; dur:30000; easing: linear; loop: false;");
@@ -197,10 +209,13 @@ function clearPageAll(){
     }
 }
 
+document.getElementById("textPara").addEventListener("loadstart", iniParagraphObjects);   
+
 //define all paragraph objects
-var objParas = [];
+
+
 function iniParagraphObjects(){
-    console.log("GETTING ELEMENTS")
+    console.log("GETTING ELEMENTS");
     objParas[0]=document.getElementById("textPara");
     objParas[1]=document.getElementById("textPara2");
     objParas[2]=document.getElementById("textPara3");
@@ -209,13 +224,13 @@ function iniParagraphObjects(){
     //set initial paragraph value
     //objParas[0].setAttribute("value", storyParagraphs[0]);
     
-    
-    console.log("Retrieving Test ELEMENTS");
     //extractText()
     //let myText = retrieveStoryText('../story.json')
     //extracting.retrieveStoryText();
 }
 
+setInterval(setOpacity,100);
+      
 
 //Define Story paragraphs dynamically from the author's pre-existing story paragraphs
 //Currently just defines story paragraphs from input 
@@ -295,16 +310,10 @@ function retrieveStoryText(){
   const combinedText =[];
   extractText(storyData)
   
-               
+  console.log("Retrieving story text");
   return combinedText;
 }
 
-const storyParagraphs=[];
-fullText = retrieveStoryText();
-for(i in fullText){
-  storyParagraphs[i] = fullText[i];
-  console.log(storyParagraphs[i]);
-}
 
 /*
 const storyParagraphs = [];
