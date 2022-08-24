@@ -21,9 +21,15 @@ function wrapAround(current,min,max){
     return [wrapped,current];
 }
 
+//Function triggers for each new section in the story, to update objects and images
+function newSection(pageChange){
+    changeSky(pageChange);
+    changePage(pageChange,0,storyParagraphs.length+1);
+}
+    
 //Control the opacity of paragraphs as they change height
 function setOpacity(){
-    for(let i=0;i<4;i++){
+    /*for(let i=0;i<4;i++){
         textTarget = objParas[i];
         scrollingHeight = textTarget.object3D.position.y+10;
         if (scrollingHeight !== 0 && scrollingHeight !== 20){
@@ -36,6 +42,10 @@ function setOpacity(){
                 textTarget.setAttribute("opacity",1);
             }
         }
+    }*/
+    for(let i=0;i<4;i++){
+        textTarget = objParas[i];
+        textTarget.setAttribute("opacity",1);
     }
 }
 
@@ -62,14 +72,13 @@ var currentSky = 0;
 document.addEventListener("keydown", function (event) {
     //Go to next background
     if (event.shiftKey) {
-        changeSky(1);
         iniParagraphObjects();
-        console.log("extracting text");
         fullText = retrieveStoryText();
         for(i in fullText){
-          storyParagraphs[i] = fullText[i];
+          storyParagraphs[i-1] = fullText[i-1];
         }
-        console.log(storyParagraphs.length);
+        storyParagraphs.unshift("Paragraph 0");
+        changePage(1,0,storyParagraphs.length+1);
     }
 });
 
@@ -78,11 +87,11 @@ document.addEventListener("keydown", function (event) {
     //Go to previous paragraph
     if (event.key === "q") {
         scrollingHeight = 0;
-        changePage(-1);
+        changePage(-1,0,storyParagraphs.length);
     //Go to next paragraph
     } else if (event.key === "e") {
         scrollingHeight = 0;
-        changePage(1);
+        changePage(1,0,storyParagraphs.length+1);
     }
 
     if (event.key ==="p"){
@@ -98,13 +107,17 @@ function changePage(pageChange) {
     
     clearPageAll();
     currentPage = wrapAround(currentPage+pageChange,1, storyParagraphs.length - 1)[1];
-
-    //Update paragraph text value
-    objParas[0].setAttribute("value", storyParagraphs[currentPage]);
-    console.log("Page Change"+storyParagraphs[currentPage]);
-    //Reset and activate the Position animation
-    objParas[0].removeAttribute("animation__pos");
-    objParas[0].setAttribute("animation__pos","property: position; from:0 -10 -20;to: 0 10 -20; dur:30000; easing: linear; loop: false;");
+    
+    if(storyParagraphs[currentPage]==="Next Section"){
+        newSection(pageChange);
+    }else{
+        //Update paragraph text value
+        objParas[0].setAttribute("value", storyParagraphs[currentPage]);
+        console.log(currentPage+" Is current page. "+storyParagraphs[currentPage]);
+        //Reset and activate the Position animation
+        objParas[0].removeAttribute("animation__pos");
+        objParas[0].setAttribute("animation__pos","property: position; from:0 -10 -20;to: 0 10 -20; dur:5000; easing: linear; loop: false;");
+    }
 }
 
 //Manually scroll through paragraphs with "i" or "k"
@@ -115,7 +128,7 @@ document.addEventListener("keydown", function (event) {
     if (event.key === "i"){
         changePage(0);
         //add to scroll
-        scrollingHeight= objParas[0].object3D.position.y+10+0.2;
+        scrollingHeight= objParas[0].object3D.position.y+10+1;
 
         //If greater than or equal to maximum height, reset for next section
         var wrapCheck = wrapAround(scrollingHeight,0,20);
@@ -125,7 +138,7 @@ document.addEventListener("keydown", function (event) {
             changePage(1);
 
             //Reset the Position 
-            objParas[0].setAttribute("opacity", 0);
+            objParas[0].setAttribute("opacity", 1);
             objParas[0].setAttribute("position","0 -10 -20"); 
         }
 
@@ -149,7 +162,7 @@ document.addEventListener("keydown", function (event) {
             changePage(-1);
 
             //Reset  the Position
-            objParas[0].setAttribute("opacity", 0);
+            objParas[0].setAttribute("opacity", 1);
             objParas[0].setAttribute("position","0 10 -20");  
         }           
 
@@ -176,35 +189,35 @@ function changePageAll(pageChange) {
     //set next page variable text object
     objParas[0].setAttribute("value", storyParagraphs[tempPage]);
     //Reset and activate the Position animation
-    objParas[0].setAttribute("animation__pos","property: position; from:0 -10 -20;to: 0 10 -20;                             dur: 10000; easing: linear; loop: false;");
+    objParas[0].setAttribute("animation__pos","property: position; from:0 -10 -20;to: 0 10 -20; dur: 10000; easing: linear; loop: false;");
 
     //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ UPDATE SECOND PARAGRAH ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
     //Set next temporary page variable for PARAGRAPH 2 
     tempPage = wrapAround(tempPage+1,1, storyParagraphs.length - 1)[1];
     objParas[1].setAttribute("value", storyParagraphs[tempPage]);
     //Reset and activate the Position animation
-    objParas[1].setAttribute("animation__pos","property: position; from:20 -10 0;to: 20 10 -0;                              dur: 10000; easing: linear; loop: false;");
+    objParas[1].setAttribute("animation__pos","property: position; from:20 -10 0;to: 20 10 -0; dur: 10000; easing: linear; loop: false;");
 
     //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ UPDATE THIRD PARAGRAH ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
     //Set next temporary page variable for PARAGRAPH 3
     tempPage = wrapAround(tempPage+1,1, storyParagraphs.length - 1)[1];          
     objParas[2].setAttribute("value", storyParagraphs[tempPage]);
     //Reset and activate the Position animation
-    objParas[2].setAttribute("animation__pos","property: position; from:-0 -10 20;to: -0 10 20;                             dur: 10000; easing: linear; loop: false;");
+    objParas[2].setAttribute("animation__pos","property: position; from:-0 -10 20;to: -0 10 20; dur: 10000; easing: linear; loop: false;");
 
     //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ UPDATE FOURTH PARAGRAH ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
     //Set next temporary page variable for PARAGRAPH 4
     tempPage = wrapAround(tempPage+1,1, storyParagraphs.length - 1)[1];
     objParas[3].setAttribute("value", storyParagraphs[tempPage]);
     //Reset and activate the Position animation
-    objParas[3].setAttribute("animation__pos","property: position; from:-20 -10 -0;to: -20 10 -0;                           dur: 10000; easing: linear; loop: false;");
+    objParas[3].setAttribute("animation__pos","property: position; from:-20 -10 -0;to: -20 10 -0; dur: 10000; easing: linear; loop: false;");
 }
 
 //clearing all pages for a clean change to next sections
 function clearPageAll(){
     for (let i = 0; i < 4; i++) {
         objParas[i].removeAttribute("animation__pos");
-        objParas[i].setAttribute("opacity",0);
+        objParas[i].setAttribute("opacity",1);
         objParas[i].setAttribute("value", "");
     }
 }
@@ -220,13 +233,6 @@ function iniParagraphObjects(){
     objParas[1]=document.getElementById("textPara2");
     objParas[2]=document.getElementById("textPara3");
     objParas[3]=document.getElementById("textPara4");
-    
-    //set initial paragraph value
-    //objParas[0].setAttribute("value", storyParagraphs[0]);
-    
-    //extractText()
-    //let myText = retrieveStoryText('../story.json')
-    //extracting.retrieveStoryText();
 }
 
 setInterval(setOpacity,100);
@@ -237,6 +243,10 @@ setInterval(setOpacity,100);
 function retrieveStoryText(){
   //Declare array variable for all extracted text
 
+  function newSection(target){
+      combinedText[combinedText.length]="Next Section";
+      extractText(target);
+  }
   function extractText(json)
   {
     if (!json) {
@@ -248,14 +258,10 @@ function retrieveStoryText(){
       combinedText[combinedText.length]=a;
       return json.text;
     } else if (json.type === "object") {
-      return json.sections.map(extractText).join("");
+      return json.type.map(extractText).join("");
     } else if (json?.sections!==undefined) {
-    // console.log("Detected Sections");
-      //console.log(json.id);
-      return json.sections.map(extractText).join("");
+      return json.sections.map(newSection).join("");
     } else if (json?.layers!==undefined) {
-      //console.log(json.id);
-      //console.log("Detected layers");
       switch(typeof(json.layers)===Array){
         case true:
           return json.layers.map(extractText).join("");
@@ -264,57 +270,46 @@ function retrieveStoryText(){
           return extractText(json.layers);
       }
     } else if (json?.text!==undefined) {
-      //console.log("Detected TEXT");
       return extractText(json.text);
     } else if (json?.items!==undefined) {
-      //console.log("Detected items");
-      //console.log(json.id);
       return json.items.map(extractText).join("");
     } else if (json?.content!==undefined) {
-      //console.log("Detected Content");
-      //console.log(json.id);
       return json.content.map(extractText).join("");
-    } else if (json?.["1SuARv"]!==undefined) {    //JSON ITEM WITH ODD TITLE - HOW ADAPTIVE WILL THIS BE?
-      //console.log("Detected [1SuARv]");
+    } else if (json?.["1SuARv"]!==undefined) { 
       return extractText(json["1SuARv"]);
     } else if (json?.title!==undefined) {
-      //console.log("Detected title");
       return extractText(json.title);
+    } else if (json?.leadIn!==undefined) {
+      return extractText(json.leadIn);
     } else if (json?.storyTitle!==undefined) {
-      //console.log("Detected storyTitle");
       return extractText(json.storyTitle);
     } else if (json?.byline!==undefined) {
-      //console.log("Detected byline");
       return extractText(json.byline);
     } else if (json?.caption!==undefined) {
-      //console.log("Detected caption");
       return extractText(json.caption);
-    } else if (json?.xBTbQN!==undefined) {    //JSON ITEM WITH ODD TITLE - HOW ADAPTIVE WILL THIS BE?
-      //console.log("Detected xBTbQN");
+    } else if (json?.xBTbQN!==undefined) {  
       return extractText(json.xBTbQN);
     } else if (json?.landscape!==undefined) {
-      //console.log("Detected landscape");
       return extractText(json.landscape);
+    } else if (json?.SECTIONSPLIT!==undefined) {
+      console.log("FOUND SECTION SPLIT");
+      return extractText(json.text);
     } else {
       return "";
     }
   }
 
-
-
   //retrieveStoryText('../story.json')
   //Require the desired json file from the story
   const storyData = require('../story.json');
-
   //Run function to extract the data
   const combinedText =[];
   extractText(storyData)
-  
-  console.log("Retrieving story text");
   return combinedText;
 }
 
 
+//Demo StoryParagraphs for examples
 /*
 const storyParagraphs = [];
 {
@@ -335,20 +330,7 @@ const storyParagraphs = [];
     storyParagraphs[7] =
         "Suddenly, a flash of lightning flashed through the air, and the deafening sound accompanied by the heavy rain woke Ronald from his dream instantly. He looked out the window curiously. A strange and shocking scene happened. Countless half-human, half-fish creatures crawled out of the sea to head to the town.";
 }*/
-/*
-Document.$console.log("Retrieving elements")
-
-function extractText(){
-    //Export story text from the JSON file
-    console.log("Trying to retrieve story");
-    myText = retrieveStoryText('../story.json')
-    //console.log(myParagraphs);
-
-    for(i in myText){
-        storyParagraphs[i] = myText[i];
-    }
-}*/
-
+               
 //Unused Click function
 /*
 AFRAME.registerComponent("button-click-handler", {
@@ -360,6 +342,9 @@ AFRAME.registerComponent("button-click-handler", {
         });
     },
 });*/
+               
+               
+               
 },{"../story.json":2}],2:[function(require,module,exports){
 module.exports={
   "id": "po9k9ofYug",
@@ -2327,4 +2312,5 @@ module.exports={
     "page": false
   }
 }
+//end of JSON@
 },{}]},{},[1]);
