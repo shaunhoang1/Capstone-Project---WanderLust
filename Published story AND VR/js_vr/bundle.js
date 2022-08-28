@@ -2,8 +2,23 @@
 
     
 let objParas = [];
-    
 let storyParagraphs=[];
+
+//Define the Backgrounds
+var currentSky = 0;
+const skies = [];
+{
+    skies[1] = "#sky1";
+    skies[2] = "#sky2";
+    skies[3] = "#sky3";
+}
+
+//Define the page number and change for all text objects
+var scrollingHeight = 0;
+var currentPage = 0;
+var currentPageAll = 0;
+var tempPage = 0;    
+    
 //All JS Functions which are required to navigate through the story are created here
 
 //WrapAround function to loop array variables,
@@ -57,18 +72,7 @@ function changeSky(skyChange) {
 }
 
 
-
-//Define theBackgrounds
-var currentSky = 0;
-const skies = [];
-{
-    skies[1] = "#sky1";
-    skies[2] = "#sky2";
-    skies[3] = "#sky3";
-}
-
-//Navigate Backgrounds 
-var currentSky = 0;
+//Navigating Backgrounds
 document.addEventListener("keydown", function (event) {
     //Go to next background
     if (event.shiftKey) {
@@ -77,8 +81,9 @@ document.addEventListener("keydown", function (event) {
         for(i in fullText){
           storyParagraphs[i-1] = fullText[i-1];
         }
-        storyParagraphs.unshift("Paragraph 0");
-        changePage(1,0,storyParagraphs.length+1);
+        storyParagraphs.unshift("New Section");
+        currentPage=0;currentSky = 0;
+        changePage(1);
     }
 });
 
@@ -87,11 +92,11 @@ document.addEventListener("keydown", function (event) {
     //Go to previous paragraph
     if (event.key === "q") {
         scrollingHeight = 0;
-        changePage(-1,0,storyParagraphs.length);
+        changePage(-1);
     //Go to next paragraph
     } else if (event.key === "e") {
         scrollingHeight = 0;
-        changePage(1,0,storyParagraphs.length+1);
+        changePage(1);
     }
 
     if (event.key ==="p"){
@@ -102,26 +107,30 @@ document.addEventListener("keydown", function (event) {
 });
 
 //Define the page number and change
-var currentPage = 0;
+
 function changePage(pageChange) {
-    
     clearPageAll();
     currentPage = wrapAround(currentPage+pageChange,1, storyParagraphs.length - 1)[1];
-    
-    if(storyParagraphs[currentPage]==="Next Section"){
+    if(storyParagraphs[currentPage]==="New Section"){
         newSection(pageChange);
     }else{
         //Update paragraph text value
         objParas[0].setAttribute("value", storyParagraphs[currentPage]);
-        console.log(currentPage+" Is current page. "+storyParagraphs[currentPage]);
+        console.log(currentPage-1+": "+storyParagraphs[currentPage]);
         //Reset and activate the Position animation
         objParas[0].removeAttribute("animation__pos");
         objParas[0].setAttribute("animation__pos","property: position; from:0 -10 -20;to: 0 10 -20; dur:5000; easing: linear; loop: false;");
+        movingImage1 = document.getElementById("movingImage1");
+        movingImage1.removeAttribute("animation__pos");
+        movingImage1.setAttribute("animation__pos","property: position; from:9 -6 -10;to: 9 6 -10; dur:5000; easing: linear; loop: false;");
+        movingImage2 = document.getElementById("movingImage2");
+        movingImage2.removeAttribute("animation__pos");
+        movingImage2.setAttribute("animation__pos","property: position; from:-9 -6 -10;to: -9 6 -10; dur:5000; easing: linear; loop: false;");
     }
 }
 
+    
 //Manually scroll through paragraphs with "i" or "k"
-var scrollingHeight = 0;
 document.addEventListener("keydown", function (event) {
     //Scroll through paragraphs  
     //Scroll up        
@@ -174,9 +183,7 @@ document.addEventListener("keydown", function (event) {
     }
 });
 
-//Define the page number and change for all text objects
-var currentPageAll = 0;
-var tempPage = 0;
+
 //Repetitive code for all four text objects, changes for each object (text value, positions)
 function changePageAll(pageChange) {
     //reset all paragraphs
@@ -228,7 +235,6 @@ document.getElementById("textPara").addEventListener("loadstart", iniParagraphOb
 
 
 function iniParagraphObjects(){
-    console.log("GETTING ELEMENTS");
     objParas[0]=document.getElementById("textPara");
     objParas[1]=document.getElementById("textPara2");
     objParas[2]=document.getElementById("textPara3");
@@ -243,10 +249,12 @@ setInterval(setOpacity,100);
 function retrieveStoryText(){
   //Declare array variable for all extracted text
 
-  function newSection(target){
-      combinedText[combinedText.length]="Next Section";
-      extractText(target);
+  function newSection(json)
+  {
+    combinedText[combinedText.length]="New Section";
+    return extractText(json);
   }
+
   function extractText(json)
   {
     if (!json) {
@@ -304,12 +312,16 @@ function retrieveStoryText(){
     }
   }
 
+
+
   //retrieveStoryText('../story.json')
   //Require the desired json file from the story
   const storyData = require('../story.json');
+
   //Run function to extract the data
   const combinedText =[];
   extractText(storyData)
+  combinedText[combinedText.length]="FinalPara";
   return combinedText;
 }
 
