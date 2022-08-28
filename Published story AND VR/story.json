@@ -276,15 +276,15 @@
         "className": "Theme-BackgroundColor-17"
       }
     ],
-    "version": "8fd085fcfeefd034aa8f9be36c9fa918",
+    "version": "309ba231d43a7e2933d69fd2a63c3998",
     "isEnabled": true,
     "isPublic": true,
     "createdBy": null,
     "updatedBy": null,
     "deletedBy": null,
     "createdAt": "2017-06-15T03:36:21.796Z",
-    "updatedAt": "2022-08-19T15:29:20.978Z",
-    "currentVersion": 10390,
+    "updatedAt": "2022-08-26T18:33:52.017Z",
+    "currentVersion": 10426,
     "assetBase": "./assets",
     "fullPath": "/efs_data/themes/0-demo/theme.min.css"
   },
@@ -1371,7 +1371,30 @@
                         },
                         "content": [
                           {
-                            "type": "hard_break"
+                            "type": "text",
+                            "text": "The owner of the shop told me the story of this town with a half-smile. A hundred years ago, this town lived on the port trade. At that time, it was still a vibrant town. However, the good times did not last long. The town was quickly dragged down by the ensuing war. Many people lost their livelihood jobs. It's all ruined."
+                          }
+                        ]
+                      },
+                      {
+                        "type": "paragraph",
+                        "attrs": {
+                          "align": "",
+                          "className": "",
+                          "fontFamily": ""
+                        }
+                      },
+                      {
+                        "type": "paragraph",
+                        "attrs": {
+                          "align": "",
+                          "className": "",
+                          "fontFamily": ""
+                        },
+                        "content": [
+                          {
+                            "type": "text",
+                            "text": "However, this scene didn't last long when an ship sailed toward the town. The captain told everyone in the town that he knew a true god, and as long as everyone was willing to follow him, Innsmouth would prosper. From then on, the town seemed to come alive, with schools of fish flocking to the town and smoke from the factory chimneys. However, every night the residents of the town mysteriously disappear."
                           }
                         ]
                       },
@@ -1385,7 +1408,7 @@
                         "content": [
                           {
                             "type": "text",
-                            "text": "Various software programs are used to colour the drawings and simulate camera movement and effects."
+                            "text": "Finally, on a stormy night, the bizarre events are revealed by the half-man, half-fish creatures that keep emerging from the shoreline. It turned out that the captain and his followers were constantly sacrificing residents to those monsters in exchange for various resources. Since then, there have been many mixed species of humans and fish in the town."
                           }
                         ]
                       },
@@ -1399,35 +1422,7 @@
                         "content": [
                           {
                             "type": "text",
-                            "text": "The final animated piece is output to one of several delivery media, including traditional 35 mm film and newer media such as digital video. The \"look\" of traditional cel animation is still preserved, and the character animators' work has remained essentially the same over the past 70 years. Some animation producers have used the term \"tradigital\" to describe cel animation which makes extensive use of computer technology. Examples of traditionally animated feature films include Pinocchio (United States, 1940), Animal Farm (United Kingdom, 1954), and Akira (Japan, 1988). Traditional animated films which were produced with the aid of computer technology include The Lion King (US, 1994) Sen to Chihiro no Kamikakushi (Spirited Away) (Japan, 2001), and Les Triplettes de Belleville (France, 2003)."
-                          }
-                        ]
-                      },
-                      {
-                        "type": "paragraph",
-                        "attrs": {
-                          "align": "",
-                          "className": "",
-                          "fontFamily": ""
-                        },
-                        "content": [
-                          {
-                            "type": "text",
-                            "text": "In computer displays, filmmaking, television production, and other kinetic displays, scrolling is sliding text, images or video across a monitor or display, vertically or horizontally. \"Scrolling\", as such, does not change the layout of the text or pictures, but moves (pans or tilts) the user's view across what is apparently a larger image that is not wholly seen. A common television and movie special effect is to scroll credits, while leaving the background stationary. Scrolling may take place completely without user intervention (as in film credits) or, on an interactive device, be triggered by touchscreen or computer mouse motion or a keypress and continue without further intervention until a further user action, or be entirely controlled by input devices. Scrolling may take place in discrete increments (perhaps one or a few lines of text at a time), or continuously (smooth scrolling). Frame rate is the speed at which an entire image is redisplayed. It is related to scrolling in that changes to text and image position can only happen as often as the image can be redisplayed. When frame rate is a limiting factor, one smooth scrolling technique is to blur images during movement that would otherwise appear to \"jump\". The term scrolling is also used for a type of misbehavior in an online chat room whereby one person forces the screens of others in a chat to scroll by inserting much noise or special control characters."
-                          }
-                        ]
-                      },
-                      {
-                        "type": "paragraph",
-                        "attrs": {
-                          "align": "",
-                          "className": "",
-                          "fontFamily": ""
-                        },
-                        "content": [
-                          {
-                            "type": "text",
-                            "text": "Words from http://en.wikipedia.org/wiki/Animation and http://en.wikipedia.org/wiki/Scrolling."
+                            "text": "Such people don't show obvious features at first, but around the age of 20 they start to lose their hair and gradually become half human and half fish. I hear a chill in my heart here. I subconsciously looked at my watch, it was time to get on the departing bus."
                           }
                         ]
                       }
@@ -1524,90 +1519,6 @@
                       "start": 0.25
                     }
                   }
-                },
-                {
-                  "id": "YS1oac",
-                  "kind": "image",
-                  "link": {
-                    "href": "",
-                    "blank": false,
-                    "nofollow": false,
-                    "noreferrer": true
-                  },
-                  "portrait": {
-                    "image": {
-                      "id": "yQ6btvrDnK",
-                      "isUserDefined": false
-                    },
-                    "transition": {
-                      "start": 0.5
-                    }
-                  },
-                  "position": {
-                    "x": "center",
-                    "y": "center"
-                  },
-                  "landscape": {
-                    "image": {
-                      "id": "MHpGn40WGF",
-                      "isUserDefined": false
-                    },
-                    "altText": "",
-                    "caption": {
-                      "type": "doc",
-                      "content": [
-                        {
-                          "type": "paragraph",
-                          "content": []
-                        }
-                      ]
-                    },
-                    "transition": {
-                      "start": 0.5
-                    }
-                  }
-                },
-                {
-                  "id": "seo9aK",
-                  "kind": "image",
-                  "link": {
-                    "href": "",
-                    "blank": false,
-                    "nofollow": false,
-                    "noreferrer": true
-                  },
-                  "portrait": {
-                    "image": {
-                      "id": "9CEiLBVQCF",
-                      "isUserDefined": false
-                    },
-                    "transition": {
-                      "start": 0.75
-                    }
-                  },
-                  "position": {
-                    "x": "center",
-                    "y": "center"
-                  },
-                  "landscape": {
-                    "image": {
-                      "id": "raIDUjaBQq",
-                      "isUserDefined": false
-                    },
-                    "altText": "",
-                    "caption": {
-                      "type": "doc",
-                      "content": [
-                        {
-                          "type": "paragraph",
-                          "content": []
-                        }
-                      ]
-                    },
-                    "transition": {
-                      "start": 0.75
-                    }
-                  }
                 }
               ],
               "responsiveHide": "sm-down",
@@ -1628,257 +1539,121 @@
       ]
     },
     {
-      "id": "F3xIUerY1h",
-      "template": "Sa33zbyRTr",
-      "className": "Scrollpoints",
+      "id": "dTT5SWlvIx",
+      "template": "74v5b8TFme",
+      "className": "TextOverMedia",
       "isNavigable": false,
       "settings": {
-        "theme": "Dark",
-        "overlay": 85,
+        "height": 100,
+        "layout": "Half",
+        "isFixed": true,
+        "overlay": 30,
         "className": null,
-        "background": "",
+        "textShift": "none",
         "visibilities": [
           "All devices",
           "Mobile only",
           "Desktop only"
         ],
-        "backgroundOpacity": 10
+        "theme": "Dark",
+        "textFade": "none",
+        "visibility": "All devices",
+        "layoutLandscapeMedia": "left",
+        "layoutPortraitMedia": "top"
       },
       "layers": [
         {
-          "id": "QDLcmhWjSJ",
-          "kind": "scrollpoints-text",
-          "layers": {
-            "qSHphYA8ua": {
-              "id": "qSHphYA8ua",
-              "kind": "text",
-              "items": [
-                {
-                  "kind": "text-body",
-                  "text": {
-                    "id": "aIKiPLV9s4",
-                    "type": "doc",
+          "id": "YTaiah",
+          "kind": "text-blocks",
+          "items": [
+            {
+              "kind": "card-body",
+              "text": {
+                "id": "vY8PnPpuRK",
+                "type": "doc",
+                "content": [
+                  {
+                    "type": "subsubtitle",
+                    "attrs": {
+                      "align": "",
+                      "className": "",
+                      "fontFamily": "",
+                      "fontSize": "xxxsmall"
+                    }
+                  }
+                ]
+              },
+              "title": {
+                "id": "kgxljxloy7",
+                "type": "doc",
+                "content": [
+                  {
+                    "type": "title",
+                    "attrs": {
+                      "align": "right",
+                      "className": "",
+                      "fontFamily": "",
+                      "fontSize": "small"
+                    }
+                  }
+                ]
+              },
+              "position": {
+                "x": "center",
+                "y": "center"
+              },
+              "subTitle": {
+                "id": "irOQ5dDfBM",
+                "type": "doc",
+                "content": [
+                  {
+                    "type": "subtitle",
+                    "attrs": {
+                      "align": "left",
+                      "className": "",
+                      "fontFamily": "",
+                      "fontSize": "xxxsmall"
+                    },
                     "content": [
                       {
-                        "type": "paragraph",
-                        "attrs": {
-                          "align": "",
-                          "className": "",
-                          "fontFamily": ""
-                        },
-                        "content": [
-                          {
-                            "type": "text",
-                            "text": "This is a Scrollpoints section."
-                          }
-                        ]
-                      },
-                      {
-                        "type": "paragraph",
-                        "attrs": {
-                          "align": "",
-                          "className": "",
-                          "fontFamily": ""
-                        },
-                        "content": [
-                          {
-                            "type": "text",
-                            "text": "It contains a single image that can have multiple 'points', highlighted via box or marker, with accompanying text."
-                          }
-                        ]
-                      },
-                      {
-                        "type": "paragraph",
-                        "attrs": {
-                          "align": "",
-                          "className": "",
-                          "fontFamily": ""
-                        },
-                        "content": [
-                          {
-                            "type": "text",
-                            "text": "The section moves to each point as you scroll, allowing you to bring attention to various details in the image."
-                          }
-                        ]
+                        "type": "text",
+                        "text": "I subconsciously looked at my watch, it was time to get on the departing bus."
                       }
                     ]
                   }
-                }
-              ],
-              "column": 0,
-              "isEmpty": false,
-              "highlights": [
-                {
-                  "id": "5XtQIUqRvm",
-                  "x": 60,
-                  "y": 50,
-                  "dotX": 68,
-                  "dotY": 63,
-                  "color": "Theme-ForegroundColor-0",
-                  "width": 18,
-                  "hasDot": false,
-                  "height": 26,
-                  "dotColor": "Theme-ForegroundColor-0",
-                  "isHidden": false
-                }
-              ],
-              "alignment": "left"
-            },
-            "X5cbNhOtNL": {
-              "id": "X5cbNhOtNL",
-              "kind": "text",
-              "items": [
-                {
-                  "id": "UlLn5vwaUK",
-                  "kind": "text-body",
-                  "text": {
-                    "id": "Ee2VjHOFED",
-                    "type": "doc",
-                    "content": [
-                      {
-                        "type": "paragraph",
-                        "attrs": {
-                          "align": "",
-                          "className": "",
-                          "fontFamily": ""
-                        },
-                        "content": [
-                          {
-                            "type": "text",
-                            "text": "Elephant"
-                          }
-                        ]
-                      }
-                    ]
-                  }
-                }
-              ],
-              "column": 1,
-              "isEmpty": false,
-              "highlights": [
-                {
-                  "id": "Q5d0VOq8At",
-                  "x": 9.8,
-                  "y": 35.2,
-                  "dotX": 22.049999999999997,
-                  "dotY": 47.150000000000006,
-                  "color": "Theme-ForegroundColor-0",
-                  "width": 24.499999999999996,
-                  "hasDot": false,
-                  "height": 23.9,
-                  "dotColor": "Theme-ForegroundColor-0",
-                  "isHidden": false
-                },
-                {
-                  "id": "FnsUBx3uZv",
-                  "x": 26.8,
-                  "y": 30.8,
-                  "width": 16.8,
-                  "height": 4.099999999999998,
-                  "isHidden": false,
-                  "hasDot": false,
-                  "dotX": 35.2,
-                  "dotY": 32.85,
-                  "color": "Theme-ForegroundColor-0",
-                  "dotColor": "Theme-ForegroundColor-0"
-                },
-                {
-                  "id": "qZgyT7zweH",
-                  "x": 54.3,
-                  "y": 19.9,
-                  "width": 23.299999999999997,
-                  "height": 30.9,
-                  "isHidden": false,
-                  "hasDot": false,
-                  "dotX": 65.94999999999999,
-                  "dotY": 35.349999999999994,
-                  "color": "Theme-ForegroundColor-0",
-                  "dotColor": "Theme-ForegroundColor-0"
-                },
-                {
-                  "id": "ur6valf3dm",
-                  "x": 25.3,
-                  "y": 35.1,
-                  "width": 22.400000000000002,
-                  "height": 28.5,
-                  "isHidden": false,
-                  "hasDot": false,
-                  "dotX": 36.5,
-                  "dotY": 49.35,
-                  "color": "Theme-ForegroundColor-0",
-                  "dotColor": "Theme-ForegroundColor-0"
-                }
-              ],
-              "alignment": "center"
-            },
-            "5ZEQLQEZmY": {
-              "id": "5ZEQLQEZmY",
-              "kind": "text",
-              "items": [
-                {
-                  "kind": "text-body",
-                  "text": {
-                    "id": "afPzcljRHl",
-                    "type": "doc",
-                    "content": [
-                      {
-                        "type": "paragraph",
-                        "attrs": {
-                          "align": "",
-                          "className": "",
-                          "fontFamily": ""
-                        },
-                        "content": [
-                          {
-                            "type": "text",
-                            "text": "A point with no defined highlight will show the entire uncropped image, like this."
-                          }
-                        ]
-                      },
-                      {
-                        "type": "paragraph",
-                        "attrs": {
-                          "align": "",
-                          "className": "",
-                          "fontFamily": ""
-                        },
-                        "content": [
-                          {
-                            "type": "text",
-                            "text": "To edit the section, simply upload an image and add, remove, or modify the existing highlights and text."
-                          }
-                        ]
-                      }
-                    ]
-                  }
-                }
-              ],
-              "column": 1,
-              "isEmpty": false,
-              "highlights": [],
-              "alignment": "center"
+                ]
+              }
             }
-          },
-          "layerOrder": [
-            "qSHphYA8ua",
-            "X5cbNhOtNL",
-            "5ZEQLQEZmY"
           ]
         },
         {
-          "id": "hAoZo9F1Jf",
+          "id": "tF0nco",
           "kind": "background-viewport",
           "items": [
             {
-              "id": "3Yn9V1KyoL",
+              "id": "BRxYxu",
               "kind": "image",
-              "link": {},
+              "link": {
+                "href": "",
+                "blank": false,
+                "nofollow": false,
+                "noreferrer": true
+              },
               "portrait": {
                 "image": {
-                  "id": "lGV1OG18Fc",
+                  "id": "0PiHnHQXIs",
                   "isUserDefined": false
                 },
-                "altText": ""
+                "altText": "",
+                "caption": {
+                  "type": "doc",
+                  "content": [
+                    {
+                      "type": "paragraph",
+                      "content": []
+                    }
+                  ]
+                }
               },
               "position": {
                 "x": "center",
@@ -1886,26 +1661,400 @@
               },
               "landscape": {
                 "image": {
-                  "id": "lGV1OG18Fc",
-                  "isUserDefined": false
+                  "id": "MObpieZw3w",
+                  "isUserDefined": true
                 },
-                "altText": ""
+                "altText": "",
+                "caption": {
+                  "type": "doc",
+                  "content": [
+                    {
+                      "type": "paragraph",
+                      "content": []
+                    }
+                  ]
+                }
               }
             }
           ],
-          "overlay": 0
+          "overlay": 30
+        }
+      ]
+    },
+    {
+      "id": "aBXIjm7UrP",
+      "template": "PprV0nvfFe",
+      "className": "TwoColumnScrollmation",
+      "isNavigable": false,
+      "settings": {
+        "className": null,
+        "visibilities": [
+          "All devices",
+          "Mobile only",
+          "Desktop only"
+        ],
+        "theme": "Dark"
+      },
+      "layers": [
+        {
+          "id": "iCCa8p",
+          "kind": "columns",
+          "layers": {
+            "xBTbQN": {
+              "id": "xBTbQN",
+              "kind": "text",
+              "items": [
+                {
+                  "kind": "text-body",
+                  "text": {
+                    "id": "xxA1YpwGpD",
+                    "type": "doc",
+                    "content": [
+                      {
+                        "type": "paragraph",
+                        "attrs": {
+                          "align": "",
+                          "className": "",
+                          "fontFamily": ""
+                        },
+                        "content": [
+                          {
+                            "type": "text",
+                            "text": "The driver told me that the car was broken and I'm afraid I won't be able to go anywhere tonight. In desperation, I had to rent a hotel to spend the night in this town."
+                          }
+                        ]
+                      },
+                      {
+                        "type": "paragraph",
+                        "attrs": {
+                          "align": "",
+                          "className": "",
+                          "fontFamily": ""
+                        }
+                      },
+                      {
+                        "type": "paragraph",
+                        "attrs": {
+                          "align": "",
+                          "className": "",
+                          "fontFamily": ""
+                        }
+                      },
+                      {
+                        "type": "paragraph",
+                        "attrs": {
+                          "align": "",
+                          "className": "",
+                          "fontFamily": ""
+                        },
+                        "content": [
+                          {
+                            "type": "text",
+                            "text": " I lay in bed staring at the ring in a daze and soon fell into a dream. It was a strange dream. In the dream, I actually swam unimpeded in the deep sea. There was a green stone statue on the seabed. The shape was very similar to the pattern on the ring."
+                          }
+                        ]
+                      },
+                      {
+                        "type": "paragraph",
+                        "attrs": {
+                          "align": "",
+                          "className": "",
+                          "fontFamily": ""
+                        }
+                      },
+                      {
+                        "type": "paragraph",
+                        "attrs": {
+                          "align": "",
+                          "className": "",
+                          "fontFamily": ""
+                        }
+                      },
+                      {
+                        "type": "paragraph",
+                        "attrs": {
+                          "align": "",
+                          "className": "",
+                          "fontFamily": ""
+                        },
+                        "content": [
+                          {
+                            "type": "text",
+                            "text": "Suddenly, I was awakened by the sound of thunder and rain outside the window. I looked out the window, and a scene I will never forget happened, just as the shopkeeper described, countless half-human, half-fish creatures crawled out of the water and headed towards the town."
+                          }
+                        ]
+                      }
+                    ]
+                  }
+                }
+              ],
+              "alignment": "left"
+            },
+            "PiHjEi": {
+              "id": "PiHjEi",
+              "kind": "card-canvas",
+              "items": [
+                {
+                  "id": "J0rXso",
+                  "kind": "image",
+                  "landscape": {
+                    "image": {
+                      "id": "sfv2bWQrhq",
+                      "isUserDefined": true
+                    },
+                    "transition": {
+                      "name": "none",
+                      "start": 0.05
+                    }
+                  },
+                  "portrait": {
+                    "image": {
+                      "id": null,
+                      "isUserDefined": false
+                    },
+                    "transition": {
+                      "name": "none",
+                      "start": 0.05
+                    }
+                  },
+                  "link": {
+                    "blank": false,
+                    "href": "",
+                    "nofollow": false,
+                    "noreferrer": true
+                  },
+                  "position": {
+                    "x": "center",
+                    "y": "center"
+                  }
+                },
+                {
+                  "id": "2xqU7z",
+                  "kind": "image",
+                  "landscape": {
+                    "image": {
+                      "id": "KehrQ0yKcs",
+                      "isUserDefined": true
+                    },
+                    "transition": {
+                      "name": "fade",
+                      "start": 0.5
+                    }
+                  },
+                  "portrait": {
+                    "image": {
+                      "id": null,
+                      "isUserDefined": false
+                    },
+                    "transition": {
+                      "name": "fade",
+                      "start": 0.5
+                    }
+                  },
+                  "link": {
+                    "blank": false,
+                    "href": "",
+                    "nofollow": false,
+                    "noreferrer": true
+                  },
+                  "position": {
+                    "x": "center",
+                    "y": "center"
+                  }
+                }
+              ],
+              "responsiveHide": "sm-down",
+              "alignment": "left"
+            }
+          },
+          "layerOrder": [
+            "PiHjEi",
+            "xBTbQN"
+          ]
+        },
+        {
+          "id": "s2Yhew",
+          "kind": "background-canvas",
+          "items": [],
+          "overlay": 50
+        }
+      ]
+    },
+    {
+      "id": "5QXuuoBS0P",
+      "template": "x3t6PvdwHF",
+      "className": "Text",
+      "isNavigable": false,
+      "settings": {
+        "className": null,
+        "visibilities": [
+          "All devices",
+          "Mobile only",
+          "Desktop only"
+        ],
+        "theme": "Dark"
+      },
+      "layers": [
+        {
+          "id": "G1Gqzd",
+          "kind": "columns",
+          "layers": {
+            "JYB8rA": {
+              "id": "JYB8rA",
+              "kind": "text",
+              "items": [
+                {
+                  "kind": "text-body",
+                  "text": {
+                    "id": "HnAvVGLi5L",
+                    "type": "doc",
+                    "content": [
+                      {
+                        "type": "paragraph",
+                        "attrs": {
+                          "align": "",
+                          "className": "",
+                          "fontFamily": ""
+                        },
+                        "content": [
+                          {
+                            "type": "text",
+                            "text": " I rushed out of the hotel and ran without looking back, and finally fell on the muddy ground and passed out. In the morning I woke up in the pub in the town, I quickly boarded the bus to my hometown, and everything was calm as if everything that happened last night was a dream."
+                          }
+                        ]
+                      },
+                      {
+                        "type": "media",
+                        "attrs": {
+                          "className": "",
+                          "align": "",
+                          "item": {
+                            "kind": "embed",
+                            "landscape": {
+                              "caption": {
+                                "type": "doc",
+                                "content": [
+                                  {
+                                    "type": "paragraph",
+                                    "content": []
+                                  }
+                                ]
+                              },
+                              "transition": {
+                                "name": "none",
+                                "start": 0,
+                                "delay": 0.1
+                              },
+                              "embed": {
+                                "originalUrl": "https://www.youtube.com/watch?v=JyXEwn6QNhc",
+                                "iframelyContentId": "n/a",
+                                "text": "Today we're back with some more cosmic horror examining the cthulhu mythos and the work of HP Lovecraft, this time taking a look at the creatures known as the Deep Ones. \n#Lovecraft #CthulhuMythos #MythologyExplained\nIf you have enjoyed this video, please leave a like as it helps a lot.\n►SUBSCRIBE FOR MORE VIDEOS! ►►► https://goo.gl/j5qJPy \n\nFOR MORE VIDEOS CHECK OUT MY PLAYLISTS!\n►COMPLETE PLAYLIST!  ►► ►https://goo.gl/PNtLZT\n►GREEK MYTHOLOGY PLAYLIST! ►►►https://goo.gl/mkT3Qk\n►NORSE MYTHOLOGY PLAYLIST! ►►►https://goo.gl/cj4MUs\n\nFor those wanting to support the channel - https://www.patreon.com/MythologyExplained\n\nIntro by http://taloscreative.co.uk\nIntro Music by http://www.grahamplowman.com\n\nIf any of your artwork has been used in a video of mine please don't hesitate to contact me and the appropriate credit can be given.\n\nMusic by Graham Plowman - The Hound\nhttps://www.youtube.com/watch?v=3wFA0bAnGSU\nhttp://www.grahamplowman.com",
+                                "title": "The Deep Ones - (Exploring the Cthulhu Mythos)",
+                                "html": "<div><div style=\"left: 0; width: 100%; height: 0; position: relative; padding-bottom: 56.25%;\"><iframe allow=\"autoplay *; accelerometer *; clipboard-write *; encrypted-media *; gyroscope *; picture-in-picture *;\" scrolling=\"no\" allowfullscreen=\"\" style=\"top: 0; left: 0; width: 100%; height: 100%; position: absolute; border: 0;\" data-img=\"\" data-iframely-url=\"https://iframely.shorthand.com/uBT6aKX?playerjs=1\"></iframe></div></div>",
+                                "ampHtml": "<amp-iframe src=\"https://iframely.shorthand.com/uBT6aKX?amp=1&playerjs=1\" width=\"400\" height=\"225\" frameborder=\"0\" allowfullscreen layout=\"responsive\" sandbox=\"allow-scripts allow-same-origin allow-popups allow-forms\"><amp-img layout=\"fill\" src=\"https://iframely.shorthand.com/api/thumbnail?url=https%3A%2F%2Fwww.youtube.com%2Fwatch%3Fv%3DJyXEwn6QNhc&key=4c0a0c5255344f2050a6c4f0a0e0ba98\" placeholder></amp-img></amp-iframe>",
+                                "isUserDefined": true,
+                                "provider": "youtube"
+                              }
+                            }
+                          }
+                        }
+                      }
+                    ]
+                  }
+                }
+              ],
+              "alignment": "center"
+            },
+            "Ix52cH1qSu": {
+              "id": "Ix52cH1qSu",
+              "kind": "text",
+              "items": [
+                {
+                  "kind": "text-body",
+                  "text": {
+                    "id": "cjrn3b94BQ",
+                    "type": "doc",
+                    "content": [
+                      {
+                        "type": "paragraph",
+                        "attrs": {
+                          "align": "",
+                          "className": "",
+                          "fontFamily": ""
+                        },
+                        "content": [
+                          {
+                            "type": "text",
+                            "text": " Arriving at my grandparents' house, the strange face in my grandmother's portrait brought back memories of all the weird things I've been through lately. Everything seemed to portend something, Innsmouth, the cult, the god, the strange pattern on the ring and the face of the grandmother. With my hair falling out because I stayed up all night thinking, there was only one thought in my mind, I had to go back to that town no matter what."
+                          }
+                        ]
+                      },
+                      {
+                        "type": "media",
+                        "attrs": {
+                          "className": "",
+                          "align": "",
+                          "item": {
+                            "kind": "embed",
+                            "landscape": {
+                              "caption": {
+                                "type": "doc",
+                                "content": [
+                                  {
+                                    "type": "paragraph",
+                                    "content": []
+                                  }
+                                ]
+                              },
+                              "transition": {
+                                "name": "none",
+                                "start": 0,
+                                "delay": 0.1
+                              },
+                              "embed": {
+                                "originalUrl": "https://www.youtube.com/watch?v=Rxh_SVtyZqo",
+                                "iframelyContentId": "n/a",
+                                "text": "https://www.hplovecraft.com/writings/texts/fiction/soi.aspx\n\n\nChapter 1: 0:00:00\nChapter 2: 0:28:04\nChapter 3: 1:08:03\nChapter 4: 1:50:17\nChapter 5: 2:47:08\n\nSupport the Patreon to see Exploring videos early and vote on new ones!: http://bit.ly/1U9QkPh\nJoin the Discord!: https://discord.gg/eBHHHe5\nSupport the Series with official Merch!: https://t.co/aH0HApXp7v\nFollow me on Twitter for updates!: https://twitter.com/TES_Mangg\nListen on Podcasts: https://anchor.fm/theexploringseries\nExploring SCP Foundation Playlist: https://bit.ly/2whu8NA\nExploring Dungeons and Dragons Playlist: https://bit.ly/348IZZu\nExploring Warhammer 40k Playlist: https://bit.ly/2DoFZgu\nExploring Celtic Mythology Playlist: https://bit.ly/2rTuHLm\nExploring Norse Mythology Playlist: http://bit.ly/2EAHTda\nExploring Elder Scrolls Playlist: http://bit.ly/2fgqQoY\nExploring Star Wars Playlist: http://bit.ly/2lNtlN0\nExploring Middle-Earth Playlist: http://bit.ly/2cGNcty\nExploring the Cthulhu Mythos Playlist: http://bit.ly/25OI9jY\nExploring History Playlist: https://bit.ly/2w7XMqM\nThe Story of FFXIV Playlist: https://bit.ly/2XgU1Lk\nMy Gaming Channel: https://www.youtube.com/user/ManggsLPs\n\nArtists Include:\nDenis Loebner: https://www.artstation.com/denisthemenace\nWyrdTree Art: https://www.artstation.com/mcrassusart\nsilberius: https://www.deviantart.com/silberius\nKonstantin Vohwinkel: https://www.artstation.com/kingstantin\nRostyslav Zagornov: https://www.artstation.com/attemme\nRichard Wright: https://www.artstation.com/richardwright\n\nMusic: https://www.youtube.com/watch?v=017yCQMfbzE\n             https://www.youtube.com/watch?v=ppiGTLqfaWc",
+                                "title": "The Shadow Over Innsmouth by H.P. Lovecraft (Audiobook)",
+                                "html": "<div><div style=\"left: 0; width: 100%; height: 0; position: relative; padding-bottom: 56.25%;\"><iframe allow=\"autoplay *; accelerometer *; clipboard-write *; encrypted-media *; gyroscope *; picture-in-picture *;\" scrolling=\"no\" allowfullscreen=\"\" style=\"top: 0; left: 0; width: 100%; height: 100%; position: absolute; border: 0;\" data-img=\"\" data-iframely-url=\"https://iframely.shorthand.com/NkXkFLw?playerjs=1\"></iframe></div></div>",
+                                "ampHtml": "<amp-iframe src=\"https://iframely.shorthand.com/NkXkFLw?amp=1&playerjs=1\" width=\"400\" height=\"225\" frameborder=\"0\" allowfullscreen layout=\"responsive\" sandbox=\"allow-scripts allow-same-origin allow-popups allow-forms\"><amp-img layout=\"fill\" src=\"https://iframely.shorthand.com/api/thumbnail?url=https%3A%2F%2Fwww.youtube.com%2Fwatch%3Fv%3DRxh_SVtyZqo&key=4c0a0c5255344f2050a6c4f0a0e0ba98\" placeholder></amp-img></amp-iframe>",
+                                "isUserDefined": true,
+                                "provider": "youtube"
+                              }
+                            }
+                          }
+                        }
+                      }
+                    ]
+                  },
+                  "id": "btDg36Bidq"
+                }
+              ],
+              "alignment": "center"
+            }
+          },
+          "layerOrder": [
+            "JYB8rA",
+            "Ix52cH1qSu"
+          ]
+        },
+        {
+          "id": "s2Yhew",
+          "kind": "background-canvas",
+          "items": [],
+          "overlay": 50
         }
       ]
     }
   ],
-  "sectionCount": 6,
+  "sectionCount": 8,
   "logos": [],
   "showThemeLogos": true,
   "authors": null,
   "tags": [],
   "keywords": null,
   "status": "published",
-  "contentVersion": 1144,
+  "contentVersion": 1281,
   "publishUrl": null,
   "publishAt": null,
   "previewUsername": null,
@@ -1923,17 +2072,17 @@
   "socialTwitterHandle": "",
   "socialTwitterShortUrl": "",
   "lastPreviewAt": "2022-03-31T23:48:14.501Z",
-  "lastPublishedAt": "2022-08-17T11:16:00.443Z",
+  "lastPublishedAt": "2022-08-20T02:45:27.374Z",
   "lastPublishedUrl": null,
-  "lastPublishedVersion": 1136,
+  "lastPublishedVersion": 1144,
   "lastPublishedBy": "Ru4S9oEnSI",
   "createdBy": "Ru4S9oEnSI",
   "updatedBy": "tkx8W7cFIU",
   "deletedBy": null,
   "createdAt": "2022-03-31T23:48:14.502Z",
-  "updatedAt": "2022-08-17T12:16:00.473Z",
+  "updatedAt": "2022-08-26T03:49:58.892Z",
   "deletedAt": null,
-  "currentVersion": 1144,
+  "currentVersion": 1281,
   "settings": {
     "ampEnabled": true
   },
@@ -1954,7 +2103,7 @@
     "twitterHandle": "",
     "twitterShortUrl": ""
   },
-  "generatedAt": "2022-08-20T02:45:27.541Z",
+  "generatedAt": "2022-08-28T05:48:33.684Z",
   "collections": [],
   "publishSettings": [],
   "isTestStory": false,

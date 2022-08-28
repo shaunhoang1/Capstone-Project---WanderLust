@@ -9,32 +9,35 @@ function retrieveStoryText(){
   {
     if (!json) {
       return "";
+    } else if (json?.subTitle!==undefined) {
+      return extractText(json.subTitle);
+    } else if (json?.content!==undefined) {
+      return json.content.map(extractText).join("");
     } else if (Array.isArray(json)) {
       return json.map(extractText).join("");
     } else if (json.type === "text") {
       let a = json.text;
       combinedText[combinedText.length]=a;
       return json.text;
-    } else if (json.type === "object") {
-      return json.sections.map(extractText).join("");
     } else if (json?.sections!==undefined) {
       return json.sections.map(extractText).join("");
     } else if (json?.layers!==undefined) {
-      switch(typeof(json.layers)===Array){
-        case true:
-          return json.layers.map(extractText).join("");
-
-        case false:
-          return extractText(json.layers);
+      for(i in json.layers){  //Extra filter finds layerOrder to extract specific layerID's
+        let layerObj = json.layers[i];
+        if (layerObj?.layerOrder!==undefined) {
+          let extractedLayers = []
+          for(j in layerObj.layerOrder){
+            let layerJSON = layerObj.layers[layerObj.layerOrder[j]];
+            extractedLayers[extractedLayers.length]=extractText(layerJSON);
+          }
+          return extractedLayers.join("");
+        }
       }
+      return extractText(json.layers);  //Runs on single layer object if no layerOrder
     } else if (json?.text!==undefined) {
       return extractText(json.text);
     } else if (json?.items!==undefined) {
       return json.items.map(extractText).join("");
-    } else if (json?.content!==undefined) {
-      return json.content.map(extractText).join("");
-    } else if (json?.["1SuARv"]!==undefined) { 
-      return extractText(json["1SuARv"]);
     } else if (json?.title!==undefined) {
       return extractText(json.title);
     } else if (json?.leadIn!==undefined) {
@@ -45,11 +48,15 @@ function retrieveStoryText(){
       return extractText(json.byline);
     } else if (json?.caption!==undefined) {
       return extractText(json.caption);
-    } else if (json?.xBTbQN!==undefined) {  
-      return extractText(json.xBTbQN);
     } else if (json?.landscape!==undefined) {
       return extractText(json.landscape);
-    } else {
+    } else if (json?.attrs!==undefined) { 
+      return extractText(json.attrs);
+    } else if (json?.embed!==undefined) { //Extract video embed
+      let embededObj=json.embed;
+      console.log(embededObj.originalUrl);
+      console.log("Found URL");
+    }else {
       return "";
     }
   }
@@ -62,17 +69,11 @@ function retrieveStoryText(){
 
   //Run function to extract the data
   const combinedText =[];
-  console.log(typeof(myArray));
-  console.log(typeof(combinedText));
   extractText(storyData)
   for(i in combinedText){
-    console.log("Found text elements:" + combinedText[i]);
+    //console.log("Found text elements:" + combinedText[i]);
   }
-  
-  for(i in combinedText){
-    //storyParagraphs[i] = combinedText[i];
-  }
-               
+
   return combinedText;
 }
                
