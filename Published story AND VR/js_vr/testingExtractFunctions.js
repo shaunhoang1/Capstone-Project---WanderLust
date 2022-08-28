@@ -5,6 +5,12 @@
 function retrieveStoryText(){
   //Declare array variable for all extracted text
 
+  function newSection(json)
+  {
+    combinedText[combinedText.length]="New Section";
+    return extractText(json);
+  }
+
   function extractText(json)
   {
     if (!json) {
@@ -13,6 +19,9 @@ function retrieveStoryText(){
       return extractText(json.subTitle);
     } else if (json?.content!==undefined) {
       return json.content.map(extractText).join("");
+    } else if (json?.embed!==undefined) { //Extract video embed
+      let embededObj=json.embed;
+      combinedText[combinedText.length]="EMBED:"+embededObj.originalUrl;
     } else if (Array.isArray(json)) {
       return json.map(extractText).join("");
     } else if (json.type === "text") {
@@ -20,7 +29,7 @@ function retrieveStoryText(){
       combinedText[combinedText.length]=a;
       return json.text;
     } else if (json?.sections!==undefined) {
-      return json.sections.map(extractText).join("");
+      return json.sections.map(newSection).join("");
     } else if (json?.layers!==undefined) {
       for(i in json.layers){  //Extra filter finds layerOrder to extract specific layerID's
         let layerObj = json.layers[i];
@@ -38,6 +47,8 @@ function retrieveStoryText(){
       return extractText(json.text);
     } else if (json?.items!==undefined) {
       return json.items.map(extractText).join("");
+    } else if (json?.item!==undefined) {
+      return extractText(json.item);
     } else if (json?.title!==undefined) {
       return extractText(json.title);
     } else if (json?.leadIn!==undefined) {
@@ -52,10 +63,6 @@ function retrieveStoryText(){
       return extractText(json.landscape);
     } else if (json?.attrs!==undefined) { 
       return extractText(json.attrs);
-    } else if (json?.embed!==undefined) { //Extract video embed
-      let embededObj=json.embed;
-      console.log(embededObj.originalUrl);
-      console.log("Found URL");
     }else {
       return "";
     }
