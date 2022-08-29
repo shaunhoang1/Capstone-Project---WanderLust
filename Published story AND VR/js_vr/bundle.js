@@ -3,6 +3,7 @@
     
 let objParas = [];
 let storyParagraphs=[];
+let movingPictures=[];
 
 //Define the Backgrounds
 var currentSky = 0;
@@ -44,8 +45,8 @@ function newSection(pageChange){
     
 //Control the opacity of paragraphs as they change height
 function setOpacity(){
-    /*for(let i=0;i<4;i++){
-        textTarget = objParas[i];
+    for(let i=0;i<1;i++){
+        let textTarget = objParas[i];
         scrollingHeight = textTarget.object3D.position.y+10;
         if (scrollingHeight !== 0 && scrollingHeight !== 20){
             //Control opacity while scrolling
@@ -56,13 +57,50 @@ function setOpacity(){
             }else{
                 textTarget.setAttribute("opacity",1);
             }
+            for(j in movingPictures){
+      
+              let elID = "movingPicture"+j;
+              let elmnt = document.getElementById(elID);
+              if (scrollingHeight>=15){         
+                if(scrollingHeight>17){
+                  elmnt.setAttribute("opacity",0);
+                }else{
+                  elmnt.setAttribute("opacity",(20-scrollingHeight)/5);
+                }
+              }else if (scrollingHeight<=5){
+                if(scrollingHeight<2){
+                  elmnt.setAttribute("opacity",0);
+                }else{
+                  elmnt.setAttribute("opacity",scrollingHeight/5);
+                }
+              }else{
+                textTarget.setAttribute("opacity",1);
+              }
+            }
         }
-    }*/
-    for(let i=0;i<4;i++){
-        textTarget = objParas[i];
-        textTarget.setAttribute("opacity",1);
     }
+    
 }
+
+//Start on-going timer to set moving text & image opacity
+function opacityTimer(){
+  console.log("AAA");
+  setOpacity();
+}
+setInterval(opacityTimer,100);
+
+//Initialize all text from the story JSON.
+function importAllText(){
+  iniParagraphObjects();
+  let fullText = retrieveStoryText();
+  for(i in fullText){
+    storyParagraphs[i-1] = fullText[i-1];
+  }
+  storyParagraphs.unshift("New Section");
+  currentPage=0;currentSky = 0;
+  changePage(1);
+}
+setTimeout(importAllText,10);
 
 //Navigate to next/previous skybox image
 function changeSky(skyChange) {
@@ -76,16 +114,44 @@ function changeSky(skyChange) {
 document.addEventListener("keydown", function (event) {
     //Go to next background
     if (event.shiftKey) {
-        iniParagraphObjects();
-        fullText = retrieveStoryText();
-        for(i in fullText){
-          storyParagraphs[i-1] = fullText[i-1];
-        }
-        storyParagraphs.unshift("New Section");
-        currentPage=0;currentSky = 0;
-        changePage(1);
+       
+      createNewImage();
+    }else if (event.key === "l") {
+       
+      deleteMovingImage();
     }
+
+
 });
+
+function createNewImage(){
+  //Check how many pictures there are
+  let imgCount=movingPictures.length;
+  
+  let img = document.createElement("a-image");
+  img.setAttribute("id","movingPicture"+imgCount);
+  img.setAttribute("src", "#imgPortrait2");
+  //set img offset
+  let offset = -imgCount*1+1;
+  let pos = "0 "+offset.toString()+" -2";
+  console.log(pos)
+  img.setAttribute("position", pos);
+
+  movingPictures[imgCount]=imgCount;
+
+  let element = document.getElementById("textPara");
+  element.appendChild(img);
+}
+
+function deleteMovingImage(){
+  console.log(movingPictures.length);
+  for(i in movingPictures){
+    let elID = "movingPicture"+i;
+    let elmnt = document.getElementById(elID);
+    elmnt.remove();
+  }
+  movingPictures=[];
+}
 
 //Navigate between paragraphs
 document.addEventListener("keydown", function (event) {
