@@ -61,18 +61,12 @@ function setOpacity(){
       
               let elID = "movingPicture"+j;
               let elmnt = document.getElementById(elID);
-              if (scrollingHeight>=15){         
-                if(scrollingHeight>17){
-                  elmnt.setAttribute("opacity",0);
-                }else{
+              if (scrollingHeight>=15){    
                   elmnt.setAttribute("opacity",(20-scrollingHeight)/5);
-                }
+                
               }else if (scrollingHeight<=5){
-                if(scrollingHeight<2){
-                  elmnt.setAttribute("opacity",0);
-                }else{
                   elmnt.setAttribute("opacity",scrollingHeight/5);
-                }
+                
               }else{
                 textTarget.setAttribute("opacity",1);
               }
@@ -127,13 +121,20 @@ document.addEventListener("keydown", function (event) {
 function createNewImage(){
   //Check how many pictures there are
   let imgCount=movingPictures.length;
-  
+  let imgOffset = 0
   let img = document.createElement("a-image");
   img.setAttribute("id","movingPicture"+imgCount);
   img.setAttribute("src", "#imgPortrait2");
+  img.setAttribute("Opacity", "0");
+  img.setAttribute("scale", "2 2 2");
   //set img offset
   let offset = -imgCount*1+1;
-  let pos = "0 "+offset.toString()+" -2";
+  if(imgCount % 2 == 0){
+      imgOffset = -1
+  }else{
+      imgOffset = 1
+  }
+  let pos = imgOffset+" "+offset.toString()+" -2";
   console.log(pos)
   img.setAttribute("position", pos);
 
@@ -182,16 +183,17 @@ function changePage(pageChange) {
     }else{
         //Update paragraph text value
         objParas[0].setAttribute("value", storyParagraphs[currentPage]);
+        objParas[0].setAttribute("Opacity", 0);
         console.log(currentPage-1+": "+storyParagraphs[currentPage]);
         //Reset and activate the Position animation
         objParas[0].removeAttribute("animation__pos");
-        objParas[0].setAttribute("animation__pos","property: position; from:0 -10 -20;to: 0 10 -20; dur:5000; easing: linear; loop: false;");
+        objParas[0].setAttribute("animation__pos","property: position; from:0 -10 -20;to: 0 10 -20; dur:10000; easing: linear; loop: false;");
         movingImage1 = document.getElementById("movingImage1");
         movingImage1.removeAttribute("animation__pos");
-        movingImage1.setAttribute("animation__pos","property: position; from:9 -6 -10;to: 9 6 -10; dur:5000; easing: linear; loop: false;");
+        movingImage1.setAttribute("animation__pos","property: position; from:9 -6 -10;to: 9 6 -10; dur:10000; easing: linear; loop: false;");
         movingImage2 = document.getElementById("movingImage2");
         movingImage2.removeAttribute("animation__pos");
-        movingImage2.setAttribute("animation__pos","property: position; from:-9 -6 -10;to: -9 6 -10; dur:5000; easing: linear; loop: false;");
+        movingImage2.setAttribute("animation__pos","property: position; from:-9 -6 -10;to: -9 6 -10; dur:10000; easing: linear; loop: false;");
     }
 }
 
