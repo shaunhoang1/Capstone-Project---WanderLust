@@ -60,26 +60,31 @@
         -->
       <a-entity camera look-controls id="cameraObj" position="0 1.6 2" wasd-controls="enabled:true;acceleration:10;">
       </a-entity>
-        <a-ocean ocean-state="height_offset: -10;"></a-ocean>
+        <a-ocean ocean-state="height_offset: -50;"></a-ocean>
     
 
       <!-- ###################  STORY ENTITIES  #################### -->
       <!-- Object Entity -->
-      <a-entity id="modelEntity" obj-model="obj: #firstModel;" color="#00FF00" scale="0.06 0.06 0.06" position="-1.6 0 0.2"
+      <a-entity id="modelEntity" obj-model="obj: #firstModel;" color="#00FF00" scale="0.06 0.06 0.06" position="-3.1 0 2"
+        event-set__click="_event:click; animation.property:scale;animation.to:0.2 0.2 0.2;animation.easing:linear;"
+        event-set__leave="_event:mouseleave;animation.property:scale;animation.to:0.06 0.06 0.06;animation.easing:linear;">
+        <a-circle radius="3" rotation="-90 0 0" color="grey"></a-circle>
+        </a-entity>
+    <a-entity id="modelEntity" obj-model="obj: #firstModel;" color="#00FF00" scale="0.06 0.06 0.06" position="3.1 0 2"
         event-set__click="_event:click; animation.property:scale;animation.to:0.2 0.2 0.2;animation.easing:linear;"
         event-set__leave="_event:mouseleave;animation.property:scale;animation.to:0.06 0.06 0.06;animation.easing:linear;">
         <a-circle radius="3" rotation="-90 0 0" color="grey"></a-circle>
         </a-entity>
         
       <!-- First Image Entity -->
-      <a-image id="imageEntity" src="#imgPortrait1" position="3 1.5 -0.5" opacity="0" look-at="#cameraObj"
+      <a-image id="imageEntity" src="#imgPortrait1" position="3 0.5 -0.5" opacity="0" look-at="#cameraObj"
         animation__fadeIn="property:opacity;to:1;easing:linear; "
         event-set__click="_event:click; animation.property:scale;animation.to:3 3 3;animation.easing:linear;"
         event-set__leave="_event:mouseleave;animation.property:scale;animation.to:1 1 1;animation.easing:linear;">
         </a-image>
         
       <!-- Second Image Entity -->
-      <a-image id="imageEntity" src="#imgPortrait2" position="-3 1.5 -0.5" opacity="0" look-at="#cameraObj"
+      <a-image id="imageEntity" src="#imgPortrait2" position="-3 0.5 -0.5" opacity="0" look-at="#cameraObj"
         animation__fadeIn="property:opacity;to:1;easing:linear; "
         event-set__click="_event:click; animation.property:scale;animation.to:3 3 3;animation.easing:linear;"
         event-set__leave="_event:mouseleave;animation.property:scale;animation.to:1 1 1;animation.easing:linear;">
