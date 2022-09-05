@@ -404,6 +404,11 @@ function retrieveStoryText(){
       myIMG[myIMG.length]=combinedText[i];
       combinedText.splice(i,1);
     }
+  }for(i in combinedText){
+    if(combinedText[i].includes("IMAGE")){
+      myIMG[myIMG.length]=combinedText[i];
+      combinedText.splice(i,1);
+    }
   }
   return [combinedText, myIMG];
 }

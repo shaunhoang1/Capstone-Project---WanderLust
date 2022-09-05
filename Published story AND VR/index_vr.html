@@ -8,6 +8,7 @@
       
     <!-- Load A-Frame and additional components -->
     <script src="https://aframe.io/releases/1.3.0/aframe.min.js"></script>
+    <script src="../../dist/aframe-particle-system-component.min.js"></script>
     <script src="https://unpkg.com/aframe-look-at-component@0.8.0/dist/aframe-look-at-component.min.js"></script>
     <script src="https://unpkg.com/aframe-event-set-component@^4.0.0/dist/aframe-event-set-component.min.js"></script>
     <script src="https://unpkg.com/aframe-animation-component@^4.1.2/dist/aframe-animation-component.min.js"></script>
@@ -19,6 +20,7 @@
   <body>
     <!-- HTML Elements to create a page before scene    -->
     <a-scene id="VRScene">
+        <a-entity position="0 2.25 -15" particle-system="preset:dust;particleCount:1000"></a-entity>
       <!-- ###################  LOAD ASSETS INTO STORY  #################### -->
       <a-assets>
         <a-asset-item id="firstModel" src="Resources_vr/Objects/testObj.obj"></a-asset-item>
@@ -54,6 +56,7 @@
                 geometry="primitive:ring;radiusInner:0.0004;radiusOuter:0.0006;"
                 material="color:white;shader:flat;"></a-entity>
       </a-entity>
+    
 
       <!-- ###################  STORY ENTITIES  #################### -->
       <!-- Object Entity -->
