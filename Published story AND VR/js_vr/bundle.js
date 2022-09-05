@@ -86,9 +86,14 @@ setInterval(opacityTimer,100);
 //Initialize all text from the story JSON.
 function importAllText(){
   iniParagraphObjects();
-  let fullText = retrieveStoryText();
+  let retrieveStoryAssets = retrieveStoryText();
+  let fullText = retrieveStoryAssets[0];
+  let myImages = retrieveStoryAssets[1];
   for(i in fullText){
     storyParagraphs[i-1] = fullText[i-1];
+  }
+  for(i in myImages){
+    console.log(myImages[i]);
   }
   storyParagraphs.unshift("New Section");
   currentPage=0;currentSky = 0;
@@ -331,6 +336,8 @@ function retrieveStoryText(){
       return extractText(json.subTitle);
     } else if (json?.content!==undefined) {
       return json.content.map(extractText).join("");
+    } else if (json?.image!==undefined) {
+      combinedText[combinedText.length]="IMAGE:"+json.image.id;
     } else if (json?.embed!==undefined) { //Extract video embed
       let embededObj=json.embed;
       combinedText[combinedText.length]="EMBED:"+embededObj.originalUrl;
@@ -351,7 +358,8 @@ function retrieveStoryText(){
             let layerJSON = layerObj.layers[layerObj.layerOrder[j]];
             extractedLayers[extractedLayers.length]=extractText(layerJSON);
           }
-          return extractedLayers.join("");
+          //return extractedLayers.join("");
+          return json.layers.map(extractText).join("");
         }
       }
       return extractText(json.layers);  //Runs on single layer object if no layerOrder
@@ -390,7 +398,14 @@ function retrieveStoryText(){
   const combinedText =[];
   extractText(storyData)
   combinedText[combinedText.length]="FinalPara";
-  return combinedText;
+  const myIMG = [];
+  for(i in combinedText){
+    if(combinedText[i].includes("IMAGE")){
+      myIMG[myIMG.length]=combinedText[i];
+      combinedText.splice(i,1);
+    }
+  }
+  return [combinedText, myIMG];
 }
 
 
@@ -709,15 +724,15 @@ module.exports={
         "className": "Theme-BackgroundColor-17"
       }
     ],
-    "version": "309ba231d43a7e2933d69fd2a63c3998",
+    "version": "a1cee4401feafee8c6e61e1378378485",
     "isEnabled": true,
     "isPublic": true,
     "createdBy": null,
     "updatedBy": null,
     "deletedBy": null,
     "createdAt": "2017-06-15T03:36:21.796Z",
-    "updatedAt": "2022-08-26T18:33:52.017Z",
-    "currentVersion": 10426,
+    "updatedAt": "2022-09-02T18:27:38.355Z",
+    "currentVersion": 10455,
     "assetBase": "./assets",
     "fullPath": "/efs_data/themes/0-demo/theme.min.css"
   },
@@ -1050,6 +1065,107 @@ module.exports={
             }
           ],
           "overlay": 30
+        }
+      ]
+    },
+    {
+      "id": "a6IIoWUSWI",
+      "template": "mXhhJXlEKQ",
+      "className": "Media",
+      "isNavigable": false,
+      "settings": {
+        "className": null,
+        "visibilities": [
+          "All devices",
+          "Mobile only",
+          "Desktop only"
+        ],
+        "theme": "Light",
+        "visibility": "All devices"
+      },
+      "layers": [
+        {
+          "id": "PIojJY",
+          "kind": "responsive-media",
+          "items": [
+            {
+              "id": "N4eQNg",
+              "kind": "video",
+              "portrait": {
+                "video": {
+                  "id": "oMTc06c0ID",
+                  "loop": false,
+                  "meta": {
+                    "heading": "MP4 video (will scale to screen width)",
+                    "subHeading": "Recommended: 900 x 507px, 100mb MAX"
+                  },
+                  "muted": false,
+                  "autoPlay": false,
+                  "controls": true,
+                  "isUserDefined": false
+                },
+                "poster": {
+                  "id": "FojDGJECug",
+                  "meta": {
+                    "heading": "Shown before video loads",
+                    "subHeading": "JPEG to match dimensions of video"
+                  },
+                  "isUserDefined": false
+                },
+                "caption": {
+                  "type": "doc",
+                  "content": [
+                    {
+                      "type": "paragraph",
+                      "content": []
+                    }
+                  ]
+                },
+                "transition": {
+                  "name": "none",
+                  "start": 0,
+                  "delay": 0.1
+                }
+              },
+              "landscape": {
+                "video": {
+                  "id": "PYj71zvsAD",
+                  "loop": false,
+                  "meta": {
+                    "heading": "MP4 video (will scale to screen width)",
+                    "subHeading": "Recommended: 1920x1080px, 100mb MAX"
+                  },
+                  "muted": false,
+                  "autoPlay": false,
+                  "controls": true,
+                  "isUserDefined": true
+                },
+                "poster": {
+                  "id": "yp0f2XkDCi",
+                  "meta": {
+                    "heading": "Shown before video loads",
+                    "subHeading": "JPEG to match dimensions of video"
+                  },
+                  "isUserDefined": true
+                },
+                "caption": {
+                  "type": "doc",
+                  "content": [
+                    {
+                      "type": "paragraph",
+                      "content": []
+                    }
+                  ]
+                },
+                "transition": {
+                  "name": "none",
+                  "start": 0,
+                  "delay": 0.1
+                }
+              }
+            }
+          ],
+          "overlay": 50
         }
       ]
     },
@@ -2480,14 +2596,14 @@ module.exports={
       ]
     }
   ],
-  "sectionCount": 8,
+  "sectionCount": 9,
   "logos": [],
   "showThemeLogos": true,
   "authors": null,
   "tags": [],
   "keywords": null,
   "status": "published",
-  "contentVersion": 1281,
+  "contentVersion": 1607,
   "publishUrl": null,
   "publishAt": null,
   "previewUsername": null,
@@ -2505,17 +2621,17 @@ module.exports={
   "socialTwitterHandle": "",
   "socialTwitterShortUrl": "",
   "lastPreviewAt": "2022-03-31T23:48:14.501Z",
-  "lastPublishedAt": "2022-08-20T02:45:27.374Z",
+  "lastPublishedAt": "2022-08-28T05:48:33.482Z",
   "lastPublishedUrl": null,
-  "lastPublishedVersion": 1144,
+  "lastPublishedVersion": 1281,
   "lastPublishedBy": "Ru4S9oEnSI",
   "createdBy": "Ru4S9oEnSI",
   "updatedBy": "tkx8W7cFIU",
   "deletedBy": null,
   "createdAt": "2022-03-31T23:48:14.502Z",
-  "updatedAt": "2022-08-26T03:49:58.892Z",
+  "updatedAt": "2022-09-01T17:46:46.300Z",
   "deletedAt": null,
-  "currentVersion": 1281,
+  "currentVersion": 1607,
   "settings": {
     "ampEnabled": true
   },
@@ -2536,7 +2652,7 @@ module.exports={
     "twitterHandle": "",
     "twitterShortUrl": ""
   },
-  "generatedAt": "2022-08-28T05:48:33.684Z",
+  "generatedAt": "2022-09-03T13:39:54.876Z",
   "collections": [],
   "publishSettings": [],
   "isTestStory": false,
