@@ -78,7 +78,6 @@ function setOpacity(){
 
 //Start on-going timer to set moving text & image opacity
 function opacityTimer(){
-  console.log("AAA");
   setOpacity();
 }
 setInterval(opacityTimer,100);
