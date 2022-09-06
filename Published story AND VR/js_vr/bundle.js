@@ -5,6 +5,10 @@ let objParas = [];
 let storyParagraphs=[];
 let movingPictures=[];
 
+let imgRepo=[];
+let fullText= [];
+let myImages = [];
+
 //Define the Backgrounds
 var currentSky = 0;
 const skies = [];
@@ -41,6 +45,22 @@ function wrapAround(current,min,max){
 function newSection(pageChange){
     changeSky(pageChange);
     changePage(pageChange,0,storyParagraphs.length+1);
+  
+  let myImages = [];
+  let tempImageNum = currentPage;
+  let sectionFound=false;
+  while(sectionFound==false){
+      console.log("CheckingSections")
+      if(storyParagraphs[tempImageNum].includes("New Section")){
+          sectionFound=true;
+          console.log("sectionFound")
+      }else if(storyParagraphs[tempImageNum].includes("IMAGE:")){
+          myImages.push(storyParagraphs[tempImageNum].slice(6))
+      }
+      tempImageNum=tempImageNum+1;
+  } 
+  console.log(myImages);
+  createNewImage(myImages);
 }
     
 //Control the opacity of paragraphs as they change height
@@ -78,7 +98,6 @@ function setOpacity(){
 
 //Start on-going timer to set moving text & image opacity
 function opacityTimer(){
-  console.log("AAA");
   setOpacity();
 }
 setInterval(opacityTimer,100);
@@ -86,15 +105,18 @@ setInterval(opacityTimer,100);
 //Initialize all text from the story JSON.
 function importAllText(){
   iniParagraphObjects();
-  let retrieveStoryAssets = retrieveStoryText();
-  let fullText = retrieveStoryAssets[0];
-  let myImages = retrieveStoryAssets[1];
+  retrieveStoryAssets = retrieveStoryText();
+  fullText = retrieveStoryAssets[0];
+  myImages = retrieveStoryAssets[1];
   for(i in fullText){
     storyParagraphs[i-1] = fullText[i-1];
+    console.log(storyParagraphs[i-1])
   }
-  for(i in myImages){
-    console.log(myImages[i]);
+  imgRepo = retrieveStoryAssets[2];
+  for(i in imgRepo){
+    console.log(imgRepo[i]);
   }
+    
   storyParagraphs.unshift("New Section");
   currentPage=0;currentSky = 0;
   changePage(1);
@@ -113,40 +135,42 @@ function changeSky(skyChange) {
 document.addEventListener("keydown", function (event) {
     //Go to next background
     if (event.shiftKey) {
-       
       createNewImage();
     }else if (event.key === "l") {
-       
       deleteMovingImage();
     }
-
-
 });
 
-function createNewImage(){
-  //Check how many pictures there are
-  let imgCount=movingPictures.length;
-  let imgOffset = 0
-  let img = document.createElement("a-image");
-  img.setAttribute("id","movingPicture"+imgCount);
-  img.setAttribute("src", "#imgPortrait2");
-  img.setAttribute("Opacity", "0");
-  img.setAttribute("scale", "2 2 2");
-  //set img offset
-  let offset = -imgCount*1+1;
-  if(imgCount % 2 == 0){
-      imgOffset = -1
-  }else{
-      imgOffset = 1
+    
+function createNewImage(imageNums){
+    
+    deleteMovingImage();
+  for(i in imageNums){
+     //Check how many pictures there are
+      let imgCount=movingPictures.length;
+      let imgOffset = 0
+      let img = document.createElement("a-image");
+      img.setAttribute("id","movingPicture"+imgCount);
+      img.setAttribute("src", imgRepo[imageNums[i]]);
+      img.setAttribute("Opacity", "0");
+      img.setAttribute("scale", "3 3 3");
+      //set img offset
+      let offset = -imgCount*2+1;
+      if(imgCount % 2 == 0){
+          imgOffset = -1
+      }else{
+          imgOffset = 1
+      }
+      let pos = imgOffset*2+" "+offset+" -2";
+      console.log(pos)
+      img.setAttribute("position", pos);
+
+      movingPictures[imgCount]=imgCount;
+
+      let element = document.getElementById("textPara");
+      element.appendChild(img); 
   }
-  let pos = imgOffset+" "+offset.toString()+" -2";
-  console.log(pos)
-  img.setAttribute("position", pos);
-
-  movingPictures[imgCount]=imgCount;
-
-  let element = document.getElementById("textPara");
-  element.appendChild(img);
+  
 }
 
 function deleteMovingImage(){
@@ -187,7 +211,12 @@ function changePage(pageChange) {
         newSection(pageChange);
     }else{
         //Update paragraph text value
+        
+      if(!storyParagraphs[currentPage].includes("IMAGE:")){
         objParas[0].setAttribute("value", storyParagraphs[currentPage]);
+      }else{
+          objParas[0].setAttribute("value", "");
+      }
         objParas[0].setAttribute("Opacity", 0);
         console.log(currentPage-1+": "+storyParagraphs[currentPage]);
         //Reset and activate the Position animation
@@ -401,16 +430,14 @@ function retrieveStoryText(){
   const myIMG = [];
   for(i in combinedText){
     if(combinedText[i].includes("IMAGE")){
-      myIMG[myIMG.length]=combinedText[i];
-      combinedText.splice(i,1);
-    }
-  }for(i in combinedText){
-    if(combinedText[i].includes("IMAGE")){
-      myIMG[myIMG.length]=combinedText[i];
-      combinedText.splice(i,1);
+      combinedText[i]="IMAGE:"+myIMG.length
+      myIMG[myIMG.length]=myIMG.length;
+      console.log("firstIMG filter"+myIMG);
     }
   }
-  return [combinedText, myIMG];
+               
+  const imgArray=["/assets/5HECXqtPRY/ticketoffice-1080x1920.jpeg","/assets/bcoIi7gXby/town-846x1349.jpeg","/assets/D3h9QGqI9v/town-1080x1920.jpeg","/assets/iMitwH0EXu/bus-1080x1920.jpeg","/assets/JqXBwRBR7R/store-863x1368.jpeg","/assets/KehrQ0yKcs/uvcewi30dwtkdrukfi4b-thumbnail.jpeg","./assets/MObpieZw3w/wzkp1rhpuznb2ozzmat6-1-sxv3v-thumbnail.jpeg","./assets/NETXgllPkN/railwaystation-852x1406.jpeg","./assets/PYj71zvsAD/cthulhu.mp4","./assets/sfv2bWQrhq/dream_tradingcard-857x1376.jpeg","./assets/uhD9A6h3Vo/staring-1080x1920.jpeg","./assets/X0OgcjeEUe/busdring-1080x1920.jpeg","./assets/yp0f2XkDCi/poster-1590x894.jpeg"]
+  return [combinedText, myIMG, imgArray];
 }
 
 
