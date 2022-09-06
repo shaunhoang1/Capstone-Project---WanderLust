@@ -163,6 +163,9 @@ function createNewImage(imageNums){
       }
       let pos = imgOffset*2+" "+offset+" -2";
       console.log(pos)
+      if(imageNums.length==1){
+          pos="0 0 -2";
+      }
       img.setAttribute("position", pos);
 
       movingPictures[imgCount]=imgCount;
