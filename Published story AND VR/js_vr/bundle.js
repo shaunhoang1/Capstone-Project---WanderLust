@@ -23,8 +23,81 @@ var scrollingHeight = 0;
 var currentPage = 0;
 var currentPageAll = 0;
 var tempPage = 0;    
-    
+
 //All JS Functions which are required to navigate through the story are created here
+//Manually scroll through paragraphs with "i" or "k"
+document.addEventListener("keydown", function (event) {
+    //Scroll through paragraphs  
+    //Scroll up        
+    if (event.key === "i"){
+        changePage(0);
+        //add to scroll
+        scrollingHeight= objParas[0].object3D.position.y+10+1;
+
+        //If greater than or equal to maximum height, reset for next section
+        var wrapCheck = wrapAround(scrollingHeight,0,20);
+        if (wrapCheck[0]) {
+            scrollingHeight = wrapCheck[1];
+            console.log("Loading Next section");
+            changePage(1);
+
+            //Reset the Position 
+            objParas[0].setAttribute("opacity", 1);
+            objParas[0].setAttribute("position","0 -10 -20"); 
+        }
+
+        //Remove existing animations
+        objParas[0].removeAttribute("animation__pos");
+
+        objParas[0].object3D.position.y = -10+scrollingHeight;
+        setOpacity();
+
+    //Scroll Down
+    } else if (event.key === "k") {
+    scrollingHeight = objParas[0].object3D.position.y+10;
+
+        //subtract from scroll
+        scrollingHeight= scrollingHeight-0.2;
+        //If less than or equal to min height, reset for previous section      
+        var wrapCheck = wrapAround(scrollingHeight,0,20);
+        if (wrapCheck[0]) {
+            scrollingHeight = wrapCheck[1];
+            console.log("Loading Previous section");
+            changePage(-1);
+
+            //Reset  the Position
+            objParas[0].setAttribute("opacity", 1);
+            objParas[0].setAttribute("position","0 10 -20");  
+        }           
+
+        //Remove existing animations
+        objParas[0].removeAttribute("animation__pos");
+
+        objParas[0].object3D.position.y = -10+scrollingHeight;
+        setOpacity();
+    }
+    //Go to previous paragraph
+    if (event.key === "q") {
+        scrollingHeight = 0;
+        changePage(-1);
+    //Go to next paragraph
+    } else if (event.key === "e") {
+        scrollingHeight = 0;
+        changePage(1);
+    }
+
+    if (event.key ==="p"){
+        scrollingHeight = 0;
+        changePageAll(1);
+        console.log("4-page scrolling");
+    }
+    //Go to next background
+    if (event.shiftKey) {
+      createNewImage();
+    }else if (event.key === "l") {
+      deleteMovingImage();
+    }
+});
 
 //WrapAround function to loop array variables,
 //and can also change the variable which it is based on. 
@@ -97,10 +170,7 @@ function setOpacity(){
 }
 
 //Start on-going timer to set moving text & image opacity
-function opacityTimer(){
-  setOpacity();
-}
-setInterval(opacityTimer,100);
+setInterval(setOpacity,100);
 
 //Initialize all text from the story JSON.
 function importAllText(){
@@ -129,18 +199,6 @@ function changeSky(skyChange) {
     var sky = document.getElementById("sky");
     sky.setAttribute("src", skies[currentSky]);
 }
-
-
-//Navigating Backgrounds
-document.addEventListener("keydown", function (event) {
-    //Go to next background
-    if (event.shiftKey) {
-      createNewImage();
-    }else if (event.key === "l") {
-      deleteMovingImage();
-    }
-});
-
     
 function createNewImage(imageNums){
     
@@ -186,24 +244,6 @@ function deleteMovingImage(){
   movingPictures=[];
 }
 
-//Navigate between paragraphs
-document.addEventListener("keydown", function (event) {
-    //Go to previous paragraph
-    if (event.key === "q") {
-        scrollingHeight = 0;
-        changePage(-1);
-    //Go to next paragraph
-    } else if (event.key === "e") {
-        scrollingHeight = 0;
-        changePage(1);
-    }
-
-    if (event.key ==="p"){
-        scrollingHeight = 0;
-        changePageAll(1);
-        console.log("4-page scrolling");
-    }
-});
 
 //Define the page number and change
 
@@ -233,61 +273,6 @@ function changePage(pageChange) {
         movingImage2.setAttribute("animation__pos","property: position; from:-9 -6 -10;to: -9 6 -10; dur:10000; easing: linear; loop: false;");
     }
 }
-
-    
-//Manually scroll through paragraphs with "i" or "k"
-document.addEventListener("keydown", function (event) {
-    //Scroll through paragraphs  
-    //Scroll up        
-    if (event.key === "i"){
-        changePage(0);
-        //add to scroll
-        scrollingHeight= objParas[0].object3D.position.y+10+1;
-
-        //If greater than or equal to maximum height, reset for next section
-        var wrapCheck = wrapAround(scrollingHeight,0,20);
-        if (wrapCheck[0]) {
-            scrollingHeight = wrapCheck[1];
-            console.log("Loading Next section");
-            changePage(1);
-
-            //Reset the Position 
-            objParas[0].setAttribute("opacity", 1);
-            objParas[0].setAttribute("position","0 -10 -20"); 
-        }
-
-        //Remove existing animations
-        objParas[0].removeAttribute("animation__pos");
-
-        objParas[0].object3D.position.y = -10+scrollingHeight;
-        setOpacity();
-
-    //Scroll Down
-    } else if (event.key === "k") {
-    scrollingHeight = objParas[0].object3D.position.y+10;
-
-        //subtract from scroll
-        scrollingHeight= scrollingHeight-0.2;
-        //If less than or equal to min height, reset for previous section      
-        var wrapCheck = wrapAround(scrollingHeight,0,20);
-        if (wrapCheck[0]) {
-            scrollingHeight = wrapCheck[1];
-            console.log("Loading Previous section");
-            changePage(-1);
-
-            //Reset  the Position
-            objParas[0].setAttribute("opacity", 1);
-            objParas[0].setAttribute("position","0 10 -20");  
-        }           
-
-        //Remove existing animations
-        objParas[0].removeAttribute("animation__pos");
-
-        objParas[0].object3D.position.y = -10+scrollingHeight;
-        setOpacity();
-    }
-});
-
 
 //Repetitive code for all four text objects, changes for each object (text value, positions)
 function changePageAll(pageChange) {
@@ -345,9 +330,7 @@ function iniParagraphObjects(){
     objParas[2]=document.getElementById("textPara3");
     objParas[3]=document.getElementById("textPara4");
 }
-
-setInterval(setOpacity,100);
-      
+  
 
 //Define Story paragraphs dynamically from the author's pre-existing story paragraphs
 //Currently just defines story paragraphs from input 
@@ -435,14 +418,15 @@ function retrieveStoryText(){
     if(combinedText[i].includes("IMAGE")){
       combinedText[i]="IMAGE:"+myIMG.length
       myIMG[myIMG.length]=myIMG.length;
-      console.log("firstIMG filter"+myIMG);
     }
   }
                
-  const imgArray=["/assets/5HECXqtPRY/ticketoffice-1080x1920.jpeg","/assets/bcoIi7gXby/town-846x1349.jpeg","/assets/D3h9QGqI9v/town-1080x1920.jpeg","/assets/iMitwH0EXu/bus-1080x1920.jpeg","/assets/JqXBwRBR7R/store-863x1368.jpeg","/assets/KehrQ0yKcs/uvcewi30dwtkdrukfi4b-thumbnail.jpeg","./assets/MObpieZw3w/wzkp1rhpuznb2ozzmat6-1-sxv3v-thumbnail.jpeg","./assets/NETXgllPkN/railwaystation-852x1406.jpeg","./assets/PYj71zvsAD/cthulhu.mp4","./assets/sfv2bWQrhq/dream_tradingcard-857x1376.jpeg","./assets/uhD9A6h3Vo/staring-1080x1920.jpeg","./assets/X0OgcjeEUe/busdring-1080x1920.jpeg","./assets/yp0f2XkDCi/poster-1590x894.jpeg"]
+  const imgArray=["/assets/5HECXqtPRY/ticketoffice-1080x1920.jpeg","/assets/bcoIi7gXby/town-846x1349.jpeg","/assets/D3h9QGqI9v/town-1080x1920.jpeg","/assets/iMitwH0EXu/bus-1080x1920.jpeg","/assets/JqXBwRBR7R/store-863x1368.jpeg","/assets/KehrQ0yKcs/uvcewi30dwtkdrukfi4b-thumbnail.jpeg","/assets/MObpieZw3w/wzkp1rhpuznb2ozzmat6-1-sxv3v-thumbnail.jpeg","/assets/NETXgllPkN/railwaystation-852x1406.jpeg","/assets/PYj71zvsAD/cthulhu.mp4","/assets/sfv2bWQrhq/dream_tradingcard-857x1376.jpeg",,"/assets/uhD9A6h3Vo/staring-1080x1920.jpeg","/assets/X0OgcjeEUe/busdring-1080x1920.jpeg","/assets/yp0f2XkDCi/poster-1590x894.jpeg"]
   return [combinedText, myIMG, imgArray];
 }
 
+
+               
 
 //Demo StoryParagraphs for examples
 /*

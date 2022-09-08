@@ -19,8 +19,8 @@
   </head>
 
   <body>
-    <!-- HTML Elements to create a page before scene    -->
-    <a-scene id="VRScene">
+    <!-- HTML Elements to create a page before scene   embedded style="height:100px;width:100px;" z-index=-10000 -->
+    <a-scene id="VRScene" >
         <a-entity position="0 2.25 -15" particle-system="preset:dust;particleCount:1000"></a-entity>
       <!-- ###################  LOAD ASSETS INTO STORY  #################### -->
       <a-assets>
@@ -99,7 +99,7 @@
       <!-- Second Image Entity -->
       <a-image id="movingImage2" src="#imgPortrait1" position="-9 1.5 -10" opacity="1" look-at="#cameraObj" scale="3 3 3">
         </a-image>
-
+        
 
       <!-- ###################  TEXT ENTITIES  #################### -->
       <!-- First Paragraph -->
