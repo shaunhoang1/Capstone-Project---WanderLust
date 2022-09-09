@@ -21,7 +21,6 @@
   <body>
     <!-- HTML Elements to create a page before scene   embedded style="height:100px;width:100px;" z-index=-10000 -->
     <a-scene id="VRScene" >
-        <a-entity position="0 2.25 -15" particle-system="preset:dust;particleCount:1000"></a-entity>
       <!-- ###################  LOAD ASSETS INTO STORY  #################### -->
       <a-assets>
         <a-asset-item id="firstModel" src="Resources_vr/Objects/testObj.obj"></a-asset-item>
@@ -60,7 +59,6 @@
         -->
       <a-entity camera look-controls id="cameraObj" position="0 1.6 2" wasd-controls="enabled:true;acceleration:10;">
       </a-entity>
-        <a-ocean ocean-state="height_offset: -50;"></a-ocean>
     
 
       <!-- ###################  STORY ENTITIES  #################### -->

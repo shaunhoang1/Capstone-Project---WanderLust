@@ -123,16 +123,14 @@ function newSection(pageChange){
   let tempImageNum = currentPage;
   let sectionFound=false;
   while(sectionFound==false){
-      console.log("CheckingSections")
       if(storyParagraphs[tempImageNum].includes("New Section")){
           sectionFound=true;
-          console.log("sectionFound")
+          console.log("section Found")
       }else if(storyParagraphs[tempImageNum].includes("IMAGE:")){
           myImages.push(storyParagraphs[tempImageNum].slice(6))
       }
       tempImageNum=tempImageNum+1;
-  } 
-  console.log(myImages);
+  }
   createNewImage(myImages);
 }
     
@@ -141,7 +139,7 @@ function setOpacity(){
     for(let i=0;i<1;i++){
         let textTarget = objParas[i];
         scrollingHeight = textTarget.object3D.position.y+10;
-        if (scrollingHeight !== 0 && scrollingHeight !== 20){
+        if (scrollingHeight > 0 && scrollingHeight < 20){
             //Control opacity while scrolling
             if (scrollingHeight>=15){
                 textTarget.setAttribute("opacity",(20-scrollingHeight)/5);
@@ -161,8 +159,15 @@ function setOpacity(){
                   elmnt.setAttribute("opacity",scrollingHeight/5);
                 
               }else{
-                textTarget.setAttribute("opacity",1);
+                elmnt.setAttribute("opacity",1);
               }
+            }
+        }else{
+            textTarget.setAttribute("opacity",0);
+            for(j in movingPictures){
+              let elID = "movingPicture"+j;
+              let elmnt = document.getElementById(elID);
+              elmnt.setAttribute("opacity",0);
             }
         }
     }
@@ -180,12 +185,12 @@ function importAllText(){
   myImages = retrieveStoryAssets[1];
   for(i in fullText){
     storyParagraphs[i-1] = fullText[i-1];
-    console.log(storyParagraphs[i-1])
+    //console.log(storyParagraphs[i-1]);
   }
   imgRepo = retrieveStoryAssets[2];
-  for(i in imgRepo){
+  /*for(i in imgRepo){
     console.log(imgRepo[i]);
-  }
+  }*/
     
   storyParagraphs.unshift("New Section");
   currentPage=0;currentSky = 0;
@@ -220,7 +225,6 @@ function createNewImage(imageNums){
           imgOffset = 1
       }
       let pos = imgOffset*2+" "+offset+" -2";
-      console.log(pos)
       if(imageNums.length==1){
           pos="0 0 -2";
       }
@@ -235,7 +239,6 @@ function createNewImage(imageNums){
 }
 
 function deleteMovingImage(){
-  console.log(movingPictures.length);
   for(i in movingPictures){
     let elID = "movingPicture"+i;
     let elmnt = document.getElementById(elID);
@@ -261,16 +264,10 @@ function changePage(pageChange) {
           objParas[0].setAttribute("value", "");
       }
         objParas[0].setAttribute("Opacity", 0);
-        console.log(currentPage-1+": "+storyParagraphs[currentPage]);
+        //console.log(currentPage-1+": "+storyParagraphs[currentPage]);
         //Reset and activate the Position animation
         objParas[0].removeAttribute("animation__pos");
         objParas[0].setAttribute("animation__pos","property: position; from:0 -10 -20;to: 0 10 -20; dur:10000; easing: linear; loop: false;");
-        movingImage1 = document.getElementById("movingImage1");
-        movingImage1.removeAttribute("animation__pos");
-        movingImage1.setAttribute("animation__pos","property: position; from:9 -6 -10;to: 9 6 -10; dur:10000; easing: linear; loop: false;");
-        movingImage2 = document.getElementById("movingImage2");
-        movingImage2.removeAttribute("animation__pos");
-        movingImage2.setAttribute("animation__pos","property: position; from:-9 -6 -10;to: -9 6 -10; dur:10000; easing: linear; loop: false;");
     }
 }
 
@@ -314,22 +311,19 @@ function changePageAll(pageChange) {
 function clearPageAll(){
     for (let i = 0; i < 4; i++) {
         objParas[i].removeAttribute("animation__pos");
-        objParas[i].setAttribute("opacity",1);
         objParas[i].setAttribute("value", "");
+        objParas[i].setAttribute("opacity",1);
     }
 }
-
-document.getElementById("textPara").addEventListener("loadstart", iniParagraphObjects);   
-
+  
 //define all paragraph objects
-
-
 function iniParagraphObjects(){
     objParas[0]=document.getElementById("textPara");
     objParas[1]=document.getElementById("textPara2");
     objParas[2]=document.getElementById("textPara3");
     objParas[3]=document.getElementById("textPara4");
 }
+document.getElementById("textPara").addEventListener("loadstart", iniParagraphObjects); 
   
 
 //Define Story paragraphs dynamically from the author's pre-existing story paragraphs
