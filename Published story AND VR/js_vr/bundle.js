@@ -10,7 +10,7 @@ let fullText= [];
 let myImages = [];
 
 //Define the Backgrounds
-var currentSky = 0;
+let currentSky = 0;
 const skies = [];
 {
     skies[1] = "#sky1";
@@ -19,10 +19,10 @@ const skies = [];
 }
 
 //Define the page number and change for all text objects
-var scrollingHeight = 0;
-var currentPage = 0;
-var currentPageAll = 0;
-var tempPage = 0;    
+let scrollingHeight = 0;
+let currentPage = 0;
+let currentPageAll = 0;
+let tempPage = 0;    
 
 //All JS Functions which are required to navigate through the story are created here
 //Manually scroll through paragraphs with "i" or "k"
@@ -103,33 +103,36 @@ document.addEventListener("keydown", function (event) {
 //and can also change the variable which it is based on. 
 //Returns "True" or "False" in case additional functions depend on the wrap status
 function wrapAround(current,min,max){
-    var wrapped = false;
-    if (current > max) {
-        current = min;
-        wrapped = true;
-    }else if (current < min) {
-        current = max;
-        wrapped = true;
-    }
-    return [wrapped,current];
+  let wrapped = false;
+  if (current > max) {
+      current = min;
+      wrapped = true;
+  }else if (current < min) {
+      current = max;
+      wrapped = true;
+  }
+  return [wrapped,current];
 }
 
 //Function triggers for each new section in the story, to update objects and images
 function newSection(pageChange){
-    changeSky(pageChange);
-    changePage(pageChange,0,storyParagraphs.length+1);
+  changeSky(pageChange);
+  changePage(pageChange);
   
   let myImages = [];
   let tempImageNum = currentPage;
   let sectionFound=false;
-  while(sectionFound==false){
-      if(storyParagraphs[tempImageNum].includes("New Section")){
-          sectionFound=true;
-          console.log("section Found")
-      }else if(storyParagraphs[tempImageNum].includes("IMAGE:")){
-          myImages.push(storyParagraphs[tempImageNum].slice(6))
-      }
-      tempImageNum=tempImageNum+1;
+  while(!sectionFound){
+    console.log(tempImageNum)
+    console.log(storyParagraphs[tempImageNum])
+    if(storyParagraphs[tempImageNum].includes("New Section")){
+        sectionFound=true;
+        console.log("section Found")
+    }else if(storyParagraphs[tempImageNum].includes("IMAGE:")){
+        myImages.push(storyParagraphs[tempImageNum].slice(6))
+    }
+    tempImageNum=tempImageNum+1;
+    if(tempImageNum>storyParagraphs.length-1){sectionFound=true;}
   }
   createNewImage(myImages);
 }
@@ -148,6 +151,7 @@ function setOpacity(){
             }else{
                 textTarget.setAttribute("opacity",1);
             }
+            /*
             for(j in movingPictures){
       
               let elID = "movingPicture"+j;
@@ -161,17 +165,17 @@ function setOpacity(){
               }else{
                 elmnt.setAttribute("opacity",1);
               }
-            }
+            }*/
         }else{
             textTarget.setAttribute("opacity",0);
+            /*
             for(j in movingPictures){
               let elID = "movingPicture"+j;
               let elmnt = document.getElementById(elID);
               elmnt.setAttribute("opacity",0);
-            }
+            }*/
         }
     }
-    
 }
 
 //Start on-going timer to set moving text & image opacity
@@ -188,9 +192,6 @@ function importAllText(){
     //console.log(storyParagraphs[i-1]);
   }
   imgRepo = retrieveStoryAssets[2];
-  /*for(i in imgRepo){
-    console.log(imgRepo[i]);
-  }*/
     
   storyParagraphs.unshift("New Section");
   currentPage=0;currentSky = 0;
@@ -206,36 +207,51 @@ function changeSky(skyChange) {
 }
     
 function createNewImage(imageNums){
-    
-    deleteMovingImage();
+  deleteMovingImage();
   for(i in imageNums){
-     //Check how many pictures there are
-      let imgCount=movingPictures.length;
-      let imgOffset = 0
-      let img = document.createElement("a-image");
-      img.setAttribute("id","movingPicture"+imgCount);
-      img.setAttribute("src", imgRepo[imageNums[i]]);
-      img.setAttribute("Opacity", "0");
-      img.setAttribute("scale", "3 3 3");
-      //set img offset
-      let offset = -imgCount*2+1;
-      if(imgCount % 2 == 0){
-          imgOffset = -1
-      }else{
-          imgOffset = 1
+    console.log(imageNums[i])
+    //Check how many pictures there are
+    let imgCount=movingPictures.length;
+    let imgOffset = 0
+    let img = document.createElement("a-image");
+    img.setAttribute("id","movingPicture"+imgCount);
+    let src ="";
+    for(j in imgRepo){
+      if(imgRepo[j].includes(imageNums[i])){
+        src=imgRepo[j]
       }
-      let pos = imgOffset*2+" "+offset+" -2";
-      if(imageNums.length==1){
-          pos="0 0 -2";
-      }
-      img.setAttribute("position", pos);
+    }
+    img.setAttribute("src", src);
+    img.setAttribute("Opacity", "0");
+    img.setAttribute("scale", "15 15 15");
 
-      movingPictures[imgCount]=imgCount;
+    //set img offset
+    let offset = -imgCount*8+5;
+    if(imgCount % 2 == 0){
+        imgOffset = -1
+    }else{
+        imgOffset = 1
+    }
+    /* FOR IMAGES MOVING WITH TEXT
+    let pos = imgOffset*2+" "+offset+" -2";
+    if(imageNums.length==1){
+        pos="0 0 -2";
+    }*/
+    let pos = imgOffset*8+" "+offset+" -21";
+    if(imageNums.length==1){
+        pos="0 0 -21";
+    }
+    img.setAttribute("position", pos);
 
-      let element = document.getElementById("textPara");
-      element.appendChild(img); 
+    movingPictures[imgCount]=imgCount;
+    
+    //let element = document.getElementById("textPara");
+    let element = document.getElementById("VRScene");
+    element.appendChild(img); 
+    img.removeAttribute("animation__opa");
+      //ANIMATION ATTRIBUTE FOR BACKGROUND IMAGES TO FADE IN
+    img.setAttribute("animation__opa","property: opacity; from:0;to: 1; dur:1000; easing: linear; loop: false;");
   }
-  
 }
 
 function deleteMovingImage(){
@@ -256,18 +272,21 @@ function changePage(pageChange) {
     if(storyParagraphs[currentPage]==="New Section"){
         newSection(pageChange);
     }else{
-        //Update paragraph text value
-        
+      //Update paragraph text value
+      objParas[0].setAttribute("Opacity", 0);
+      //console.log(currentPage-1+": "+storyParagraphs[currentPage]);
+      //Reset and activate the Position animation
+      objParas[0].removeAttribute("animation__pos");
+      objParas[0].setAttribute("animation__pos","property: position; from:0 -10 -20;to: 0 10 -20; dur:10000; easing: linear; loop: false;");
       if(!storyParagraphs[currentPage].includes("IMAGE:")){
         objParas[0].setAttribute("value", storyParagraphs[currentPage]);
       }else{
           objParas[0].setAttribute("value", "");
+          if(storyParagraphs[currentPage-1].includes("IMAGE:")){
+            changePage(1);
+          }
       }
-        objParas[0].setAttribute("Opacity", 0);
-        //console.log(currentPage-1+": "+storyParagraphs[currentPage]);
-        //Reset and activate the Position animation
-        objParas[0].removeAttribute("animation__pos");
-        objParas[0].setAttribute("animation__pos","property: position; from:0 -10 -20;to: 0 10 -20; dur:10000; easing: linear; loop: false;");
+        
     }
 }
 
@@ -330,7 +349,6 @@ document.getElementById("textPara").addEventListener("loadstart", iniParagraphOb
 //Currently just defines story paragraphs from input 
 function retrieveStoryText(){
   //Declare array variable for all extracted text
-
   function newSection(json)
   {
     combinedText[combinedText.length]="New Section";
@@ -347,6 +365,8 @@ function retrieveStoryText(){
       return json.content.map(extractText).join("");
     } else if (json?.image!==undefined) {
       combinedText[combinedText.length]="IMAGE:"+json.image.id;
+    } else if (json?.video!==undefined) {
+      combinedText[combinedText.length]="IMAGE:"+json.video.id;
     } else if (json?.embed!==undefined) { //Extract video embed
       let embededObj=json.embed;
       combinedText[combinedText.length]="EMBED:"+embededObj.originalUrl;
@@ -396,9 +416,6 @@ function retrieveStoryText(){
       return "";
     }
   }
-
-
-
   //retrieveStoryText('../story.json')
   //Require the desired json file from the story
   const storyData = require('../story.json');
@@ -410,8 +427,7 @@ function retrieveStoryText(){
   const myIMG = [];
   for(i in combinedText){
     if(combinedText[i].includes("IMAGE")){
-      combinedText[i]="IMAGE:"+myIMG.length
-      myIMG[myIMG.length]=myIMG.length;
+      myIMG[myIMG.length]=combinedText[i];
     }
   }
                

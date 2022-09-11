@@ -21,7 +21,6 @@
   <body>
     <!-- HTML Elements to create a page before scene   embedded style="height:100px;width:100px;" z-index=-10000 -->
     <a-scene id="VRScene" >
-        <a-entity position="0 2.25 -15" particle-system="preset:dust;particleCount:1000"></a-entity>
       <!-- ###################  LOAD ASSETS INTO STORY  #################### -->
       <a-assets>
         <a-asset-item id="firstModel" src="Resources_vr/Objects/testObj.obj"></a-asset-item>
@@ -47,7 +46,7 @@
       <!--ground for player-->
       <a-circle position="0 0 2" rotation="-90 0 0" radius="2" color="grey"></a-circle>
 
-        <!-- Sky Object  -->
+      <!-- Sky Object  -->
       <a-sky id="sky" src="#pier"></a-sky>
 
       <!-- ###################  CAMERA/PLAYER ENTITIES  #################### -->
@@ -60,9 +59,14 @@
         -->
       <a-entity camera look-controls id="cameraObj" position="0 1.6 2" wasd-controls="enabled:true;acceleration:10;">
       </a-entity>
-        <a-ocean ocean-state="height_offset: -50;"></a-ocean>
-    
 
+        
+      <!-- ADDITIONAL ENVIRONMENT EFFECTS   -->
+      <!--<a-ocean ocean-state="height_offset: -50;"></a-ocean>
+      <a-entity position="0 2.25 -15" particle-system="preset:dust;particleCount:1000"></a-entity>-->
+
+        
+        
       <!-- ###################  STORY ENTITIES  #################### -->
       <!-- Object Entity -->
       <a-entity id="modelEntity" obj-model="obj: #firstModel;" color="#00FF00" scale="0.06 0.06 0.06" position="-3.1 0 2"

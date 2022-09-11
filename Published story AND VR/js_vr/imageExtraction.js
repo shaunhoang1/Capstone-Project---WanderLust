@@ -13,7 +13,6 @@ function retrieveDirectoryImages(){
           for(let x in [0,1]){
             for(let j in fileImages){
               if (fileImages[j].search('.webp')!==-1 || fileImages[j].search('.gif')!==-1){
-                console.log("Splicing "+fileImages[j])
                 fileImages.splice(j,1);
               }
             }
