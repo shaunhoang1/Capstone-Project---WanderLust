@@ -15,6 +15,7 @@
     <script src="https://unpkg.com/aframe-animation-component@^4.1.2/dist/aframe-animation-component.min.js"></script>
       
     <!-- Load custom JS functions -->
+    <script type="text/javascript" src="./story.json"></script>
     <script src="js_vr/bundle.js"></script>
   </head>
 
@@ -41,13 +42,15 @@
         <img id="sky1" src="Resources_vr/Backgrounds/woods-by-the-river.jpg" />
         <img id="pier" src="Resources_vr/Backgrounds/pier.jpg" />
         <img id="sunset" src="Resources_vr/Backgrounds/sunset.jpeg"/>
+        
+        <img id="cool" src="Resources_vr/Backgrounds/S8.png"/>
       </a-assets>
 
       <!--ground for player-->
-      <a-circle position="0 0 2" rotation="-90 0 0" radius="2" color="grey"></a-circle>
+      <a-circle position="0 0 2" rotation="-90 0 0" radius="2" color="green" material="flat"></a-circle>
 
       <!-- Sky Object  -->
-      <a-sky id="sky" src="#pier"></a-sky>
+      <a-sky id="sky" src="#cool"></a-sky>
 
       <!-- ###################  CAMERA/PLAYER ENTITIES  #################### -->
         <!-- ### CANNOT HAVE CURSOR ENTITY WITHIN CAMERA OBEJCT FOR OCEAN TO WORK

@@ -1,13 +1,92 @@
 function retrieveStoryText(){
   //Declare array variable for all extracted text
-  function newSection(json)
-  {
+
+  function newSection(json){
     combinedText[combinedText.length]="New Section";
     return extractText(json);
   }
 
-  function extractText(json)
-  {
+  function extractText(json){
+    console.log(json.id)
+    let toExtract = [];
+    if (!json) {
+      return "";
+    } 
+     if (json?.subTitle!==undefined) {
+      toExtract[toExtract.length]=extractText(json.subTitle);
+    } 
+     if (json?.content!==undefined) {
+      toExtract[toExtract.length]= json.content.map(extractText).join("");
+    } 
+     if (json?.image!==undefined) {
+      combinedText[combinedText.length]="IMAGE:"+json.image.id;
+    } 
+     if (json?.video!==undefined) {
+      combinedText[combinedText.length]="VIDEO:"+json.video.id;
+    } 
+     if (json?.embed!==undefined) { //Extract video embed
+      let embededObj=json.embed;
+      combinedText[combinedText.length]="EMBED:"+embededObj.originalUrl;
+    } 
+     if (json.type === "text") {
+      let a = json.text;
+      combinedText[combinedText.length]=a;
+    } 
+     if (json?.sections!==undefined) {
+      toExtract[toExtract.length]= json.sections.map(newSection).join("");
+    } 
+     if (json?.text!==undefined) {
+      toExtract[toExtract.length]= extractText(json.text);
+    } 
+     if (json?.items!==undefined) {
+      toExtract[toExtract.length]=json.items.map(extractText).join("");
+    } 
+     if (json?.layers!==undefined) {
+      for(let i in json.layers){  //Extra filter finds layerOrder to extract specific layerID's
+        let extractedLayers = []
+        let layerObj = json.layers[i];
+        if (layerObj?.layerOrder!==undefined) {
+          for(let j in layerObj.layerOrder){
+            let layerJSON = layerObj.layers[layerObj.layerOrder[j]];
+            extractedLayers[extractedLayers.length]=extractText(layerJSON);
+          }
+        }
+      }
+      toExtract[toExtract.length]= extractText(json.layers);  //Runs on single layer object if no layerOrder
+    } 
+     if (json?.item!==undefined) {
+      toExtract[toExtract.length]= extractText(json.item);
+    } 
+     if (json?.title!==undefined) {
+      toExtract[toExtract.length]=extractText(json.title);
+    } 
+     if (json?.leadIn!==undefined) {
+      toExtract[toExtract.length]=extractText(json.leadIn);
+    } 
+     if (json?.storyTitle!==undefined) {
+      toExtract[toExtract.length]= extractText(json.storyTitle);
+    } 
+     if (json?.byline!==undefined) {
+      toExtract[toExtract.length]= extractText(json.byline);
+    } 
+     if (json?.caption!==undefined) {
+      toExtract[toExtract.length]= extractText(json.caption);
+    } 
+     if (json?.landscape!==undefined) {
+      toExtract[toExtract.length]= extractText(json.landscape);
+    } 
+     if (json?.attrs!==undefined) { 
+      toExtract[toExtract.length]= extractText(json.attrs);
+    } 
+     if (Array.isArray(json)) {
+      toExtract[toExtract.length]= json.map(extractText).join("");
+    }else {
+      toExtract[toExtract.length]= "";
+    }
+  }
+  /*
+  function extractText(json){
+    console.log(json.id)
     if (!json) {
       return "";
     } else if (json?.subTitle!==undefined) {
@@ -21,8 +100,6 @@ function retrieveStoryText(){
     } else if (json?.embed!==undefined) { //Extract video embed
       let embededObj=json.embed;
       combinedText[combinedText.length]="EMBED:"+embededObj.originalUrl;
-    } else if (Array.isArray(json)) {
-      return json.map(extractText).join("");
     } else if (json.type === "text") {
       let a = json.text;
       combinedText[combinedText.length]=a;
@@ -31,23 +108,20 @@ function retrieveStoryText(){
       return json.sections.map(newSection).join("");
     } else if (json?.text!==undefined) {
       return extractText(json.text);
+    } else if (json?.items!==undefined) {
+      return json.items.map(extractText).join("");
     } else if (json?.layers!==undefined) {
-      for(i in json.layers){  //Extra filter finds layerOrder to extract specific layerID's
+      for(let i in json.layers){  //Extra filter finds layerOrder to extract specific layerID's
+        let extractedLayers = []
         let layerObj = json.layers[i];
-        console.log(layerObj.id)
         if (layerObj?.layerOrder!==undefined) {
-          let extractedLayers = []
           for(let j in layerObj.layerOrder){
             let layerJSON = layerObj.layers[layerObj.layerOrder[j]];
             extractedLayers[extractedLayers.length]=extractText(layerJSON);
           }
-          //return extractedLayers.join("");
-          return json.layers.map(extractText).join("");
         }
       }
       return extractText(json.layers);  //Runs on single layer object if no layerOrder
-    } else if (json?.items!==undefined) {
-      return json.items.map(extractText).join("");
     } else if (json?.item!==undefined) {
       return extractText(json.item);
     } else if (json?.title!==undefined) {
@@ -64,10 +138,13 @@ function retrieveStoryText(){
       return extractText(json.landscape);
     } else if (json?.attrs!==undefined) { 
       return extractText(json.attrs);
+    } else if (Array.isArray(json)) {
+      return json.map(extractText).join("");
     }else {
       return "";
     }
-  }
+  }*/
+
   //retrieveStoryText('../story.json')
   //Require the desired json file from the story
   const storyData = require('../story.json');
@@ -78,10 +155,10 @@ function retrieveStoryText(){
   combinedText[combinedText.length]="FinalPara";
   const myIMG = [];
   for(i in combinedText){
-    if(combinedText[i].includes("IMAGE")){
+    if(combinedText[i].includes("IMAGE:")){
       console.log("image found")
       myIMG[myIMG.length]=combinedText[i];
-    }else if(combinedText[i].includes("VIDEO")){
+    }else if(combinedText[i].includes("VIDEO:")){
       console.log("VIDEO found")
       myIMG[myIMG.length]=combinedText[i];
     }
