@@ -126,12 +126,10 @@ function newSection(pageChange){
   while(!sectionFound){
     if(storyParagraphs[tempImageNum].includes("New Section")){
         sectionFound=true;
-        console.log("section Found")
-    }else if(storyParagraphs[tempImageNum].includes("IMAGE:")){
-        myImages.push(storyParagraphs[tempImageNum].slice(6))
+    }else if(storyParagraphs[tempImageNum].includes("IMAGE:") || storyParagraphs[tempImageNum].includes("VIDEO:")){
+        myImages.push(storyParagraphs[tempImageNum].slice(8))
     }else{
-      currentText=currentText+"/n"+storyParagraphs[tempImageNum];
-      console.log("CUrrent Text: "+currentText)
+      currentText=currentText+storyParagraphs[tempImageNum]+"\n\n";
     }
     tempImageNum=tempImageNum+1;
     if(tempImageNum>storyParagraphs.length-1){sectionFound=true;}
@@ -211,7 +209,6 @@ function changeSky(skyChange) {
 function createNewImage(imageNums){
   deleteMovingImage();
   for(i in imageNums){
-    console.log(imageNums[i])
     //Check how many pictures there are
     let imgCount=movingPictures.length;
     let imgOffset = 0
@@ -354,8 +351,8 @@ document.getElementById("textPara").addEventListener("loadstart", iniParagraphOb
 //Currently just defines story paragraphs from input 
 function retrieveStoryText(){
   //Declare array variable for all extracted text
-  function newSection(json)
-  {
+
+  function newSection(json){
     combinedText[combinedText.length]="New Section";
     return extractText(json);
   }
@@ -365,34 +362,40 @@ function retrieveStoryText(){
     if (!json) {
       return "";
     } 
+    if (json?.attrs!==undefined) { 
+      if(json.attrs?.fontSize!==undefined){
+        combinedText[combinedText.length]="(FONT:)"+json.attrs.fontSize;
+      }
+      extractText(json.attrs);
+    } 
     if (json?.subTitle!==undefined) {
-      toExtract[toExtract.length]=extractText(json.subTitle);
+      extractText(json.subTitle);
     } 
     if (json?.content!==undefined) {
-      toExtract[toExtract.length]= json.content.map(extractText).join("");
+      json.content.map(extractText).join("");
     } 
     if (json?.image!==undefined) {
-      combinedText[combinedText.length]="IMAGE:"+json.image.id;
+      combinedText[combinedText.length]="(IMAGE:)"+json.image.id;
     } 
     if (json?.video!==undefined) {
-      combinedText[combinedText.length]="VIDEO:"+json.video.id;
+      combinedText[combinedText.length]="(VIDEO:)"+json.video.id;
     } 
     if (json?.embed!==undefined) { //Extract video embed
       let embededObj=json.embed;
-      combinedText[combinedText.length]="EMBED:"+embededObj.originalUrl;
+      combinedText[combinedText.length]="(EMBED:)"+embededObj.originalUrl;
     } 
     if (json.type === "text") {
       let a = json.text;
       combinedText[combinedText.length]=a;
     } 
     if (json?.sections!==undefined) {
-      toExtract[toExtract.length]= json.sections.map(newSection).join("");
+      json.sections.map(newSection).join("");
     } 
     if (json?.text!==undefined) {
-      toExtract[toExtract.length]= extractText(json.text);
+      extractText(json.text);
     } 
     if (json?.items!==undefined) {
-      toExtract[toExtract.length]=json.items.map(extractText).join("");
+      json.items.map(extractText).join("");
     } 
     if (json?.layers!==undefined) {
       for(let i in json.layers){  //Extra filter finds layerOrder to extract specific layerID's
@@ -405,34 +408,32 @@ function retrieveStoryText(){
           }
         }
       }
-      toExtract[toExtract.length]= extractText(json.layers);  //Runs on single layer object if no layerOrder
+      extractText(json.layers);  //Runs on single layer object if no layerOrder
     } 
     if (json?.item!==undefined) {
-      toExtract[toExtract.length]= extractText(json.item);
+      extractText(json.item);
     } 
     if (json?.title!==undefined) {
-      toExtract[toExtract.length]=extractText(json.title);
+      extractText(json.title);
     } 
     if (json?.leadIn!==undefined) {
-      toExtract[toExtract.length]=extractText(json.leadIn);
+      extractText(json.leadIn);
     } 
     if (json?.storyTitle!==undefined) {
-      toExtract[toExtract.length]= extractText(json.storyTitle);
+      extractText(json.storyTitle);
     } 
     if (json?.byline!==undefined) {
-      toExtract[toExtract.length]= extractText(json.byline);
+      extractText(json.byline);
     } 
     if (json?.caption!==undefined) {
-      toExtract[toExtract.length]= extractText(json.caption);
+      extractText(json.caption);
     } 
     if (json?.landscape!==undefined) {
-      toExtract[toExtract.length]= extractText(json.landscape);
+      extractText(json.landscape);
     } 
-    if (json?.attrs!==undefined) { 
-      toExtract[toExtract.length]= extractText(json.attrs);
-    } 
+    
     if (Array.isArray(json)) {
-      toExtract[toExtract.length]= json.map(extractText).join("");
+      json.map(extractText).join("");
     }else {
       toExtract[toExtract.length]= "";
     }
@@ -440,15 +441,15 @@ function retrieveStoryText(){
   //retrieveStoryText('../story.json')
   //Require the desired json file from the story
   const storyData = require('../story.json');
-  
-  
+
   //Run function to extract the data
   const combinedText =[];
   extractText(storyData)
   combinedText[combinedText.length]="FinalPara";
   const myIMG = [];
   for(i in combinedText){
-    if(combinedText[i].includes("IMAGE")){
+    if(combinedText[i].includes("(IMAGE:)") || combinedText[i].includes("(VIDEO:)")){
+      //console.log("image found")
       myIMG[myIMG.length]=combinedText[i];
     }
   }

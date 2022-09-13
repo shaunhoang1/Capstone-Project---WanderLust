@@ -11,6 +11,12 @@ function retrieveStoryText(){
     if (!json) {
       return "";
     } 
+    if (json?.attrs!==undefined) { 
+      if(json.attrs?.fontSize!==undefined){
+        combinedText[combinedText.length]="(FONT:)"+json.attrs.fontSize;
+      }
+      toExtract[toExtract.length]= extractText(json.attrs);
+    } 
     if (json?.subTitle!==undefined) {
       toExtract[toExtract.length]=extractText(json.subTitle);
     } 
@@ -18,14 +24,14 @@ function retrieveStoryText(){
       toExtract[toExtract.length]= json.content.map(extractText).join("");
     } 
     if (json?.image!==undefined) {
-      combinedText[combinedText.length]="IMAGE:"+json.image.id;
+      combinedText[combinedText.length]="(IMAGE:)"+json.image.id;
     } 
     if (json?.video!==undefined) {
-      combinedText[combinedText.length]="VIDEO:"+json.video.id;
+      combinedText[combinedText.length]="(VIDEO:)"+json.video.id;
     } 
     if (json?.embed!==undefined) { //Extract video embed
       let embededObj=json.embed;
-      combinedText[combinedText.length]="EMBED:"+embededObj.originalUrl;
+      combinedText[combinedText.length]="(EMBED:)"+embededObj.originalUrl;
     } 
     if (json.type === "text") {
       let a = json.text;
@@ -74,9 +80,7 @@ function retrieveStoryText(){
     if (json?.landscape!==undefined) {
       toExtract[toExtract.length]= extractText(json.landscape);
     } 
-    if (json?.attrs!==undefined) { 
-      toExtract[toExtract.length]= extractText(json.attrs);
-    } 
+    
     if (Array.isArray(json)) {
       toExtract[toExtract.length]= json.map(extractText).join("");
     }else {
@@ -182,11 +186,8 @@ function retrieveStoryText(){
   combinedText[combinedText.length]="FinalPara";
   const myIMG = [];
   for(i in combinedText){
-    if(combinedText[i].includes("IMAGE:")){
+    if(combinedText[i].includes("(IMAGE:)") || combinedText[i].includes("(VIDEO:)")){
       //console.log("image found")
-      myIMG[myIMG.length]=combinedText[i];
-    }else if(combinedText[i].includes("VIDEO:")){
-      //console.log("VIDEO found")
       myIMG[myIMG.length]=combinedText[i];
     }
   }
@@ -200,7 +201,10 @@ function retrieveStoryText(){
 //myText = retrieveStoryText('./shorthand-wanderlust-project-Innsmouth/story.json');
 let myText = []
 myText = retrieveStoryText();
-console.log("Text: "+myText[0].length+myText[0]);
+for(i in myText[0]){
+  console.log(myText[0][i])
+}
+//console.log("Text: "+myText[0].length+myText[0]);
 console.log(myText[1]);
 console.log(myText[2]);
 
