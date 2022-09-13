@@ -122,18 +122,21 @@ function newSection(pageChange){
   let myImages = [];
   let tempImageNum = currentPage;
   let sectionFound=false;
+  let currentText="";
   while(!sectionFound){
-    console.log(tempImageNum)
-    console.log(storyParagraphs[tempImageNum])
     if(storyParagraphs[tempImageNum].includes("New Section")){
         sectionFound=true;
         console.log("section Found")
     }else if(storyParagraphs[tempImageNum].includes("IMAGE:")){
         myImages.push(storyParagraphs[tempImageNum].slice(6))
+    }else{
+      currentText=currentText+"/n"+storyParagraphs[tempImageNum];
+      console.log("CUrrent Text: "+currentText)
     }
     tempImageNum=tempImageNum+1;
     if(tempImageNum>storyParagraphs.length-1){sectionFound=true;}
   }
+  objParas[0].setAttribute("value", currentText);
   createNewImage(myImages);
 }
     
@@ -151,7 +154,7 @@ function setOpacity(){
             }else{
                 textTarget.setAttribute("opacity",1);
             }
-            /*
+            /* COMMENTED OUT, MOVING PICUTRES NOW FADE IN ONCE PER SECTION
             for(j in movingPictures){
       
               let elID = "movingPicture"+j;
@@ -189,7 +192,6 @@ function importAllText(){
   myImages = retrieveStoryAssets[1];
   for(i in fullText){
     storyParagraphs[i-1] = fullText[i-1];
-    //console.log(storyParagraphs[i-1]);
   }
   imgRepo = retrieveStoryAssets[2];
     
@@ -270,7 +272,9 @@ function changePage(pageChange) {
     clearPageAll();
     currentPage = wrapAround(currentPage+pageChange,1, storyParagraphs.length - 1)[1];
     if(storyParagraphs[currentPage]==="New Section"){
-        newSection(pageChange);
+      newSection(pageChange);
+    }else if(storyParagraphs[currentPage-1]!=="New Section"){
+      changePage(pageChange);
     }else{
       //Update paragraph text value
       objParas[0].setAttribute("Opacity", 0);
@@ -279,7 +283,8 @@ function changePage(pageChange) {
       objParas[0].removeAttribute("animation__pos");
       objParas[0].setAttribute("animation__pos","property: position; from:0 -10 -20;to: 0 10 -20; dur:10000; easing: linear; loop: false;");
       if(!storyParagraphs[currentPage].includes("IMAGE:")){
-        objParas[0].setAttribute("value", storyParagraphs[currentPage]);
+        //Commented out, trialing setting Block paragraph value
+        //objParas[0].setAttribute("value", storyParagraphs[currentPage]);
       }else{
           objParas[0].setAttribute("value", "");
           if(storyParagraphs[currentPage-1].includes("IMAGE:")){
@@ -356,9 +361,10 @@ function retrieveStoryText(){
   }
 
   function extractText(json){
-    console.log(json.id)
     let toExtract = [];
-    if (!json) {return "";} 
+    if (!json) {
+      return "";
+    } 
     if (json?.subTitle!==undefined) {
       toExtract[toExtract.length]=extractText(json.subTitle);
     } 
@@ -382,7 +388,7 @@ function retrieveStoryText(){
     if (json?.sections!==undefined) {
       toExtract[toExtract.length]= json.sections.map(newSection).join("");
     } 
-     if (json?.text!==undefined) {
+    if (json?.text!==undefined) {
       toExtract[toExtract.length]= extractText(json.text);
     } 
     if (json?.items!==undefined) {

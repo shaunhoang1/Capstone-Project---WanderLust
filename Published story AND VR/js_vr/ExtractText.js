@@ -7,41 +7,40 @@ function retrieveStoryText(){
   }
 
   function extractText(json){
-    console.log(json.id)
     let toExtract = [];
     if (!json) {
       return "";
     } 
-     if (json?.subTitle!==undefined) {
+    if (json?.subTitle!==undefined) {
       toExtract[toExtract.length]=extractText(json.subTitle);
     } 
-     if (json?.content!==undefined) {
+    if (json?.content!==undefined) {
       toExtract[toExtract.length]= json.content.map(extractText).join("");
     } 
-     if (json?.image!==undefined) {
+    if (json?.image!==undefined) {
       combinedText[combinedText.length]="IMAGE:"+json.image.id;
     } 
-     if (json?.video!==undefined) {
+    if (json?.video!==undefined) {
       combinedText[combinedText.length]="VIDEO:"+json.video.id;
     } 
-     if (json?.embed!==undefined) { //Extract video embed
+    if (json?.embed!==undefined) { //Extract video embed
       let embededObj=json.embed;
       combinedText[combinedText.length]="EMBED:"+embededObj.originalUrl;
     } 
-     if (json.type === "text") {
+    if (json.type === "text") {
       let a = json.text;
       combinedText[combinedText.length]=a;
     } 
-     if (json?.sections!==undefined) {
+    if (json?.sections!==undefined) {
       toExtract[toExtract.length]= json.sections.map(newSection).join("");
     } 
-     if (json?.text!==undefined) {
+    if (json?.text!==undefined) {
       toExtract[toExtract.length]= extractText(json.text);
     } 
-     if (json?.items!==undefined) {
+    if (json?.items!==undefined) {
       toExtract[toExtract.length]=json.items.map(extractText).join("");
     } 
-     if (json?.layers!==undefined) {
+    if (json?.layers!==undefined) {
       for(let i in json.layers){  //Extra filter finds layerOrder to extract specific layerID's
         let extractedLayers = []
         let layerObj = json.layers[i];
@@ -54,63 +53,85 @@ function retrieveStoryText(){
       }
       toExtract[toExtract.length]= extractText(json.layers);  //Runs on single layer object if no layerOrder
     } 
-     if (json?.item!==undefined) {
+    if (json?.item!==undefined) {
       toExtract[toExtract.length]= extractText(json.item);
     } 
-     if (json?.title!==undefined) {
+    if (json?.title!==undefined) {
       toExtract[toExtract.length]=extractText(json.title);
     } 
-     if (json?.leadIn!==undefined) {
+    if (json?.leadIn!==undefined) {
       toExtract[toExtract.length]=extractText(json.leadIn);
     } 
-     if (json?.storyTitle!==undefined) {
+    if (json?.storyTitle!==undefined) {
       toExtract[toExtract.length]= extractText(json.storyTitle);
     } 
-     if (json?.byline!==undefined) {
+    if (json?.byline!==undefined) {
       toExtract[toExtract.length]= extractText(json.byline);
     } 
-     if (json?.caption!==undefined) {
+    if (json?.caption!==undefined) {
       toExtract[toExtract.length]= extractText(json.caption);
     } 
-     if (json?.landscape!==undefined) {
+    if (json?.landscape!==undefined) {
       toExtract[toExtract.length]= extractText(json.landscape);
     } 
-     if (json?.attrs!==undefined) { 
+    if (json?.attrs!==undefined) { 
       toExtract[toExtract.length]= extractText(json.attrs);
     } 
-     if (Array.isArray(json)) {
+    if (Array.isArray(json)) {
       toExtract[toExtract.length]= json.map(extractText).join("");
     }else {
       toExtract[toExtract.length]= "";
     }
   }
+
   /*
   function extractText(json){
-    console.log(json.id)
+    let toExtract = [];
     if (!json) {
       return "";
-    } else if (json?.subTitle!==undefined) {
-      return extractText(json.subTitle);
-    } else if (json?.content!==undefined) {
-      return json.content.map(extractText).join("");
-    } else if (json?.image!==undefined) {
-      combinedText[combinedText.length]="IMAGE:"+json.image.id;
-    } else if (json?.video!==undefined) {
-      combinedText[combinedText.length]="VIDEO:"+json.video.id;
-    } else if (json?.embed!==undefined) { //Extract video embed
+    }  
+    if (json?.attrs!==undefined) { 
+      let attributes = json.attrs;
+      if (attributes?.fontSize!==undefined){
+        //console.log("Attribute found")
+      }
+      extractText(json.attrs);
+    } 
+    if (json?.subTitle!==undefined) {
+      extractText(json.subTitle);
+    } 
+    if (json?.content!==undefined) {
+      if(json.type=="doc"){
+        paraCounter=paraCounter+1;
+        combinedText[combinedText.length]=[];
+      }
+      json.content.map(extractText).join("");
+    } 
+    if (json?.image!==undefined) {
+      combinedText[paraCounter][combinedText[paraCounter].length]="IMAGE:"+json.image.id;
+    } 
+    if (json?.video!==undefined) {
+      combinedText[paraCounter][combinedText[paraCounter].length]="VIDEO:"+json.video.id;
+    } 
+    if (json?.embed!==undefined) { //Extract video embed
       let embededObj=json.embed;
-      combinedText[combinedText.length]="EMBED:"+embededObj.originalUrl;
-    } else if (json.type === "text") {
+      combinedText[paraCounter][combinedText[paraCounter].length]="EMBED:"+embededObj.originalUrl;
+    } 
+    if (json.type === "text") {
       let a = json.text;
-      combinedText[combinedText.length]=a;
-      return json.text;
-    } else if (json?.sections!==undefined) {
-      return json.sections.map(newSection).join("");
-    } else if (json?.text!==undefined) {
-      return extractText(json.text);
-    } else if (json?.items!==undefined) {
-      return json.items.map(extractText).join("");
-    } else if (json?.layers!==undefined) {
+      //console.log("Text Found")
+      combinedText[paraCounter][combinedText[paraCounter].length]=a;
+    } 
+    if (json?.sections!==undefined) {
+      json.sections.map(newSection).join("");
+    } 
+    if (json?.text!==undefined) {
+      extractText(json.text);
+    } 
+    if (json?.items!==undefined) {
+      json.items.map(extractText).join("");
+    } 
+    if (json?.layers!==undefined) {
       for(let i in json.layers){  //Extra filter finds layerOrder to extract specific layerID's
         let extractedLayers = []
         let layerObj = json.layers[i];
@@ -121,27 +142,33 @@ function retrieveStoryText(){
           }
         }
       }
-      return extractText(json.layers);  //Runs on single layer object if no layerOrder
-    } else if (json?.item!==undefined) {
-      return extractText(json.item);
-    } else if (json?.title!==undefined) {
-      return extractText(json.title);
-    } else if (json?.leadIn!==undefined) {
-      return extractText(json.leadIn);
-    } else if (json?.storyTitle!==undefined) {
-      return extractText(json.storyTitle);
-    } else if (json?.byline!==undefined) {
-      return extractText(json.byline);
-    } else if (json?.caption!==undefined) {
-      return extractText(json.caption);
-    } else if (json?.landscape!==undefined) {
-      return extractText(json.landscape);
-    } else if (json?.attrs!==undefined) { 
-      return extractText(json.attrs);
-    } else if (Array.isArray(json)) {
-      return json.map(extractText).join("");
+      extractText(json.layers);  //Runs on single layer object if no layerOrder
+    } 
+    if (json?.item!==undefined) {
+      extractText(json.item);
+    } 
+    if (json?.title!==undefined) {
+      extractText(json.title);
+    } 
+    if (json?.leadIn!==undefined) {
+      extractText(json.leadIn);
+    } 
+    if (json?.storyTitle!==undefined) {
+      extractText(json.storyTitle);
+    } 
+    if (json?.byline!==undefined) {
+      extractText(json.byline);
+    } 
+    if (json?.caption!==undefined) {
+      extractText(json.caption);
+    } 
+    if (json?.landscape!==undefined) {
+      extractText(json.landscape);
+    }
+    if (Array.isArray(json)) {
+      json.map(extractText).join("");
     }else {
-      return "";
+      toExtract[toExtract.length]= "";
     }
   }*/
 
@@ -156,10 +183,10 @@ function retrieveStoryText(){
   const myIMG = [];
   for(i in combinedText){
     if(combinedText[i].includes("IMAGE:")){
-      console.log("image found")
+      //console.log("image found")
       myIMG[myIMG.length]=combinedText[i];
     }else if(combinedText[i].includes("VIDEO:")){
-      console.log("VIDEO found")
+      //console.log("VIDEO found")
       myIMG[myIMG.length]=combinedText[i];
     }
   }
