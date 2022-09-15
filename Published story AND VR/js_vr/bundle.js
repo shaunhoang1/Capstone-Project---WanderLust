@@ -13,9 +13,15 @@ let myImages = [];
 let currentSky = 0;
 const skies = [];
 {
-    skies[1] = "#cool";
-    skies[2] = "#cool";
-    skies[3] = "#cool";
+    skies[1] = "#sky1";
+    skies[2] = "#sky2";
+    skies[3] = "#sky3";
+    skies[4] = "#sky4";
+    skies[5] = "#sky5";
+    skies[6] = "#sky6";
+    skies[7] = "#sky7";
+    skies[8] = "#sky8";
+    skies[9] = "#sky9";
 }
 
 //Define the page number and change for all text objects
