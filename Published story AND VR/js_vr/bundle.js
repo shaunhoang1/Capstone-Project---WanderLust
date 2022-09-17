@@ -350,7 +350,7 @@ function iniParagraphObjects(){
     objParas[2]=document.getElementById("textPara3");
     objParas[3]=document.getElementById("textPara4");
 }
-document.getElementById("textPara").addEventListener("loadstart", iniParagraphObjects); 
+//document.getElementById("textPara").addEventListener("loadstart", iniParagraphObjects); 
   
 
 //Define Story paragraphs dynamically from the author's pre-existing story paragraphs
