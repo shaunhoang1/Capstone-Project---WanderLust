@@ -8,17 +8,20 @@
       
     <!-- Load A-Frame and additional components -->
     <script src="https://aframe.io/releases/1.3.0/aframe.min.js"></script>
+    <script src="../../dist/aframe-particle-system-component.min.js"></script>
+    <script src="app/a-water.v0.1.1.min.js"></script>
     <script src="https://unpkg.com/aframe-look-at-component@0.8.0/dist/aframe-look-at-component.min.js"></script>
     <script src="https://unpkg.com/aframe-event-set-component@^4.0.0/dist/aframe-event-set-component.min.js"></script>
     <script src="https://unpkg.com/aframe-animation-component@^4.1.2/dist/aframe-animation-component.min.js"></script>
       
     <!-- Load custom JS functions -->
+    <script type="text/javascript" src="./story.json"></script>
     <script src="js_vr/bundle.js"></script>
   </head>
 
   <body>
-    <!-- HTML Elements to create a page before scene    -->
-    <a-scene id="VRScene">
+    <!-- HTML Elements to create a page before scene   embedded style="height:100px;width:100px;" z-index=-10000 -->
+    <a-scene id="VRScene" >
       <!-- ###################  LOAD ASSETS INTO STORY  #################### -->
       <a-assets>
         <a-asset-item id="firstModel" src="Resources_vr/Objects/testObj.obj"></a-asset-item>
@@ -31,62 +34,79 @@
         <img id="imgPortrait2" src="Resources_vr/Images/portrait2.jpg"/>
 
         <!-- Skybox Images-->
-        <img id="sky3" src="Resources_vr/Backgrounds/lawn-Mansion.jpeg" />
-        <img id="skyScenes" src="Resources_vr/Backgrounds/scenes.jpeg" />
-        <img id="skySnow" src="Resources_vr/Backgrounds/snowy-mountain.jpeg" />
-        <img id="sky2" src="Resources_vr/Backgrounds/texturify_pano-1-9.jpg"/>
-        <img id="skyWhite" src="Resources_vr/Backgrounds/white-building.jpeg" />
-        <img id="sky1" src="Resources_vr/Backgrounds/woods-by-the-river.jpg" />
-        <img id="pier" src="Resources_vr/Backgrounds/pier.jpg" />
-        <img id="sunset" src="Resources_vr/Backgrounds/sunset.jpeg"/>
+        <img id="sky1" src="Resources_vr/Backgrounds/S5.png">
+      <img id="sky2" src="Resources_vr/Backgrounds/S4.png">
+      <img id="sky3" src="Resources_vr/Backgrounds/S2.png">
+      <img id="sky4" src="Resources_vr/Backgrounds/S3.png">
+      <img id="sky5" src="Resources_vr/Backgrounds/S1.png">
+      <img id="sky6" src="Resources_vr/Backgrounds/S7.png">
+      <img id="sky7" src="Resources_vr/Backgrounds/S9.png">
+      <img id="sky8" src="Resources_vr/Backgrounds/S8.png">
+      <img id="sky9" src="Resources_vr/Backgrounds/S13.png">
+
       </a-assets>
 
       <!--ground for player-->
-      <a-circle position="0 0 2" rotation="-90 0 0" radius="2" color="grey"></a-circle>
+      <a-circle position="0 0 2" rotation="-90 0 0" radius="2" color="green" material="flat"></a-circle>
 
-        <!-- Sky Object  -->
-      <a-sky id="sky" src="#pier"></a-sky>
+      <!-- Sky Object  -->
+      <a-sky id="sky" src="#cool"></a-sky>
 
       <!-- ###################  CAMERA/PLAYER ENTITIES  #################### -->
-      <a-entity camera look-controls id="cameraObj" position="0 1.6 2" wasd-controls="enabled:true;acceleration:10;">
+        <!-- ### CANNOT HAVE CURSOR ENTITY WITHIN CAMERA OBEJCT FOR OCEAN TO WORK
+
             <a-entity cursor="fuse:true;fuseTimeout:500;"
                 position="0 0 -0.1"
                 geometry="primitive:ring;radiusInner:0.0004;radiusOuter:0.0006;"
-                material="color:white;shader:flat;"></a-entity>
+                material="color:white;shader:flat;"></a-entity>                 
+        -->
+      <a-entity camera look-controls id="cameraObj" position="0 1.6 2" wasd-controls="enabled:true;acceleration:10;">
       </a-entity>
 
+        
+      <!-- ADDITIONAL ENVIRONMENT EFFECTS   -->
+      <!--<a-ocean ocean-state="height_offset: -50;"></a-ocean>
+      <a-entity position="0 2.25 -15" particle-system="preset:dust;particleCount:1000"></a-entity>-->
+
+        
+        
       <!-- ###################  STORY ENTITIES  #################### -->
       <!-- Object Entity -->
-      <a-entity id="modelEntity" obj-model="obj: #firstModel;" color="#00FF00" scale="0.06 0.06 0.06" position="-1.6 0 0.2"
+      <a-entity id="modelEntity" obj-model="obj: #firstModel;" color="#00FF00" scale="0.06 0.06 0.06" position="-3.1 0 2"
+        event-set__click="_event:click; animation.property:scale;animation.to:0.2 0.2 0.2;animation.easing:linear;"
+        event-set__leave="_event:mouseleave;animation.property:scale;animation.to:0.06 0.06 0.06;animation.easing:linear;">
+        <a-circle radius="3" rotation="-90 0 0" color="grey"></a-circle>
+        </a-entity>
+    <a-entity id="modelEntity" obj-model="obj: #firstModel;" color="#00FF00" scale="0.06 0.06 0.06" position="3.1 0 2"
         event-set__click="_event:click; animation.property:scale;animation.to:0.2 0.2 0.2;animation.easing:linear;"
         event-set__leave="_event:mouseleave;animation.property:scale;animation.to:0.06 0.06 0.06;animation.easing:linear;">
         <a-circle radius="3" rotation="-90 0 0" color="grey"></a-circle>
         </a-entity>
         
       <!-- First Image Entity -->
-      <a-image id="imageEntity" src="#imgPortrait1" position="3 1.5 -0.5" opacity="0" look-at="#cameraObj"
+      <a-image id="imageEntity" src="#imgPortrait1" position="3 0.5 -0.5" opacity="0" look-at="#cameraObj"
         animation__fadeIn="property:opacity;to:1;easing:linear; "
         event-set__click="_event:click; animation.property:scale;animation.to:3 3 3;animation.easing:linear;"
         event-set__leave="_event:mouseleave;animation.property:scale;animation.to:1 1 1;animation.easing:linear;">
         </a-image>
         
       <!-- Second Image Entity -->
-      <a-image id="imageEntity" src="#imgPortrait2" position="-3 1.5 -0.5" opacity="0" look-at="#cameraObj"
+      <a-image id="imageEntity" src="#imgPortrait2" position="-3 0.5 -0.5" opacity="0" look-at="#cameraObj"
         animation__fadeIn="property:opacity;to:1;easing:linear; "
         event-set__click="_event:click; animation.property:scale;animation.to:3 3 3;animation.easing:linear;"
         event-set__leave="_event:mouseleave;animation.property:scale;animation.to:1 1 1;animation.easing:linear;">
         </a-image>
         
         
-        <!-- ######################### MOVING IMAGES ##################### -->
-        <!-- First Image Entity -->
-      <a-image id="movingImage1" src="#imgPortrait1" position="9 1.5 -10" opacity="1" look-at="#cameraObj" scale="3 3 3">
+        <!-- ######################### MOVING IMAGES #####################
+        <!-- First Image Entity 
+      <a-image id="movingImage1" src="#imgPortrait2" position="9 1.5 -10" opacity="1" look-at="#cameraObj" scale="3 3 3">
         </a-image>
         
-      <!-- Second Image Entity -->
-      <a-image id="movingImage2" src="#imgPortrait2" position="-9 1.5 -10" opacity="1" look-at="#cameraObj" scale="3 3 3">
-        </a-image>
-
+      <!-- Second Image Entity 
+      <a-image id="movingImage2" src="#imgPortrait1" position="-9 1.5 -10" opacity="1" look-at="#cameraObj" scale="3 3 3">
+        </a-image>-->
+        
 
       <!-- ###################  TEXT ENTITIES  #################### -->
       <!-- First Paragraph -->

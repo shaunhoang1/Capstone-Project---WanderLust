@@ -5,197 +5,32 @@ let objParas = [];
 let storyParagraphs=[];
 let movingPictures=[];
 
+let imgRepo=[];
+let fullText= [];
+let myImages = [];
+
 //Define the Backgrounds
-var currentSky = 0;
+let currentSky = 0;
 const skies = [];
 {
     skies[1] = "#sky1";
     skies[2] = "#sky2";
     skies[3] = "#sky3";
+    skies[4] = "#sky4";
+    skies[5] = "#sky5";
+    skies[6] = "#sky6";
+    skies[7] = "#sky7";
+    skies[8] = "#sky8";
+    skies[9] = "#sky9";
 }
 
 //Define the page number and change for all text objects
-var scrollingHeight = 0;
-var currentPage = 0;
-var currentPageAll = 0;
-var tempPage = 0;    
-    
+let scrollingHeight = 0;
+let currentPage = 0;
+let currentPageAll = 0;
+let tempPage = 0;    
+
 //All JS Functions which are required to navigate through the story are created here
-
-//WrapAround function to loop array variables,
-//and can also change the variable which it is based on. 
-//Returns "True" or "False" in case additional functions depend on the wrap status
-function wrapAround(current,min,max){
-    var wrapped = false;
-    if (current > max) {
-        current = min;
-        wrapped = true;
-    }else if (current < min) {
-        current = max;
-        wrapped = true;
-    }
-    return [wrapped,current];
-}
-
-//Function triggers for each new section in the story, to update objects and images
-function newSection(pageChange){
-    changeSky(pageChange);
-    changePage(pageChange,0,storyParagraphs.length+1);
-}
-    
-//Control the opacity of paragraphs as they change height
-function setOpacity(){
-    for(let i=0;i<1;i++){
-        let textTarget = objParas[i];
-        scrollingHeight = textTarget.object3D.position.y+10;
-        if (scrollingHeight !== 0 && scrollingHeight !== 20){
-            //Control opacity while scrolling
-            if (scrollingHeight>=15){
-                textTarget.setAttribute("opacity",(20-scrollingHeight)/5);
-            }else if (scrollingHeight<=5){
-                textTarget.setAttribute("opacity",scrollingHeight/5);
-            }else{
-                textTarget.setAttribute("opacity",1);
-            }
-            for(j in movingPictures){
-      
-              let elID = "movingPicture"+j;
-              let elmnt = document.getElementById(elID);
-              if (scrollingHeight>=15){         
-                if(scrollingHeight>17){
-                  elmnt.setAttribute("opacity",0);
-                }else{
-                  elmnt.setAttribute("opacity",(20-scrollingHeight)/5);
-                }
-              }else if (scrollingHeight<=5){
-                if(scrollingHeight<2){
-                  elmnt.setAttribute("opacity",0);
-                }else{
-                  elmnt.setAttribute("opacity",scrollingHeight/5);
-                }
-              }else{
-                textTarget.setAttribute("opacity",1);
-              }
-            }
-        }
-    }
-    
-}
-
-//Start on-going timer to set moving text & image opacity
-function opacityTimer(){
-  console.log("AAA");
-  setOpacity();
-}
-setInterval(opacityTimer,100);
-
-//Initialize all text from the story JSON.
-function importAllText(){
-  iniParagraphObjects();
-  let fullText = retrieveStoryText();
-  for(i in fullText){
-    storyParagraphs[i-1] = fullText[i-1];
-  }
-  storyParagraphs.unshift("New Section");
-  currentPage=0;currentSky = 0;
-  changePage(1);
-}
-setTimeout(importAllText,10);
-
-//Navigate to next/previous skybox image
-function changeSky(skyChange) {
-    currentSky = wrapAround(currentSky + skyChange,1,skies.length-1)[1];
-    var sky = document.getElementById("sky");
-    sky.setAttribute("src", skies[currentSky]);
-}
-
-
-//Navigating Backgrounds
-document.addEventListener("keydown", function (event) {
-    //Go to next background
-    if (event.shiftKey) {
-       
-      createNewImage();
-    }else if (event.key === "l") {
-       
-      deleteMovingImage();
-    }
-
-
-});
-
-function createNewImage(){
-  //Check how many pictures there are
-  let imgCount=movingPictures.length;
-  
-  let img = document.createElement("a-image");
-  img.setAttribute("id","movingPicture"+imgCount);
-  img.setAttribute("src", "#imgPortrait2");
-  //set img offset
-  let offset = -imgCount*1+1;
-  let pos = "0 "+offset.toString()+" -2";
-  console.log(pos)
-  img.setAttribute("position", pos);
-
-  movingPictures[imgCount]=imgCount;
-
-  let element = document.getElementById("textPara");
-  element.appendChild(img);
-}
-
-function deleteMovingImage(){
-  console.log(movingPictures.length);
-  for(i in movingPictures){
-    let elID = "movingPicture"+i;
-    let elmnt = document.getElementById(elID);
-    elmnt.remove();
-  }
-  movingPictures=[];
-}
-
-//Navigate between paragraphs
-document.addEventListener("keydown", function (event) {
-    //Go to previous paragraph
-    if (event.key === "q") {
-        scrollingHeight = 0;
-        changePage(-1);
-    //Go to next paragraph
-    } else if (event.key === "e") {
-        scrollingHeight = 0;
-        changePage(1);
-    }
-
-    if (event.key ==="p"){
-        scrollingHeight = 0;
-        changePageAll(1);
-        console.log("4-page scrolling");
-    }
-});
-
-//Define the page number and change
-
-function changePage(pageChange) {
-    clearPageAll();
-    currentPage = wrapAround(currentPage+pageChange,1, storyParagraphs.length - 1)[1];
-    if(storyParagraphs[currentPage]==="New Section"){
-        newSection(pageChange);
-    }else{
-        //Update paragraph text value
-        objParas[0].setAttribute("value", storyParagraphs[currentPage]);
-        console.log(currentPage-1+": "+storyParagraphs[currentPage]);
-        //Reset and activate the Position animation
-        objParas[0].removeAttribute("animation__pos");
-        objParas[0].setAttribute("animation__pos","property: position; from:0 -10 -20;to: 0 10 -20; dur:5000; easing: linear; loop: false;");
-        movingImage1 = document.getElementById("movingImage1");
-        movingImage1.removeAttribute("animation__pos");
-        movingImage1.setAttribute("animation__pos","property: position; from:9 -6 -10;to: 9 6 -10; dur:5000; easing: linear; loop: false;");
-        movingImage2 = document.getElementById("movingImage2");
-        movingImage2.removeAttribute("animation__pos");
-        movingImage2.setAttribute("animation__pos","property: position; from:-9 -6 -10;to: -9 6 -10; dur:5000; easing: linear; loop: false;");
-    }
-}
-
-    
 //Manually scroll through paragraphs with "i" or "k"
 document.addEventListener("keydown", function (event) {
     //Scroll through paragraphs  
@@ -247,8 +82,221 @@ document.addEventListener("keydown", function (event) {
         objParas[0].object3D.position.y = -10+scrollingHeight;
         setOpacity();
     }
+    //Go to previous paragraph
+    if (event.key === "q") {
+        scrollingHeight = 0;
+        changePage(-1);
+    //Go to next paragraph
+    } else if (event.key === "e") {
+        scrollingHeight = 0;
+        changePage(1);
+    }
+
+    if (event.key ==="p"){
+        scrollingHeight = 0;
+        changePageAll(1);
+        console.log("4-page scrolling");
+    }
+    //Go to next background
+    if (event.shiftKey) {
+      createNewImage();
+    }else if (event.key === "l") {
+      deleteMovingImage();
+    }
 });
 
+//WrapAround function to loop array variables,
+//and can also change the variable which it is based on. 
+//Returns "True" or "False" in case additional functions depend on the wrap status
+function wrapAround(current,min,max){
+  let wrapped = false;
+  if (current > max) {
+      current = min;
+      wrapped = true;
+  }else if (current < min) {
+      current = max;
+      wrapped = true;
+  }
+  return [wrapped,current];
+}
+
+//Function triggers for each new section in the story, to update objects and images
+function newSection(pageChange){
+  changeSky(pageChange);
+  changePage(pageChange);
+  
+  let myImages = [];
+  let tempImageNum = currentPage;
+  let sectionFound=false;
+  let currentText="";
+  while(!sectionFound){
+    if(storyParagraphs[tempImageNum].includes("New Section")){
+        sectionFound=true;
+    }else if(storyParagraphs[tempImageNum].includes("IMAGE:") || storyParagraphs[tempImageNum].includes("VIDEO:")){
+        myImages.push(storyParagraphs[tempImageNum].slice(8))
+    }else{
+      currentText=currentText+storyParagraphs[tempImageNum]+"\n\n";
+    }
+    tempImageNum=tempImageNum+1;
+    if(tempImageNum>storyParagraphs.length-1){sectionFound=true;}
+  }
+  objParas[0].setAttribute("value", currentText);
+  createNewImage(myImages);
+}
+    
+//Control the opacity of paragraphs as they change height
+function setOpacity(){
+    for(let i=0;i<1;i++){
+        let textTarget = objParas[i];
+        scrollingHeight = textTarget.object3D.position.y+10;
+        if (scrollingHeight > 0 && scrollingHeight < 20){
+            //Control opacity while scrolling
+            if (scrollingHeight>=15){
+                textTarget.setAttribute("opacity",(20-scrollingHeight)/5);
+            }else if (scrollingHeight<=5){
+                textTarget.setAttribute("opacity",scrollingHeight/5);
+            }else{
+                textTarget.setAttribute("opacity",1);
+            }
+            /* COMMENTED OUT, MOVING PICUTRES NOW FADE IN ONCE PER SECTION
+            for(j in movingPictures){
+      
+              let elID = "movingPicture"+j;
+              let elmnt = document.getElementById(elID);
+              if (scrollingHeight>=15){    
+                  elmnt.setAttribute("opacity",(20-scrollingHeight)/5);
+                
+              }else if (scrollingHeight<=5){
+                  elmnt.setAttribute("opacity",scrollingHeight/5);
+                
+              }else{
+                elmnt.setAttribute("opacity",1);
+              }
+            }*/
+        }else{
+            textTarget.setAttribute("opacity",0);
+            /*
+            for(j in movingPictures){
+              let elID = "movingPicture"+j;
+              let elmnt = document.getElementById(elID);
+              elmnt.setAttribute("opacity",0);
+            }*/
+        }
+    }
+}
+
+//Start on-going timer to set moving text & image opacity
+setInterval(setOpacity,100);
+
+//Initialize all text from the story JSON.
+function importAllText(){
+  iniParagraphObjects();
+  retrieveStoryAssets = retrieveStoryText();
+  fullText = retrieveStoryAssets[0];
+  myImages = retrieveStoryAssets[1];
+  for(i in fullText){
+    storyParagraphs[i-1] = fullText[i-1];
+  }
+  imgRepo = retrieveStoryAssets[2];
+    
+  storyParagraphs.unshift("New Section");
+  currentPage=0;currentSky = 0;
+  changePage(1);
+}
+setTimeout(importAllText,10);
+
+//Navigate to next/previous skybox image
+function changeSky(skyChange) {
+    currentSky = wrapAround(currentSky + skyChange,1,skies.length-1)[1];
+    var sky = document.getElementById("sky");
+    sky.setAttribute("src", skies[currentSky]);
+}
+    
+function createNewImage(imageNums){
+  deleteMovingImage();
+  for(i in imageNums){
+    //Check how many pictures there are
+    let imgCount=movingPictures.length;
+    let imgOffset = 0
+    let img = document.createElement("a-image");
+    img.setAttribute("id","movingPicture"+imgCount);
+    let src ="";
+    for(j in imgRepo){
+      if(imgRepo[j].includes(imageNums[i])){
+        src=imgRepo[j]
+      }
+    }
+    img.setAttribute("src", src);
+    img.setAttribute("Opacity", "0");
+    img.setAttribute("scale", "15 15 15");
+
+    //set img offset
+    let offset = -imgCount*8+5;
+    if(imgCount % 2 == 0){
+        imgOffset = -1
+    }else{
+        imgOffset = 1
+    }
+    /* FOR IMAGES MOVING WITH TEXT
+    let pos = imgOffset*2+" "+offset+" -2";
+    if(imageNums.length==1){
+        pos="0 0 -2";
+    }*/
+    let pos = imgOffset*8+" "+offset+" -21";
+    if(imageNums.length==1){
+        pos="0 0 -21";
+    }
+    img.setAttribute("position", pos);
+
+    movingPictures[imgCount]=imgCount;
+    
+    //let element = document.getElementById("textPara");
+    let element = document.getElementById("VRScene");
+    element.appendChild(img); 
+    img.removeAttribute("animation__opa");
+      //ANIMATION ATTRIBUTE FOR BACKGROUND IMAGES TO FADE IN
+    img.setAttribute("animation__opa","property: opacity; from:0;to: 1; dur:1000; easing: linear; loop: false;");
+  }
+}
+
+function deleteMovingImage(){
+  for(i in movingPictures){
+    let elID = "movingPicture"+i;
+    let elmnt = document.getElementById(elID);
+    elmnt.remove();
+  }
+  movingPictures=[];
+}
+
+
+//Define the page number and change
+
+function changePage(pageChange) {
+    clearPageAll();
+    currentPage = wrapAround(currentPage+pageChange,1, storyParagraphs.length - 1)[1];
+    if(storyParagraphs[currentPage]==="New Section"){
+      newSection(pageChange);
+    }else if(storyParagraphs[currentPage-1]!=="New Section"){
+      changePage(pageChange);
+    }else{
+      //Update paragraph text value
+      objParas[0].setAttribute("Opacity", 0);
+      //console.log(currentPage-1+": "+storyParagraphs[currentPage]);
+      //Reset and activate the Position animation
+      objParas[0].removeAttribute("animation__pos");
+      objParas[0].setAttribute("animation__pos","property: position; from:0 -10 -20;to: 0 10 -20; dur:10000; easing: linear; loop: false;");
+      if(!storyParagraphs[currentPage].includes("IMAGE:")){
+        //Commented out, trialing setting Block paragraph value
+        //objParas[0].setAttribute("value", storyParagraphs[currentPage]);
+      }else{
+          objParas[0].setAttribute("value", "");
+          if(storyParagraphs[currentPage-1].includes("IMAGE:")){
+            changePage(1);
+          }
+      }
+        
+    }
+}
 
 //Repetitive code for all four text objects, changes for each object (text value, positions)
 function changePageAll(pageChange) {
@@ -290,96 +338,112 @@ function changePageAll(pageChange) {
 function clearPageAll(){
     for (let i = 0; i < 4; i++) {
         objParas[i].removeAttribute("animation__pos");
-        objParas[i].setAttribute("opacity",1);
         objParas[i].setAttribute("value", "");
+        objParas[i].setAttribute("opacity",1);
     }
 }
-
-document.getElementById("textPara").addEventListener("loadstart", iniParagraphObjects);   
-
+  
 //define all paragraph objects
-
-
 function iniParagraphObjects(){
     objParas[0]=document.getElementById("textPara");
     objParas[1]=document.getElementById("textPara2");
     objParas[2]=document.getElementById("textPara3");
     objParas[3]=document.getElementById("textPara4");
 }
-
-setInterval(setOpacity,100);
-      
+document.getElementById("textPara").addEventListener("loadstart", iniParagraphObjects); 
+  
 
 //Define Story paragraphs dynamically from the author's pre-existing story paragraphs
 //Currently just defines story paragraphs from input 
 function retrieveStoryText(){
   //Declare array variable for all extracted text
 
-  function newSection(json)
-  {
+  function newSection(json){
     combinedText[combinedText.length]="New Section";
     return extractText(json);
   }
 
-  function extractText(json)
-  {
+  function extractText(json){
+    let toExtract = [];
     if (!json) {
       return "";
-    } else if (json?.subTitle!==undefined) {
-      return extractText(json.subTitle);
-    } else if (json?.content!==undefined) {
-      return json.content.map(extractText).join("");
-    } else if (json?.embed!==undefined) { //Extract video embed
+    } 
+    if (json?.attrs!==undefined) { 
+      if(json.attrs?.fontSize!==undefined){
+        combinedText[combinedText.length]="(FONT:)"+json.attrs.fontSize;
+      }
+      extractText(json.attrs);
+    } 
+    if (json?.subTitle!==undefined) {
+      extractText(json.subTitle);
+    } 
+    if (json?.content!==undefined) {
+      json.content.map(extractText).join("");
+    } 
+    if (json?.image!==undefined) {
+      combinedText[combinedText.length]="(IMAGE:)"+json.image.id;
+    } 
+    if (json?.video!==undefined) {
+      combinedText[combinedText.length]="(VIDEO:)"+json.video.id;
+    } 
+    if (json?.embed!==undefined) { //Extract video embed
       let embededObj=json.embed;
-      combinedText[combinedText.length]="EMBED:"+embededObj.originalUrl;
-    } else if (Array.isArray(json)) {
-      return json.map(extractText).join("");
-    } else if (json.type === "text") {
+      combinedText[combinedText.length]="(EMBED:)"+embededObj.originalUrl;
+    } 
+    if (json.type === "text") {
       let a = json.text;
       combinedText[combinedText.length]=a;
-      return json.text;
-    } else if (json?.sections!==undefined) {
-      return json.sections.map(newSection).join("");
-    } else if (json?.layers!==undefined) {
-      for(i in json.layers){  //Extra filter finds layerOrder to extract specific layerID's
+    } 
+    if (json?.sections!==undefined) {
+      json.sections.map(newSection).join("");
+    } 
+    if (json?.text!==undefined) {
+      extractText(json.text);
+    } 
+    if (json?.items!==undefined) {
+      json.items.map(extractText).join("");
+    } 
+    if (json?.layers!==undefined) {
+      for(let i in json.layers){  //Extra filter finds layerOrder to extract specific layerID's
+        let extractedLayers = []
         let layerObj = json.layers[i];
         if (layerObj?.layerOrder!==undefined) {
-          let extractedLayers = []
-          for(j in layerObj.layerOrder){
+          for(let j in layerObj.layerOrder){
             let layerJSON = layerObj.layers[layerObj.layerOrder[j]];
             extractedLayers[extractedLayers.length]=extractText(layerJSON);
           }
-          return extractedLayers.join("");
         }
       }
-      return extractText(json.layers);  //Runs on single layer object if no layerOrder
-    } else if (json?.text!==undefined) {
-      return extractText(json.text);
-    } else if (json?.items!==undefined) {
-      return json.items.map(extractText).join("");
-    } else if (json?.item!==undefined) {
-      return extractText(json.item);
-    } else if (json?.title!==undefined) {
-      return extractText(json.title);
-    } else if (json?.leadIn!==undefined) {
-      return extractText(json.leadIn);
-    } else if (json?.storyTitle!==undefined) {
-      return extractText(json.storyTitle);
-    } else if (json?.byline!==undefined) {
-      return extractText(json.byline);
-    } else if (json?.caption!==undefined) {
-      return extractText(json.caption);
-    } else if (json?.landscape!==undefined) {
-      return extractText(json.landscape);
-    } else if (json?.attrs!==undefined) { 
-      return extractText(json.attrs);
+      extractText(json.layers);  //Runs on single layer object if no layerOrder
+    } 
+    if (json?.item!==undefined) {
+      extractText(json.item);
+    } 
+    if (json?.title!==undefined) {
+      extractText(json.title);
+    } 
+    if (json?.leadIn!==undefined) {
+      extractText(json.leadIn);
+    } 
+    if (json?.storyTitle!==undefined) {
+      extractText(json.storyTitle);
+    } 
+    if (json?.byline!==undefined) {
+      extractText(json.byline);
+    } 
+    if (json?.caption!==undefined) {
+      extractText(json.caption);
+    } 
+    if (json?.landscape!==undefined) {
+      extractText(json.landscape);
+    } 
+    
+    if (Array.isArray(json)) {
+      json.map(extractText).join("");
     }else {
-      return "";
+      toExtract[toExtract.length]= "";
     }
   }
-
-
-
   //retrieveStoryText('../story.json')
   //Require the desired json file from the story
   const storyData = require('../story.json');
@@ -388,9 +452,20 @@ function retrieveStoryText(){
   const combinedText =[];
   extractText(storyData)
   combinedText[combinedText.length]="FinalPara";
-  return combinedText;
+  const myIMG = [];
+  for(i in combinedText){
+    if(combinedText[i].includes("(IMAGE:)") || combinedText[i].includes("(VIDEO:)")){
+      //console.log("image found")
+      myIMG[myIMG.length]=combinedText[i];
+    }
+  }
+               
+  const imgArray=["/assets/5HECXqtPRY/ticketoffice-1080x1920.jpeg","/assets/bcoIi7gXby/town-846x1349.jpeg","/assets/D3h9QGqI9v/town-1080x1920.jpeg","/assets/iMitwH0EXu/bus-1080x1920.jpeg","/assets/JqXBwRBR7R/store-863x1368.jpeg","/assets/KehrQ0yKcs/uvcewi30dwtkdrukfi4b-thumbnail.jpeg","/assets/MObpieZw3w/wzkp1rhpuznb2ozzmat6-1-sxv3v-thumbnail.jpeg","/assets/NETXgllPkN/railwaystation-852x1406.jpeg","/assets/PYj71zvsAD/cthulhu.mp4","/assets/sfv2bWQrhq/dream_tradingcard-857x1376.jpeg",,"/assets/uhD9A6h3Vo/staring-1080x1920.jpeg","/assets/X0OgcjeEUe/busdring-1080x1920.jpeg","/assets/yp0f2XkDCi/poster-1590x894.jpeg"]
+  return [combinedText, myIMG, imgArray];
 }
 
+
+               
 
 //Demo StoryParagraphs for examples
 /*
@@ -707,15 +782,15 @@ module.exports={
         "className": "Theme-BackgroundColor-17"
       }
     ],
-    "version": "309ba231d43a7e2933d69fd2a63c3998",
+    "version": "a1cee4401feafee8c6e61e1378378485",
     "isEnabled": true,
     "isPublic": true,
     "createdBy": null,
     "updatedBy": null,
     "deletedBy": null,
     "createdAt": "2017-06-15T03:36:21.796Z",
-    "updatedAt": "2022-08-26T18:33:52.017Z",
-    "currentVersion": 10426,
+    "updatedAt": "2022-09-02T18:27:38.355Z",
+    "currentVersion": 10455,
     "assetBase": "./assets",
     "fullPath": "/efs_data/themes/0-demo/theme.min.css"
   },
@@ -1048,6 +1123,107 @@ module.exports={
             }
           ],
           "overlay": 30
+        }
+      ]
+    },
+    {
+      "id": "a6IIoWUSWI",
+      "template": "mXhhJXlEKQ",
+      "className": "Media",
+      "isNavigable": false,
+      "settings": {
+        "className": null,
+        "visibilities": [
+          "All devices",
+          "Mobile only",
+          "Desktop only"
+        ],
+        "theme": "Light",
+        "visibility": "All devices"
+      },
+      "layers": [
+        {
+          "id": "PIojJY",
+          "kind": "responsive-media",
+          "items": [
+            {
+              "id": "N4eQNg",
+              "kind": "video",
+              "portrait": {
+                "video": {
+                  "id": "oMTc06c0ID",
+                  "loop": false,
+                  "meta": {
+                    "heading": "MP4 video (will scale to screen width)",
+                    "subHeading": "Recommended: 900 x 507px, 100mb MAX"
+                  },
+                  "muted": false,
+                  "autoPlay": false,
+                  "controls": true,
+                  "isUserDefined": false
+                },
+                "poster": {
+                  "id": "FojDGJECug",
+                  "meta": {
+                    "heading": "Shown before video loads",
+                    "subHeading": "JPEG to match dimensions of video"
+                  },
+                  "isUserDefined": false
+                },
+                "caption": {
+                  "type": "doc",
+                  "content": [
+                    {
+                      "type": "paragraph",
+                      "content": []
+                    }
+                  ]
+                },
+                "transition": {
+                  "name": "none",
+                  "start": 0,
+                  "delay": 0.1
+                }
+              },
+              "landscape": {
+                "video": {
+                  "id": "PYj71zvsAD",
+                  "loop": false,
+                  "meta": {
+                    "heading": "MP4 video (will scale to screen width)",
+                    "subHeading": "Recommended: 1920x1080px, 100mb MAX"
+                  },
+                  "muted": false,
+                  "autoPlay": false,
+                  "controls": true,
+                  "isUserDefined": true
+                },
+                "poster": {
+                  "id": "yp0f2XkDCi",
+                  "meta": {
+                    "heading": "Shown before video loads",
+                    "subHeading": "JPEG to match dimensions of video"
+                  },
+                  "isUserDefined": true
+                },
+                "caption": {
+                  "type": "doc",
+                  "content": [
+                    {
+                      "type": "paragraph",
+                      "content": []
+                    }
+                  ]
+                },
+                "transition": {
+                  "name": "none",
+                  "start": 0,
+                  "delay": 0.1
+                }
+              }
+            }
+          ],
+          "overlay": 50
         }
       ]
     },
@@ -2478,14 +2654,14 @@ module.exports={
       ]
     }
   ],
-  "sectionCount": 8,
+  "sectionCount": 9,
   "logos": [],
   "showThemeLogos": true,
   "authors": null,
   "tags": [],
   "keywords": null,
   "status": "published",
-  "contentVersion": 1281,
+  "contentVersion": 1607,
   "publishUrl": null,
   "publishAt": null,
   "previewUsername": null,
@@ -2503,17 +2679,17 @@ module.exports={
   "socialTwitterHandle": "",
   "socialTwitterShortUrl": "",
   "lastPreviewAt": "2022-03-31T23:48:14.501Z",
-  "lastPublishedAt": "2022-08-20T02:45:27.374Z",
+  "lastPublishedAt": "2022-08-28T05:48:33.482Z",
   "lastPublishedUrl": null,
-  "lastPublishedVersion": 1144,
+  "lastPublishedVersion": 1281,
   "lastPublishedBy": "Ru4S9oEnSI",
   "createdBy": "Ru4S9oEnSI",
   "updatedBy": "tkx8W7cFIU",
   "deletedBy": null,
   "createdAt": "2022-03-31T23:48:14.502Z",
-  "updatedAt": "2022-08-26T03:49:58.892Z",
+  "updatedAt": "2022-09-01T17:46:46.300Z",
   "deletedAt": null,
-  "currentVersion": 1281,
+  "currentVersion": 1607,
   "settings": {
     "ampEnabled": true
   },
@@ -2534,7 +2710,7 @@ module.exports={
     "twitterHandle": "",
     "twitterShortUrl": ""
   },
-  "generatedAt": "2022-08-28T05:48:33.684Z",
+  "generatedAt": "2022-09-03T13:39:54.876Z",
   "collections": [],
   "publishSettings": [],
   "isTestStory": false,
