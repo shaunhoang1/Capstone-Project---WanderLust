@@ -30,9 +30,20 @@ let imgDir=[]
 for(i in myImages){
   if(myImages[i].includes(".")){
     imgDir[i] = "\"/assets/"+myImages[i]+"\"";
-    console.log(imgDir[i]);
   }
 }
-console.log(imgDir.join(","))
+
+const fs = require('fs')
+
+// Data which will write in a file.
+let data = "\nimgRepo = ["+imgDir.join(",")+"]";
+// Write data in 'Output.txt' .
+fs.appendFile('./js_vr/storyFunctions.js', data, (err) => {
+	
+	// In case of a error throw err.
+	if (err) throw err;
+})
+
+
 
 
