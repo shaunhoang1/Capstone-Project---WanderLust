@@ -91,16 +91,13 @@ document.addEventListener("keydown", function (event) {
         scrollingHeight = 0;
         changePage(1);
     }
-
+    /*
     if (event.key ==="p"){
         scrollingHeight = 0;
         changePageAll(1);
         console.log("4-page scrolling");
-    }
-    //Go to next background
-    if (event.shiftKey) {
-      createNewImage();
-    }else if (event.key === "l") {
+    }*/
+    if (event.key === "l") {
       deleteMovingImage();
     }
 });
@@ -120,28 +117,39 @@ function wrapAround(current,min,max){
   return [wrapped,current];
 }
 
-//Function triggers for each new section in the story, to update objects and images
-function newSection(pageChange){
-  changeSky(pageChange);
-  changePage(pageChange);
+//Function triggers for each new section in the story, to update object, images and text to the next section
+function nextSection(pageChange){
+  changeSky(pageChange); //Update skybox to respective image
+  changePage(pageChange); //Navigate to the next page
   
-  let myImages = [];
-  let tempImageNum = currentPage;
-  let sectionFound=false;
-  let currentText="";
+  let myImages = []; //Initiate the Array of images for the new section
+  let tempImageNum = currentPage; //Temp integer at current page to navigate through all story components in this section
+  let sectionFound=false; //Boolean to check when the section ends
+  let currentText=""; //Str var for all the text in this section
+    
+  //Run until the end of section
   while(!sectionFound){
     if(storyParagraphs[tempImageNum].includes("New Section")){
+        //If next section found, end the search
         sectionFound=true;
     }else if(storyParagraphs[tempImageNum].includes("IMAGE:") || storyParagraphs[tempImageNum].includes("VIDEO:")){
+        //If an image or video is found, then push them to the image array for loading
         myImages.push(storyParagraphs[tempImageNum].slice(8))
     }else{
+        //Otherwise add the current text to the section text var
       currentText=currentText+storyParagraphs[tempImageNum]+"\n\n";
     }
+      
+      //check up to the next story component
     tempImageNum=tempImageNum+1;
-    if(tempImageNum>storyParagraphs.length-1){sectionFound=true;}
+    if(tempImageNum>storyParagraphs.length-1){sectionFound=true;} //If last story component, then mark end of section
   }
+    
+    //Set the text object value to the current section's text
   objParas[0].setAttribute("value", currentText);
-  createNewImage(myImages);
+    
+    //Create all images for the current section
+  createImages(myImages);
 }
     
 //Control the opacity of paragraphs as they change height
@@ -188,22 +196,22 @@ function setOpacity(){
 //Start on-going timer to set moving text & image opacity
 setInterval(setOpacity,100);
 
+    
 //Initialize all text from the story JSON.
-function importAllText(){
-  iniParagraphObjects();
-  retrieveStoryAssets = retrieveStoryText();
-  fullText = retrieveStoryAssets[0];
-  myImages = retrieveStoryAssets[1];
-  for(i in fullText){
-    storyParagraphs[i-1] = fullText[i-1];
+function importStory(){
+  iniParagraphObjects(); //Initialize the html text objects
+  retrieveStoryAssets = retrieveStory(); //retrieve the story from the json
+  myImages = retrieveStoryAssets[1]; //Assign the image elements from the story
+  for(i in retrieveStoryAssets[0]){ //Extract the text elements from the story into the HTML
+    storyParagraphs[i-1] = retrieveStoryAssets[0][i-1];
   }
-  imgRepo = retrieveStoryAssets[2];
+  imgRepo = retrieveStoryAssets[2]; //Assign the Image Directory values
     
   storyParagraphs.unshift("New Section");
-  currentPage=0;currentSky = 0;
-  changePage(1);
+  currentPage=0;currentSky = 0; //Initialize New State of story
+  changePage(1); //Begin story
 }
-setTimeout(importAllText,10);
+setTimeout(importStory,10); //Required to begin the story
 
 //Navigate to next/previous skybox image
 function changeSky(skyChange) {
@@ -212,16 +220,20 @@ function changeSky(skyChange) {
     sky.setAttribute("src", skies[currentSky]);
 }
     
-function createNewImage(imageNums){
+//Create all the images for the current section
+function createImages(imageNums){
+    //Clear previous sections images
   deleteMovingImage();
-  for(i in imageNums){
+  for(i in imageNums){ //For each image in this section
     //Check how many pictures there are
     let imgCount=movingPictures.length;
     let imgOffset = 0
+    
+    //Create the new HTML Element for the picture
     let img = document.createElement("a-image");
     img.setAttribute("id","movingPicture"+imgCount);
     let src ="";
-    for(j in imgRepo){
+    for(j in imgRepo){ //Find the image file for the current image
       if(imgRepo[j].includes(imageNums[i])){
         src=imgRepo[j]
       }
@@ -242,7 +254,7 @@ function createNewImage(imageNums){
     if(imageNums.length==1){
         pos="0 0 -2";
     }*/
-    let pos = imgOffset*8+" "+offset+" -21";
+    let pos = imgOffset*19+" "+offset+" -21";
     if(imageNums.length==1){
         pos="0 0 -21";
     }
@@ -250,6 +262,7 @@ function createNewImage(imageNums){
 
     movingPictures[imgCount]=imgCount;
     
+      //Create the image element
     //let element = document.getElementById("textPara");
     let element = document.getElementById("VRScene");
     element.appendChild(img); 
@@ -259,6 +272,7 @@ function createNewImage(imageNums){
   }
 }
 
+//Delete all pictures
 function deleteMovingImage(){
   for(i in movingPictures){
     let elID = "movingPicture"+i;
@@ -270,12 +284,11 @@ function deleteMovingImage(){
 
 
 //Define the page number and change
-
 function changePage(pageChange) {
     clearPageAll();
     currentPage = wrapAround(currentPage+pageChange,1, storyParagraphs.length - 1)[1];
     if(storyParagraphs[currentPage]==="New Section"){
-      newSection(pageChange);
+      nextSection(pageChange);
     }else if(storyParagraphs[currentPage-1]!=="New Section"){
       changePage(pageChange);
     }else{
@@ -350,20 +363,16 @@ function iniParagraphObjects(){
     objParas[2]=document.getElementById("textPara3");
     objParas[3]=document.getElementById("textPara4");
 }
-//document.getElementById("textPara").addEventListener("loadstart", iniParagraphObjects); 
-  
 
 //Define Story paragraphs dynamically from the author's pre-existing story paragraphs
 //Currently just defines story paragraphs from input 
-function retrieveStoryText(){
+function retrieveStory(){
   //Declare array variable for all extracted text
-
   function newSection(json){
     combinedText[combinedText.length]="New Section";
-    return extractText(json);
+    return extractStory(json);
   }
-
-  function extractText(json){
+  function extractStory(json){
     let toExtract = [];
     if (!json) {
       return "";
@@ -372,16 +381,19 @@ function retrieveStoryText(){
       if(json.attrs?.fontSize!==undefined){
         combinedText[combinedText.length]="(FONT:)"+json.attrs.fontSize;
       }
-      extractText(json.attrs);
+      extractStory(json.attrs);
     } 
     if (json?.subTitle!==undefined) {
-      extractText(json.subTitle);
+      extractStory(json.subTitle);
     } 
     if (json?.content!==undefined) {
-      json.content.map(extractText).join("");
+      json.content.map(extractStory).join("");
     } 
     if (json?.image!==undefined) {
       combinedText[combinedText.length]="(IMAGE:)"+json.image.id;
+    } 
+    if (json?.object!==undefined) {
+      combinedText[combinedText.length]="(object:)"+json.object.id;
     } 
     if (json?.video!==undefined) {
       combinedText[combinedText.length]="(VIDEO:)"+json.video.id;
@@ -398,10 +410,10 @@ function retrieveStoryText(){
       json.sections.map(newSection).join("");
     } 
     if (json?.text!==undefined) {
-      extractText(json.text);
+      extractStory(json.text);
     } 
     if (json?.items!==undefined) {
-      json.items.map(extractText).join("");
+      json.items.map(extractStory).join("");
     } 
     if (json?.layers!==undefined) {
       for(let i in json.layers){  //Extra filter finds layerOrder to extract specific layerID's
@@ -410,47 +422,47 @@ function retrieveStoryText(){
         if (layerObj?.layerOrder!==undefined) {
           for(let j in layerObj.layerOrder){
             let layerJSON = layerObj.layers[layerObj.layerOrder[j]];
-            extractedLayers[extractedLayers.length]=extractText(layerJSON);
+            extractedLayers[extractedLayers.length]=extractStory(layerJSON);
           }
         }
       }
-      extractText(json.layers);  //Runs on single layer object if no layerOrder
+      extractStory(json.layers);  //Runs on single layer object if no layerOrder
     } 
     if (json?.item!==undefined) {
-      extractText(json.item);
+      extractStory(json.item);
     } 
     if (json?.title!==undefined) {
-      extractText(json.title);
+      extractStory(json.title);
     } 
     if (json?.leadIn!==undefined) {
-      extractText(json.leadIn);
+      extractStory(json.leadIn);
     } 
     if (json?.storyTitle!==undefined) {
-      extractText(json.storyTitle);
+      extractStory(json.storyTitle);
     } 
     if (json?.byline!==undefined) {
-      extractText(json.byline);
+      extractStory(json.byline);
     } 
     if (json?.caption!==undefined) {
-      extractText(json.caption);
+      extractStory(json.caption);
     } 
     if (json?.landscape!==undefined) {
-      extractText(json.landscape);
+      extractStory(json.landscape);
     } 
     
     if (Array.isArray(json)) {
-      json.map(extractText).join("");
+      json.map(extractStory).join("");
     }else {
       toExtract[toExtract.length]= "";
     }
   }
-  //retrieveStoryText('../story.json')
+  //retrieveStory('../story.json')
   //Require the desired json file from the story
   const storyData = require('../story.json');
 
   //Run function to extract the data
   const combinedText =[];
-  extractText(storyData)
+  extractStory(storyData)
   combinedText[combinedText.length]="FinalPara";
   const myIMG = [];
   for(i in combinedText){
