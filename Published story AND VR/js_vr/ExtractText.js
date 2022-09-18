@@ -1,13 +1,13 @@
-function retrieveStoryText(){
+function retrieveStory(){
   //Declare array variable for all extracted text
   let inLine=false;
   function newSection(json){
     combinedText[combinedText.length]="New Section";
     inLine=false;
-    return extractText(json,inLine);
+    return extractStory(json,inLine);
   }
 
-  function extractText(json,canvas){
+  function extractStory(json,canvas){
     let toExtract = [];
     if (!json) {
       return "";
@@ -23,24 +23,24 @@ function retrieveStoryText(){
       if(json.attrs?.fontSize!==undefined){
         combinedText[combinedText.length]="(FONT:)"+json.attrs.fontSize;
       }
-      extractText(json.attrs, canvas);
+      extractStory(json.attrs, canvas);
     } 
     if (json?.subTitle!==undefined) {
-      extractText(json.subTitle, canvas);
+      extractStory(json.subTitle, canvas);
     } 
     if (json?.content!==undefined) {
-      json.content.map(extractText).join("");
+      json.content.map(extractStory).join("");
     } 
     if (json?.image!==undefined) {
       if(inLine){
-        combinedText[combinedText.length]="(IMGIN:)"+json.image.id;
+        combinedText[combinedText.length]="(IMAGE-IN:)"+json.image.id;
       }else{
         combinedText[combinedText.length]="(IMAGE-BG:)"+json.image.id;
       }
       console.log(combinedText[combinedText.length-1])
     } 
     if (json?.video!==undefined) {
-      combinedText[combinedText.length]="(VIDEO:)"+json.video.id;
+      combinedText[combinedText.length]="(VIDEO---:)"+json.video.id;
     } 
     if (json?.embed!==undefined) { //Extract video embed
       let embededObj=json.embed;
@@ -54,10 +54,10 @@ function retrieveStoryText(){
       json.sections.map(newSection).join("");
     } 
     if (json?.text!==undefined) {
-      extractText(json.text, canvas);
+      extractStory(json.text, canvas);
     } 
     if (json?.items!==undefined) {
-      json.items.map(extractText,canvas).join("");
+      json.items.map(extractStory,canvas).join("");
     } 
     if (json?.layers!==undefined) {
       for(let i in json.layers){  //Extra filter finds layerOrder to extract specific layerID's
@@ -66,36 +66,36 @@ function retrieveStoryText(){
         if (layerObj?.layerOrder!==undefined) {
           for(let j in layerObj.layerOrder){
             let layerJSON = layerObj.layers[layerObj.layerOrder[j]];
-            extractedLayers[extractedLayers.length]=extractText(layerJSON, canvas);
+            extractedLayers[extractedLayers.length]=extractStory(layerJSON, canvas);
           }
         }
       }
-      extractText(json.layers, canvas);  //Runs on single layer object if no layerOrder
+      extractStory(json.layers, canvas);  //Runs on single layer object if no layerOrder
     } 
     if (json?.item!==undefined) {
-      extractText(json.item, canvas);
+      extractStory(json.item, canvas);
     } 
     if (json?.title!==undefined) {
-      extractText(json.title, canvas);
+      extractStory(json.title, canvas);
     } 
     if (json?.leadIn!==undefined) {
-      extractText(json.leadIn, canvas);
+      extractStory(json.leadIn, canvas);
     } 
     if (json?.storyTitle!==undefined) {
-      extractText(json.storyTitle, canvas);
+      extractStory(json.storyTitle, canvas);
     } 
     if (json?.byline!==undefined) {
-      extractText(json.byline, canvas);
+      extractStory(json.byline, canvas);
     } 
     if (json?.caption!==undefined) {
-      extractText(json.caption, canvas);
+      extractStory(json.caption, canvas);
     } 
     if (json?.landscape!==undefined) {
-      extractText(json.landscape, canvas);
+      extractStory(json.landscape, canvas);
     } 
     
     if (Array.isArray(json)) {
-      json.map(extractText).join("");
+      json.map(extractStory).join("");
     }else {
       toExtract[toExtract.length]= "";
     }
@@ -106,7 +106,7 @@ function retrieveStoryText(){
 
   //Run function to extract the data
   const combinedText =[];
-  extractText(storyData,inLine)
+  extractStory(storyData,inLine)
   combinedText[combinedText.length]="FinalPara";
   const myIMG = [];
   for(i in combinedText){
@@ -124,9 +124,9 @@ function retrieveStoryText(){
 
 //myText = retrieveStoryText('./shorthand-wanderlust-project-Innsmouth/story.json');
 let myText = []
-myText = retrieveStoryText();
+myText = retrieveStory();
 for(i in myText[0]){
-  if(myText[0][i].includes("(IM")){
+  if(myText[0][i].includes("(IMAGE-")){
     //console.log(myText[0][i])
 
   }
