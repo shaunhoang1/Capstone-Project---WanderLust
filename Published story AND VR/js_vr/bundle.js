@@ -368,12 +368,11 @@ function iniParagraphObjects(){
 //Currently just defines story paragraphs from input 
 function retrieveStory(){
   //Declare array variable for all extracted text
-
   function newSection(json){
     combinedText[combinedText.length]="New Section";
-    return extractText(json);
+    return extractStory(json);
   }
-  function extractText(json){
+  function extractStory(json){
     let toExtract = [];
     if (!json) {
       return "";
@@ -382,13 +381,13 @@ function retrieveStory(){
       if(json.attrs?.fontSize!==undefined){
         combinedText[combinedText.length]="(FONT:)"+json.attrs.fontSize;
       }
-      extractText(json.attrs);
+      extractStory(json.attrs);
     } 
     if (json?.subTitle!==undefined) {
-      extractText(json.subTitle);
+      extractStory(json.subTitle);
     } 
     if (json?.content!==undefined) {
-      json.content.map(extractText).join("");
+      json.content.map(extractStory).join("");
     } 
     if (json?.image!==undefined) {
       combinedText[combinedText.length]="(IMAGE:)"+json.image.id;
@@ -411,10 +410,10 @@ function retrieveStory(){
       json.sections.map(newSection).join("");
     } 
     if (json?.text!==undefined) {
-      extractText(json.text);
+      extractStory(json.text);
     } 
     if (json?.items!==undefined) {
-      json.items.map(extractText).join("");
+      json.items.map(extractStory).join("");
     } 
     if (json?.layers!==undefined) {
       for(let i in json.layers){  //Extra filter finds layerOrder to extract specific layerID's
@@ -423,36 +422,36 @@ function retrieveStory(){
         if (layerObj?.layerOrder!==undefined) {
           for(let j in layerObj.layerOrder){
             let layerJSON = layerObj.layers[layerObj.layerOrder[j]];
-            extractedLayers[extractedLayers.length]=extractText(layerJSON);
+            extractedLayers[extractedLayers.length]=extractStory(layerJSON);
           }
         }
       }
-      extractText(json.layers);  //Runs on single layer object if no layerOrder
+      extractStory(json.layers);  //Runs on single layer object if no layerOrder
     } 
     if (json?.item!==undefined) {
-      extractText(json.item);
+      extractStory(json.item);
     } 
     if (json?.title!==undefined) {
-      extractText(json.title);
+      extractStory(json.title);
     } 
     if (json?.leadIn!==undefined) {
-      extractText(json.leadIn);
+      extractStory(json.leadIn);
     } 
     if (json?.storyTitle!==undefined) {
-      extractText(json.storyTitle);
+      extractStory(json.storyTitle);
     } 
     if (json?.byline!==undefined) {
-      extractText(json.byline);
+      extractStory(json.byline);
     } 
     if (json?.caption!==undefined) {
-      extractText(json.caption);
+      extractStory(json.caption);
     } 
     if (json?.landscape!==undefined) {
-      extractText(json.landscape);
+      extractStory(json.landscape);
     } 
     
     if (Array.isArray(json)) {
-      json.map(extractText).join("");
+      json.map(extractStory).join("");
     }else {
       toExtract[toExtract.length]= "";
     }
@@ -463,7 +462,7 @@ function retrieveStory(){
 
   //Run function to extract the data
   const combinedText =[];
-  extractText(storyData)
+  extractStory(storyData)
   combinedText[combinedText.length]="FinalPara";
   const myIMG = [];
   for(i in combinedText){
