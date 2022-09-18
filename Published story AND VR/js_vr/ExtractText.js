@@ -14,7 +14,6 @@ function retrieveStory(){
     } 
     if (json?.kind!==undefined){
       if(json.kind==="card-canvas"){
-        console.log(json.kind);
         inLine=true;
       }
       
@@ -37,7 +36,6 @@ function retrieveStory(){
       }else{
         combinedText[combinedText.length]="(IMAGE-BG:)"+json.image.id;
       }
-      console.log(combinedText[combinedText.length-1])
     } 
     if (json?.video!==undefined) {
       combinedText[combinedText.length]="(VIDEO---:)"+json.video.id;
@@ -108,18 +106,10 @@ function retrieveStory(){
   const combinedText =[];
   extractStory(storyData,inLine)
   combinedText[combinedText.length]="FinalPara";
-  const myIMG = [];
-  for(i in combinedText){
-    if(combinedText[i].includes("(IMAGE:)") || combinedText[i].includes("(VIDEO:)")){
-      //console.log("image found")
-      myIMG[myIMG.length]=combinedText[i];
-    }
-  }
                
   const imgArray=["/assets/5HECXqtPRY/ticketoffice-1080x1920.jpeg","/assets/bcoIi7gXby/town-846x1349.jpeg","/assets/D3h9QGqI9v/town-1080x1920.jpeg","/assets/iMitwH0EXu/bus-1080x1920.jpeg","/assets/JqXBwRBR7R/store-863x1368.jpeg","/assets/KehrQ0yKcs/uvcewi30dwtkdrukfi4b-thumbnail.jpeg","/assets/MObpieZw3w/wzkp1rhpuznb2ozzmat6-1-sxv3v-thumbnail.jpeg","/assets/NETXgllPkN/railwaystation-852x1406.jpeg","/assets/PYj71zvsAD/cthulhu.mp4","/assets/sfv2bWQrhq/dream_tradingcard-857x1376.jpeg",,"/assets/uhD9A6h3Vo/staring-1080x1920.jpeg","/assets/X0OgcjeEUe/busdring-1080x1920.jpeg","/assets/yp0f2XkDCi/poster-1590x894.jpeg"]
-  return [combinedText, myIMG, imgArray];
+  return [combinedText, imgArray];
 }
-
                
 
 //myText = retrieveStoryText('./shorthand-wanderlust-project-Innsmouth/story.json');

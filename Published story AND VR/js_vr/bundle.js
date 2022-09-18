@@ -1,34 +1,28 @@
 (function(){function r(e,n,t){function o(i,f){if(!n[i]){if(!e[i]){var c="function"==typeof require&&require;if(!f&&c)return c(i,!0);if(u)return u(i,!0);var a=new Error("Cannot find module '"+i+"'");throw a.code="MODULE_NOT_FOUND",a}var p=n[i]={exports:{}};e[i][0].call(p.exports,function(r){var n=e[i][1][r];return o(n||r)},p,p.exports,r,e,n,t)}return n[i].exports}for(var u="function"==typeof require&&require,i=0;i<t.length;i++)o(t[i]);return o}return r})()({1:[function(require,module,exports){
-
     
 let objParas = "";
 let storyParagraphs=[];
 let movingPictures=[];
-
 let imgRepo=[];
-let fullText= [];
-let myImages = [];
 
 //Define the Backgrounds
 let currentSky = 0;
 const skies = [];
 {
-    skies[1] = "#sky1";
-    skies[2] = "#sky2";
-    skies[3] = "#sky3";
-    skies[4] = "#sky4";
-    skies[5] = "#sky5";
-    skies[6] = "#sky6";
-    skies[7] = "#sky7";
-    skies[8] = "#sky8";
-    skies[9] = "#sky9";
+  skies[1] = "#sky1";
+  skies[2] = "#sky2";
+  skies[3] = "#sky3";
+  skies[4] = "#sky4";
+  skies[5] = "#sky5";
+  skies[6] = "#sky6";
+  skies[7] = "#sky7";
+  skies[8] = "#sky8";
+  skies[9] = "#sky9";
 }
 
 //Define the page number and change for all text objects
 let scrollingHeight = 0;
 let currentPage = 0;
-let currentPageAll = 0;
-let tempPage = 0;    
 
 //All JS Functions which are required to navigate through the story are created here
 //Manually scroll through paragraphs with "i" or "k"
@@ -36,51 +30,50 @@ document.addEventListener("keydown", function (event) {
     //Scroll through paragraphs  
     //Scroll up        
     if (event.key === "i"){
-        changePage(0);
-        //add to scroll
-        scrollingHeight= objParas.object3D.position.y+10+1;
+      changePage(0);
+      //add to scroll
+      scrollingHeight= objParas.object3D.position.y+10+1;
 
-        //If greater than or equal to maximum height, reset for next section
-        var wrapCheck = wrapAround(scrollingHeight,0,20);
-        if (wrapCheck[0]) {
-            scrollingHeight = wrapCheck[1];
-            console.log("Loading Next section");
-            changePage(1);
+      //If greater than or equal to maximum height, reset for next section
+      var wrapCheck = wrapAround(scrollingHeight,0,20);
+      if (wrapCheck[0]) {
+          scrollingHeight = wrapCheck[1];
+          console.log("Loading Next section");
+          changePage(1);
 
-            //Reset the Position 
-            objParas.setAttribute("opacity", 1);
-            objParas.setAttribute("position","0 -10 -20"); 
-        }
+          //Reset the Position 
+          objParas.setAttribute("opacity", 1);
+          objParas.setAttribute("position","0 -10 -20"); 
+      }
 
-        //Remove existing animations
-        objParas.removeAttribute("animation__pos");
+      //Remove existing animations
+      objParas.removeAttribute("animation__pos");
 
-        objParas.object3D.position.y = -10+scrollingHeight;
-        setOpacity();
+      objParas.object3D.position.y = -10+scrollingHeight;
+      setOpacity();
 
     //Scroll Down
     } else if (event.key === "k") {
-    scrollingHeight = objParas.object3D.position.y+10;
+      scrollingHeight = objParas.object3D.position.y+10;
+      //subtract from scroll
+      scrollingHeight= scrollingHeight-0.2;
+      //If less than or equal to min height, reset for previous section      
+      var wrapCheck = wrapAround(scrollingHeight,0,20);
+      if (wrapCheck[0]) {
+        scrollingHeight = wrapCheck[1];
+        console.log("Loading Previous section");
+        changePage(-1);
 
-        //subtract from scroll
-        scrollingHeight= scrollingHeight-0.2;
-        //If less than or equal to min height, reset for previous section      
-        var wrapCheck = wrapAround(scrollingHeight,0,20);
-        if (wrapCheck[0]) {
-            scrollingHeight = wrapCheck[1];
-            console.log("Loading Previous section");
-            changePage(-1);
+        //Reset  the Position
+        objParas.setAttribute("opacity", 1);
+        objParas.setAttribute("position","0 10 -20");  
+      }           
 
-            //Reset  the Position
-            objParas.setAttribute("opacity", 1);
-            objParas.setAttribute("position","0 10 -20");  
-        }           
+      //Remove existing animations
+      objParas.removeAttribute("animation__pos");
 
-        //Remove existing animations
-        objParas.removeAttribute("animation__pos");
-
-        objParas.object3D.position.y = -10+scrollingHeight;
-        setOpacity();
+      objParas.object3D.position.y = -10+scrollingHeight;
+      setOpacity();
     }
     //Go to previous paragraph
     if (event.key === "q") {
@@ -90,15 +83,6 @@ document.addEventListener("keydown", function (event) {
     } else if (event.key === "e") {
         scrollingHeight = 0;
         changePage(1);
-    }
-    /*
-    if (event.key ==="p"){
-        scrollingHeight = 0;
-        changePageAll(1);
-        console.log("4-page scrolling");
-    }*/
-    if (event.key === "l") {
-      deleteMovingImage();
     }
 });
 
@@ -129,7 +113,6 @@ function nextSection(pageChange){
     
   //Run until the end of section
   while(!sectionFound){
-    console.log(storyParagraphs[tempImageNum])
     if(storyParagraphs[tempImageNum].includes("New Section")){
         //If next section found, end the search
         sectionFound=true;
@@ -146,10 +129,9 @@ function nextSection(pageChange){
     if(tempImageNum>storyParagraphs.length-1){sectionFound=true;} //If last story component, then mark end of section
   }
     
-    //Set the text object value to the current section's text
+  //Set the text object value to the current section's text
   objParas.setAttribute("value", currentText);
-    console.log(myImages)
-    //Create all images for the current section
+  //Create all images for the current section
   createImages(myImages);
 }
     
@@ -200,11 +182,11 @@ setInterval(setOpacity,100);
 function importStory(){
   iniParagraphObjects(); //Initialize the html text objects
   retrieveStoryAssets = retrieveStory(); //retrieve the story from the json
-  myImages = retrieveStoryAssets[1]; //Assign the image elements from the story
+  
   for(i in retrieveStoryAssets[0]){ //Extract the text elements from the story into the HTML
     storyParagraphs[i-1] = retrieveStoryAssets[0][i-1];
   }
-  imgRepo = retrieveStoryAssets[2]; //Assign the Image Directory values
+  imgRepo = retrieveStoryAssets[1]; //Assign the Image Directory values
 
   storyParagraphs.unshift("New Section");
   currentPage=0;currentSky = 0; //Initialize New State of story
@@ -337,7 +319,6 @@ function retrieveStory(){
     } 
     if (json?.kind!==undefined){
       if(json.kind==="card-canvas"){
-        console.log(json.kind);
         inLine=true;
       }
       
@@ -360,7 +341,6 @@ function retrieveStory(){
       }else{
         combinedText[combinedText.length]="(IMAGE-BG:)"+json.image.id;
       }
-      console.log(combinedText[combinedText.length-1])
     } 
     if (json?.video!==undefined) {
       combinedText[combinedText.length]="(VIDEO---:)"+json.video.id;
@@ -431,16 +411,9 @@ function retrieveStory(){
   const combinedText =[];
   extractStory(storyData,inLine)
   combinedText[combinedText.length]="FinalPara";
-  const myIMG = [];
-  for(i in combinedText){
-    if(combinedText[i].includes("(IMAGE:)") || combinedText[i].includes("(VIDEO:)")){
-      //console.log("image found")
-      myIMG[myIMG.length]=combinedText[i];
-    }
-  }
                
   const imgArray=["/assets/5HECXqtPRY/ticketoffice-1080x1920.jpeg","/assets/bcoIi7gXby/town-846x1349.jpeg","/assets/D3h9QGqI9v/town-1080x1920.jpeg","/assets/iMitwH0EXu/bus-1080x1920.jpeg","/assets/JqXBwRBR7R/store-863x1368.jpeg","/assets/KehrQ0yKcs/uvcewi30dwtkdrukfi4b-thumbnail.jpeg","/assets/MObpieZw3w/wzkp1rhpuznb2ozzmat6-1-sxv3v-thumbnail.jpeg","/assets/NETXgllPkN/railwaystation-852x1406.jpeg","/assets/PYj71zvsAD/cthulhu.mp4","/assets/sfv2bWQrhq/dream_tradingcard-857x1376.jpeg",,"/assets/uhD9A6h3Vo/staring-1080x1920.jpeg","/assets/X0OgcjeEUe/busdring-1080x1920.jpeg","/assets/yp0f2XkDCi/poster-1590x894.jpeg"]
-  return [combinedText, myIMG, imgArray];
+  return [combinedText, imgArray];
 }
 
 
