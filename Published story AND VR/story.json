@@ -545,6 +545,14 @@
                   "y": 50
                 }
               },
+              "object": {
+                "id": "testObject",
+                "meta": {
+                  "heading": "Background image (will be cropped to screen)",
+                  "subHeading": "Recommended: JPEG @ 1080 x 1920px "
+                },
+                "isUserDefined": false
+              },
               "portrait": {
                 "image": {
                   "id": "qt75W6oC9E",

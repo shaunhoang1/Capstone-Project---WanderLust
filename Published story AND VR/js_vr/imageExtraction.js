@@ -1,26 +1,36 @@
 //Import required functions for script
 //const { response } = require('express');
 //const { array, string } = require('joi');
-
-
 function retrieveDirectoryImages(){
-  var fs = require('fs');
-  var files = fs.readdirSync('./assets');
+  let fs = require('fs');
+  let files = fs.readdirSync('./assets');
   let myImages = [];
   for(i in files){
-      if(!files[i].includes('.')){
-          var fileImages = fs.readdirSync('./assets/'+files[i]);
-          for(let x in [0,1]){
-            for(let j in fileImages){
-              if (fileImages[j].search('.webp')!==-1 || fileImages[j].search('.gif')!==-1){
-                fileImages.splice(j,1);
-              }
-            }
-          }
-          myImages.push(files[i]+"/"+fileImages[1]);
-  }}
-  for(i in myImages){
-      //console.log(myImages[i]);
+    if(!files[i].includes('.')){
+      let fileImages = fs.readdirSync('./assets/'+files[i]);
+      let imgFound=false;
+      //Searches for more important file types first, and then others
+      for(let j in fileImages){
+        if (fileImages[j].search('.mp4')!==-1 && !imgFound){
+          myImages.push(files[i]+"/"+fileImages[j]);
+          imgFound=true;
+        }
+      }
+      for(let j in fileImages){
+        if (fileImages[j].search('.obj')!==-1 && !imgFound){
+          myImages.push(files[i]+"/"+fileImages[j]);
+          imgFound=true;
+        }
+        if (fileImages[j].search('.jpeg')!==-1 && !imgFound){
+          myImages.push(files[i]+"/"+fileImages[j]);
+          imgFound=true;
+        }
+        if (fileImages[j].search('.png')!==-1 && !imgFound){
+          myImages.push(files[i]+"/"+fileImages[j]);
+          imgFound=true;
+        }
+      }
+    } 
   }
   return myImages;
 }      
@@ -30,6 +40,7 @@ let imgDir=[]
 for(i in myImages){
   if(myImages[i].includes(".")){
     imgDir[i] = "\"/assets/"+myImages[i]+"\"";
+    console.log(imgDir[i])
   }
 }
 

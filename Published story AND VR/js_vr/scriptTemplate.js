@@ -1,7 +1,11 @@
+//const { string } = require("joi");
+
 let objParas = "";
 let storyParagraphs=[];
 let movingPictures=[];
+let movingObjects=[];
 let imgRepo=[];
+
 
 //Define the Backgrounds
 let currentSky = 0;
@@ -105,6 +109,7 @@ function nextSection(pageChange){
   changePage(pageChange); //Navigate to the next page
   
   let myImages = []; //Initiate the Array of images for the new section
+  let myObjects = []; //Initiate the Array of Objects for the new section
   let tempImageNum = currentPage; //Temp integer at current page to navigate through all story components in this section
   let sectionFound=false; //Boolean to check when the section ends
   let currentText=""; //Str var for all the text in this section
@@ -115,9 +120,12 @@ function nextSection(pageChange){
         //If next section found, end the search
         sectionFound=true;
     }else if(storyParagraphs[tempImageNum].includes("(IMAGE-") || storyParagraphs[tempImageNum].includes("(VIDEO-")){
-        //If an image or video is found, then push them to the image array for loading
-        myImages.push(storyParagraphs[tempImageNum].slice(11))
-    }else{
+      //If an image or video is found, then push them to the image array for loading
+      myImages.push(storyParagraphs[tempImageNum].slice(11))
+    }else if(storyParagraphs[tempImageNum].includes("(OBJECT-")){
+      //If an image or video is found, then push them to the image array for loading
+      myObjects.push(storyParagraphs[tempImageNum].slice(11))
+    }else{  
         //Otherwise add the current text to the section text var
       currentText=currentText+storyParagraphs[tempImageNum]+"\n\n";
     }
@@ -131,6 +139,7 @@ function nextSection(pageChange){
   objParas.setAttribute("value", currentText);
   //Create all images for the current section
   createImages(myImages);
+  createObjects(myObjects);
 }
     
 //Control the opacity of paragraphs as they change height
@@ -246,6 +255,39 @@ function createImages(imageNums){
   }
 }
 
+function createObjects(objNums){
+  //Clear previous sections images
+//deleteMovingImage();
+for(i in objNums){ //For each image in this section
+  //Check how many pictures there are
+  let objCount=movingObjects.length;
+  
+  //Create the new HTML Element for the picture
+  let obj = document.createElement("a-entity");
+  obj.setAttribute("id","movingObj"+objCount);
+  let src ="";
+  for(j in imgRepo){ //Find the image file for the current image
+    if(imgRepo[j].includes(objNums[i])){
+      src=imgRepo[j]
+    }
+  }
+  obj.setAttribute("obj-model", "obj: "+src);
+  obj.setAttribute("color", "#00FF00");
+  obj.setAttribute("scale", "0.06 0.06 0.06");
+  obj.setAttribute("position", "-3.1 0 2");
+
+  movingObjects[objCount]=objCount;
+  
+  //Create the image element
+  //let element = document.getElementById("textPara");
+  let element = document.getElementById("objectParent");
+  element.appendChild(obj); 
+  obj.removeAttribute("animation__opa");
+    //ANIMATION ATTRIBUTE FOR BACKGROUND IMAGES TO FADE IN
+  obj.setAttribute("animation__opa","property: opacity; from:0;to: 1; dur:1000; easing: linear; loop: false;");
+}
+}
+
 //Delete all pictures
 function deleteMovingImage(){
   for(i in movingPictures){
@@ -253,7 +295,13 @@ function deleteMovingImage(){
     let elmnt = document.getElementById(elID);
     elmnt.remove();
   }
+  for(i in movingObjects){
+    let elID = "movingObj"+i;
+    let elmnt = document.getElementById(elID);
+    elmnt.remove();
+  }
   movingPictures=[];
+  movingObjects=[];
 }
 
 
