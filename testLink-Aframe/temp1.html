@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Link Test</title>      
+    <!-- Load A-Frame and additional components -->
+    <script src="https://aframe.io/releases/1.3.0/aframe.min.js"></script>
+    <script src="https://unpkg.com/aframe-look-at-component@0.8.0/dist/aframe-look-at-component.min.js"></script>
+    <script>
+      let arrWorlds=["./index1.html","./index2.html","./index3.html"]
+      let currentWorld=0
+      document.addEventListener("keydown", function (event) {
+        if (event.key === "e"){
+        window.location = document.getElementById("next").getAttribute("href")
+        }
+        if (event.key === "q"){
+        window.location = document.getElementById("back").getAttribute("href")
+        }
+      })
+      let locations=["world1","world2","world3"];
+      </script>
+  </head>
+
+  <body>
+    <!-- HTML Elements to create a page before scene   embedded style="height:100px;width:100px;" z-index=-10000 -->
+    <a-scene>
+
+      <a-assets>
+        <img id="world1" src="./assets/S10.png">
+        <img id="world2" src="./assets/S11.png">
+        <img id="world3" src="./assets/S12.png">
+        <img id="world4" src="./assets/S13.png">
+        <img id="world5" src="./assets/S14.png">
+        <img id="world6" src="./assets/S12.png">
+      </a-assets>
+      
