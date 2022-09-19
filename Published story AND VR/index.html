@@ -46,7 +46,9 @@
     <script>
       function enterVR(){
         console.log(navigator.userAgent.toLowerCase())
-        window.location="index_vr.html"
+        let buttonEl = document.getElementById("vrButton")
+        buttonEl.textContent=navigator.userAgent.toLowerCase()
+        //window.location="index_vr.html"
       }
 
     </script>
@@ -60,7 +62,7 @@
           
           
         </div>
-        <button class="ml-auto float-xs-right"  value="" style="width:auto;margin-right: 30%;font-size: 1.3vmin;margin-bottom: auto;margin-top: auto;" onclick="enterVR()">
+        <button class="ml-auto float-xs-right" id="vrButton"  value="" style="width:auto;margin-right: 30%;font-size: 1.3vmin;margin-bottom: auto;margin-top: auto;" onclick="enterVR()">
           Enter VR
         </button>
         <nav class="Navigation Theme-NavigationBar" role="navigation" id="navigation">

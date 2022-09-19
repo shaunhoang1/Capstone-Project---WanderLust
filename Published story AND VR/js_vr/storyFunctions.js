@@ -5,8 +5,10 @@ let storyParagraphs=[];
 let movingPictures=[];
 let movingObjects=[];
 let imgRepo=[];
-
-
+let objSky = "";
+let elementDelete = [];
+let sectionImages = []; //Initiate the Array of images for the new section
+  let sectionObjects = []; //Initiate the Array of Objects for the new section
 //Define the Backgrounds
 let currentSky = 0;
 const skies = [];
@@ -107,39 +109,20 @@ function wrapAround(current,min,max){
 function nextSection(pageChange){
   changeSky(pageChange); //Update skybox to respective image
   changePage(pageChange); //Navigate to the next page
-  
-  let myImages = []; //Initiate the Array of images for the new section
-  let myObjects = []; //Initiate the Array of Objects for the new section
-  let tempImageNum = currentPage; //Temp integer at current page to navigate through all story components in this section
-  let sectionFound=false; //Boolean to check when the section ends
-  let currentText=""; //Str var for all the text in this section
-    
-  //Run until the end of section
-  while(!sectionFound){
-    if(storyParagraphs[tempImageNum].includes("New Section")){
-        //If next section found, end the search
-        sectionFound=true;
-    }else if(storyParagraphs[tempImageNum].includes("(IMAGE-") || storyParagraphs[tempImageNum].includes("(VIDEO-")){
-      //If an image or video is found, then push them to the image array for loading
-      myImages.push(storyParagraphs[tempImageNum].slice(11))
-    }else if(storyParagraphs[tempImageNum].includes("(OBJECT-")){
-      //If an image or video is found, then push them to the image array for loading
-      myObjects.push(storyParagraphs[tempImageNum].slice(11))
-    }else{  
-        //Otherwise add the current text to the section text var
-      currentText=currentText+storyParagraphs[tempImageNum]+"\n\n";
-    }
-      
-      //check up to the next story component
-    tempImageNum=tempImageNum+1;
-    if(tempImageNum>storyParagraphs.length-1){sectionFound=true;} //If last story component, then mark end of section
+  for(i in movingPictures){
+    let elID = "movingPicture"+i;
+    let elmnt = document.getElementById(elID);
+    elmnt.setAttribute("animation__opa","property: opacity; from:1;to: 0; dur:100; easing: linear; loop: false;");
+    elementDelete.push(elID)
   }
-    
-  //Set the text object value to the current section's text
-  objParas.setAttribute("value", currentText);
-  //Create all images for the current section
-  createImages(myImages);
-  createObjects(myObjects);
+  for(i in movingObjects){
+    let elID = "movingObj"+i;
+    let elmnt = document.getElementById(elID);
+    elmnt.setAttribute("animation__scale","property: scale; from:0.06 0.06 0.06;to: 0 0 0; dur:100; easing: linear; loop: false;");
+    elementDelete.push(elID)
+  }
+  setTimeout(deleteSectionMedia,100);
+  
 }
     
 //Control the opacity of paragraphs as they change height
@@ -198,25 +181,22 @@ setTimeout(importStory,10); //Required to begin the story
 
 //Navigate to next/previous skybox image
 function changeSky(skyChange) {
-  var sky2 = document.getElementById("sky2");
-  var sky = document.getElementById("sky");
-  sky.removeAttribute("animation__opa");
-  sky2.removeAttribute("animation__opa");
-  sky2.setAttribute("opacity", "0");
-  sky2.setAttribute("src", skies[currentSky]);
-  sky2.setAttribute("opacity", "1");
-  sky2.setAttribute("animation__opa","property: opacity; from:1;to: 0; dur:1000; easing: linear; loop: false;");
   currentSky = wrapAround(currentSky + skyChange,1,skies.length-1)[1];
-  sky.setAttribute("opacity", "0");
-  sky.setAttribute("src", skies[currentSky]);
-  sky.setAttribute("animation__opa","property: opacity; from:0;to: 1; dur:1000; easing: linear; loop: false;");
-  
+  objSky.removeAttribute("animation__opa");
+  objSky.setAttribute("animation__opa","property: opacity; from:1;to: 0; dur:200; easing: linear; loop: false;");
+  setTimeout(setSkyFadeIn,200);
+}
+function setSkyFadeIn(){
+  objSky.removeAttribute("animation__opa");
+  objSky.setAttribute("src", skies[currentSky]);
+  objSky.setAttribute("animation__opa","property: opacity; from:0;to: 1; dur:300; easing: linear; loop: false;");
+
 }
     
 //Create all the images for the current section
 function createImages(imageNums){
     //Clear previous sections images
-  deleteMovingImage();
+
   for(i in imageNums){ //For each image in this section
     //Check how many pictures there are
     let imgCount=movingPictures.length;
@@ -261,57 +241,87 @@ function createImages(imageNums){
     element.appendChild(img); 
     img.removeAttribute("animation__opa");
       //ANIMATION ATTRIBUTE FOR BACKGROUND IMAGES TO FADE IN
-    img.setAttribute("animation__opa","property: opacity; from:0;to: 1; dur:1000; easing: linear; loop: false;");
+    img.setAttribute("animation__opa","property: opacity; from:0;to: 1; dur:100; easing: linear; loop: false;");
   }
 }
 
 function createObjects(objNums){
   //Clear previous sections images
-//deleteMovingImage();
-for(i in objNums){ //For each image in this section
-  //Check how many pictures there are
-  let objCount=movingObjects.length;
-  
-  //Create the new HTML Element for the picture
-  let obj = document.createElement("a-entity");
-  obj.setAttribute("id","movingObj"+objCount);
-  let src ="";
-  for(j in imgRepo){ //Find the image file for the current image
-    if(imgRepo[j].includes(objNums[i])){
-      src=imgRepo[j]
+  //deleteMovingImage();
+  for(i in objNums){ //For each image in this section
+    //Check how many pictures there are
+    let objCount=movingObjects.length;
+    
+    //Create the new HTML Element for the picture
+    let obj = document.createElement("a-entity");
+    obj.setAttribute("id","movingObj"+objCount);
+    let src ="";
+    for(j in imgRepo){ //Find the image file for the current image
+      if(imgRepo[j].includes(objNums[i])){
+        src=imgRepo[j]
+      }
     }
-  }
-  obj.setAttribute("obj-model", "obj: "+src);
-  obj.setAttribute("color", "#00FF00");
-  obj.setAttribute("scale", "0.06 0.06 0.06");
-  obj.setAttribute("position", "-3.1 0 2");
+    obj.setAttribute("obj-model", "obj: "+src);
+    obj.setAttribute("color", "#00FF00");
+    obj.setAttribute("scale", "0 0 0");
+    obj.setAttribute("position", "-3.1 0 2");
 
-  movingObjects[objCount]=objCount;
-  
-  //Create the image element
-  //let element = document.getElementById("textPara");
-  let element = document.getElementById("objectParent");
-  element.appendChild(obj); 
-  obj.removeAttribute("animation__opa");
-    //ANIMATION ATTRIBUTE FOR BACKGROUND IMAGES TO FADE IN
-  obj.setAttribute("animation__opa","property: opacity; from:0;to: 1; dur:1000; easing: linear; loop: false;");
-}
+    movingObjects[objCount]=objCount;
+    
+    //Create the image element
+    //let element = document.getElementById("textPara");
+    let element = document.getElementById("objectParent");
+    element.appendChild(obj); 
+    obj.removeAttribute("animation__sca");
+      //ANIMATION ATTRIBUTE FOR BACKGROUND IMAGES TO FADE IN
+    obj.setAttribute("animation__sca","property: scale; from:0 0 0;to: 0.06 0.06 0.06; dur:100; easing: linear; loop: false;");
+  }
 }
 
 //Delete all pictures
-function deleteMovingImage(){
-  for(i in movingPictures){
-    let elID = "movingPicture"+i;
-    let elmnt = document.getElementById(elID);
+function deleteSectionMedia(){
+  for(i in elementDelete){
+    
+    console.log(elementDelete[i])
+    let elmnt = document.getElementById(elementDelete[i]);
     elmnt.remove();
   }
-  for(i in movingObjects){
-    let elID = "movingObj"+i;
-    let elmnt = document.getElementById(elID);
-    elmnt.remove();
-  }
+  elementDelete=[];
   movingPictures=[];
   movingObjects=[];
+  sectionimages=[];
+  sectionObjects=[];
+  
+  let tempImageNum = currentPage; //Temp integer at current page to navigate through all story components in this section
+  let sectionFound=false; //Boolean to check when the section ends
+  let currentText=""; //Str var for all the text in this section
+    
+  //Run until the end of section
+  while(!sectionFound){
+    if(storyParagraphs[tempImageNum].includes("New Section")){
+        //If next section found, end the search
+        sectionFound=true;
+    }else if(storyParagraphs[tempImageNum].includes("(IMAGE-") || storyParagraphs[tempImageNum].includes("(VIDEO-")){
+      //If an image or video is found, then push them to the image array for loading
+      sectionImages.push(storyParagraphs[tempImageNum].slice(11))
+    }else if(storyParagraphs[tempImageNum].includes("(OBJECT-")){
+      //If an image or video is found, then push them to the image array for loading
+      sectionObjects.push(storyParagraphs[tempImageNum].slice(11))
+    }else{  
+        //Otherwise add the current text to the section text var
+      currentText=currentText+storyParagraphs[tempImageNum]+"\n\n";
+    }
+      
+      //check up to the next story component
+    tempImageNum=tempImageNum+1;
+    if(tempImageNum>storyParagraphs.length-1){sectionFound=true;} //If last story component, then mark end of section
+  }
+    
+  //Set the text object value to the current section's text
+  objParas.setAttribute("value", currentText);
+  //Create all images for the current section
+  createImages(sectionImages);
+  createObjects(sectionObjects);
 }
 
 
@@ -350,6 +360,7 @@ function changePage(pageChange) {
 //define all paragraph objects
 function iniParagraphObjects(){
     objParas=document.getElementById("textPara");
+    objSky = document.getElementById("sky");
 }
 /*
 //Define Story paragraphs dynamically from the author's pre-existing story paragraphs
