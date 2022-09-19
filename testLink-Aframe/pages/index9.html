@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Link Test</title>
+<!-- Load A-Frame and additional components -->
+<script src="https://aframe.io/releases/1.3.0/aframe.min.js"></script>
+<script src="https://unpkg.com/aframe-look-at-component@0.8.0/dist/aframe-look-at-component.min.js"></script>
+<script>
+document.addEventListener("keydown", function (event) {
+if (event.key === "e"){
+window.location = document.getElementById("next").getAttribute("href")
+}
+if (event.key === "q"){
+window.location = document.getElementById("back").getAttribute("href")
+}
+})
+</script>
+</head>
+
+  <body>
+<!-- HTML Elements to create a page before scene   embedded style="height:100px;width:100px;" z-index=-10000 -->
+<a-scene>
+
+<a-assets>
+<img id="world0" src="../assets/S10.png">
+<img id="world1" src="../assets/S11.png">
+<img id="world2" src="../assets/S12.png">
+<img id="world3" src="../assets/S10.png">
+<img id="world4" src="../assets/S11.png">
+<img id="world5" src="../assets/S12.png">
+<img id="world6" src="../assets/S10.png">
+<img id="world7" src="../assets/S11.png">
+<img id="world8" src="../assets/S12.png">
+<img id="world9" src="../assets/S10.png">
+</a-assets>
+<a-text value=" I rushed out of the hotel and ran without looking back, and finally fell on the muddy ground and passed out. In the morning I woke up in the pub in the town, I quickly boarded the bus to my hometown, and everything was calm as if everything that happened last night was a dream.
+(EMBED:)https://www.youtube.com/watch?v=JyXEwn6QNhc
+ Arriving at my grandparents' house, the strange face in my grandmother's portrait brought back memories of all the weird things I've been through lately. Everything seemed to portend something, Innsmouth, the cult, the god, the strange pattern on the ring and the face of the grandmother. With my hair falling out because I stayed up all night thinking, there was only one thought in my mind, I had to go back to that town no matter what.
+(EMBED:)https://www.youtube.com/watch?v=Rxh_SVtyZqo
+" position="-1 0 -15"></a-text>
+<a-sky src="#world9"></a-sky>
+<a-link id="next" href="index1.html" title="Next Page" image="#world1" position="10 0 -10" scale="3 3 3"></a-link>
+<a-link id="back" href="index8.html" title="Previous Page" image="#world8" position="-10 0 -10" scale="3 3 3"></a-link>
+</a-scene>
+</body>
+</html>
