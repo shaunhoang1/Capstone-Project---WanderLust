@@ -1,14 +1,14 @@
 //const { string } = require("joi");
 
 let objParas = "";
-let storyParagraphs=[];
-let movingPictures=[];
-let movingObjects=[];
-let imgRepo=[];
+let storyParagraphs = [];
+let movingPictures = [];
+let movingObjects = [];
+let imgRepo = [];
 let objSky = "";
 let elementDelete = [];
 let sectionImages = []; //Initiate the Array of images for the new section
-  let sectionObjects = []; //Initiate the Array of Objects for the new section
+let sectionObjects = []; //Initiate the Array of Objects for the new section
 //Define the Backgrounds
 let currentSky = 0;
 const skies = [];
@@ -31,114 +31,119 @@ let currentPage = 0;
 //All JS Functions which are required to navigate through the story are created here
 //Manually scroll through paragraphs with "i" or "k"
 document.addEventListener("keydown", function (event) {
-    //Scroll through paragraphs  
-    //Scroll up        
-    if (event.key === "i"){
-      changePage(0);
-      //add to scroll
-      scrollingHeight= objParas.object3D.position.y+10+1;
+  //Scroll through paragraphs
+  //Scroll up
+  if (event.key === "i") {
+    changePage(0);
+    //add to scroll
+    scrollingHeight = objParas.object3D.position.y + 10 + 1;
 
-      //If greater than or equal to maximum height, reset for next section
-      var wrapCheck = wrapAround(scrollingHeight,0,20);
-      if (wrapCheck[0]) {
-          scrollingHeight = wrapCheck[1];
-          console.log("Loading Next section");
-          changePage(1);
+    //If greater than or equal to maximum height, reset for next section
+    var wrapCheck = wrapAround(scrollingHeight, 0, 20);
+    if (wrapCheck[0]) {
+      scrollingHeight = wrapCheck[1];
+      console.log("Loading Next section");
+      changePage(1);
 
-          //Reset the Position 
-          objParas.setAttribute("opacity", 1);
-          objParas.setAttribute("position","0 -10 -20"); 
-      }
+      //Reset the Position
+      objParas.setAttribute("opacity", 1);
+      objParas.setAttribute("position", "0 -10 -20");
+    }
 
-      //Remove existing animations
-      objParas.removeAttribute("animation__pos");
+    //Remove existing animations
+    objParas.removeAttribute("animation__pos");
 
-      objParas.object3D.position.y = -10+scrollingHeight;
-      setOpacity();
+    objParas.object3D.position.y = -10 + scrollingHeight;
+    setOpacity();
 
     //Scroll Down
-    } else if (event.key === "k") {
-      scrollingHeight = objParas.object3D.position.y+10;
-      //subtract from scroll
-      scrollingHeight= scrollingHeight-0.2;
-      //If less than or equal to min height, reset for previous section      
-      var wrapCheck = wrapAround(scrollingHeight,0,20);
-      if (wrapCheck[0]) {
-        scrollingHeight = wrapCheck[1];
-        console.log("Loading Previous section");
-        changePage(-1);
+  } else if (event.key === "k") {
+    scrollingHeight = objParas.object3D.position.y + 10;
+    //subtract from scroll
+    scrollingHeight = scrollingHeight - 0.2;
+    //If less than or equal to min height, reset for previous section
+    var wrapCheck = wrapAround(scrollingHeight, 0, 20);
+    if (wrapCheck[0]) {
+      scrollingHeight = wrapCheck[1];
+      console.log("Loading Previous section");
+      changePage(-1);
 
-        //Reset  the Position
-        objParas.setAttribute("opacity", 1);
-        objParas.setAttribute("position","0 10 -20");  
-      }           
-
-      //Remove existing animations
-      objParas.removeAttribute("animation__pos");
-
-      objParas.object3D.position.y = -10+scrollingHeight;
-      setOpacity();
+      //Reset  the Position
+      objParas.setAttribute("opacity", 1);
+      objParas.setAttribute("position", "0 10 -20");
     }
-    //Go to previous paragraph
-    if (event.key === "q") {
-        scrollingHeight = 0;
-        changePage(-1);
+
+    //Remove existing animations
+    objParas.removeAttribute("animation__pos");
+
+    objParas.object3D.position.y = -10 + scrollingHeight;
+    setOpacity();
+  }
+  //Go to previous paragraph
+  if (event.key === "q") {
+    scrollingHeight = 0;
+    changePage(-1);
     //Go to next paragraph
-    } else if (event.key === "e") {
-        scrollingHeight = 0;
-        changePage(1);
-    }
+  } else if (event.key === "e") {
+    scrollingHeight = 0;
+    changePage(1);
+  }
 });
 
 //WrapAround function to loop array variables,
-//and can also change the variable which it is based on. 
+//and can also change the variable which it is based on.
 //Returns "True" or "False" in case additional functions depend on the wrap status
-function wrapAround(current,min,max){
+function wrapAround(current, min, max) {
   let wrapped = false;
   if (current > max) {
-      current = min;
-      wrapped = true;
-  }else if (current < min) {
-      current = max;
-      wrapped = true;
+    current = min;
+    wrapped = true;
+  } else if (current < min) {
+    current = max;
+    wrapped = true;
   }
-  return [wrapped,current];
+  return [wrapped, current];
 }
 
 //Function triggers for each new section in the story, to update object, images and text to the next section
-function nextSection(pageChange){
+function nextSection(pageChange) {
   changeSky(pageChange); //Update skybox to respective image
   changePage(pageChange); //Navigate to the next page
-  for(i in movingPictures){
-    let elID = "movingPicture"+i;
+  for (i in movingPictures) {
+    let elID = "movingPicture" + i;
     let elmnt = document.getElementById(elID);
-    elmnt.setAttribute("animation__opa","property: opacity; from:1;to: 0; dur:100; easing: linear; loop: false;");
-    elementDelete.push(elID)
+    elmnt.setAttribute(
+      "animation__opa",
+      "property: opacity; from:1;to: 0; dur:100; easing: linear; loop: false;"
+    );
+    elementDelete.push(elID);
   }
-  for(i in movingObjects){
-    let elID = "movingObj"+i;
+  for (i in movingObjects) {
+    let elID = "movingObj" + i;
     let elmnt = document.getElementById(elID);
-    elmnt.setAttribute("animation__scale","property: scale; from:0.06 0.06 0.06;to: 0 0 0; dur:100; easing: linear; loop: false;");
-    elementDelete.push(elID)
+    elmnt.setAttribute(
+      "animation__scale",
+      "property: scale; from:0.06 0.06 0.06;to: 0 0 0; dur:100; easing: linear; loop: false;"
+    );
+    elementDelete.push(elID);
   }
-  setTimeout(deleteSectionMedia,100);
-  
+  setTimeout(deleteSectionMedia, 100);
 }
-    
+
 //Control the opacity of paragraphs as they change height
-function setOpacity(){
+function setOpacity() {
   let textTarget = objParas;
-  scrollingHeight = textTarget.object3D.position.y+10;
-  if (scrollingHeight > 0 && scrollingHeight < 20){
-      //Control opacity while scrolling
-      if (scrollingHeight>=15){
-          textTarget.setAttribute("opacity",(20-scrollingHeight)/5);
-      }else if (scrollingHeight<=5){
-          textTarget.setAttribute("opacity",scrollingHeight/5);
-      }else{
-          textTarget.setAttribute("opacity",1);
-      }
-      /* COMMENTED OUT, MOVING PICUTRES NOW FADE IN ONCE PER SECTION
+  scrollingHeight = textTarget.object3D.position.y + 10;
+  if (scrollingHeight > 0 && scrollingHeight < 20) {
+    //Control opacity while scrolling
+    if (scrollingHeight >= 15) {
+      textTarget.setAttribute("opacity", (20 - scrollingHeight) / 5);
+    } else if (scrollingHeight <= 5) {
+      textTarget.setAttribute("opacity", scrollingHeight / 5);
+    } else {
+      textTarget.setAttribute("opacity", 1);
+    }
+    /* COMMENTED OUT, MOVING PICUTRES NOW FADE IN ONCE PER SECTION
       for(j in movingPictures){
 
         let elID = "movingPicture"+j;
@@ -153,62 +158,69 @@ function setOpacity(){
           elmnt.setAttribute("opacity",1);
         }
       }*/
-  }else{
-      textTarget.setAttribute("opacity",0);
-      /*
+  } else {
+    textTarget.setAttribute("opacity", 0);
+    /*
       for(j in movingPictures){
         let elID = "movingPicture"+j;
         let elmnt = document.getElementById(elID);
         elmnt.setAttribute("opacity",0);
       }*/
-        
   }
 }
 
 //Start on-going timer to set moving text & image opacity
-setInterval(setOpacity,100);
+setInterval(setOpacity, 100);
 
 //Initialize all text from the story JSON.
-function importStory(){
+function importStory() {
   iniParagraphObjects(); //Initialize the html text objects
   //retrieveStoryAssets = retrieveStory(); //retrieve the story from the json
- 
+
   storyParagraphs.unshift("New Section");
-  currentPage=0;currentSky = 0; //Initialize New State of story
+  currentPage = 0;
+  currentSky = 0; //Initialize New State of story
   changePage(1); //Begin story
 }
-setTimeout(importStory,10); //Required to begin the story
+setTimeout(importStory, 10); //Required to begin the story
 
 //Navigate to next/previous skybox image
 function changeSky(skyChange) {
-  currentSky = wrapAround(currentSky + skyChange,1,skies.length-1)[1];
+  currentSky = wrapAround(currentSky + skyChange, 1, skies.length - 1)[1];
   objSky.removeAttribute("animation__opa");
-  objSky.setAttribute("animation__opa","property: opacity; from:1;to: 0; dur:200; easing: linear; loop: false;");
-  setTimeout(setSkyFadeIn,200);
+  objSky.setAttribute(
+    "animation__opa",
+    "property: opacity; from:1;to: 0; dur:200; easing: linear; loop: false;"
+  );
+  setTimeout(setSkyFadeIn, 200);
 }
-function setSkyFadeIn(){
+function setSkyFadeIn() {
   objSky.removeAttribute("animation__opa");
   objSky.setAttribute("src", skies[currentSky]);
-  objSky.setAttribute("animation__opa","property: opacity; from:0;to: 1; dur:300; easing: linear; loop: false;");
-
+  objSky.setAttribute(
+    "animation__opa",
+    "property: opacity; from:0;to: 1; dur:300; easing: linear; loop: false;"
+  );
 }
-    
-//Create all the images for the current section
-function createImages(imageNums){
-    //Clear previous sections images
 
-  for(i in imageNums){ //For each image in this section
+//Create all the images for the current section
+function createImages(imageNums) {
+  //Clear previous sections images
+
+  for (i in imageNums) {
+    //For each image in this section
     //Check how many pictures there are
-    let imgCount=movingPictures.length;
-    let imgOffset = 0
-    
+    let imgCount = movingPictures.length;
+    let imgOffset = 0;
+
     //Create the new HTML Element for the picture
     let img = document.createElement("a-image");
-    img.setAttribute("id","movingPicture"+imgCount);
-    let src ="";
-    for(j in imgRepo){ //Find the image file for the current image
-      if(imgRepo[j].includes(imageNums[i])){
-        src=imgRepo[j]
+    img.setAttribute("id", "movingPicture" + imgCount);
+    let src = "";
+    for (j in imgRepo) {
+      //Find the image file for the current image
+      if (imgRepo[j].includes(imageNums[i])) {
+        src = imgRepo[j];
       }
     }
     img.setAttribute("src", src);
@@ -216,107 +228,119 @@ function createImages(imageNums){
     img.setAttribute("scale", "15 15 15");
 
     //set img offset
-    let offset = -imgCount*8+5;
-    if(imgCount % 2 == 0){
-        imgOffset = -1
-    }else{
-        imgOffset = 1
+    let offset = -imgCount * 8 + 5;
+    if (imgCount % 2 == 0) {
+      imgOffset = -1;
+    } else {
+      imgOffset = 1;
     }
     /* FOR IMAGES MOVING WITH TEXT
     let pos = imgOffset*2+" "+offset+" -2";
     if(imageNums.length==1){
         pos="0 0 -2";
     }*/
-    let pos = imgOffset*19+" "+offset+" -21";
-    if(imageNums.length==1){
-        pos="0 0 -21";
+    let pos = imgOffset * 19 + " " + offset + " -21";
+    if (imageNums.length == 1) {
+      pos = "0 0 -21";
     }
     img.setAttribute("position", pos);
 
-    movingPictures[imgCount]=imgCount;
-    
-      //Create the image element
+    movingPictures[imgCount] = imgCount;
+
+    //Create the image element
     //let element = document.getElementById("textPara");
     let element = document.getElementById("VRScene");
-    element.appendChild(img); 
+    element.appendChild(img);
     img.removeAttribute("animation__opa");
-      //ANIMATION ATTRIBUTE FOR BACKGROUND IMAGES TO FADE IN
-    img.setAttribute("animation__opa","property: opacity; from:0;to: 1; dur:100; easing: linear; loop: false;");
+    //ANIMATION ATTRIBUTE FOR BACKGROUND IMAGES TO FADE IN
+    img.setAttribute(
+      "animation__opa",
+      "property: opacity; from:0;to: 1; dur:100; easing: linear; loop: false;"
+    );
   }
 }
 
-function createObjects(objNums){
+function createObjects(objNums) {
   //Clear previous sections images
   //deleteMovingImage();
-  for(i in objNums){ //For each image in this section
+  for (i in objNums) {
+    //For each image in this section
     //Check how many pictures there are
-    let objCount=movingObjects.length;
-    
+    let objCount = movingObjects.length;
+
     //Create the new HTML Element for the picture
     let obj = document.createElement("a-entity");
-    obj.setAttribute("id","movingObj"+objCount);
-    let src ="";
-    for(j in imgRepo){ //Find the image file for the current image
-      if(imgRepo[j].includes(objNums[i])){
-        src=imgRepo[j]
+    obj.setAttribute("id", "movingObj" + objCount);
+    let src = "";
+    for (j in imgRepo) {
+      //Find the image file for the current image
+      if (imgRepo[j].includes(objNums[i])) {
+        src = imgRepo[j];
       }
     }
-    obj.setAttribute("obj-model", "obj: "+src);
+    obj.setAttribute("obj-model", "obj: " + src);
     obj.setAttribute("color", "#00FF00");
     obj.setAttribute("scale", "0 0 0");
     obj.setAttribute("position", "-3.1 0 2");
 
-    movingObjects[objCount]=objCount;
-    
+    movingObjects[objCount] = objCount;
+
     //Create the image element
     //let element = document.getElementById("textPara");
     let element = document.getElementById("objectParent");
-    element.appendChild(obj); 
+    element.appendChild(obj);
     obj.removeAttribute("animation__sca");
-      //ANIMATION ATTRIBUTE FOR BACKGROUND IMAGES TO FADE IN
-    obj.setAttribute("animation__sca","property: scale; from:0 0 0;to: 0.06 0.06 0.06; dur:100; easing: linear; loop: false;");
+    //ANIMATION ATTRIBUTE FOR BACKGROUND IMAGES TO FADE IN
+    obj.setAttribute(
+      "animation__sca",
+      "property: scale; from:0 0 0;to: 0.06 0.06 0.06; dur:100; easing: linear; loop: false;"
+    );
   }
 }
 
 //Delete all pictures
-function deleteSectionMedia(){
-  for(i in elementDelete){
-    
-    console.log(elementDelete[i])
+function deleteSectionMedia() {
+  for (i in elementDelete) {
+    console.log(elementDelete[i]);
     let elmnt = document.getElementById(elementDelete[i]);
     elmnt.remove();
   }
-  elementDelete=[];
-  movingPictures=[];
-  movingObjects=[];
-  sectionimages=[];
-  sectionObjects=[];
-  
+  elementDelete = [];
+  movingPictures = [];
+  movingObjects = [];
+  sectionimages = [];
+  sectionObjects = [];
+
   let tempImageNum = currentPage; //Temp integer at current page to navigate through all story components in this section
-  let sectionFound=false; //Boolean to check when the section ends
-  let currentText=""; //Str var for all the text in this section
-    
+  let sectionFound = false; //Boolean to check when the section ends
+  let currentText = ""; //Str var for all the text in this section
+
   //Run until the end of section
-  while(!sectionFound){
-    if(storyParagraphs[tempImageNum].includes("New Section")){
-        //If next section found, end the search
-        sectionFound=true;
-    }else if(storyParagraphs[tempImageNum].includes("(IMAGE-") || storyParagraphs[tempImageNum].includes("(VIDEO-")){
+  while (!sectionFound) {
+    if (storyParagraphs[tempImageNum].includes("New Section")) {
+      //If next section found, end the search
+      sectionFound = true;
+    } else if (
+      storyParagraphs[tempImageNum].includes("(IMAGE-") ||
+      storyParagraphs[tempImageNum].includes("(VIDEO-")
+    ) {
       //If an image or video is found, then push them to the image array for loading
-      sectionImages.push(storyParagraphs[tempImageNum].slice(11))
-    }else if(storyParagraphs[tempImageNum].includes("(OBJECT-")){
+      sectionImages.push(storyParagraphs[tempImageNum].slice(11));
+    } else if (storyParagraphs[tempImageNum].includes("(OBJECT-")) {
       //If an image or video is found, then push them to the image array for loading
-      sectionObjects.push(storyParagraphs[tempImageNum].slice(11))
-    }else{  
-        //Otherwise add the current text to the section text var
-      currentText=currentText+storyParagraphs[tempImageNum]+"\n\n";
+      sectionObjects.push(storyParagraphs[tempImageNum].slice(11));
+    } else {
+      //Otherwise add the current text to the section text var
+      currentText = currentText + storyParagraphs[tempImageNum] + "\n\n";
     }
-      
-      //check up to the next story component
-    tempImageNum=tempImageNum+1;
-    if(tempImageNum>storyParagraphs.length-1){sectionFound=true;} //If last story component, then mark end of section
+
+    //check up to the next story component
+    tempImageNum = tempImageNum + 1;
+    if (tempImageNum > storyParagraphs.length - 1) {
+      sectionFound = true;
+    } //If last story component, then mark end of section
   }
-    
+
   //Set the text object value to the current section's text
   objParas.setAttribute("value", currentText);
   //Create all images for the current section
@@ -324,43 +348,48 @@ function deleteSectionMedia(){
   createObjects(sectionObjects);
 }
 
-
 //Define the page number and change
 function changePage(pageChange) {
-    //Delete Current page properties
-    objParas.removeAttribute("animation__pos");
-    objParas.setAttribute("value", "");
-    objParas.setAttribute("opacity",0);
+  //Delete Current page properties
+  objParas.removeAttribute("animation__pos");
+  objParas.setAttribute("value", "");
+  objParas.setAttribute("opacity", 0);
 
-    currentPage = wrapAround(currentPage+pageChange,1, storyParagraphs.length - 1)[1];
-    if(storyParagraphs[currentPage]==="New Section"){
-      nextSection(pageChange);
-    }else if(storyParagraphs[currentPage-1]!=="New Section"){
-      changePage(pageChange);
-    }else{
-      //Update paragraph text value
-      objParas.setAttribute("Opacity", 0);
-      //console.log(currentPage-1+": "+storyParagraphs[currentPage]);
-      //Reset and activate the Position animation
-      objParas.removeAttribute("animation__pos");
-      objParas.setAttribute("animation__pos","property: position; from:0 -10 -20;to: 0 10 -20; dur:10000; easing: linear; loop: false;");
-      if(!storyParagraphs[currentPage].includes("IMAGE:")){
-        //Commented out, trialing setting Block paragraph value
-        //objParas.setAttribute("value", storyParagraphs[currentPage]);
-      }else{
-          objParas.setAttribute("value", "");
-          if(storyParagraphs[currentPage-1].includes("IMAGE:")){
-            changePage(1);
-          }
+  currentPage = wrapAround(
+    currentPage + pageChange,
+    1,
+    storyParagraphs.length - 1
+  )[1];
+  if (storyParagraphs[currentPage] === "New Section") {
+    nextSection(pageChange);
+  } else if (storyParagraphs[currentPage - 1] !== "New Section") {
+    changePage(pageChange);
+  } else {
+    //Update paragraph text value
+    objParas.setAttribute("Opacity", 0);
+    //console.log(currentPage-1+": "+storyParagraphs[currentPage]);
+    //Reset and activate the Position animation
+    objParas.removeAttribute("animation__pos");
+    objParas.setAttribute(
+      "animation__pos",
+      "property: position; from:0 -10 -20;to: 0 10 -20; dur:10000; easing: linear; loop: false;"
+    );
+    if (!storyParagraphs[currentPage].includes("IMAGE:")) {
+      //Commented out, trialing setting Block paragraph value
+      //objParas.setAttribute("value", storyParagraphs[currentPage]);
+    } else {
+      objParas.setAttribute("value", "");
+      if (storyParagraphs[currentPage - 1].includes("IMAGE:")) {
+        changePage(1);
       }
-        
     }
+  }
 }
 
 //define all paragraph objects
-function iniParagraphObjects(){
-    objParas=document.getElementById("textPara");
-    objSky = document.getElementById("sky");
+function iniParagraphObjects() {
+  objParas = document.getElementById("textPara");
+  objSky = document.getElementById("sky");
 }
 /*
 //Define Story paragraphs dynamically from the author's pre-existing story paragraphs
@@ -502,7 +531,7 @@ const storyParagraphs = [];
     storyParagraphs[7] =
         "Suddenly, a flash of lightning flashed through the air, and the deafening sound accompanied by the heavy rain woke Ronald from his dream instantly. He looked out the window curiously. A strange and shocking scene happened. Countless half-human, half-fish creatures crawled out of the sea to head to the town.";
 }*/
-               
+
 //Unused Click function
 /*
 AFRAME.registerComponent("button-click-handler", {
@@ -514,5 +543,3 @@ AFRAME.registerComponent("button-click-handler", {
         });
     },
 });*/
-               
-

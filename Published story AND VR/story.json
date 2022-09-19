@@ -358,11 +358,7 @@
         "textDepth": 1,
         "textShift": "none",
         "overlayStyle": "Top",
-        "visibilities": [
-          "All devices",
-          "Mobile only",
-          "Desktop only"
-        ],
+        "visibilities": ["All devices", "Mobile only", "Desktop only"],
         "colorClassName": "Theme-ForegroundColor-9",
         "mediaTransition": "none",
         "backgroundColorClassName": "Theme-BackgroundColor-10",
@@ -634,11 +630,7 @@
       "isNavigable": false,
       "settings": {
         "className": null,
-        "visibilities": [
-          "All devices",
-          "Mobile only",
-          "Desktop only"
-        ],
+        "visibilities": ["All devices", "Mobile only", "Desktop only"],
         "theme": "Light",
         "visibility": "All devices"
       },
@@ -717,7 +709,7 @@
                   ]
                 },
                 "object": {
-                  "id": "testObject",
+                  "id": "testObject2",
                   "meta": {
                     "heading": "Object for story (will be cropped to screen)"
                   },
@@ -744,11 +736,7 @@
         "overlay": 60,
         "className": null,
         "bodyTextFade": "none",
-        "visibilities": [
-          "All devices",
-          "Mobile only",
-          "Desktop only"
-        ],
+        "visibilities": ["All devices", "Mobile only", "Desktop only"],
         "mediaTransition": "slow",
         "theme": "Dark",
         "visibility": "All devices"
@@ -908,9 +896,7 @@
               "alignment": "left"
             }
           },
-          "layerOrder": [
-            "1SuARv"
-          ]
+          "layerOrder": ["1SuARv"]
         },
         {
           "id": "uJo5YX",
@@ -1095,7 +1081,6 @@
           "overlay": 50
         }
       ]
-    
     },
     {
       "id": "mTf9WR7FbX",
@@ -1109,11 +1094,7 @@
         "overlay": 30,
         "className": null,
         "textShift": "none",
-        "visibilities": [
-          "All devices",
-          "Mobile only",
-          "Desktop only"
-        ],
+        "visibilities": ["All devices", "Mobile only", "Desktop only"],
         "theme": "Dark",
         "textFade": "none",
         "layoutLandscapeMedia": "left",
@@ -1262,11 +1243,7 @@
         "overlay": 30,
         "className": null,
         "textShift": "none",
-        "visibilities": [
-          "All devices",
-          "Mobile only",
-          "Desktop only"
-        ],
+        "visibilities": ["All devices", "Mobile only", "Desktop only"],
         "theme": "Dark",
         "textFade": "none",
         "layoutLandscapeMedia": "left",
@@ -1405,11 +1382,7 @@
       "isNavigable": false,
       "settings": {
         "className": null,
-        "visibilities": [
-          "All devices",
-          "Mobile only",
-          "Desktop only"
-        ],
+        "visibilities": ["All devices", "Mobile only", "Desktop only"],
         "theme": "Dark"
       },
       "layers": [
@@ -1433,7 +1406,8 @@
                           "align": "",
                           "className": "",
                           "fontFamily": ""
-                        },"object": {
+                        },
+                        "object": {
                           "id": "testObject",
                           "meta": {
                             "heading": "Object for story (will be cropped to screen)"
@@ -1668,10 +1642,7 @@
               "alignment": "left"
             }
           },
-          "layerOrder": [
-            "xBTbQN",
-            "PiHjEi"
-          ]
+          "layerOrder": ["xBTbQN", "PiHjEi"]
         },
         {
           "id": "s2Yhew",
@@ -1693,11 +1664,7 @@
         "overlay": 30,
         "className": null,
         "textShift": "none",
-        "visibilities": [
-          "All devices",
-          "Mobile only",
-          "Desktop only"
-        ],
+        "visibilities": ["All devices", "Mobile only", "Desktop only"],
         "theme": "Dark",
         "textFade": "none",
         "visibility": "All devices",
@@ -1831,11 +1798,7 @@
       "isNavigable": false,
       "settings": {
         "className": null,
-        "visibilities": [
-          "All devices",
-          "Mobile only",
-          "Desktop only"
-        ],
+        "visibilities": ["All devices", "Mobile only", "Desktop only"],
         "theme": "Dark"
       },
       "layers": [
@@ -2010,10 +1973,7 @@
               "alignment": "left"
             }
           },
-          "layerOrder": [
-            "PiHjEi",
-            "xBTbQN"
-          ]
+          "layerOrder": ["PiHjEi", "xBTbQN"]
         },
         {
           "id": "s2Yhew",
@@ -2030,11 +1990,7 @@
       "isNavigable": false,
       "settings": {
         "className": null,
-        "visibilities": [
-          "All devices",
-          "Mobile only",
-          "Desktop only"
-        ],
+        "visibilities": ["All devices", "Mobile only", "Desktop only"],
         "theme": "Dark"
       },
       "layers": [
@@ -2176,10 +2132,7 @@
               "alignment": "center"
             }
           },
-          "layerOrder": [
-            "JYB8rA",
-            "Ix52cH1qSu"
-          ]
+          "layerOrder": ["JYB8rA", "Ix52cH1qSu"]
         },
         {
           "id": "s2Yhew",
