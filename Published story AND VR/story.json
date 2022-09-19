@@ -548,10 +548,9 @@
               "object": {
                 "id": "testObject",
                 "meta": {
-                  "heading": "Background image (will be cropped to screen)",
-                  "subHeading": "Recommended: JPEG @ 1080 x 1920px "
+                  "heading": "Object for story (will be cropped to screen)"
                 },
-                "isUserDefined": false
+                "isUserDefined": true
               },
               "portrait": {
                 "image": {
@@ -717,6 +716,13 @@
                     }
                   ]
                 },
+                "object": {
+                  "id": "testObject",
+                  "meta": {
+                    "heading": "Object for story (will be cropped to screen)"
+                  },
+                  "isUserDefined": true
+                },
                 "transition": {
                   "name": "none",
                   "start": 0,
@@ -751,6 +757,13 @@
         {
           "id": "hRhdug",
           "kind": "columns",
+          "object": {
+            "id": "testObject",
+            "meta": {
+              "heading": "Object for story (will be cropped to screen)"
+            },
+            "isUserDefined": true
+          },
           "layers": {
             "1SuARv": {
               "id": "1SuARv",
@@ -931,6 +944,13 @@
                   "start": 0
                 }
               },
+              "object": {
+                "id": "testObject",
+                "meta": {
+                  "heading": "Object for story (will be cropped to screen)"
+                },
+                "isUserDefined": true
+              },
               "position": {
                 "x": "center",
                 "y": "center"
@@ -1101,6 +1121,13 @@
       },
       "layers": [
         {
+          "object": {
+            "id": "testObject",
+            "meta": {
+              "heading": "Object for story (will be cropped to screen)"
+            },
+            "isUserDefined": true
+          },
           "id": "YTaiah",
           "kind": "text-blocks",
           "items": [
@@ -1406,6 +1433,12 @@
                           "align": "",
                           "className": "",
                           "fontFamily": ""
+                        },"object": {
+                          "id": "testObject",
+                          "meta": {
+                            "heading": "Object for story (will be cropped to screen)"
+                          },
+                          "isUserDefined": true
                         },
                         "content": [
                           {

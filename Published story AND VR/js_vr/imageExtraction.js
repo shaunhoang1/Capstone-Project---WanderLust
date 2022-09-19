@@ -40,7 +40,7 @@ let imgDir=[]
 for(i in myImages){
   if(myImages[i].includes(".")){
     imgDir[i] = "\"/assets/"+myImages[i]+"\"";
-    console.log(imgDir[i])
+    //console.log(imgDir[i])
   }
 }
 

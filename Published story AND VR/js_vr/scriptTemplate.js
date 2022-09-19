@@ -198,9 +198,19 @@ setTimeout(importStory,10); //Required to begin the story
 
 //Navigate to next/previous skybox image
 function changeSky(skyChange) {
-    currentSky = wrapAround(currentSky + skyChange,1,skies.length-1)[1];
-    var sky = document.getElementById("sky");
-    sky.setAttribute("src", skies[currentSky]);
+  var sky2 = document.getElementById("sky2");
+  var sky = document.getElementById("sky");
+  sky.removeAttribute("animation__opa");
+  sky2.removeAttribute("animation__opa");
+  sky2.setAttribute("opacity", "0");
+  sky2.setAttribute("src", skies[currentSky]);
+  sky2.setAttribute("opacity", "1");
+  sky2.setAttribute("animation__opa","property: opacity; from:1;to: 0; dur:1000; easing: linear; loop: false;");
+  currentSky = wrapAround(currentSky + skyChange,1,skies.length-1)[1];
+  sky.setAttribute("opacity", "0");
+  sky.setAttribute("src", skies[currentSky]);
+  sky.setAttribute("animation__opa","property: opacity; from:0;to: 1; dur:1000; easing: linear; loop: false;");
+  
 }
     
 //Create all the images for the current section

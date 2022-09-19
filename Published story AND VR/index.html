@@ -43,6 +43,13 @@
     <meta name="twitter:title" content="Shorthand-WanderLust Project:">
     <meta name="twitter:description" content="Lost in Innsmouth">
     <meta name="generator" content="Shorthand">
+    <script>
+      function enterVR(){
+        console.log(navigator.userAgent.toLowerCase())
+        window.location="index_vr.html"
+      }
+
+    </script>
   </head>
 
   <body class="theme-base">
@@ -50,7 +57,12 @@
       <div class="Header Layout Theme-Header" role="banner">
         <div class="Theme-Logos">
           <div class="Theme-Default-Logos"><span class="Theme-Logo"><a href="https://shorthand.com/" target="_blank"><img alt="Shorthand" src="./assets/logo.png" class="Theme-BigLogo Display--none Display--md-block"><img alt="Shorthand" src="./assets/logo.png" class="Theme-SmallLogo Display--md-none"></a></span></div>
+          
+          
         </div>
+        <button class="ml-auto float-xs-right"  value="" style="width:auto;margin-right: 30%;font-size: 1.3vmin;margin-bottom: auto;margin-top: auto;" onclick="enterVR()">
+          Enter VR
+        </button>
         <nav class="Navigation Theme-NavigationBar" role="navigation" id="navigation">
           <ul class="Navigation__itemList Theme-Navigation-ItemList"></ul>
         </nav>
@@ -465,43 +477,8 @@
       <div data-testid="StandardFooter" id="StandardFooter" data-footer="standard" class="Theme-Footer FullSize--fullWidth">
         <div class="Layout FullSize--fullHeight"><a id="footerTopLink" href="#article" class="Layout__snap--xcenter Layout__snap--ycenter Theme-FooterTopLink">Top</a><a href="https://shorthand.com/?utm_source=__host__&amp;utm_medium=referral&amp;utm_campaign=footer&amp;utm_term=built+with+shorthand&amp;utm_content=po9k9ofYug" class="Layout__snap--xright  Theme-FooterLogo--container" rel="noopener noreferrer" title="The beautifully simple way to build brand and feature stories for the web." target="_blank" id="footer_shorthand_link"><img id="FooterLogo" src="./assets/logo-black-no-text.svg" alt="Shorthand logo" class="Theme-FooterLogo">Built with&nbsp;<strong>Shorthand</strong></a></div>
       </div>
-      <div class="upsell preview">
-        <div class="upsell-container">
-          <div class="shorthand-logo"></div>
-          <h2>This is only a preview. <em>Start publishing!</em></h2>
-          <a href="https://shorthand.com/enquiry" class="btn btn-primary" target="_blank">Enquire now</a>
-        </div>
-      </div>
+      
 
-      <div class="section-upsell upsell">
-        <div class="upsell-container">
-          <div class="shorthand-logo"></div>
-          <h2>
-            This is only a preview. <br>
-            <em>Start publishing!</em>
-          </h2>
-          <p>
-            <strong>Subscribe now to begin publishing your Shorthand stories.</strong> All plans offer flexible hosting options,
-            best-practice training &amp; online support.
-          </p>
-          <a href="https://shorthand.com/enquiry" class="btn btn-primary" target="_blank">Enquire now</a>
-
-          <div class="brands-container">
-            <h5>As used by</h5>
-            <ul class="brands flex">
-              <li class="brand bbc">BBC</li>
-              <li class="brand bi">Dow Jones</li>
-              <li class="brand adweek">ADWEEK</li>
-              <li class="brand skynews">Sky News</li>
-              <li class="brand honda">Honda</li>
-              <li class="brand stc">Save The Children</li>
-              <li class="brand who">World Health Organisation</li>
-              <li class="brand uh">University of Houston</li>
-              <li class="brand relx">RELX</li>
-            </ul>
-          </div>
-        </div>
-      </div>
     </article>
     <script src="./static/story.78638.min.js"></script>
     <script>
