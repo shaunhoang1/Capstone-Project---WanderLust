@@ -41,7 +41,6 @@ function retrieveStory(){
       combinedText[combinedText.length]="\"(VIDEO---:)"+json.video.id+"\"";
     } 
     if (json?.object!==undefined) {
-      console.log(json.object.id)
       combinedText[combinedText.length]="\"(OBJECT--:)"+json.object.id+"\"";
     } 
     if (json?.embed!==undefined) { //Extract video embed

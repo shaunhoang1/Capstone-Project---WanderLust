@@ -358,11 +358,7 @@
         "textDepth": 1,
         "textShift": "none",
         "overlayStyle": "Top",
-        "visibilities": [
-          "All devices",
-          "Mobile only",
-          "Desktop only"
-        ],
+        "visibilities": ["All devices", "Mobile only", "Desktop only"],
         "colorClassName": "Theme-ForegroundColor-9",
         "mediaTransition": "none",
         "backgroundColorClassName": "Theme-BackgroundColor-10",
@@ -548,10 +544,9 @@
               "object": {
                 "id": "testObject",
                 "meta": {
-                  "heading": "Background image (will be cropped to screen)",
-                  "subHeading": "Recommended: JPEG @ 1080 x 1920px "
+                  "heading": "Object for story (will be cropped to screen)"
                 },
-                "isUserDefined": false
+                "isUserDefined": true
               },
               "portrait": {
                 "image": {
@@ -635,11 +630,7 @@
       "isNavigable": false,
       "settings": {
         "className": null,
-        "visibilities": [
-          "All devices",
-          "Mobile only",
-          "Desktop only"
-        ],
+        "visibilities": ["All devices", "Mobile only", "Desktop only"],
         "theme": "Light",
         "visibility": "All devices"
       },
@@ -717,6 +708,13 @@
                     }
                   ]
                 },
+                "object": {
+                  "id": "trainStation",
+                  "meta": {
+                    "heading": "Object for story (will be cropped to screen)"
+                  },
+                  "isUserDefined": true
+                },
                 "transition": {
                   "name": "none",
                   "start": 0,
@@ -738,11 +736,7 @@
         "overlay": 60,
         "className": null,
         "bodyTextFade": "none",
-        "visibilities": [
-          "All devices",
-          "Mobile only",
-          "Desktop only"
-        ],
+        "visibilities": ["All devices", "Mobile only", "Desktop only"],
         "mediaTransition": "slow",
         "theme": "Dark",
         "visibility": "All devices"
@@ -751,6 +745,13 @@
         {
           "id": "hRhdug",
           "kind": "columns",
+          "object": {
+            "id": "testObject",
+            "meta": {
+              "heading": "Object for story (will be cropped to screen)"
+            },
+            "isUserDefined": true
+          },
           "layers": {
             "1SuARv": {
               "id": "1SuARv",
@@ -895,9 +896,7 @@
               "alignment": "left"
             }
           },
-          "layerOrder": [
-            "1SuARv"
-          ]
+          "layerOrder": ["1SuARv"]
         },
         {
           "id": "uJo5YX",
@@ -930,6 +929,13 @@
                 "transition": {
                   "start": 0
                 }
+              },
+              "object": {
+                "id": "testObject",
+                "meta": {
+                  "heading": "Object for story (will be cropped to screen)"
+                },
+                "isUserDefined": true
               },
               "position": {
                 "x": "center",
@@ -1075,7 +1081,6 @@
           "overlay": 50
         }
       ]
-    
     },
     {
       "id": "mTf9WR7FbX",
@@ -1089,11 +1094,7 @@
         "overlay": 30,
         "className": null,
         "textShift": "none",
-        "visibilities": [
-          "All devices",
-          "Mobile only",
-          "Desktop only"
-        ],
+        "visibilities": ["All devices", "Mobile only", "Desktop only"],
         "theme": "Dark",
         "textFade": "none",
         "layoutLandscapeMedia": "left",
@@ -1101,6 +1102,13 @@
       },
       "layers": [
         {
+          "object": {
+            "id": "testObject",
+            "meta": {
+              "heading": "Object for story (will be cropped to screen)"
+            },
+            "isUserDefined": true
+          },
           "id": "YTaiah",
           "kind": "text-blocks",
           "items": [
@@ -1235,11 +1243,7 @@
         "overlay": 30,
         "className": null,
         "textShift": "none",
-        "visibilities": [
-          "All devices",
-          "Mobile only",
-          "Desktop only"
-        ],
+        "visibilities": ["All devices", "Mobile only", "Desktop only"],
         "theme": "Dark",
         "textFade": "none",
         "layoutLandscapeMedia": "left",
@@ -1288,6 +1292,13 @@
                     }
                   }
                 ]
+              },
+              "object": {
+                "id": "townScene",
+                "meta": {
+                  "heading": "Object for story (will be cropped to screen)"
+                },
+                "isUserDefined": true
               },
               "position": {
                 "x": "center",
@@ -1378,11 +1389,7 @@
       "isNavigable": false,
       "settings": {
         "className": null,
-        "visibilities": [
-          "All devices",
-          "Mobile only",
-          "Desktop only"
-        ],
+        "visibilities": ["All devices", "Mobile only", "Desktop only"],
         "theme": "Dark"
       },
       "layers": [
@@ -1406,6 +1413,13 @@
                           "align": "",
                           "className": "",
                           "fontFamily": ""
+                        },
+                        "object": {
+                          "id": "testObject",
+                          "meta": {
+                            "heading": "Object for story (will be cropped to screen)"
+                          },
+                          "isUserDefined": true
                         },
                         "content": [
                           {
@@ -1635,10 +1649,7 @@
               "alignment": "left"
             }
           },
-          "layerOrder": [
-            "xBTbQN",
-            "PiHjEi"
-          ]
+          "layerOrder": ["xBTbQN", "PiHjEi"]
         },
         {
           "id": "s2Yhew",
@@ -1660,11 +1671,7 @@
         "overlay": 30,
         "className": null,
         "textShift": "none",
-        "visibilities": [
-          "All devices",
-          "Mobile only",
-          "Desktop only"
-        ],
+        "visibilities": ["All devices", "Mobile only", "Desktop only"],
         "theme": "Dark",
         "textFade": "none",
         "visibility": "All devices",
@@ -1798,11 +1805,7 @@
       "isNavigable": false,
       "settings": {
         "className": null,
-        "visibilities": [
-          "All devices",
-          "Mobile only",
-          "Desktop only"
-        ],
+        "visibilities": ["All devices", "Mobile only", "Desktop only"],
         "theme": "Dark"
       },
       "layers": [
@@ -1977,10 +1980,7 @@
               "alignment": "left"
             }
           },
-          "layerOrder": [
-            "PiHjEi",
-            "xBTbQN"
-          ]
+          "layerOrder": ["PiHjEi", "xBTbQN"]
         },
         {
           "id": "s2Yhew",
@@ -1997,11 +1997,7 @@
       "isNavigable": false,
       "settings": {
         "className": null,
-        "visibilities": [
-          "All devices",
-          "Mobile only",
-          "Desktop only"
-        ],
+        "visibilities": ["All devices", "Mobile only", "Desktop only"],
         "theme": "Dark"
       },
       "layers": [
@@ -2143,10 +2139,7 @@
               "alignment": "center"
             }
           },
-          "layerOrder": [
-            "JYB8rA",
-            "Ix52cH1qSu"
-          ]
+          "layerOrder": ["JYB8rA", "Ix52cH1qSu"]
         },
         {
           "id": "s2Yhew",
