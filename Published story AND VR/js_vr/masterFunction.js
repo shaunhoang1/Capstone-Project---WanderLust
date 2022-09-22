@@ -7,4 +7,4 @@ fs.copyFile('./js_vr/scriptTemplate.js', './js_vr/storyFunctions.js', (err) => {
 });
 require('./imageExtraction.js')
 require('./ExtractStory.js')
-//require('./Output.jss');s
+//require('.es

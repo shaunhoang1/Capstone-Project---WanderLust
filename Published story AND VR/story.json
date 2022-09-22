@@ -709,7 +709,7 @@
                   ]
                 },
                 "object": {
-                  "id": "testObject2",
+                  "id": "trainStation",
                   "meta": {
                     "heading": "Object for story (will be cropped to screen)"
                   },
@@ -1292,6 +1292,13 @@
                     }
                   }
                 ]
+              },
+              "object": {
+                "id": "townScene",
+                "meta": {
+                  "heading": "Object for story (will be cropped to screen)"
+                },
+                "isUserDefined": true
               },
               "position": {
                 "x": "center",

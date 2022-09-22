@@ -2,11 +2,8 @@
 
 let objParas = "";
 let storyParagraphs = [];
-let movingPictures = [];
-let movingObjects = [];
 let imgRepo = [];
 let objSky = "";
-let elementDelete = [];
 let sectionImages = []; //Initiate the Array of images for the new section
 let sectionObjects = []; //Initiate the Array of Objects for the new section
 //Define the Backgrounds
@@ -109,25 +106,21 @@ function wrapAround(current, min, max) {
 function nextSection(pageChange) {
   changeSky(pageChange); //Update skybox to respective image
   changePage(pageChange); //Navigate to the next page
-  for (i in movingPictures) {
-    let elID = "movingPicture" + i;
-    let elmnt = document.getElementById(elID);
-    elmnt.setAttribute(
-      "animation__opa",
-      "property: opacity; from:1;to: 0; dur:100; easing: linear; loop: false;"
-    );
-    elementDelete.push(elID);
+
+  for (i in sectionImages) {
+    let elmnt = document.getElementById(sectionImages[i]);
+    console.log("adding image to delete:"+sectionImages[i])
+    elmnt.setAttribute("animation__opa","property: opacity; from:1;to: 0; dur:1000; easing: linear; loop: false;");
   }
-  for (i in movingObjects) {
-    let elID = "movingObj" + i;
-    let elmnt = document.getElementById(elID);
-    elmnt.setAttribute(
-      "animation__scale",
-      "property: scale; from:0.06 0.06 0.06;to: 0 0 0; dur:100; easing: linear; loop: false;"
-    );
-    elementDelete.push(elID);
+
+  for (i in sectionObjects) {
+    let elmnt = document.getElementById(sectionObjects[i]);
+    console.log("adding object to delete:"+sectionObjects[i])
+    elmnt.setAttribute("animation__scale","property: scale; from:0.02 0.02 0.02;to: 0 0 0; dur:1000; easing: linear; loop: false;");
   }
-  setTimeout(deleteSectionMedia, 100);
+  sectionImages.length=0
+  sectionObjects.length=0
+  setTimeout(deleteSectionMedia, 1000);
 }
 
 //Control the opacity of paragraphs as they change height
@@ -194,6 +187,7 @@ function changeSky(skyChange) {
   );
   setTimeout(setSkyFadeIn, 200);
 }
+
 function setSkyFadeIn() {
   objSky.removeAttribute("animation__opa");
   objSky.setAttribute("src", skies[currentSky]);
@@ -204,22 +198,21 @@ function setSkyFadeIn() {
 }
 
 //Create all the images for the current section
-function createImages(imageNums) {
+function createImages() {
   //Clear previous sections images
-
-  for (i in imageNums) {
+  let currentImages=0;
+  for (i in sectionImages) {
     //For each image in this section
     //Check how many pictures there are
-    let imgCount = movingPictures.length;
     let imgOffset = 0;
 
     //Create the new HTML Element for the picture
     let img = document.createElement("a-image");
-    img.setAttribute("id", "movingPicture" + imgCount);
+    img.setAttribute("id", "movingPicture" + currentImages);
     let src = "";
     for (j in imgRepo) {
       //Find the image file for the current image
-      if (imgRepo[j].includes(imageNums[i])) {
+      if (imgRepo[j].includes(sectionImages[i])) {
         src = imgRepo[j];
       }
     }
@@ -228,8 +221,8 @@ function createImages(imageNums) {
     img.setAttribute("scale", "15 15 15");
 
     //set img offset
-    let offset = -imgCount * 8 + 5;
-    if (imgCount % 2 == 0) {
+    let offset = -currentImages * 8 + 5;
+    if (currentImages % 2 == 0) {
       imgOffset = -1;
     } else {
       imgOffset = 1;
@@ -240,51 +233,58 @@ function createImages(imageNums) {
         pos="0 0 -2";
     }*/
     let pos = imgOffset * 19 + " " + offset + " -21";
-    if (imageNums.length == 1) {
+    if (sectionImages.length == 1) {
       pos = "0 0 -21";
     }
     img.setAttribute("position", pos);
 
-    movingPictures[imgCount] = imgCount;
-
+    sectionImages[currentImages] = img.getAttribute("id");
     //Create the image element
     //let element = document.getElementById("textPara");
-    let element = document.getElementById("VRScene");
+    let element = document.getElementById("imageParent");
     element.appendChild(img);
     img.removeAttribute("animation__opa");
     //ANIMATION ATTRIBUTE FOR BACKGROUND IMAGES TO FADE IN
     img.setAttribute(
       "animation__opa",
-      "property: opacity; from:0;to: 1; dur:100; easing: linear; loop: false;"
+      "property: opacity; from:0;to: 1; dur:1000; easing: linear; loop: false;"
     );
+    currentImages++;
   }
+  currentImages=0;
 }
 
 function createObjects(objNums) {
   //Clear previous sections images
   //deleteMovingImage();
+  let currentObjects = 0;
   for (i in objNums) {
     //For each image in this section
     //Check how many pictures there are
-    let objCount = movingObjects.length;
+    let objCount = currentObjects;
 
     //Create the new HTML Element for the picture
     let obj = document.createElement("a-entity");
     obj.setAttribute("id", "movingObj" + objCount);
     let src = "";
+    let mtl = "";
     for (j in imgRepo) {
       //Find the image file for the current image
       if (imgRepo[j].includes(objNums[i])) {
-        src = imgRepo[j];
+        src = imgRepo[j].slice(0, -3)+"obj";
+        if (imgRepo[j].includes(".mtl")){
+          mtl = imgRepo[j].slice(0, -3)+"mtl";
+        }
       }
     }
-    obj.setAttribute("obj-model", "obj: " + src);
+    obj.setAttribute("obj-model", "obj: " + src+";mtl:"+mtl+";");
     obj.setAttribute("color", "#00FF00");
     obj.setAttribute("scale", "0 0 0");
     obj.setAttribute("position", "-3.1 0 2");
 
-    movingObjects[objCount] = objCount;
+    sectionObjects[objCount] = obj.getAttribute("id");
 
+    console.log("SECTION OBJECTS"+sectionObjects[objCount] )
     //Create the image element
     //let element = document.getElementById("textPara");
     let element = document.getElementById("objectParent");
@@ -293,21 +293,20 @@ function createObjects(objNums) {
     //ANIMATION ATTRIBUTE FOR BACKGROUND IMAGES TO FADE IN
     obj.setAttribute(
       "animation__sca",
-      "property: scale; from:0 0 0;to: 0.06 0.06 0.06; dur:100; easing: linear; loop: false;"
+      "property: scale; from:0 0 0;to: 0.02 0.02 0.02; dur:1000; easing: linear; loop: false;"
     );
+    currentObjects++;
   }
+  currentObjects=0;
 }
 
 //Delete all pictures
 function deleteSectionMedia() {
-  for (i in elementDelete) {
-    console.log(elementDelete[i]);
-    let elmnt = document.getElementById(elementDelete[i]);
-    elmnt.remove();
-  }
-  elementDelete = [];
-  movingPictures = [];
-  movingObjects = [];
+  const imageParent = document.getElementById("imageParent");
+  const objectParent = document.getElementById("objectParent");
+  while(imageParent.hasChildNodes()){imageParent.removeChild(imageParent.firstChild);}
+  while(objectParent.hasChildNodes()){objectParent.removeChild(objectParent.firstChild);}
+
   sectionimages = [];
   sectionObjects = [];
 
@@ -317,6 +316,7 @@ function deleteSectionMedia() {
 
   //Run until the end of section
   while (!sectionFound) {
+    console.log(storyParagraphs[tempImageNum]);
     if (storyParagraphs[tempImageNum].includes("New Section")) {
       //If next section found, end the search
       sectionFound = true;

@@ -36,6 +36,7 @@ function retrieveDirectoryImages() {
       }
     }
   }
+  console.log(myImages)
   return myImages;
 }
 
