@@ -26,66 +26,6 @@ let scrollingHeight = 0;
 let currentPage = 0;
 
 //All JS Functions which are required to navigate through the story are created here
-//Manually scroll through paragraphs with "i" or "k"
-document.addEventListener("keydown", function (event) {
-  //Scroll through paragraphs
-  //Scroll up
-  if (event.key === "i") {
-    changePage(0);
-    //add to scroll
-    scrollingHeight = objParas.object3D.position.y + 10 + 1;
-
-    //If greater than or equal to maximum height, reset for next section
-    var wrapCheck = wrapAround(scrollingHeight, 0, 20);
-    if (wrapCheck[0]) {
-      scrollingHeight = wrapCheck[1];
-      console.log("Loading Next section");
-      changePage(1);
-
-      //Reset the Position
-      objParas.setAttribute("opacity", 1);
-      objParas.setAttribute("position", "0 -10 -20");
-    }
-
-    //Remove existing animations
-    objParas.removeAttribute("animation__pos");
-
-    objParas.object3D.position.y = -10 + scrollingHeight;
-    setOpacity();
-
-    //Scroll Down
-  } else if (event.key === "k") {
-    scrollingHeight = objParas.object3D.position.y + 10;
-    //subtract from scroll
-    scrollingHeight = scrollingHeight - 0.2;
-    //If less than or equal to min height, reset for previous section
-    var wrapCheck = wrapAround(scrollingHeight, 0, 20);
-    if (wrapCheck[0]) {
-      scrollingHeight = wrapCheck[1];
-      console.log("Loading Previous section");
-      changePage(-1);
-
-      //Reset  the Position
-      objParas.setAttribute("opacity", 1);
-      objParas.setAttribute("position", "0 10 -20");
-    }
-
-    //Remove existing animations
-    objParas.removeAttribute("animation__pos");
-
-    objParas.object3D.position.y = -10 + scrollingHeight;
-    setOpacity();
-  }
-  //Go to previous paragraph
-  if (event.key === "q") {
-    scrollingHeight = 0;
-    changePage(-1);
-    //Go to next paragraph
-  } else if (event.key === "e") {
-    scrollingHeight = 0;
-    changePage(1);
-  }
-});
 
 //WrapAround function to loop array variables,
 //and can also change the variable which it is based on.
@@ -109,13 +49,11 @@ function nextSection(pageChange) {
 
   for (i in sectionImages) {
     let elmnt = document.getElementById(sectionImages[i]);
-    console.log("adding image to delete:"+sectionImages[i])
     elmnt.setAttribute("animation__opa","property: opacity; from:1;to: 0; dur:1000; easing: linear; loop: false;");
   }
 
   for (i in sectionObjects) {
     let elmnt = document.getElementById(sectionObjects[i]);
-    console.log("adding object to delete:"+sectionObjects[i])
     elmnt.setAttribute("animation__scale","property: scale; from:0.02 0.02 0.02;to: 0 0 0; dur:1000; easing: linear; loop: false;");
   }
   sectionImages.length=0
@@ -183,9 +121,9 @@ function changeSky(skyChange) {
   objSky.removeAttribute("animation__opa");
   objSky.setAttribute(
     "animation__opa",
-    "property: opacity; from:1;to: 0; dur:200; easing: linear; loop: false;"
+    "property: opacity; from:1;to: 0; dur:1000; easing: linear; loop: false;"
   );
-  setTimeout(setSkyFadeIn, 200);
+  setTimeout(setSkyFadeIn, 1000);
 }
 
 function setSkyFadeIn() {
@@ -280,11 +218,10 @@ function createObjects(objNums) {
     obj.setAttribute("obj-model", "obj: " + src+";mtl:"+mtl+";");
     obj.setAttribute("color", "#00FF00");
     obj.setAttribute("scale", "0 0 0");
-    obj.setAttribute("position", "-3.1 0 2");
+    obj.setAttribute("position", "0 0 -.5");
 
     sectionObjects[objCount] = obj.getAttribute("id");
 
-    console.log("SECTION OBJECTS"+sectionObjects[objCount] )
     //Create the image element
     //let element = document.getElementById("textPara");
     let element = document.getElementById("objectParent");
@@ -316,7 +253,6 @@ function deleteSectionMedia() {
 
   //Run until the end of section
   while (!sectionFound) {
-    console.log(storyParagraphs[tempImageNum]);
     if (storyParagraphs[tempImageNum].includes("New Section")) {
       //If next section found, end the search
       sectionFound = true;
