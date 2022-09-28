@@ -1,6 +1,7 @@
 //const { string } = require("joi");
 
 let objParas = "";
+let pageChanging = false;
 let storyParagraphs = [];
 let imgRepo = [];
 let objSky = "";
@@ -41,15 +42,39 @@ let currentPage = 0;
 
 //All JS Functions which are required to navigate through the story are created here
 document.addEventListener("keydown", function (event) {
-  //Scroll through paragraphs
-  //Go to previous paragraph
-  if (event.key === "q") {
-    scrollingHeight = 0;
-    changePage(-1);
-    //Go to next paragraph
-  } else if (event.key === "e") {
-    scrollingHeight = 0;
-    changePage(1);
+  if(!pageChanging){
+    //Scroll through paragraphs
+    //Go to previous paragraph
+    if (event.key === "q") {
+      scrollingHeight = 0;
+      changePage(-1);
+      //Go to next paragraph
+    } else if (event.key === "e") {
+      scrollingHeight = 0;
+      changePage(1);
+    }
+  
+    if (event.key === "i"){
+      //add to scroll
+      scrollingHeight= objParas.object3D.position.y+10+.5;
+  
+      //If greater than or equal to maximum height, reset for next section
+      objParas.removeAttribute("animation__pos");
+  
+      objParas.object3D.position.y = -10+scrollingHeight;
+      setOpacity();
+      console.log(scrollingHeight)
+    //Scroll Down
+    } else if (event.key === "k") {
+      scrollingHeight = objParas.object3D.position.y+10-.5;
+  
+      //Remove existing animations
+      objParas.removeAttribute("animation__pos");
+      console.log(scrollingHeight)
+      objParas.object3D.position.y = -10+scrollingHeight;
+      setOpacity();
+    }
+
   }
 });
 
@@ -70,6 +95,7 @@ function wrapAround(current, min, max) {
 
 //Function triggers for each new section in the story, to update object, images and text to the next section
 function nextSection(pageChange) {
+  pageChanging=true;
   changeSky(pageChange); //Update skybox to respective image
   changePage(pageChange); //Navigate to the next page
 
@@ -115,8 +141,18 @@ function setOpacity() {
           elmnt.setAttribute("opacity",1);
         }
       }*/
-  } else {
+  } else{
     textTarget.setAttribute("opacity", 0);
+  } 
+  
+  if (scrollingHeight<0){
+    scrollingHeight=20;
+    objParas.object3D.position.y = -10+scrollingHeight;
+    changePage(-1);
+  }else if(scrollingHeight>20){
+    scrollingHeight=0;
+    objParas.object3D.position.y = -10+scrollingHeight;
+    changePage(1);
     /*
       for(j in movingPictures){
         let elID = "movingPicture"+j;
@@ -182,7 +218,7 @@ function createImages() {
     }
     img.setAttribute("src", src);
     img.setAttribute("Opacity", "0");
-    img.setAttribute("scale", "2 2 2");
+    img.setAttribute("scale", "1.6 1.6 1.6");
     img.setAttribute("look-at","#cameraObj");
 
     //set img offset
@@ -218,7 +254,6 @@ function createImages() {
     );
     currentImages++;
   }
-  currentImages=0;
 }
 
 function createObjects(objNums) {
@@ -263,11 +298,11 @@ function createObjects(objNums) {
     );
     currentObjects++;
   }
-  currentObjects=0;
 }
 
 //Delete all pictures
 function deleteSectionMedia() {
+  pageChanging=false;
   const imageParent = document.getElementById("imageParent");
   const objectParent = document.getElementById("objectParent");
   while(imageParent.hasChildNodes()){imageParent.removeChild(imageParent.firstChild);}
