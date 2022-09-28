@@ -48,8 +48,15 @@ function retrieveStory(){
       combinedText[combinedText.length]="\"(EMBED:)"+embededObj.originalUrl+"\"";
     } 
     if (json.type === "text") {
-      let a = json.text;
-      combinedText[combinedText.length]="\""+a+"\"";
+      let currentText = json.text;
+      let currentMark = json?.marks;
+      if(currentMark!==undefined){
+        currentMark=currentMark[0]?.type;
+        if(currentMark!=="link"){
+          currentText=currentMark+"("+currentText+")"
+        }
+      }
+      combinedText[combinedText.length]="\""+currentText+"\"";
     } 
     if (json?.sections!==undefined) {
       json.sections.map(newSection).join("");

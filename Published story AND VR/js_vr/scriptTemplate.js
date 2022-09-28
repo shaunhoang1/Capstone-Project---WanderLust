@@ -21,11 +21,37 @@ const skies = [];
   skies[9] = "#sky9";
 }
 
+const imgPositions = [
+  "-2.4 1.5 0",
+  "2.4 1.5 0",
+  "-3.3 1.5 2",
+  "3.3 1.5 2"
+];
+
+
+let fontBold="https://raw.githubusercontent.com/WayneBrysen/FontStore/main/FntFonts/Arial_Bold.fnt";
+let fontItalic="https://raw.githubusercontent.com/WayneBrysen/FontStore/main/FntFonts/Arial_Italic.fnt";
+let fontItalicBold="https://raw.githubusercontent.com/WayneBrysen/FontStore/main/FntFonts/Arial_Italic_Bold.fnt";
+let fontLight="https://raw.githubusercontent.com/WayneBrysen/FontStore/main/FntFonts/Arial_Light.fnt";
+let fontRegular="https://raw.githubusercontent.com/WayneBrysen/FontStore/main/FntFonts/Arial_Regular.fnt";
+
 //Define the page number and change for all text objects
 let scrollingHeight = 0;
 let currentPage = 0;
 
 //All JS Functions which are required to navigate through the story are created here
+document.addEventListener("keydown", function (event) {
+  //Scroll through paragraphs
+  //Go to previous paragraph
+  if (event.key === "q") {
+    scrollingHeight = 0;
+    changePage(-1);
+    //Go to next paragraph
+  } else if (event.key === "e") {
+    scrollingHeight = 0;
+    changePage(1);
+  }
+});
 
 //WrapAround function to loop array variables,
 //and can also change the variable which it is based on.
@@ -145,7 +171,7 @@ function createImages() {
     let imgOffset = 0;
 
     //Create the new HTML Element for the picture
-    let img = document.createElement("a-image");
+    let img = document.createElement("a-video");
     img.setAttribute("id", "movingPicture" + currentImages);
     let src = "";
     for (j in imgRepo) {
@@ -156,7 +182,8 @@ function createImages() {
     }
     img.setAttribute("src", src);
     img.setAttribute("Opacity", "0");
-    img.setAttribute("scale", "15 15 15");
+    img.setAttribute("scale", "2 2 2");
+    img.setAttribute("look-at","#cameraObj");
 
     //set img offset
     let offset = -currentImages * 8 + 5;
@@ -165,6 +192,7 @@ function createImages() {
     } else {
       imgOffset = 1;
     }
+
     /* FOR IMAGES MOVING WITH TEXT
     let pos = imgOffset*2+" "+offset+" -2";
     if(imageNums.length==1){
@@ -174,6 +202,7 @@ function createImages() {
     if (sectionImages.length == 1) {
       pos = "0 0 -21";
     }
+    pos=imgPositions[currentImages]
     img.setAttribute("position", pos);
 
     sectionImages[currentImages] = img.getAttribute("id");
@@ -218,7 +247,7 @@ function createObjects(objNums) {
     obj.setAttribute("obj-model", "obj: " + src+";mtl:"+mtl+";");
     obj.setAttribute("color", "#00FF00");
     obj.setAttribute("scale", "0 0 0");
-    obj.setAttribute("position", "0 0 -.5");
+    obj.setAttribute("position", "0 0 0");
 
     sectionObjects[objCount] = obj.getAttribute("id");
 
@@ -279,6 +308,7 @@ function deleteSectionMedia() {
 
   //Set the text object value to the current section's text
   objParas.setAttribute("value", currentText);
+  objParas.setAttribute("font", fontItalicBold);
   //Create all images for the current section
   createImages(sectionImages);
   createObjects(sectionObjects);
@@ -308,7 +338,7 @@ function changePage(pageChange) {
     objParas.removeAttribute("animation__pos");
     objParas.setAttribute(
       "animation__pos",
-      "property: position; from:0 -10 -20;to: 0 10 -20; dur:10000; easing: linear; loop: false;"
+      "property: position; from:0 -10 -15;to: 0 10 -15; dur:10000; easing: linear; loop: false;"
     );
     if (!storyParagraphs[currentPage].includes("IMAGE:")) {
       //Commented out, trialing setting Block paragraph value
