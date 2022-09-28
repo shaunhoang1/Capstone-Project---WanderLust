@@ -16,6 +16,14 @@ function retrieveDirectoryImages() {
           imgFound = true;
         }
       }
+      //Search for Audio before prioritising other file types
+      for (let j in fileImages) {
+        if (fileImages[j].search(".mp3") !== -1 && !imgFound) {
+          myImages.push(files[i] + "/" + fileImages[j]);
+          imgFound = true;
+        }
+      }
+
       for (let j in fileImages) {
         if (fileImages[j].search(".obj") !== -1 && !imgFound) {
           myImages.push(files[i] + "/" + fileImages[j]);

@@ -110,7 +110,7 @@ function nextSection(pageChange) {
   }
   sectionImages.length=0
   sectionObjects.length=0
-  setTimeout(deleteSectionMedia, 1000);
+  setTimeout(refreshMedia, 1000);
 }
 
 //Control the opacity of paragraphs as they change height
@@ -301,7 +301,7 @@ function createObjects(objNums) {
 }
 
 //Delete all pictures
-function deleteSectionMedia() {
+function refreshMedia() {
   pageChanging=false;
   const imageParent = document.getElementById("imageParent");
   const objectParent = document.getElementById("objectParent");

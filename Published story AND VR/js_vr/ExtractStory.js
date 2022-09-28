@@ -37,6 +37,9 @@ function retrieveStory(){
         combinedText[combinedText.length]="\"(IMAGE-BG:)"+json.image.id+"\"";
       }
     } 
+    if (json?.audio!==undefined) {
+      combinedText[combinedText.length]="\"(AUDIO---:)"+json.audio.id+"\"";
+    } 
     if (json?.video!==undefined) {
       combinedText[combinedText.length]="\"(VIDEO---:)"+json.video.id+"\"";
     } 
@@ -138,6 +141,10 @@ fs.appendFile('./js_vr/storyFunctions.js', data, (err) => {
 	// In case of a error throw err.
 	if (err) throw err;
 })
+
+for(i in myText){
+  console.log(myText[i])
+}
 //console.log("Text: "+myText[0].length+myText[0]);
 //console.log(myText[1]);
 //console.log(myText[2]);

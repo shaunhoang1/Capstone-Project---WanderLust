@@ -379,6 +379,12 @@
           "heading": "Train Station modelled scene"
         },
         "isUserDefined": true
+      },"audio": {
+        "id": "audioTown",
+        "meta": {
+          "heading": "Town Passive Audio"
+        },
+        "isUserDefined": true
       },
       "layers": [
         {
@@ -1109,6 +1115,12 @@
           "heading": "Mountain Road modelled scene"
         },
         "isUserDefined": true
+      },"audio": {
+        "id": "audioBus",
+        "meta": {
+          "heading": "Bus Passive Audio"
+        },
+        "isUserDefined": true
       },
       "layers": [
         {
@@ -1691,6 +1703,12 @@
         "visibility": "All devices",
         "layoutLandscapeMedia": "left",
         "layoutPortraitMedia": "top"
+      },"audio": {
+        "id": "audioBeach",
+        "meta": {
+          "heading": "Beach Passive Audio"
+        },
+        "isUserDefined": true
       },
       "layers": [
         {
@@ -1813,6 +1831,12 @@
           "Desktop only"
         ],
         "theme": "Dark"
+      },"audio": {
+        "id": "audioNight",
+        "meta": {
+          "heading": "Night Passive Audio"
+        },
+        "isUserDefined": true
       },
       "layers": [
         {
@@ -2030,6 +2054,12 @@
         "id": "sceneOcean",
         "meta": {
           "heading": "Ocean Modelled scene for story enhancement"
+        },
+        "isUserDefined": true
+      },"audio": {
+        "id": "audioThunder",
+        "meta": {
+          "heading": "Thunder Passive Audio"
         },
         "isUserDefined": true
       },
