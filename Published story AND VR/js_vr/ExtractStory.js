@@ -37,6 +37,9 @@ function retrieveStory(){
         combinedText[combinedText.length]="\"(IMAGE-BG:)"+json.image.id+"\"";
       }
     } 
+    if (json?.audio!==undefined) {
+      combinedText[combinedText.length]="\"(AUDIO---:)"+json.audio.id+"\"";
+    } 
     if (json?.video!==undefined) {
       combinedText[combinedText.length]="\"(VIDEO---:)"+json.video.id+"\"";
     } 
@@ -48,8 +51,15 @@ function retrieveStory(){
       combinedText[combinedText.length]="\"(EMBED:)"+embededObj.originalUrl+"\"";
     } 
     if (json.type === "text") {
-      let a = json.text;
-      combinedText[combinedText.length]="\""+a+"\"";
+      let currentText = json.text;
+      let currentMark = json?.marks;
+      if(currentMark!==undefined){
+        currentMark=currentMark[0]?.type;
+        if(currentMark!=="link"){
+          currentText=currentMark+"("+currentText+")"
+        }
+      }
+      combinedText[combinedText.length]="\""+currentText+"\"";
     } 
     if (json?.sections!==undefined) {
       json.sections.map(newSection).join("");
@@ -131,6 +141,10 @@ fs.appendFile('./js_vr/storyFunctions.js', data, (err) => {
 	// In case of a error throw err.
 	if (err) throw err;
 })
+
+for(i in myText){
+  console.log(myText[i])
+}
 //console.log("Text: "+myText[0].length+myText[0]);
 //console.log(myText[1]);
 //console.log(myText[2]);

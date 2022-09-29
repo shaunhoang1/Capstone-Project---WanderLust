@@ -1,0 +1,126 @@
+newmtl MountainRoad_p5:AutobusSG4
+illum 4
+Kd 1.00 0.81 0.36
+Ka 0.00 0.00 0.00
+Tf 1.00 1.00 1.00
+Ni 1.00
+newmtl MountainRoad_p5:AutobusSG6
+illum 4
+Kd 0.50 0.61 0.67
+Ka 0.00 0.00 0.00
+Tf 1.00 1.00 1.00
+Ni 1.00
+newmtl MountainRoad_p5:AutobusSG8
+illum 4
+Kd 0.11 0.11 0.11
+Ka 0.00 0.00 0.00
+Tf 1.00 1.00 1.00
+Ni 1.00
+newmtl MountainRoad_p5:AutobusSG10
+illum 4
+Kd 0.14 0.14 0.14
+Ka 0.00 0.00 0.00
+Tf 1.00 1.00 1.00
+Ni 1.00
+newmtl MountainRoad_p5:Back_WheelsSG2
+illum 4
+Kd 0.17 0.17 0.17
+Ka 0.00 0.00 0.00
+Tf 1.00 1.00 1.00
+Ni 1.00
+newmtl MountainRoad_p5:Back_WheelsSG4
+illum 4
+Kd 0.91 0.91 0.91
+Ka 0.00 0.00 0.00
+Tf 1.00 1.00 1.00
+Ni 1.00
+newmtl MountainRoad_p5:Door1SG2
+illum 4
+Kd 0.14 0.14 0.14
+Ka 0.00 0.00 0.00
+Tf 1.00 1.00 1.00
+Ni 1.00
+newmtl MountainRoad_p5:Door1SG4
+illum 4
+Kd 0.50 0.61 0.67
+Ka 0.00 0.00 0.00
+Tf 1.00 1.00 1.00
+Ni 1.00
+newmtl MountainRoad_p5:FrameElements_no_edge_split_SG8
+illum 4
+Kd 0.68 0.68 0.68
+Ka 0.00 0.00 0.00
+Tf 1.00 1.00 1.00
+Ni 1.00
+newmtl MountainRoad_p5:FrameElements_no_edge_split_SG10
+illum 4
+Kd 0.28 0.20 0.10
+Ka 0.00 0.00 0.00
+Tf 1.00 1.00 1.00
+Ni 1.00
+newmtl MountainRoad_p5:FrameElements_no_edge_split_SG12
+illum 4
+Kd 0.91 0.91 0.91
+Ka 0.00 0.00 0.00
+Tf 1.00 1.00 1.00
+Ni 1.00
+newmtl MountainRoad_p5:FrameElements_no_edge_split_SG14
+illum 4
+Kd 0.91 0.91 0.91
+Ka 0.00 0.00 0.00
+Tf 1.00 1.00 1.00
+Ni 1.00
+newmtl MountainRoad_p5:FrameElements_no_edge_split_SG16
+illum 4
+Kd 0.91 0.32 0.37
+Ka 0.00 0.00 0.00
+Tf 1.00 1.00 1.00
+Ni 1.00
+newmtl MountainRoad_p5:FrameElements_no_edge_split_SG18
+illum 4
+Kd 0.91 0.91 0.91
+Ka 0.00 0.00 0.00
+Tf 1.00 1.00 1.00
+Ni 1.00
+newmtl MountainRoad_p5:FrameElements_no_edge_split_SG20
+illum 4
+Kd 1.00 1.00 1.00
+Ka 0.00 0.00 0.00
+Tf 1.00 1.00 1.00
+Ni 1.00
+newmtl MountainRoad_p5:FrameElements_no_edge_split_SG22
+illum 4
+Kd 0.38 0.39 0.46
+Ka 0.00 0.00 0.00
+Tf 1.00 1.00 1.00
+Ni 1.00
+newmtl MountainRoad_p5:MountainSG1
+illum 4
+Kd 0.94 0.75 0.40
+Ka 0.00 0.00 0.00
+Tf 1.00 1.00 1.00
+Ni 1.00
+newmtl MountainRoad_p5:PlaneSG1
+illum 4
+Kd 0.11 0.11 0.11
+Ka 0.00 0.00 0.00
+Tf 1.00 1.00 1.00
+Ni 1.00
+newmtl MountainRoad_p5:Tree1SG1
+illum 4
+Kd 0.30 0.59 0.15
+Ka 0.00 0.00 0.00
+Tf 1.00 1.00 1.00
+Ni 1.00
+newmtl MountainRoad_p5:Tree2SG2
+illum 4
+Kd 0.70 0.43 0.17
+Ka 0.00 0.00 0.00
+Tf 1.00 1.00 1.00
+Ni 1.00
+newmtl MountainRoad_p5:Tree2SG4
+illum 4
+Kd 0.44 0.75 0.13
+Ka 0.00 0.00 0.00
+Tf 1.00 1.00 1.00
+Ni 1.00

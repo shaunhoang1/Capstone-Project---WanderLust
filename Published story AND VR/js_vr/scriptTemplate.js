@@ -1,11 +1,12 @@
-//const { string } = require("joi");
 
 let objParas = "";
+let pageChanging = false;
 let storyParagraphs = [];
 let imgRepo = [];
 let objSky = "";
 let sectionImages = []; //Initiate the Array of images for the new section
 let sectionObjects = []; //Initiate the Array of Objects for the new section
+let sectionAudio =""
 //Define the Backgrounds
 let currentSky = 0;
 const skies = [];
@@ -21,69 +22,59 @@ const skies = [];
   skies[9] = "#sky9";
 }
 
+const imgPositions = [
+  "-2.4 1.5 0",
+  "2.4 1.5 0",
+  "-3.3 1.5 2",
+  "3.3 1.5 2"
+];
+
+
+let fontBold="https://raw.githubusercontent.com/WayneBrysen/FontStore/main/FntFonts/Arial_Bold.fnt";
+let fontItalic="https://raw.githubusercontent.com/WayneBrysen/FontStore/main/FntFonts/Arial_Italic.fnt";
+let fontItalicBold="https://raw.githubusercontent.com/WayneBrysen/FontStore/main/FntFonts/Arial_Italic_Bold.fnt";
+let fontLight="https://raw.githubusercontent.com/WayneBrysen/FontStore/main/FntFonts/Arial_Light.fnt";
+let fontRegular="https://raw.githubusercontent.com/WayneBrysen/FontStore/main/FntFonts/Arial_Regular.fnt";
+
 //Define the page number and change for all text objects
 let scrollingHeight = 0;
 let currentPage = 0;
 
 //All JS Functions which are required to navigate through the story are created here
-//Manually scroll through paragraphs with "i" or "k"
 document.addEventListener("keydown", function (event) {
-  //Scroll through paragraphs
-  //Scroll up
-  if (event.key === "i") {
-    changePage(0);
-    //add to scroll
-    scrollingHeight = objParas.object3D.position.y + 10 + 1;
-
-    //If greater than or equal to maximum height, reset for next section
-    var wrapCheck = wrapAround(scrollingHeight, 0, 20);
-    if (wrapCheck[0]) {
-      scrollingHeight = wrapCheck[1];
-      console.log("Loading Next section");
-      changePage(1);
-
-      //Reset the Position
-      objParas.setAttribute("opacity", 1);
-      objParas.setAttribute("position", "0 -10 -20");
-    }
-
-    //Remove existing animations
-    objParas.removeAttribute("animation__pos");
-
-    objParas.object3D.position.y = -10 + scrollingHeight;
-    setOpacity();
-
-    //Scroll Down
-  } else if (event.key === "k") {
-    scrollingHeight = objParas.object3D.position.y + 10;
-    //subtract from scroll
-    scrollingHeight = scrollingHeight - 0.2;
-    //If less than or equal to min height, reset for previous section
-    var wrapCheck = wrapAround(scrollingHeight, 0, 20);
-    if (wrapCheck[0]) {
-      scrollingHeight = wrapCheck[1];
-      console.log("Loading Previous section");
+  if(!pageChanging){
+    //Scroll through paragraphs
+    //Go to previous paragraph
+    if (event.key === "q") {
+      scrollingHeight = 0;
       changePage(-1);
-
-      //Reset  the Position
-      objParas.setAttribute("opacity", 1);
-      objParas.setAttribute("position", "0 10 -20");
+      //Go to next paragraph
+    } else if (event.key === "e") {
+      scrollingHeight = 0;
+      changePage(1);
+    }
+  
+    if (event.key === "i"){
+      //add to scroll
+      scrollingHeight= objParas.object3D.position.y+10+.5;
+  
+      //If greater than or equal to maximum height, reset for next section
+      objParas.removeAttribute("animation__pos");
+  
+      objParas.object3D.position.y = -10+scrollingHeight;
+      setOpacity();
+      console.log(scrollingHeight)
+    //Scroll Down
+    } else if (event.key === "k") {
+      scrollingHeight = objParas.object3D.position.y+10-.5;
+  
+      //Remove existing animations
+      objParas.removeAttribute("animation__pos");
+      console.log(scrollingHeight)
+      objParas.object3D.position.y = -10+scrollingHeight;
+      setOpacity();
     }
 
-    //Remove existing animations
-    objParas.removeAttribute("animation__pos");
-
-    objParas.object3D.position.y = -10 + scrollingHeight;
-    setOpacity();
-  }
-  //Go to previous paragraph
-  if (event.key === "q") {
-    scrollingHeight = 0;
-    changePage(-1);
-    //Go to next paragraph
-  } else if (event.key === "e") {
-    scrollingHeight = 0;
-    changePage(1);
   }
 });
 
@@ -104,23 +95,22 @@ function wrapAround(current, min, max) {
 
 //Function triggers for each new section in the story, to update object, images and text to the next section
 function nextSection(pageChange) {
+  pageChanging=true;
   changeSky(pageChange); //Update skybox to respective image
   changePage(pageChange); //Navigate to the next page
 
   for (i in sectionImages) {
     let elmnt = document.getElementById(sectionImages[i]);
-    console.log("adding image to delete:"+sectionImages[i])
     elmnt.setAttribute("animation__opa","property: opacity; from:1;to: 0; dur:1000; easing: linear; loop: false;");
   }
 
   for (i in sectionObjects) {
     let elmnt = document.getElementById(sectionObjects[i]);
-    console.log("adding object to delete:"+sectionObjects[i])
     elmnt.setAttribute("animation__scale","property: scale; from:0.02 0.02 0.02;to: 0 0 0; dur:1000; easing: linear; loop: false;");
   }
   sectionImages.length=0
   sectionObjects.length=0
-  setTimeout(deleteSectionMedia, 1000);
+  setTimeout(refreshMedia, 1000);
 }
 
 //Control the opacity of paragraphs as they change height
@@ -151,8 +141,18 @@ function setOpacity() {
           elmnt.setAttribute("opacity",1);
         }
       }*/
-  } else {
+  } else{
     textTarget.setAttribute("opacity", 0);
+  } 
+  
+  if (scrollingHeight<0){
+    scrollingHeight=20;
+    objParas.object3D.position.y = -10+scrollingHeight;
+    changePage(-1);
+  }else if(scrollingHeight>20){
+    scrollingHeight=0;
+    objParas.object3D.position.y = -10+scrollingHeight;
+    changePage(1);
     /*
       for(j in movingPictures){
         let elID = "movingPicture"+j;
@@ -183,9 +183,9 @@ function changeSky(skyChange) {
   objSky.removeAttribute("animation__opa");
   objSky.setAttribute(
     "animation__opa",
-    "property: opacity; from:1;to: 0; dur:200; easing: linear; loop: false;"
+    "property: opacity; from:1;to: 0; dur:1000; easing: linear; loop: false;"
   );
-  setTimeout(setSkyFadeIn, 200);
+  setTimeout(setSkyFadeIn, 1000);
 }
 
 function setSkyFadeIn() {
@@ -205,10 +205,8 @@ function createImages() {
     //For each image in this section
     //Check how many pictures there are
     let imgOffset = 0;
-
+    let img ="";
     //Create the new HTML Element for the picture
-    let img = document.createElement("a-image");
-    img.setAttribute("id", "movingPicture" + currentImages);
     let src = "";
     for (j in imgRepo) {
       //Find the image file for the current image
@@ -216,9 +214,18 @@ function createImages() {
         src = imgRepo[j];
       }
     }
+    if(src.includes("mp4")){      
+      img = document.createElement("a-video");
+      img.setAttribute("id", "sectionVideo" + currentImages);
+    }else{
+      img = document.createElement("a-image");
+      img.setAttribute("id", "sectionPicture" + currentImages);
+    }
+    
     img.setAttribute("src", src);
     img.setAttribute("Opacity", "0");
-    img.setAttribute("scale", "15 15 15");
+    img.setAttribute("scale", "1.6 1.6 1.6");
+    img.setAttribute("look-at","#cameraObj");
 
     //set img offset
     let offset = -currentImages * 8 + 5;
@@ -227,6 +234,7 @@ function createImages() {
     } else {
       imgOffset = 1;
     }
+
     /* FOR IMAGES MOVING WITH TEXT
     let pos = imgOffset*2+" "+offset+" -2";
     if(imageNums.length==1){
@@ -236,6 +244,7 @@ function createImages() {
     if (sectionImages.length == 1) {
       pos = "0 0 -21";
     }
+    pos=imgPositions[currentImages]
     img.setAttribute("position", pos);
 
     sectionImages[currentImages] = img.getAttribute("id");
@@ -251,14 +260,39 @@ function createImages() {
     );
     currentImages++;
   }
-  currentImages=0;
 }
 
-function createObjects(objNums) {
+//Create all the images for the current section
+function createAudio() {
+  
+  console.log("Create Audio:"+sectionAudio)
+  let img ="";
+  //Create the new HTML Element for the picture
+  let src = "";
+  for (j in imgRepo) {
+    //Find the image file for the current image
+    if (imgRepo[j].includes(sectionAudio)) {
+      src = imgRepo[j];
+    }
+  }
+  img = document.createElement("a-sound");
+  img.setAttribute("id", "sectionAudio");
+  img.setAttribute("src", src);
+  img.setAttribute("autoplay", "true");
+  img.setAttribute("on", "true");
+  img.setAttribute("loop", "true");
+  //Create the image element
+  //let element = document.getElementById("textPara");
+  let element = document.getElementById("imageParent");
+  element.appendChild(img);
+}
+
+
+function createObjects() {
   //Clear previous sections images
   //deleteMovingImage();
   let currentObjects = 0;
-  for (i in objNums) {
+  for (i in sectionObjects) {
     //For each image in this section
     //Check how many pictures there are
     let objCount = currentObjects;
@@ -270,7 +304,7 @@ function createObjects(objNums) {
     let mtl = "";
     for (j in imgRepo) {
       //Find the image file for the current image
-      if (imgRepo[j].includes(objNums[i])) {
+      if (imgRepo[j].includes(sectionObjects[i])) {
         src = imgRepo[j].slice(0, -3)+"obj";
         if (imgRepo[j].includes(".mtl")){
           mtl = imgRepo[j].slice(0, -3)+"mtl";
@@ -280,11 +314,10 @@ function createObjects(objNums) {
     obj.setAttribute("obj-model", "obj: " + src+";mtl:"+mtl+";");
     obj.setAttribute("color", "#00FF00");
     obj.setAttribute("scale", "0 0 0");
-    obj.setAttribute("position", "-3.1 0 2");
+    obj.setAttribute("position", "0 0 0");
 
     sectionObjects[objCount] = obj.getAttribute("id");
 
-    console.log("SECTION OBJECTS"+sectionObjects[objCount] )
     //Create the image element
     //let element = document.getElementById("textPara");
     let element = document.getElementById("objectParent");
@@ -297,14 +330,28 @@ function createObjects(objNums) {
     );
     currentObjects++;
   }
-  currentObjects=0;
 }
 
 //Delete all pictures
-function deleteSectionMedia() {
+function refreshMedia() {
+  pageChanging=false;
   const imageParent = document.getElementById("imageParent");
   const objectParent = document.getElementById("objectParent");
-  while(imageParent.hasChildNodes()){imageParent.removeChild(imageParent.firstChild);}
+  while(imageParent.hasChildNodes()){
+    //imageParent.firstChild.pause();
+    let elID=imageParent.firstElementChild?.getAttribute("id")
+    console.log(elID)
+    if (elID!==undefined){
+      if((imageParent.firstElementChild.getAttribute("id")).includes("Video")){
+        document.getElementById(elID).pause();
+        document.querySelector("#"+elID).pause();
+      }
+      if((imageParent.firstElementChild.getAttribute("id")).includes("Audio")){
+        document.getElementById(elID).setAttribute("on", "false");
+      }
+    }
+    imageParent.removeChild(imageParent.firstChild );
+  }
   while(objectParent.hasChildNodes()){objectParent.removeChild(objectParent.firstChild);}
 
   sectionimages = [];
@@ -316,7 +363,6 @@ function deleteSectionMedia() {
 
   //Run until the end of section
   while (!sectionFound) {
-    console.log(storyParagraphs[tempImageNum]);
     if (storyParagraphs[tempImageNum].includes("New Section")) {
       //If next section found, end the search
       sectionFound = true;
@@ -329,9 +375,13 @@ function deleteSectionMedia() {
     } else if (storyParagraphs[tempImageNum].includes("(OBJECT-")) {
       //If an image or video is found, then push them to the image array for loading
       sectionObjects.push(storyParagraphs[tempImageNum].slice(11));
+    } else if (storyParagraphs[tempImageNum].includes("AUDIO--")) {
+      //If an image or video is found, then push them to the image array for loading
+      sectionAudio = storyParagraphs[tempImageNum].slice(11);
+      console.log("Audio found");
     } else {
       //Otherwise add the current text to the section text var
-      currentText = currentText + storyParagraphs[tempImageNum] + "\n\n";
+      currentText = currentText + storyParagraphs[tempImageNum]+ "\n\n";
     }
 
     //check up to the next story component
@@ -343,8 +393,10 @@ function deleteSectionMedia() {
 
   //Set the text object value to the current section's text
   objParas.setAttribute("value", currentText);
+  objParas.setAttribute("font", fontItalicBold);
   //Create all images for the current section
   createImages(sectionImages);
+  createAudio();
   createObjects(sectionObjects);
 }
 
@@ -355,11 +407,7 @@ function changePage(pageChange) {
   objParas.setAttribute("value", "");
   objParas.setAttribute("opacity", 0);
 
-  currentPage = wrapAround(
-    currentPage + pageChange,
-    1,
-    storyParagraphs.length - 1
-  )[1];
+  currentPage = wrapAround(currentPage + pageChange,1,storyParagraphs.length - 1)[1];
   if (storyParagraphs[currentPage] === "New Section") {
     nextSection(pageChange);
   } else if (storyParagraphs[currentPage - 1] !== "New Section") {
@@ -372,7 +420,7 @@ function changePage(pageChange) {
     objParas.removeAttribute("animation__pos");
     objParas.setAttribute(
       "animation__pos",
-      "property: position; from:0 -10 -20;to: 0 10 -20; dur:10000; easing: linear; loop: false;"
+      "property: position; from:0 -10 -15;to: 0 10 -15; dur:10000; easing: linear; loop: false;"
     );
     if (!storyParagraphs[currentPage].includes("IMAGE:")) {
       //Commented out, trialing setting Block paragraph value
