@@ -376,13 +376,14 @@
       },"object": {
         "id": "sceneTrain",
         "meta": {
-          "heading": "Train Station modelled scene"
+          "heading": "Train Station modelled scene",
+          "SectionDuration":"1,2,3"
         },
         "isUserDefined": true
       },"audio": {
-        "id": "audioTown",
+        "id": "audioStation",
         "meta": {
-          "heading": "Town Passive Audio"
+          "heading": "Station Passive Audio"
         },
         "isUserDefined": true
       },

@@ -1,4 +1,3 @@
-//const { string } = require("joi");
 
 let objParas = "";
 let pageChanging = false;
@@ -7,6 +6,7 @@ let imgRepo = [];
 let objSky = "";
 let sectionImages = []; //Initiate the Array of images for the new section
 let sectionObjects = []; //Initiate the Array of Objects for the new section
+let sectionAudio =""
 //Define the Backgrounds
 let currentSky = 0;
 const skies = [];
@@ -205,10 +205,8 @@ function createImages() {
     //For each image in this section
     //Check how many pictures there are
     let imgOffset = 0;
-
+    let img ="";
     //Create the new HTML Element for the picture
-    let img = document.createElement("a-video");
-    img.setAttribute("id", "movingPicture" + currentImages);
     let src = "";
     for (j in imgRepo) {
       //Find the image file for the current image
@@ -216,6 +214,14 @@ function createImages() {
         src = imgRepo[j];
       }
     }
+    if(src.includes("mp4")){      
+      img = document.createElement("a-video");
+      img.setAttribute("id", "sectionVideo" + currentImages);
+    }else{
+      img = document.createElement("a-image");
+      img.setAttribute("id", "sectionPicture" + currentImages);
+    }
+    
     img.setAttribute("src", src);
     img.setAttribute("Opacity", "0");
     img.setAttribute("scale", "1.6 1.6 1.6");
@@ -256,11 +262,37 @@ function createImages() {
   }
 }
 
-function createObjects(objNums) {
+//Create all the images for the current section
+function createAudio() {
+  
+  console.log("Create Audio:"+sectionAudio)
+  let img ="";
+  //Create the new HTML Element for the picture
+  let src = "";
+  for (j in imgRepo) {
+    //Find the image file for the current image
+    if (imgRepo[j].includes(sectionAudio)) {
+      src = imgRepo[j];
+    }
+  }
+  img = document.createElement("a-sound");
+  img.setAttribute("id", "sectionAudio");
+  img.setAttribute("src", src);
+  img.setAttribute("autoplay", "true");
+  img.setAttribute("on", "true");
+  img.setAttribute("loop", "true");
+  //Create the image element
+  //let element = document.getElementById("textPara");
+  let element = document.getElementById("imageParent");
+  element.appendChild(img);
+}
+
+
+function createObjects() {
   //Clear previous sections images
   //deleteMovingImage();
   let currentObjects = 0;
-  for (i in objNums) {
+  for (i in sectionObjects) {
     //For each image in this section
     //Check how many pictures there are
     let objCount = currentObjects;
@@ -272,7 +304,7 @@ function createObjects(objNums) {
     let mtl = "";
     for (j in imgRepo) {
       //Find the image file for the current image
-      if (imgRepo[j].includes(objNums[i])) {
+      if (imgRepo[j].includes(sectionObjects[i])) {
         src = imgRepo[j].slice(0, -3)+"obj";
         if (imgRepo[j].includes(".mtl")){
           mtl = imgRepo[j].slice(0, -3)+"mtl";
@@ -305,7 +337,21 @@ function refreshMedia() {
   pageChanging=false;
   const imageParent = document.getElementById("imageParent");
   const objectParent = document.getElementById("objectParent");
-  while(imageParent.hasChildNodes()){imageParent.removeChild(imageParent.firstChild);}
+  while(imageParent.hasChildNodes()){
+    //imageParent.firstChild.pause();
+    let elID=imageParent.firstElementChild?.getAttribute("id")
+    console.log(elID)
+    if (elID!==undefined){
+      if((imageParent.firstElementChild.getAttribute("id")).includes("Video")){
+        document.getElementById(elID).pause();
+        document.querySelector("#"+elID).pause();
+      }
+      if((imageParent.firstElementChild.getAttribute("id")).includes("Audio")){
+        document.getElementById(elID).setAttribute("on", "false");
+      }
+    }
+    imageParent.removeChild(imageParent.firstChild );
+  }
   while(objectParent.hasChildNodes()){objectParent.removeChild(objectParent.firstChild);}
 
   sectionimages = [];
@@ -329,9 +375,13 @@ function refreshMedia() {
     } else if (storyParagraphs[tempImageNum].includes("(OBJECT-")) {
       //If an image or video is found, then push them to the image array for loading
       sectionObjects.push(storyParagraphs[tempImageNum].slice(11));
+    } else if (storyParagraphs[tempImageNum].includes("AUDIO--")) {
+      //If an image or video is found, then push them to the image array for loading
+      sectionAudio = storyParagraphs[tempImageNum].slice(11);
+      console.log("Audio found");
     } else {
       //Otherwise add the current text to the section text var
-      currentText = currentText + storyParagraphs[tempImageNum] + "\n\n";
+      currentText = currentText + storyParagraphs[tempImageNum]+ "\n\n";
     }
 
     //check up to the next story component
@@ -346,6 +396,7 @@ function refreshMedia() {
   objParas.setAttribute("font", fontItalicBold);
   //Create all images for the current section
   createImages(sectionImages);
+  createAudio();
   createObjects(sectionObjects);
 }
 
@@ -356,11 +407,7 @@ function changePage(pageChange) {
   objParas.setAttribute("value", "");
   objParas.setAttribute("opacity", 0);
 
-  currentPage = wrapAround(
-    currentPage + pageChange,
-    1,
-    storyParagraphs.length - 1
-  )[1];
+  currentPage = wrapAround(currentPage + pageChange,1,storyParagraphs.length - 1)[1];
   if (storyParagraphs[currentPage] === "New Section") {
     nextSection(pageChange);
   } else if (storyParagraphs[currentPage - 1] !== "New Section") {

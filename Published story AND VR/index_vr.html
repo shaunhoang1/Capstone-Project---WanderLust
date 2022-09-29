@@ -20,9 +20,10 @@
 
   <body>
     <!-- HTML Elements to create a page before scene   embedded style="height:100px;width:100px;" z-index=-10000 -->
-    <a-scene id="VRScene" >
+    <a-scene id="VRScene" shadow="autoUpdate:true">
       <!-- ###################  LOAD ASSETS INTO STORY  #################### -->
-      <a-assets>
+      <a-assets id="assetParent">
+        <video id="PYj71zvsADID" src="/assets/PYj71zvsAD/cthulhu.mp4" loop="false">
         <!--<a-asset-item id="firstModel" src="./assets/testObject/testObj.obj"></a-asset-item>
         <!-- CANNOT UPLOAD LARGE OBJECTS TO GITHUB -->
         <!--<a-asset-item id="venator" src="Resources/Objects/venator/Venator.obj"></a-asset-item>
@@ -45,9 +46,9 @@
         
       </a-assets>
 
-      <!--ground for player-->
+      <!--ground for player
       <a-circle position="0 0 2" rotation="-90 0 0" radius="2" color="green" material="flat"></a-circle>
-
+    -->
       <!-- Sky Object  </a-sky>
       -->
       <a-sky id="sky" src="#sky1"></a-sky>>
@@ -130,6 +131,16 @@
         width="5">
         </a-text>
         <a-box position="0 18 -6" opacity="0" scale="50 25 54" roughness="1"></a-box>
-    </a-scene>
+        <a-text
+          id="textPara222"
+          scale="5 5 5"
+          value=""
+          opacity="1"
+          align="center"
+          color="#FFFFFF"
+          position="0 10 -20"
+          width="5" value="<strong>TESTING BOLD</strong>" >
+          </a-text>
+      </a-scene>
   </body>
 </html>
