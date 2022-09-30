@@ -30,7 +30,7 @@ function retrieveStory(){
       extractStory(json.subTitle, canvas);
     } 
     if (json?.content!==undefined) {
-      if(json?.type==="paragraph"){
+      if(json?.type==="paragraph" || json?.type==="subsubtitle"){
         console.log("Paragraph found");
         groupParagraph=true;
         json.content.map(extractStory).join("");
