@@ -37,7 +37,8 @@ let fontLight="https://raw.githubusercontent.com/WayneBrysen/FontStore/main/FntF
 let fontRegular="https://raw.githubusercontent.com/WayneBrysen/FontStore/main/FntFonts/Arial_Regular.fnt";
 
 //Define the page number and change for all text objects
-let scrollingHeight = 0;
+let scrollingHeight = [];
+scrollingHeight[0] = 0;
 let currentPage = 0;
 
 //All JS Functions which are required to navigate through the story are created here
@@ -46,32 +47,34 @@ document.addEventListener("keydown", function (event) {
     //Scroll through paragraphs
     //Go to previous paragraph
     if (event.key === "q") {
-      scrollingHeight = 0;
-      changePage(-1);
+      scrollingHeight[0] = 0;
+      console.log("Previous Page")
+      nextSection(-1);
       //Go to next paragraph
     } else if (event.key === "e") {
-      scrollingHeight = 0;
-      changePage(1);
+      scrollingHeight[0] = 0;
+      console.log("Next Page")
+      nextSection(1);
     }
   
     if (event.key === "i"){
       //add to scroll
-      scrollingHeight= objParas.object3D.position.y+10+.5;
+      scrollingHeight[0] = objParas.object3D.position.y+10+.5;
   
       //If greater than or equal to maximum height, reset for next section
       objParas.removeAttribute("animation__pos");
   
-      objParas.object3D.position.y = -10+scrollingHeight;
+      objParas.object3D.position.y = -10+scrollingHeight[0];
       setOpacity();
-      console.log(scrollingHeight)
+      console.log(scrollingHeight[0])
     //Scroll Down
     } else if (event.key === "k") {
-      scrollingHeight = objParas.object3D.position.y+10-.5;
+      scrollingHeight[0] = objParas.object3D.position.y+10-.5;
   
       //Remove existing animations
       objParas.removeAttribute("animation__pos");
-      console.log(scrollingHeight)
-      objParas.object3D.position.y = -10+scrollingHeight;
+      console.log(scrollingHeight[0])
+      objParas.object3D.position.y = -10+scrollingHeight[0];
       setOpacity();
     }
 
@@ -97,8 +100,28 @@ function wrapAround(current, min, max) {
 function nextSection(pageChange) {
   pageChanging=true;
   changeSky(pageChange); //Update skybox to respective image
-  changePage(pageChange); //Navigate to the next page
-
+  //Delete Current page properties
+  objParas.removeAttribute("animation__pos");
+  objParas.setAttribute("value", "");
+  objParas.setAttribute("opacity", 0);
+  
+  let notNewSection=true;
+  while(notNewSection){
+    currentPage = wrapAround(currentPage + pageChange,1,storyParagraphs.length - 1)[1];
+    if (storyParagraphs[currentPage-1]==="New Section"){
+      notNewSection=false;
+    }
+  }
+    
+  //Update paragraph text value
+  objParas.setAttribute("Opacity", 0);
+  //console.log(currentPage-1+": "+storyParagraphs[currentPage]);
+  //Reset and activate the Position animation
+  objParas.removeAttribute("animation__pos");
+  objParas.setAttribute(
+    "animation__pos",
+    "property: position; from:0 -10 -15;to: 0 10 -15; dur:10000; easing: linear; loop: false;"
+  );
   for (i in sectionImages) {
     let elmnt = document.getElementById(sectionImages[i]);
     elmnt.setAttribute("animation__opa","property: opacity; from:1;to: 0; dur:1000; easing: linear; loop: false;");
@@ -116,13 +139,13 @@ function nextSection(pageChange) {
 //Control the opacity of paragraphs as they change height
 function setOpacity() {
   let textTarget = objParas;
-  scrollingHeight = textTarget.object3D.position.y + 10;
-  if (scrollingHeight > 0 && scrollingHeight < 20) {
+  scrollingHeight[0] = textTarget.object3D.position.y + 10;
+  if (scrollingHeight[0] > 0 && scrollingHeight[0] < 20) {
     //Control opacity while scrolling
-    if (scrollingHeight >= 15) {
-      textTarget.setAttribute("opacity", (20 - scrollingHeight) / 5);
-    } else if (scrollingHeight <= 5) {
-      textTarget.setAttribute("opacity", scrollingHeight / 5);
+    if (scrollingHeight[0] >= 15) {
+      textTarget.setAttribute("opacity", (20 - scrollingHeight[0]) / 5);
+    } else if (scrollingHeight[0] <= 5) {
+      textTarget.setAttribute("opacity", scrollingHeight[0] / 5);
     } else {
       textTarget.setAttribute("opacity", 1);
     }
@@ -145,14 +168,14 @@ function setOpacity() {
     textTarget.setAttribute("opacity", 0);
   } 
   
-  if (scrollingHeight<0){
-    scrollingHeight=20;
-    objParas.object3D.position.y = -10+scrollingHeight;
-    changePage(-1);
-  }else if(scrollingHeight>20){
-    scrollingHeight=0;
-    objParas.object3D.position.y = -10+scrollingHeight;
-    changePage(1);
+  if (scrollingHeight[0]<0){
+    scrollingHeight[0]=20;
+    objParas.object3D.position.y = -10+scrollingHeight[0];
+    nextSection(-1);
+  }else if(scrollingHeight[0]>20){
+    scrollingHeight[0]=0;
+    objParas.object3D.position.y = -10+scrollingHeight[0];
+    nextSection(1);
     /*
       for(j in movingPictures){
         let elID = "movingPicture"+j;
@@ -289,7 +312,6 @@ function createAudio() {
   element.appendChild(img);
 }
 
-
 function createObjects() {
   //Clear previous sections images
   //deleteMovingImage();
@@ -402,7 +424,6 @@ function refreshMedia() {
   createObjects(sectionObjects);
 }
 
-//Define the page number and change
 function changePage(pageChange) {
   //Delete Current page properties
   objParas.removeAttribute("animation__pos");
@@ -434,6 +455,7 @@ function changePage(pageChange) {
       }
     }
   }
+  
 }
 
 //define all paragraph objects
