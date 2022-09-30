@@ -171,6 +171,7 @@ function importStory() {
   //retrieveStoryAssets = retrieveStory(); //retrieve the story from the json
 
   storyParagraphs.unshift("New Section");
+  storyParagraphs[-1]="The End!";
   currentPage = 0;
   currentSky = 0; //Initialize New State of story
   changePage(1); //Begin story
