@@ -59,7 +59,8 @@ function retrieveStory(){
     } 
     if (json?.embed!==undefined) { //Extract video embed
       let embededObj=json.embed;
-      combinedText[combinedText.length]="\"(EMBED:)"+embededObj.originalUrl+"\"";
+      //Cannot add embedded videos due to A-Frame legality restrictions
+      //combinedText[combinedText.length]="\"(EMBED:)"+embededObj.originalUrl+"\"";
     } 
     if (json.type === "text") {
       let currentText = json.text;
