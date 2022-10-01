@@ -95,12 +95,15 @@ document.addEventListener("keydown", function (event) {
 });
 
 function scroll(direction,stepSize){ //direction, -1 = down, 1=up
+  let testLoggingEl ="";
   switch(direction){
     case -1:
       scrollingHeight[0] = objParas[0].object3D.position.y-stepSize;
       //Remove existing animations
       objParas[0].removeAttribute("animation__pos");
       objParas[0].object3D.position.y = scrollingHeight[0];
+      testLoggingEl = document.getElementById("testLogging");
+      testLoggingEl.setAttribute("value",scrollingHeight[0])
       setOpacity();
       break;
     case 1:
@@ -109,6 +112,8 @@ function scroll(direction,stepSize){ //direction, -1 = down, 1=up
       //If greater than or equal to maximum height, reset for next section
       objParas[0].removeAttribute("animation__pos");
       objParas[0].object3D.position.y = scrollingHeight[0];
+      testLoggingEl = document.getElementById("testLogging");
+      testLoggingEl.setAttribute("value",scrollingHeight[0]+"\n"+objParas[0]["id"])
       setOpacity();
       console.log(scrollingHeight[scrollingHeight.length-1])
       break;
