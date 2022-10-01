@@ -373,6 +373,13 @@
         "backgroundGrayscale": "none",
         "layoutLandscapeMedia": "left",
         "layoutPortraitMedia": "top"
+      },"object": {
+        "id": "sceneTrain",
+        "meta": {
+          "heading": "Train Station modelled scene",
+          "SectionDuration":"1,2,3"
+        },
+        "isUserDefined": true
       },"audio": {
         "id": "audioStation",
         "meta": {
@@ -1103,6 +1110,12 @@
         "textFade": "none",
         "layoutLandscapeMedia": "left",
         "layoutPortraitMedia": "top"
+      },"object": {
+        "id": "sceneMountain",
+        "meta": {
+          "heading": "Mountain Road modelled scene"
+        },
+        "isUserDefined": true
       },"audio": {
         "id": "audioBus",
         "meta": {
@@ -1385,6 +1398,12 @@
           "Desktop only"
         ],
         "theme": "Dark"
+      },"object": {
+        "id": "sceneTown",
+        "meta": {
+          "heading": "Object for story (will be cropped to screen)"
+        },
+        "isUserDefined": true
       },
       "layers": [
         {
@@ -2032,6 +2051,12 @@
           "Desktop only"
         ],
         "theme": "Dark"
+      },"object": {
+        "id": "sceneOcean",
+        "meta": {
+          "heading": "Ocean Modelled scene for story enhancement"
+        },
+        "isUserDefined": true
       },"audio": {
         "id": "audioThunder",
         "meta": {
