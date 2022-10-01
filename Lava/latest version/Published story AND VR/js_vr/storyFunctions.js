@@ -98,7 +98,7 @@ function scroll(direction,stepSize){ //direction, -1 = down, 1=up
   let testLoggingEl ="";
   switch(direction){
     case -1:
-      scrollingHeight[0] = objParas[0].object3D.position.y-stepSize;
+      scrollingHeight[0] = scrollingHeight[0]-stepSize;
       //Remove existing animations
       objParas[0].removeAttribute("animation__pos");
       objParas[0].object3D.position.y = scrollingHeight[0];
@@ -108,7 +108,7 @@ function scroll(direction,stepSize){ //direction, -1 = down, 1=up
       break;
     case 1:
       //add to scroll
-      scrollingHeight[0] = objParas[0].object3D.position.y+stepSize;
+      scrollingHeight[0] = scrollingHeight[0]+stepSize;
       //If greater than or equal to maximum height, reset for next section
       objParas[0].removeAttribute("animation__pos");
       objParas[0].object3D.position.y = scrollingHeight[0];
@@ -179,7 +179,7 @@ function setOpacity() {
   for(i in objParas){
     if(i!==0){
       let textTarget = objParas[i];
-      scrollingHeight[i] = textTarget.object3D.position.y + 10;
+      scrollingHeight[i] = textTarget.object3D.position.y ;
       if (scrollingHeight[i] > 0 && scrollingHeight[i] < 25) {
         // Control opacity while scrolling
         if (scrollingHeight[i] >= 20) { //Gradient fade when too high
@@ -393,8 +393,8 @@ function createText(currentPara,width,height){
   txt.setAttribute("scale", width+" 5 5");
   txt.setAttribute("value", currentPara);
   txt.setAttribute("align", "center");
-  txt.setAttribute("opacity", "1");
-  txt.setAttribute("position", "0 "+height*2+" -20");
+  txt.setAttribute("opacity", "0");
+  txt.setAttribute("position", "0 0 -20");
   txt.setAttribute("width", width);
   objParas.push(txt);
   //Create the Text element
@@ -441,7 +441,6 @@ function refreshMedia() {
 
   //Run until the end of section
   
-  let tempText="";
   while (!sectionFound) {
     if (storyParagraphs[tempImageNum].includes("(FONT:)")) {
       let fontSizeStr = storyParagraphs[tempImageNum].slice(7);

@@ -42,7 +42,31 @@ let fontRegular="https://raw.githubusercontent.com/WayneBrysen/FontStore/main/Fn
 let scrollingHeight = [];
 scrollingHeight[0] = -5;
 let currentPage = 0;
+//the vr controller
+AFRAME.registerComponent('thumbstick-logging',{
+  init: function () {
+    this.el.addEventListener('thumbstickmoved', this.logThumbstick);
+  },
+  logThumbstick: function (evt) {
+    if(!pageChanging){
+      if (evt.detail.y > 0.8) {  
+      scroll(1,1-evt.detail.y);
+    //Scroll Down
+  }
+    else if (evt.detail.y < -0.8) {
+      scroll(-1,1+evt.detail.y);
+      }
 
+    if (evt.detail.x < -0.95) { scrollingHeight = 0;
+      scrollingHeight[0] = 0;
+      console.log("Previous Page")
+      nextSection(-1); }
+    if (evt.detail.x > 0.95) {  scrollingHeight = 0;
+      scrollingHeight[0] = 0;
+      console.log("Next Page")
+      nextSection(1); }
+  }
+  }})
 //All JS Functions which are required to navigate through the story are created here
 document.addEventListener("keydown", function (event) {
   if(!pageChanging){
@@ -60,22 +84,38 @@ document.addEventListener("keydown", function (event) {
     }
   
     if (event.key === "i"){
-      //add to scroll
-      scrollingHeight[0] = objParas[0].object3D.position.y+.2;
-      //If greater than or equal to maximum height, reset for next section
-      objParas[0].removeAttribute("animation__pos");
-      objParas[0].object3D.position.y = scrollingHeight[0];
-      setOpacity();
-    //Scroll Down
+      scroll(1,0.2);
     } else if (event.key === "k") {
-      scrollingHeight[0] = objParas[0].object3D.position.y-.2;
-      //Remove existing animations
-      objParas[0].removeAttribute("animation__pos");
-      objParas[0].object3D.position.y = scrollingHeight[0];
-      setOpacity();
+      scroll(-1,0.2);
     }
   }
 });
+
+function scroll(direction,stepSize){ //direction, -1 = down, 1=up
+  let testLoggingEl ="";
+  switch(direction){
+    case -1:
+      scrollingHeight[0] = scrollingHeight[0]-stepSize;
+      //Remove existing animations
+      objParas[0].removeAttribute("animation__pos");
+      objParas[0].object3D.position.y = scrollingHeight[0];
+      testLoggingEl = document.getElementById("testLogging");
+      testLoggingEl.setAttribute("value",scrollingHeight[0])
+      setOpacity();
+      break;
+    case 1:
+      //add to scroll
+      scrollingHeight[0] = scrollingHeight[0]+stepSize;
+      //If greater than or equal to maximum height, reset for next section
+      objParas[0].removeAttribute("animation__pos");
+      objParas[0].object3D.position.y = scrollingHeight[0];
+      testLoggingEl = document.getElementById("testLogging");
+      testLoggingEl.setAttribute("value",scrollingHeight[0]+"\n"+objParas[0].getAttribute("opacity"))
+      setOpacity();
+      console.log(scrollingHeight[scrollingHeight.length-1])
+      break;
+  }
+}
 
 //WrapAround function to loop array variables,
 //and can also change the variable which it is based on.
@@ -155,7 +195,7 @@ function setOpacity() {
     nextSection(-1);
     scrollingHeight[0]=20;
     objParas[0].object3D.position.y = scrollingHeight[0];
-  }else if(objParas[objParas.length-1].object3D.position.y>20){
+  }else if(scrollingHeight[scrollingHeight.length-1]>20){
     nextSection(1);
     scrollingHeight[0]=-5;
     console.log("Bottom Para is above threshold")
@@ -166,8 +206,8 @@ function setOpacity() {
       objParas[i].object3D.position.y = objParas[i-1].object3D.position.y-5;
     }
   }
-  console.log("Top Paragraph:"+objParas[0].object3D.position.y+",  "+scrollingHeight[0])
-  console.log("Bottom Paragraph:"+objParas[objParas.length-1].object3D.position.y+",  "+scrollingHeight[scrollingHeight.length-1])
+  // console.log("Top Paragraph:"+objParas[0].object3D.position.y+",  "+scrollingHeight[0])
+  // console.log("Bottom Paragraph:"+objParas[objParas.length-1].object3D.position.y+",  "+scrollingHeight[scrollingHeight.length-1])
 }
 
 //Start on-going timer to set moving text & image opacity
@@ -346,10 +386,11 @@ function createText(currentPara,width){
   txt.setAttribute("value", currentPara);
   txt.setAttribute("align", "center");
   txt.setAttribute("opacity", "0");
-  txt.setAttribute("position", "0 0 -20");
+  txt.setAttribute("position", "0 -5 -20");
   txt.setAttribute("width", width);
   objParas.push(txt);
   scrollingHeight[objParas.length-1]=-5;
+
   //Create the Text element
   let element = document.getElementById("textParent");
   element.appendChild(txt);  
@@ -380,7 +421,8 @@ function refreshMedia() {
   while(textParent.hasChildNodes()){textParent.removeChild(textParent.firstChild);objParas.shift();}
   sectionimages = [];
   sectionObjects = [];
-
+  scrollingHeight=[];
+  scrollingHeight[0]=-5;
   let tempImageNum = currentPage; //Temp integer at current page to navigate through all story components in this section
   let sectionFound = false; //Boolean to check when the section ends
   let currentText = ""; //Str var for all the text in this section
