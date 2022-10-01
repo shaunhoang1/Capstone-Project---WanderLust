@@ -148,12 +148,6 @@ function setOpacity() {
       } else{  //Set opacity to zero when outside borders
         textTarget.setAttribute("opacity", 0);
       } 
-    // }else{
-    //   let textTarget = objParas[i];
-    //   scrollingHeight[i] = textTarget.object3D.position.y + 10;
-    //   textTarget.setAttribute("opacity", 0);
-      
-    // }
   }
 
   //Check if image has scrolled outside of borders
