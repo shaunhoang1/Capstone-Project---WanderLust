@@ -113,7 +113,7 @@ function scroll(direction,stepSize){ //direction, -1 = down, 1=up
       objParas[0].removeAttribute("animation__pos");
       objParas[0].object3D.position.y = scrollingHeight[0];
       testLoggingEl = document.getElementById("testLogging");
-      testLoggingEl.setAttribute("value",scrollingHeight[0]+"\n"+objParas[0]["id"])
+      testLoggingEl.setAttribute("value",scrollingHeight[0]+"\n"+objParas[0].getAttribute("opacity"))
       setOpacity();
       console.log(scrollingHeight[scrollingHeight.length-1])
       break;
