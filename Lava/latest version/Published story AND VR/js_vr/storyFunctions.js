@@ -51,22 +51,14 @@ AFRAME.registerComponent('thumbstick-logging',{
   logThumbstick: function (evt) {
     if(!pageChanging){
       if (evt.detail.y > 0.95) {  
-         //add to scroll
-      scrollingHeight[0] = objParas[0].object3D.position.y+.2;
-      //If greater than or equal to maximum height, reset for next section
-      objParas[0].removeAttribute("animation__pos");
-      objParas[0].object3D.position.y = scrollingHeight[0];
-      setOpacity();
-      console.log(scrollingHeight[scrollingHeight.length-1])
+      scroll(1);
     //Scroll Down
   }
     else if (evt.detail.y < -0.95) {
-      scrollingHeight[0] = objParas[0].object3D.position.y-.2;
-      //Remove existing animations
-      objParas[0].removeAttribute("animation__pos");
-      objParas[0].object3D.position.y = scrollingHeight[0];
-      setOpacity();
+      scroll(-1);
       }
+
+
     if (evt.detail.x < -0.95) { scrollingHeight = 0;
       scrollingHeight[0] = 0;
       console.log("Previous Page")
@@ -94,25 +86,33 @@ document.addEventListener("keydown", function (event) {
     }
   
     if (event.key === "i"){
-      //add to scroll
-      scrollingHeight[0] = objParas[0].object3D.position.y+10+.2;
-      //If greater than or equal to maximum height, reset for next section
-      objParas[0].removeAttribute("animation__pos");
-      objParas[0].object3D.position.y = -10+scrollingHeight[0];
-      setOpacity();
-      console.log(scrollingHeight[scrollingHeight.length-1])
-    //Scroll Down
+      scroll(1);
     } else if (event.key === "k") {
-      scrollingHeight[0] = objParas[0].object3D.position.y+10-.2;
-      //Remove existing animations
-      objParas[0].removeAttribute("animation__pos");
-      objParas[0].object3D.position.y = -10+scrollingHeight[0];
-      setOpacity();
+      scroll(-1);
     }
 
   }
 });
-
+function scroll(direction){ //direction, -1 = down, 1=up
+  switch(direction){
+    case -1:
+      scrollingHeight[0] = objParas[0].object3D.position.y-.2;
+      //Remove existing animations
+      objParas[0].removeAttribute("animation__pos");
+      objParas[0].object3D.position.y = scrollingHeight[0];
+      setOpacity();
+      break;
+    case 1:
+      //add to scroll
+      scrollingHeight[0] = objParas[0].object3D.position.y+.2;
+      //If greater than or equal to maximum height, reset for next section
+      objParas[0].removeAttribute("animation__pos");
+      objParas[0].object3D.position.y = scrollingHeight[0];
+      setOpacity();
+      console.log(scrollingHeight[scrollingHeight.length-1])
+      break;
+  }
+}
 //WrapAround function to loop array variables,
 //and can also change the variable which it is based on.
 //Returns "True" or "False" in case additional functions depend on the wrap status
