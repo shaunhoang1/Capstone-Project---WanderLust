@@ -76,9 +76,7 @@ AFRAME.registerComponent('thumbstick-logging',{
       console.log("Next Page")
       nextSection(1); }
   }
-  }}
-)
-
+  }})
 //All JS Functions which are required to navigate through the story are created here
 document.addEventListener("keydown", function (event) {
   if(!pageChanging){
