@@ -61,6 +61,20 @@
                 geometry="primitive:ring;radiusInner:0.0004;radiusOuter:0.0006;"
                 material="color:white;shader:flat;"></a-entity>                 
         -->
+        <!--vr controller-->
+      <a-entity tracked-controls="controller: -10; idPrefix: OpenVR"></a-entity>
+       
+      
+        <a-entity id="cameraObj" position="0 0 0" cursor-teleport="cameraObj: #cameraObj; cameraHead: #head; collisionEntities: .collision; ignoreEntities: .clickable">
+          <a-entity id="head" position="0 1.52 0" camera="" look-controls="reverseMouseDrag: true" rotation=""></a-entity>
+          <a-entity laser-controls="hand: left" raycaster="objects: .clickable; far: 100" line="color: red; opacity: 0.75" teleport-controls="
+              collisionEntities: .collision;
+              cameraRig: #cameraObj;
+              teleportOrigin: #head;
+              button: trigger;
+              curveShootingSpeed: 8" oculus-touch-controls=""></a-entity>
+          <a-entity laser-controls="hand: right" thumbstick-logging ></a-entity>
+        </a-entity>   
       <a-entity camera look-controls id="cameraObj" position="0 1.6 2" wasd-controls="enabled:true;acceleration:10;">
       </a-entity>
 
