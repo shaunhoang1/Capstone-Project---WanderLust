@@ -50,12 +50,12 @@ AFRAME.registerComponent('thumbstick-logging',{
   logThumbstick: function (evt) {
     if(!pageChanging){
       if (evt.detail.y > 0.95) {  
-        scroll(1,0.1);
+        scroll(-1,0.2);
         // scroll(1,1-evt.detail.y);
         //Scroll Down
       }else if (evt.detail.y < -0.95) {
         // scroll(-1,1+evt.detail.y);
-        scroll(-1,0.1);
+        scroll(1,0.2);
       }
 
     if (evt.detail.x < -0.95) {
@@ -150,7 +150,9 @@ function nextSection(pageChange) {
   }
 
   //Update paragraph text value
-  objParas[0].setAttribute("Opacity", 0);
+  for(i in objParas){
+    objParas[i].setAttribute("Opacity", 0);
+  }
   //console.log(currentPage-1+": "+storyParagraphs[currentPage]);
   //Reset and activate the Position animation
   objParas[0].removeAttribute("animation__pos");
@@ -194,7 +196,7 @@ function setOpacity() {
   //Check if image has scrolled outside of borders
   if (scrollingHeight[0]<-5){
     nextSection(-1);
-    scrollingHeight[0]=20;
+    scrollingHeight[0]=-5;
     objParas[0].object3D.position.y = scrollingHeight[0];
   }else if(scrollingHeight[scrollingHeight.length-1]>20){
     nextSection(1);
@@ -399,7 +401,6 @@ function createText(currentPara,width){
 
 //Delete all pictures
 function refreshMedia() {
-  pageChanging=false;
   const imageParent = document.getElementById("imageParent");
   const objectParent = document.getElementById("objectParent");
   const textParent = document.getElementById("textParent");
@@ -490,6 +491,8 @@ function refreshMedia() {
   createImages();
   createAudio();
   createObjects();
+  
+  pageChanging=false;
 }
 
 //define all paragraph objects
