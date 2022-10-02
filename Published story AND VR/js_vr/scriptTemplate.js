@@ -41,6 +41,7 @@ let fontRegular="https://raw.githubusercontent.com/WayneBrysen/FontStore/main/Fn
 //Define the page number and change for all text objects
 let scrollingHeight = [];
 scrollingHeight[0] = -5;
+let scrollTick=0.01;
 let currentPage = 0;
 //the vr controller
 AFRAME.registerComponent('thumbstick-logging',{
@@ -50,12 +51,9 @@ AFRAME.registerComponent('thumbstick-logging',{
   logThumbstick: function (evt) {
     if(!pageChanging){
       if (evt.detail.y > 0.95) {  
-        scroll(-1,0.2);
-        // scroll(1,1-evt.detail.y);
-        //Scroll Down
+        scrollTick-=0.01
       }else if (evt.detail.y < -0.95) {
-        // scroll(-1,1+evt.detail.y);
-        scroll(1,0.2);
+        scrollTick+=0.01
       }
 
     if (evt.detail.x < -0.95) {
@@ -85,38 +83,27 @@ document.addEventListener("keydown", function (event) {
     }
   
     if (event.key === "i"){
-      scroll(1,0.2);
+      scrollTick+=0.01
     } else if (event.key === "k") {
-      scroll(-1,0.2);
+      scrollTick-=0.01
     }
   }
 });
 
-function scroll(direction,stepSize){ //direction, -1 = down, 1=up
-  let testLoggingEl ="";
-  switch(direction){
-    case -1:
-      scrollingHeight[0] = scrollingHeight[0]-stepSize;
-      //Remove existing animations
-      objParas[0].removeAttribute("animation__pos");
-      objParas[0].object3D.position.y = scrollingHeight[0];
-      testLoggingEl = document.getElementById("testLogging");
-      testLoggingEl.setAttribute("value",scrollingHeight[0])
-      setOpacity();
-      break;
-    case 1:
-      //add to scroll
-      scrollingHeight[0] = scrollingHeight[0]+stepSize;
-      //If greater than or equal to maximum height, reset for next section
-      objParas[0].removeAttribute("animation__pos");
-      objParas[0].object3D.position.y = scrollingHeight[0];
-      testLoggingEl = document.getElementById("testLogging");
-      testLoggingEl.setAttribute("value",scrollingHeight[0]+"\n"+objParas[0].getAttribute("opacity"))
-      setOpacity();
-      console.log(scrollingHeight[scrollingHeight.length-1])
-      break;
+function scroll(scrollChange=0){ //direction, -1 = down, 1=up
+  if (scrollChange!==0){
+    scrollTick+=scrollChange
   }
+  if(!pageChanging){
+    scrollingHeight[0] = scrollingHeight[0]+scrollTick;
+    //Remove existing animations
+    objParas[0].removeAttribute("animation__pos");
+    objParas[0].object3D.position.y = scrollingHeight[0];
+  }
+  setOpacity();
 }
+//Start on-going timer to set moving text & image opacity
+setInterval(scroll, 10);
 
 //WrapAround function to loop array variables,
 //and can also change the variable which it is based on.
@@ -136,6 +123,7 @@ function wrapAround(current, min, max) {
 //Function triggers for each new section in the story, to update object, images and text to the next section
 function nextSection(pageChange) {
   pageChanging=true;
+  scrollTick=0.01;
   changeSky(pageChange); //Update skybox to respective image
   //Delete Current page properties
   objParas[0].removeAttribute("animation__pos");
@@ -213,8 +201,6 @@ function setOpacity() {
   // console.log("Bottom Paragraph:"+objParas[objParas.length-1].object3D.position.y+",  "+scrollingHeight[scrollingHeight.length-1])
 }
 
-//Start on-going timer to set moving text & image opacity
-setInterval(setOpacity, 10);
 
 //Initialize all text from the story JSON.
 function importStory() {
