@@ -49,19 +49,20 @@ AFRAME.registerComponent('thumbstick-logging',{
   },
   logThumbstick: function (evt) {
     if(!pageChanging){
-      if (evt.detail.y > 0.8) {  
-      scroll(1,1-evt.detail.y);
-    //Scroll Down
-  }
-    else if (evt.detail.y < -0.8) {
-      scroll(-1,1+evt.detail.y);
+      if (evt.detail.y > 0.95) {  
+        scroll(1,0.1);
+        // scroll(1,1-evt.detail.y);
+        //Scroll Down
+      }else if (evt.detail.y < -0.95) {
+        // scroll(-1,1+evt.detail.y);
+        scroll(-1,0.1);
       }
 
-    if (evt.detail.x < -0.95) { scrollingHeight = 0;
+    if (evt.detail.x < -0.95) {
       scrollingHeight[0] = 0;
       console.log("Previous Page")
       nextSection(-1); }
-    if (evt.detail.x > 0.95) {  scrollingHeight = 0;
+    if (evt.detail.x > 0.95) {
       scrollingHeight[0] = 0;
       console.log("Next Page")
       nextSection(1); }
@@ -203,7 +204,7 @@ function setOpacity() {
   }
   for(i in objParas){
     if(i>0){
-      objParas[i].object3D.position.y = objParas[i-1].object3D.position.y-5;
+      objParas[i].object3D.position.y = objParas[i-1].object3D.position.y-4;
     }
   }
   // console.log("Top Paragraph:"+objParas[0].object3D.position.y+",  "+scrollingHeight[0])
@@ -382,11 +383,11 @@ function createText(currentPara,width){
   let txt = document.createElement("a-text");
   txt.setAttribute("id", "textPara"+objParas.length);
   txt.setAttribute("color", "#FFFFFF");
-  txt.setAttribute("scale", width+" 5 5");
+  txt.setAttribute("scale", width+" "+width+" 3");
   txt.setAttribute("value", currentPara);
   txt.setAttribute("align", "center");
   txt.setAttribute("opacity", "0");
-  txt.setAttribute("position", "0 -5 -20");
+  txt.setAttribute("position", "0 -5 -15");
   txt.setAttribute("width", width);
   objParas.push(txt);
   scrollingHeight[objParas.length-1]=-5;
@@ -433,19 +434,19 @@ function refreshMedia() {
       let fontSizeStr = storyParagraphs[tempImageNum].slice(7);
       switch(fontSizeStr){
         case "xxxsmall":
-          fontSizeInt = 5;
+          fontSizeInt = 4;
           break;
         case "xxsmall":
-          fontSizeInt = 5.3;
+          fontSizeInt = 4.3;
           break;
         case "xsmall":
-          fontSizeInt = 5.6;
+          fontSizeInt = 4.6;
           break;
         case "small":
-          fontSizeInt = 5.8;
+          fontSizeInt = 4.8;
           break;
         case "xxxlarge":
-          fontSizeInt = 6.2;
+          fontSizeInt = 5.2;
           break;
       }
     }else if (storyParagraphs[tempImageNum].includes("New Section")) {
