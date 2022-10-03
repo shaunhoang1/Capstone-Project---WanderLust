@@ -25,10 +25,10 @@ const skies = [];
 }
 
 const imgPositions = [
-  "-2.4 1.5 0",
-  "2.4 1.5 0",
-  "-3.3 1.5 2",
-  "3.3 1.5 2"
+  "-2.4 1.5 -2",
+  "2.4 1.5 -2",
+  "-3.3 1.5 1",
+  "3.3 1.5 1"
 ];
 
 
@@ -424,16 +424,16 @@ function refreshMedia() {
           fontSizeInt = 4;
           break;
         case "xxsmall":
-          fontSizeInt = 4.3;
+          fontSizeInt = 4.1;
           break;
         case "xsmall":
-          fontSizeInt = 4.6;
+          fontSizeInt = 4.2;
           break;
         case "small":
-          fontSizeInt = 4.8;
+          fontSizeInt = 4.3;
           break;
         case "xxxlarge":
-          fontSizeInt = 5.2;
+          fontSizeInt = 4.6;
           break;
       }
     }else if (storyParagraphs[tempImageNum].includes("New Section")) {
