@@ -23,16 +23,6 @@
     <a-scene id="VRScene" shadow="autoUpdate:true">
       <!-- ###################  LOAD ASSETS INTO STORY  #################### -->
       <a-assets id="assetParent">
-        <video id="PYj71zvsADID" src="/assets/PYj71zvsAD/cthulhu.mp4" loop="false">
-        <!--<a-asset-item id="firstModel" src="./assets/testObject/testObj.obj"></a-asset-item>
-        <!-- CANNOT UPLOAD LARGE OBJECTS TO GITHUB -->
-        <!--<a-asset-item id="venator" src="Resources/Objects/venator/Venator.obj"></a-asset-item>
-        <a-asset-item id="plant1" src="Resources/Objects/folder/Vase%20Pack%202.FBX"></a-asset-item>-->
-        <img id="imgBunyip" src="Resources_vr/Images/Bunyip_5.jpg"/>
-        <img id="imgBunyip2" src="Resources_vr/Images/bunyip-emerging.jpg"/>
-        <img id="imgPortrait1" src="Resources_vr/Images/portrait1jpg.jpg"/>
-        <img id="imgPortrait2" src="Resources_vr/Images/portrait2.jpg"/>
-
         <!-- Skybox Images-->
         <img id="sky1" src="Resources_vr/Backgrounds/S5.png">
         <img id="sky2" src="Resources_vr/Backgrounds/S4.png">
@@ -47,13 +37,11 @@
       </a-assets>
 
       <!--ground for player
-      <a-circle position="0 0 2" rotation="-90 0 0" radius="2" color="green" material="flat"></a-circle>
-    -->
-      <!-- Sky Object  </a-sky>
-      -->
+      <a-circle position="0 0 2" rotation="-90 0 0" radius="2" color="green" material="flat"></a-circle>-->
+      
+      <!-- Sky Object  -->
       <a-sky id="sky" src="#sky1"></a-sky>>
       
-
       <!-- ###################  CAMERA/PLAYER ENTITIES  #################### -->
         <!-- ### CANNOT HAVE CURSOR ENTITY WITHIN CAMERA OBEJCT FOR OCEAN TO WORK
             <a-entity cursor="fuse:true;fuseTimeout:500;"
@@ -82,11 +70,9 @@
       <!--<a-ocean ocean-state="height_offset: -50;"></a-ocean>
       <a-entity position="0 2.25 -15" particle-system="preset:dust;particleCount:1000"></a-entity>-->
 
-        
-        
       <!-- ###################  STORY ENTITIES  #################### -->
       <!-- Object Entity -->
-      <a-entity id="objectParent" position="0 0 0">
+      <a-entity id="objectParent">
       </a-entity>
       <a-entity id="imageParent">
       </a-entity>
