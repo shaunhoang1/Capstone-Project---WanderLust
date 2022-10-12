@@ -43,6 +43,7 @@ let scrollingHeight = [];
 scrollingHeight[0] = -5;
 let scrollTick=0.01;
 let currentPage = 0;
+let pagecount = 0
 //the vr controller
 AFRAME.registerComponent('thumbstick-logging',{
   init: function () {
@@ -57,13 +58,17 @@ AFRAME.registerComponent('thumbstick-logging',{
       }
 
     if (evt.detail.x < -0.95) {
+      if(pagecount>0){
       scrollingHeight[0] = 0;
       console.log("Previous Page")
-      nextSection(-1); }
+      pagecount=pagecount-1;
+      nextSection(-1); }}
     if (evt.detail.x > 0.95) {
+      if(pagecount<8){
       scrollingHeight[0] = 0;
       console.log("Next Page")
-      nextSection(1); }
+      pagecount = pagecount+1
+      nextSection(1); }}
   }
   }})
 //All JS Functions which are required to navigate through the story are created here
@@ -264,7 +269,7 @@ function createImages() {
     img.setAttribute("src", src);
     img.setAttribute("Opacity", "0");
     img.setAttribute("scale", "1.6 1.6 1.6");
-    img.setAttribute("look-at","#cameraObj");
+    img.setAttribute("look-at","#cameraRig");
 
     //set img offset
     let offset = -currentImages * 8 + 5;
