@@ -13,7 +13,7 @@
     <script src="https://unpkg.com/aframe-look-at-component@0.8.0/dist/aframe-look-at-component.min.js"></script>
     <script src="https://unpkg.com/aframe-event-set-component@^4.0.0/dist/aframe-event-set-component.min.js"></script>
     <script src="https://unpkg.com/aframe-animation-component@^4.1.2/dist/aframe-animation-component.min.js"></script>
-      
+    <script src="https://rawgit.com/fernandojsg/aframe-teleport-controls/master/dist/aframe-teleport-controls.min.js"></script>   
     <!-- Load custom JS functions -->
     <script src="js_vr/storyFunctions.js"></script>
   </head>
@@ -64,11 +64,11 @@
         <a-entity tracked-controls="controller: -10; idPrefix: OpenVR"></a-entity>
        
       
-      <a-entity id="cameraObj" position="0 0 0" cursor-teleport="cameraObj: #cameraObj; cameraHead: #head; collisionEntities: .collision; ignoreEntities: .clickable">
+      <a-entity id="cameraRig" position="0 0 0" cursor-teleport="cameraRig: #cameraRig; cameraHead: #head; collisionEntities: .collision; ignoreEntities: .clickable">
         <a-entity id="head" position="0 1.52 0" camera="" look-controls="reverseMouseDrag: true" rotation=""></a-entity>
         <a-entity laser-controls="hand: left" raycaster="objects: .clickable; far: 100" line="color: red; opacity: 0.75" teleport-controls="
             collisionEntities: .collision;
-            cameraRig: #cameraObj;
+            cameraRig: #cameraRig;
             teleportOrigin: #head;
             button: trigger;
             curveShootingSpeed: 8" oculus-touch-controls=""></a-entity>
