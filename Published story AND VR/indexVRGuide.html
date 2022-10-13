@@ -63,7 +63,7 @@
         <div class="Theme-Logos">
           <div class="Theme-Default-Logos"><span class="Theme-Logo"><a href="https://shorthand.com/" target="_blank"><img alt="Shorthand" src="./assets/logo.png" class="Theme-BigLogo Display--none Display--md-block"><img alt="Shorthand" src="./assets/logo.png" class="Theme-SmallLogo Display--md-none"></a></span></div>
         </div>
-        <button class="ml-auto float-xs-right" id="vrButtonBack"  value="" style="width:auto;margin-right: 10%;font-size: 5vmin;margin-bottom: auto;margin-top: auto;" onclick="storyBack()">
+        <button class="ml-auto float-xs-right" id="vrButtonBack"  value="" style="width:auto;margin-right: 10%;font-size: 3vmin;margin-bottom: auto;margin-top: auto;" onclick="storyBack()">
           Return to Story
         </button>
         <nav class="Navigation Theme-NavigationBar" role="navigation" id="navigation">
@@ -77,9 +77,33 @@
           <div class="Layout__flex--xcenter Layout__flex--ycenter Theme-Layer-TextBlock-Container" data-scrollymoly-basis="true">
             <div class="Theme-Layer-TextBlock-Inner DisplayContainer--heightBasis">
               <div>
-                <h1 class="Theme-StoryTitle Theme-TextSize-xxxsmall h-align-center">You are about to enter the VR enhanced mode, please be cautious that the Immersive Story may contain enhanced effects such as rapid animations, changing colours or sounds.</h1>
-                <h1 class="Theme-LeadIn Theme-TextSize-xxxsmall h-align-center"></p>You may navigate the story via your VR controllers: Use the left controller to move around the environment (Trigger to teleport to a location); Use the Right controler to control the story - Whilst the story will automatically and slowly scroll, you may increase the or decrease the scrolling speed by pushing the right joystick forward or backward, and skip to the next or previous section by pushing the right joystick right or left.</h1></br>
-                <p class="Theme-LeadIn Theme-TextSize-xxxsmall h-align-center">Please press the button below if you are ready to be amazed</p></br></br>
+                <p class="Theme-LeadIn Theme-TextSize-xxxsmall h-align-center">You are about to enter the VR enhanced mode, please be cautious that the Immersive Story may contain enhanced effects such as rapid animations, changing colours or sounds.</p>
+              </br></br>
+                <table>
+                  <tr>
+                  <th style="width: 33%;" class="Theme-TextSize xxxsmall">
+                    Push the left trigger to teleport to a nearby selected location.</br></br>
+                  </th>
+                  <th style="width: 33%;" class="Theme-TextSize xxxsmall">
+                    Push the right joystick backward or forward to decrease or increase the scrolling speed.</br></br>
+                  </th>
+                  <th style="width: 33%;"class="Theme-TextSize xxxsmall">
+                    Push the right joystick right or left to skip to the next or previous story section.</br></br>
+                  </th>
+                  </tr>
+                  <tr>
+                  <th style="width: 30%;">
+                    <img style="width: 65%;" src="/Resources_vr/vrControllerJump.png">
+                  </th>
+                  <th style="width: 30%;">
+                    <img style="width: 65%;" src="/Resources_vr/vrControllerVer.png">
+                  </th>
+                  <th style="width: 30%;">
+                    <img style="width: 65%;" src="/Resources_vr/vrControllerHor.png">
+                  </th>
+                  </tr>
+                </table>
+                <p class="Theme-LeadIn Theme-TextSize-xxxsmall h-align-center">Press the button below to continue... </p></br></br>
                 <button class="Theme-TextSize-xxsmall" onclick="enterVR()" style="width:30%;">Enter VR Story</button>
               </div>
             </div>
