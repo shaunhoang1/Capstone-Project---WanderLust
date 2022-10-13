@@ -124,14 +124,19 @@ function wrapAround(current, min, max) {
 function nextSection(pageChange) {
   pageChanging=true;
   scrollTick=0.01;
-  changeSky(pageChange); //Update skybox to respective image
   //Delete Current page properties
   objParas[0].removeAttribute("animation__pos");
   objParas[0].setAttribute("value", "");
   objParas[0].setAttribute("opacity", 0);
   let notNewSection=true;
   while(notNewSection){
-  currentPage = wrapAround(currentPage + pageChange,1,storyParagraphs.length - 1)[1];
+    currentPage = currentPage+pageChange;
+    if(currentPage<1 || currentPage>storyParagraphs.length-1){
+      currentPage=currentPage-pageChange;
+    }else{
+      changeSky(pageChange); //Update skybox to respective image
+    }
+    // currentPage = wrapAround(currentPage + pageChange,1,storyParagraphs.length - 1)[1];
     if (storyParagraphs[currentPage-1]==="New Section"){
       notNewSection=false;
     }

@@ -373,13 +373,6 @@
         "backgroundGrayscale": "none",
         "layoutLandscapeMedia": "left",
         "layoutPortraitMedia": "top"
-      },"object": {
-        "id": "sceneTrain",
-        "meta": {
-          "heading": "Train Station modelled scene",
-          "SectionDuration":"1,2,3"
-        },
-        "isUserDefined": true
       },"audio": {
         "id": "audioStation",
         "meta": {
@@ -745,6 +738,13 @@
         "mediaTransition": "slow",
         "theme": "Dark",
         "visibility": "All devices"
+      },"object": {
+        "id": "sceneTrain",
+        "meta": {
+          "heading": "Train Station modelled scene",
+          "SectionDuration":"1,2,3"
+        },
+        "isUserDefined": true
       },
       "layers": [
         {
