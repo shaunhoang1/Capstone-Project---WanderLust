@@ -1,0 +1,72 @@
+newmtl Deep_Oceanp17:Blobby_Coral_2_8183SG
+illum 4
+Kd 0.74 0.31 0.84
+Ka 0.00 0.00 0.00
+Tf 1.00 1.00 1.00
+Ni 1.00
+newmtl Deep_Oceanp17:Bulbous_Coral_2SG
+illum 4
+Kd 0.73 0.04 0.50
+Ka 0.00 0.00 0.00
+Tf 1.00 1.00 1.00
+Ni 1.00
+newmtl Deep_Oceanp17:Column_1SG
+illum 4
+Kd 0.58 0.58 0.58
+Ka 0.00 0.00 0.00
+Tf 1.00 1.00 1.00
+Ni 1.00
+newmtl Deep_Oceanp17:Coral_5__Variant_1___2_SG
+illum 4
+Kd 0.77 0.51 1.00
+Ka 0.00 0.00 0.00
+Tf 1.00 1.00 1.00
+Ni 1.00
+newmtl Deep_Oceanp17:Coral_Bunch_1__7_SG
+illum 4
+Kd 0.22 0.65 0.82
+Ka 0.00 0.00 0.00
+Tf 1.00 1.00 1.00
+Ni 1.00
+newmtl Deep_Oceanp17:Large_Shelf_Coral_1SG
+illum 4
+Kd 0.38 0.71 0.83
+Ka 0.00 0.00 0.00
+Tf 1.00 1.00 1.00
+Ni 1.00
+newmtl Deep_Oceanp17:Large_Shelf_Coral_3SG
+illum 4
+Kd 0.49 0.18 0.27
+Ka 0.00 0.00 0.00
+Tf 1.00 1.00 1.00
+Ni 1.00
+newmtl Deep_Oceanp17:Large_Soft_Coral_2SG
+illum 4
+Kd 1.00 0.96 0.51
+Ka 0.00 0.00 0.00
+Tf 1.00 1.00 1.00
+Ni 1.00
+newmtl Deep_Oceanp17:Large_Tube_Coral_2SG
+illum 4
+Kd 1.00 0.96 0.51
+Ka 0.00 0.00 0.00
+Tf 1.00 1.00 1.00
+Ni 1.00
+newmtl Deep_Oceanp17:MastSG
+illum 4
+Kd 0.08 0.07 0.04
+Ka 0.00 0.00 0.00
+Tf 1.00 1.00 1.00
+Ni 1.00
+newmtl Deep_Oceanp17:PlaneSG
+illum 4
+Kd 0.96 0.84 0.67
+Ka 0.00 0.00 0.00
+Tf 1.00 1.00 1.00
+Ni 1.00
+newmtl Deep_Oceanp17:StatueSG
+illum 4
+Kd 0.00 0.61 0.28
+Ka 0.00 0.00 0.00
+Tf 1.00 1.00 1.00
+Ni 1.00

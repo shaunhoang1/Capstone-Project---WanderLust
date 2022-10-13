@@ -1,6 +1,8 @@
 function retrieveStory(){
   //Declare array variable for all extracted text
   let inLine=false;
+  let groupParagraph = false;
+  let paragraphText = "";
   function newSection(json){
     combinedText[combinedText.length]="\"New Section\"";
     inLine=false;
@@ -28,7 +30,16 @@ function retrieveStory(){
       extractStory(json.subTitle, canvas);
     } 
     if (json?.content!==undefined) {
-      json.content.map(extractStory).join("");
+      if(json?.type==="paragraph" || json?.type==="subsubtitle"){
+        console.log("Paragraph found");
+        groupParagraph=true;
+        json.content.map(extractStory).join("");
+        combinedText[combinedText.length]="\""+paragraphText+"\"";
+        paragraphText="";
+        groupParagraph=false;
+      }else{
+        json.content.map(extractStory).join("");
+      }
     } 
     if (json?.image!==undefined) {
       if(inLine){
@@ -48,18 +59,14 @@ function retrieveStory(){
     } 
     if (json?.embed!==undefined) { //Extract video embed
       let embededObj=json.embed;
-      combinedText[combinedText.length]="\"(EMBED:)"+embededObj.originalUrl+"\"";
+      //Cannot add embedded videos due to A-Frame legality restrictions
+      //combinedText[combinedText.length]="\"(EMBED:)"+embededObj.originalUrl+"\"";
     } 
     if (json.type === "text") {
       let currentText = json.text;
-      let currentMark = json?.marks;
-      if(currentMark!==undefined){
-        currentMark=currentMark[0]?.type;
-        if(currentMark!=="link"){
-          currentText=currentMark+"("+currentText+")"
-        }
+      if (groupParagraph){paragraphText=paragraphText+currentText}else{
+        combinedText[combinedText.length]="\""+currentText+"\"";
       }
-      combinedText[combinedText.length]="\""+currentText+"\"";
     } 
     if (json?.sections!==undefined) {
       json.sections.map(newSection).join("");
@@ -118,7 +125,7 @@ function retrieveStory(){
   //Run function to extract the data
   const combinedText =[];
   extractStory(storyData,inLine)
-  combinedText[combinedText.length]="\"FinalPara\"";
+  combinedText[combinedText.length]="\"The End.\"";
                
   
   return combinedText
