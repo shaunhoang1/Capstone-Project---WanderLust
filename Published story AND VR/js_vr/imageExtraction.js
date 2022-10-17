@@ -1,63 +1,67 @@
 //Import required functions for script
 //const { response } = require('express');
 //const { array, string } = require('joi');
-function retrieveDirectoryImages() {
-  let fs = require("fs");
-  let files = fs.readdirSync("./assets");
-  let myImages = [];
+
+let fs = require("fs");
+let files = fs.readdirSync("./assets");
+console.log(files)
+let myImages = [];
+
+function retrieveDirectoryImages(files,path) {
   for (i in files) {
     if (!files[i].includes(".")) {
-      let fileImages = fs.readdirSync("./assets/" + files[i]);
+      console.log(files[i])
+      let folder=path+files[i]+"/";
+      let subfolder = fs.readdirSync("./assets/" + path+files[i]);
+      retrieveDirectoryImages(subfolder,folder);
+    }else{
       let imgFound = false;
-      //Searches for more important file types first, and then others
-      for (let j in fileImages) {
-        if (fileImages[j].search(".mp4") !== -1 && !imgFound) {
-          myImages.push(files[i] + "/" + fileImages[j]);
-          imgFound = true;
-        }
+      if (files[i].search(".mp4") !== -1 && !imgFound) {
+        myImages.push(path +files[i]);
+        imgFound = true;
       }
       //Search for Audio before prioritising other file types
-      for (let j in fileImages) {
-        if (fileImages[j].search(".mp3") !== -1 && !imgFound) {
-          myImages.push(files[i] + "/" + fileImages[j]);
-          imgFound = true;
-        }
+      if (files[i].search(".mp3") !== -1 && !imgFound) {
+        myImages.push(path +files[i]);
+        imgFound = true;
       }
-
-      for (let j in fileImages) {
-        if (fileImages[j].search(".obj") !== -1 && !imgFound) {
-          myImages.push(files[i] + "/" + fileImages[j]);
-        }
-        if (fileImages[j].search(".mtl") !== -1 && !imgFound) {
-          myImages.push(files[i] + "/" + fileImages[j]);
-        }
-        if (fileImages[j].search(".jpeg") !== -1 && !imgFound) {
-          myImages.push(files[i] + "/" + fileImages[j]);
-          imgFound = true;
-        }
-        if (fileImages[j].search(".png") !== -1 && !imgFound) {
-          myImages.push(files[i] + "/" + fileImages[j]);
-          imgFound = true;
-        }
+      if (files[i].search(".obj") !== -1 && !imgFound) {
+        myImages.push(path + files[i]);
       }
+      if (files[i].search(".mtl") !== -1 && !imgFound) {
+        myImages.push(path + files[i]);
+      }
+      if (files[i].search(".jpeg") !== -1 && !imgFound) {
+        myImages.push(path + files[i]);
+        imgFound = true;
+      }
+      if (files[i].search(".png") !== -1 && !imgFound) {
+        myImages.push(path + files[i]);
+        imgFound = true;
+      }
+      
     }
   }
+  
   return myImages;
 }
 
-myImages = retrieveDirectoryImages();
+myImages = retrieveDirectoryImages(files,"");
 let imgDir = [];
 for (i in myImages) {
+  
   if (myImages[i].includes(".")) {
     imgDir[i] = '"/assets/' + myImages[i] + '"';
+    if(imgDir[i].includes("//")){
+      imgDir[i].replace("//","/");
+    }
     //console.log(imgDir[i])
   }
 }
 
-const fs = require("fs");
-
 // Data which will write in a file.
 let data = "\nimgRepo = [" + imgDir.join(",") + "]";
+console.log(data)
 // Write data in 'Output.txt' .
 fs.appendFile("./js_vr/storyFunctions.js", data, (err) => {
   // In case of a error throw err.

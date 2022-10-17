@@ -94,12 +94,14 @@ document.addEventListener("keydown", function (event) {
 
 //On Mousewheel scroll, manually scroll the text and stop auto-scroll
 document.onmousewheel = function(event) {
-  let scrollDirection = receiveMouseWheelDir(event); //determine scroll direction
-  scrollTick=scrollDirection*0.5; //Turn off autoscroll
-  scroll();
+  if(!pageChanging){
+    let scrollDirection = receiveMouseWheelDir(event); //determine scroll direction
+    scrollTick=scrollDirection*0.5; //Turn off autoscroll
+    scroll();
 
-  scrollTick=0;
-  console.log(scrollingHeight[0] );
+    scrollTick=0;
+    console.log(scrollingHeight[0] );
+  }
 };
 
 //Determine the mouse wheel scrolling direction
