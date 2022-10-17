@@ -58,11 +58,11 @@ AFRAME.registerComponent('thumbstick-logging',{
 
     if (evt.detail.x < -0.95) {
       scrollingHeight[0] = 0;
-      console.log("Previous Page")
+      // console.log("Previous Page")
       nextSection(-1); }
     if (evt.detail.x > 0.95) {
       scrollingHeight[0] = 0;
-      console.log("Next Page")
+      // console.log("Next Page")
       nextSection(1); }
   }
   }})
@@ -71,25 +71,60 @@ document.addEventListener("keydown", function (event) {
   if(!pageChanging){
     //Scroll through paragraphs
     //Go to previous paragraph
-    if (event.key === "q") {
+    if (event.key === "1") {
       scrollingHeight[0] = -5;
-      console.log("Previous Page")
+      // console.log("Previous Page")
       nextSection(-1);
       //Go to next paragraph
-    } else if (event.key === "e") {
+    } else if (event.key === "3") {
       scrollingHeight[0] = -5;
-      console.log("Next Page")
+      // console.log("Next Page")
       nextSection(1);
     }
   
-    if (event.key === "i"){
+    //Increases the scrolling speed
+    if (event.key === "e"){
       scrollTick+=0.01
-    } else if (event.key === "k") {
+    } else if (event.key === "q") {
       scrollTick-=0.01
     }
   }
 });
 
+
+//On Mousewheel scroll, manually scroll the text and stop auto-scroll
+document.onmousewheel = function(event) {
+  let scrollDirection = receiveMouseWheelDir(event); //determine scroll direction
+  scrollTick=scrollDirection*0.5; //Turn off autoscroll
+  scroll();
+
+  scrollTick=0;
+  console.log(scrollingHeight[0] );
+};
+
+//Determine the mouse wheel scrolling direction
+function receiveMouseWheelDir(event)
+{
+    let delta = null,
+        direction = false;
+    if (!event){ // if the event is not provided, we get it from the window object
+      event = window.event;
+    }
+    //Receives scrolling direction based on browser
+    if (event.wheelDelta){ // will work in most cases
+        delta = event.wheelDelta / 60;
+    } else if (event.detail){ // fallback for Firefox
+        delta = -event.detail / 2;
+    }
+    //If scroll data could be retrieved, then set delta variable
+    if (delta !== null){
+        direction = delta > 0 ? 1 : -1;
+    }
+
+    return direction;
+}
+
+//Scroll - Scrolls the text by incrementing the scrollingheight of all text objects, then updates the opacity of them all.
 function scroll(scrollChange=0){ //direction, -1 = down, 1=up
   if (scrollChange!==0){
     scrollTick+=scrollChange
@@ -131,7 +166,9 @@ function nextSection(pageChange) {
   let notNewSection=true;
   while(notNewSection){
     currentPage = currentPage+pageChange;
-    if(currentPage<1 || currentPage>storyParagraphs.length-1){
+
+    //Prevent the user from scrolling before the first page, or after the last page
+    if(currentPage<1){
       currentPage=currentPage-pageChange;
     }else{
       changeSky(pageChange); //Update skybox to respective image
@@ -139,6 +176,8 @@ function nextSection(pageChange) {
     // currentPage = wrapAround(currentPage + pageChange,1,storyParagraphs.length - 1)[1];
     if (storyParagraphs[currentPage-1]==="New Section"){
       notNewSection=false;
+    }else if (currentPage>storyParagraphs.length){
+      currentPage=0;
     }
   }
 
@@ -307,9 +346,8 @@ function createImages() {
 
 //Create all the images for the current section
 function createAudio() {
-  
   console.log("Create Audio:"+sectionAudio)
-  let img ="";
+  let audio ="";
   //Create the new HTML Element for the picture
   let src = "";
   for (j in imgRepo) {
@@ -318,15 +356,15 @@ function createAudio() {
       src = imgRepo[j];
     }
   }
-  img = document.createElement("a-sound");
-  img.setAttribute("id", "sectionAudio");
-  img.setAttribute("src", src);
-  img.setAttribute("autoplay", "true");
-  img.setAttribute("on", "true");
-  img.setAttribute("loop", "true");
+  audio = document.createElement("a-sound");
+  audio.setAttribute("id", "sectionAudio");
+  audio.setAttribute("src", src);
+  audio.setAttribute("autoplay", "true");
+  audio.setAttribute("on", "true");
+  audio.setAttribute("loop", "true");
   //Create the image element
   let element = document.getElementById("imageParent");
-  element.appendChild(img);
+  element.appendChild(audio);
 }
 
 function createObjects() {
@@ -390,15 +428,14 @@ function createText(currentPara,width){
   element.appendChild(txt);  
 }
 
-//Delete all pictures
+//Delete all media from the document, and sets timers to create the next section's media
 function refreshMedia() {
   const imageParent = document.getElementById("imageParent");
   const objectParent = document.getElementById("objectParent");
   const textParent = document.getElementById("textParent");
   while(imageParent.hasChildNodes()){
     //imageParent.firstChild.pause();
-    let elID=imageParent.firstElementChild?.getAttribute("id")
-    console.log(elID)
+    let elID=imageParent.firstElementChild?.getAttribute("id");
     if (elID!==undefined){
       if((imageParent.firstElementChild.getAttribute("id")).includes("Video")){
         document.getElementById(elID).pause();
@@ -456,8 +493,7 @@ function refreshMedia() {
       sectionAudio = storyParagraphs[tempImageNum].slice(11);
     } else {
       //Otherwise add the current text to the section text var
-      let lengthCheck=Math.floor(storyParagraphs[tempImageNum].length / 150)
-      console.log("LengthCheck: "+lengthCheck)
+      let lengthCheck=Math.floor(storyParagraphs[tempImageNum].length / 150);
       currentText = currentText + storyParagraphs[tempImageNum]+ "\n\n";
       if(lengthCheck>0){
         createText("",fontSizeInt);
