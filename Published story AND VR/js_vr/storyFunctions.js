@@ -1,3 +1,4 @@
+/// This is the Javascript file, Copied as template and used as StoryFunctions, which will run all JS Functions to control the VR Story
 
 let objParas = [];
 objParas[0]="";
@@ -30,7 +31,6 @@ const imgPositions = [
   "-3.3 1.5 1",
   "3.3 1.5 1"
 ];
-
 
 let fontBold="https://raw.githubusercontent.com/WayneBrysen/FontStore/main/FntFonts/Arial_Bold.fnt";
 let fontItalic="https://raw.githubusercontent.com/WayneBrysen/FontStore/main/FntFonts/Arial_Italic.fnt";
@@ -88,9 +88,15 @@ document.addEventListener("keydown", function (event) {
     } else if (event.key === "q") {
       scrollTick-=0.01
     }
+
+    //Reset the Story
+    if (event.key === "r"){
+      currentPage=0;
+      currentSky = 0; 
+      nextSection(1); //Initialize New State of story
+    }
   }
 });
-
 
 //On Mousewheel scroll, manually scroll the text and stop auto-scroll
 document.onmousewheel = function(event) {
@@ -310,7 +316,7 @@ function createImages() {
     img.setAttribute("src", src);
     img.setAttribute("Opacity", "0");
     img.setAttribute("scale", "1.6 1.6 1.6");
-    img.setAttribute("look-at","#cameraRig");
+    img.setAttribute("look-at","#cameraObj");
 
     //set img offset
     let offset = -currentImages * 8 + 5;

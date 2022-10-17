@@ -56,13 +56,15 @@
         keyboardInstructions[0]=document.createElement("p");
         keyboardInstructions[0].textContent="The keyboard controls are as follows:";
         keyboardInstructions[2]=document.createElement("p");
-        keyboardInstructions[2].textContent="Use the keys WASD to navigate around the story environment.";
+        keyboardInstructions[2].textContent="Use the WASD keys to navigate around the story environment.";
         keyboardInstructions[3]=document.createElement("p");
-        keyboardInstructions[3].textContent="Use the keys Q/E to Decrease/Increase the story scrolling speed.";
+        keyboardInstructions[3].textContent="Use the Q/E keys to Decrease/Increase the story scrolling speed.";
         keyboardInstructions[4]=document.createElement("p");
-        keyboardInstructions[4].textContent="Use the keys 1/3 to skip to the Previous/Next section.";
+        keyboardInstructions[4].textContent="Use the 1/3 keys to skip to the Previous/Next section.";
         keyboardInstructions[5]=document.createElement("p");
         keyboardInstructions[5].textContent="Use the Mouse Scroll Wheel to manually scroll through the story text.";
+        keyboardInstructions[6]=document.createElement("p");
+        keyboardInstructions[6].textContent="Use the R key to reset the story.";
         for(i in keyboardInstructions){
           parent.appendChild(keyboardInstructions[i]);
         }
@@ -79,7 +81,7 @@
 
   <body style="margin:0px;">
     <div class="Core--rootElement FullSize--fullWidth PositionSticky Levels--header HeaderBarContainer Theme-HeaderContainer Story-Header" data-fixed-story-element="true" style="padding:1%;min-height: 50%;">
-      <img alt="Shorthand" src="./assets/logo.png" style="height: 70%;margin-top: .5%;">
+      <img alt="Shorthand" src="./assets/logo.png" style="height: 90%;margin-top: .1%;">
       <button id="vrButtonBack"onclick="storyBack()" style="width:auto;margin-left: 60%!important;font-size: 3vmin;" >
         Return to Story
       </button>        
@@ -90,9 +92,14 @@
           <div class="Layout__flex--xcenter Layout__flex--ycenter Theme-Layer-TextBlock-Container" style="margin-right:auto;margin-left:auto;" data-scrollymoly-basis="true">
             <div class="Theme-Layer-TextBlock-Inner DisplayContainer--heightBasis">
               <div id="instructionContainer">
-                <p class="Theme-LeadIn Theme-TextSize-xxxsmall h-align-center">You are about to enter the VR enhanced mode, please be cautious that the Immersive Story may contain enhanced effects such as rapid animations, changing colours or sounds.</p>
-                </br>
-                <button style="font-size:100%;width:30%;margin-left:35%;margin-right:35%;"onclick="showKeyboardControls()" id="keyboardControlsBtn">Click here for keyboard controls</button></br></br>
+                <p class="Theme-LeadIn Theme-TextSize-xxxsmall h-align-center">You are about to enter the VR enhanced mode, please be cautious that the Immersive Story may contain enhanced effects such as rapid animations, changing colours or sounds.</p><br>
+                <p class="Theme-LeadIn Theme-TextSize-xxxxsmall h-align-center">Please turn up the volume to enjoy the full experience the Author has created.</p>
+                <div id="keyboardControlsBtn">
+                  <br>
+                  <button style="font-size:100%;width:30%;margin-left:35%;margin-right:35%;"onclick="showKeyboardControls()" >Click here for keyboard controls</button></br>
+                  <br>
+                  </div>
+               
                 <table id="vrGuideTable">
                   <tr>
                   <th style="width: 33%;" class="Theme-TextSize xxxsmall">
