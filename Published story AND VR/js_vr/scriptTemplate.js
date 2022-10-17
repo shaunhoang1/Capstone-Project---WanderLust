@@ -310,7 +310,7 @@ function createImages() {
     img.setAttribute("src", src);
     img.setAttribute("Opacity", "0");
     img.setAttribute("scale", "1.6 1.6 1.6");
-    img.setAttribute("look-at","#cameraObj");
+    img.setAttribute("look-at","#cameraRig");
 
     //set img offset
     let offset = -currentImages * 8 + 5;
