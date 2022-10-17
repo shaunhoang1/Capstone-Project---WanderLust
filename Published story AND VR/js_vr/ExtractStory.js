@@ -126,6 +126,9 @@ function retrieveStory(){
   const combinedText =[];
   extractStory(storyData,inLine)
   combinedText[combinedText.length]="\"The End.\"";
+  combinedText[combinedText.length]="\"\"";
+  combinedText[combinedText.length]="\"Did you enjoy the story?\"";
+  combinedText[combinedText.length]="\"Press R to start from the beginning.\"";
                
   
   return combinedText
