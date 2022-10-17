@@ -48,7 +48,9 @@
     <script>
       function showKeyboardControls(){
         let vrGuideTable = document.getElementById("vrGuideTable")
-        vrGuideTable.remove();
+        vrGuideTable.remove();keyboardControlsBtn
+        let btnDelete = document.getElementById("keyboardControlsBtn")
+        btnDelete.remove();
         let parent=document.getElementById("instructionContainer");
         let keyboardInstructions=[]
         keyboardInstructions[0]=document.createElement("p");

@@ -43,7 +43,6 @@ let scrollingHeight = [];
 scrollingHeight[0] = -5;
 let scrollTick=0.01;
 let currentPage = 0;
-let pagecount = 0
 //the vr controller
 AFRAME.registerComponent('thumbstick-logging',{
   init: function () {
@@ -58,20 +57,13 @@ AFRAME.registerComponent('thumbstick-logging',{
       }
 
     if (evt.detail.x < -0.95) {
-      if(pagecount>0){
       scrollingHeight[0] = 0;
-
       // console.log("Previous Page")
       nextSection(-1); }
-
     if (evt.detail.x > 0.95) {
-      if(pagecount<8){
       scrollingHeight[0] = 0;
-
-
       // console.log("Next Page")
       nextSection(1); }
-
   }
   }})
 //All JS Functions which are required to navigate through the story are created here
