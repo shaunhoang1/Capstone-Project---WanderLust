@@ -4,10 +4,10 @@
 
 let fs = require("fs");
 let files = fs.readdirSync("./assets");
-console.log(files)
 let myImages = [];
 
 function retrieveDirectoryImages(files,path) {
+  let imgFound = false;
   for (i in files) {
     if (!files[i].includes(".")) {
       console.log(files[i])
@@ -15,7 +15,6 @@ function retrieveDirectoryImages(files,path) {
       let subfolder = fs.readdirSync("./assets/" + path+files[i]);
       retrieveDirectoryImages(subfolder,folder);
     }else{
-      let imgFound = false;
       if (files[i].search(".mp4") !== -1 && !imgFound) {
         myImages.push(path +files[i]);
         imgFound = true;
@@ -25,24 +24,25 @@ function retrieveDirectoryImages(files,path) {
         myImages.push(path +files[i]);
         imgFound = true;
       }
-      if (files[i].search(".obj") !== -1 && !imgFound) {
-        myImages.push(path + files[i]);
-      }
-      if (files[i].search(".mtl") !== -1 && !imgFound) {
-        myImages.push(path + files[i]);
-      }
-      if (files[i].search(".jpeg") !== -1 && !imgFound) {
-        myImages.push(path + files[i]);
-        imgFound = true;
-      }
-      if (files[i].search(".png") !== -1 && !imgFound) {
-        myImages.push(path + files[i]);
-        imgFound = true;
-      }
-      
     }
   }
-  
+  //Needs to be separated from the previous search to prioritize retrieving video and audio
+  for(i in files){
+    if (files[i].search(".obj") !== -1 && !imgFound) {
+      myImages.push(path + files[i]);
+    }
+    if (files[i].search(".mtl") !== -1 && !imgFound) {
+      myImages.push(path + files[i]);
+    }
+    if (files[i].search(".jpeg") !== -1 && !imgFound) {
+      myImages.push(path + files[i]);
+      imgFound = true;
+    }
+    if (files[i].search(".png") !== -1 && !imgFound) {
+      myImages.push(path + files[i]);
+      imgFound = true;
+    }
+  }
   return myImages;
 }
 
