@@ -24,7 +24,7 @@ let data=`<script>
     btn.setAttribute("look-at","#cameraObj");
     btn.textContent='Enter VR';
 
-  const parent = document.getElementsByClassName("Header Layout Theme-Header");
+  let parent = document.getElementsByClassName("Header Layout Theme-Header");
   parent[0].appendChild(btn);
 </script>`;
 // Write data in 'Output.txt' .

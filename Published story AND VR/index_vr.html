@@ -2,14 +2,11 @@
 <html>
   <head>
     <title>WanderLust VR Story</title>
-    <!-- Load styles -->
-    <link href="css_vr/main.css" rel="stylesheet" />
-    <link rel="icon" type="image/x-icon" href="Resources/Images/favicon.ico">
       
     <!-- Load A-Frame and additional components -->
     <script src="https://aframe.io/releases/1.3.0/aframe.min.js"></script>
-    <script src="../../dist/aframe-particle-system-component.min.js"></script>
-    <script src="app/a-water.v0.1.1.min.js"></script>
+    <!-- <script src="../../dist/aframe-particle-system-component.min.js"></script> -->
+    <!-- <script src="app/a-water.v0.1.1.min.js"></script> -->
     <script src="https://unpkg.com/aframe-look-at-component@0.8.0/dist/aframe-look-at-component.min.js"></script>
     <script src="https://unpkg.com/aframe-event-set-component@^4.0.0/dist/aframe-event-set-component.min.js"></script>
     <script src="https://unpkg.com/aframe-animation-component@^4.1.2/dist/aframe-animation-component.min.js"></script>
@@ -20,7 +17,7 @@
 
   <body>
     <!-- HTML Elements to create a page before scene   embedded style="height:100px;width:100px;" z-index=-10000 -->
-    <a-scene id="VRScene" shadow="autoUpdate:true">
+    <a-scene id="VRScene" shadow="autoUpdate:true" background="color:black">
       <!-- ###################  LOAD ASSETS INTO STORY  #################### -->
       <a-assets id="assetParent">
         <!-- Skybox Images-->
@@ -40,7 +37,7 @@
       <a-circle position="0 0 2" rotation="-90 0 0" radius="2" color="green" material="flat"></a-circle>-->
       
       <!-- Sky Object  -->
-      <a-sky id="sky" src="#sky1"></a-sky>>
+      <a-sky id="sky" src="#sky1"></a-sky>
       
       <!-- ###################  CAMERA/PLAYER ENTITIES  #################### -->
         <!-- ### CANNOT HAVE CURSOR ENTITY WITHIN CAMERA OBEJCT FOR OCEAN TO WORK
@@ -52,7 +49,7 @@
         <a-entity tracked-controls="controller: -10; idPrefix: OpenVR"></a-entity>
        
       
-      <a-entity id="cameraObj" position="0 0 -1" cursor-teleport="cameraObj: #cameraObj; cameraHead: #head; collisionEntities: .collision; ignoreEntities: .clickable"   wasd-controls="enabled:true;acceleration:10;">
+      <a-entity id="cameraObj" position="0 0 -1" cursor-teleport="cameraObj: #cameraObj; cameraHead: #head; collisionEntities: .collision; ignoreEntities: .clickable"   wasd-controls="enabled:true;acceleration:10;"><!--//-->
         <a-entity id="head" position="0 1.52 0" camera="" look-controls="reverseMouseDrag: true" rotation=""></a-entity>
         <a-entity laser-controls="hand: left" raycaster="objects: .clickable; far: 100" line="color: red; opacity: 0.75" teleport-controls="
             collisionEntities: .collision;

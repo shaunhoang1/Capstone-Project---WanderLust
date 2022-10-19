@@ -31,9 +31,12 @@ function retrieveStory(){
     } 
     if (json?.content!==undefined) {
       if(json?.type==="paragraph" || json?.type==="subsubtitle"){
-        console.log("Paragraph found");
         groupParagraph=true;
         json.content.map(extractStory).join("");
+        const s = paragraphText;
+        const re = /"/gi;
+
+        paragraphText = s.replace(re, '\'');
         combinedText[combinedText.length]="\""+paragraphText+"\"";
         paragraphText="";
         groupParagraph=false;
@@ -65,6 +68,10 @@ function retrieveStory(){
     if (json.type === "text") {
       let currentText = json.text;
       if (groupParagraph){paragraphText=paragraphText+currentText}else{
+        const s = currentText;
+        const re = /"/gi;
+
+        currentText = s.replace(re, '\'');
         combinedText[combinedText.length]="\""+currentText+"\"";
       }
     } 
@@ -126,6 +133,9 @@ function retrieveStory(){
   const combinedText =[];
   extractStory(storyData,inLine)
   combinedText[combinedText.length]="\"The End.\"";
+  combinedText[combinedText.length]="\"\"";
+  combinedText[combinedText.length]="\"Did you enjoy the story?\"";
+  combinedText[combinedText.length]="\"Press R to start from the beginning.\"";
                
   
   return combinedText
@@ -144,7 +154,7 @@ let data = "\nstoryParagraphs = ["+myText.join(",")+"];\n";
 
 // Write data in 'Output.txt' .
 fs.appendFile('./js_vr/storyFunctions.js', data, (err) => {
-	
+
 	// In case of a error throw err.
 	if (err) throw err;
 })
