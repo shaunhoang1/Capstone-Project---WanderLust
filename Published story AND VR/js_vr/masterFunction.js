@@ -35,7 +35,7 @@ fs.appendFile('./index.html', data, (err) => {
 })
 
 
-require('./imageExtraction.js')
+require('./ExtractMedia.js')
 require('./ExtractStory.js')
 
 console.log('VR Story Published');
